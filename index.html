@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>唐卡藝術館｜專業唐卡收藏與結緣</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --gold:#c9933a;--gold-light:#e8b865;--gold-pale:#fdf6e8;--gold-glow:rgba(201,147,58,.18);
+  --indigo:#4f46e5;--indigo-light:#818cf8;
+  --red:#ef4444;--green:#16a34a;--amber:#d97706;
+  --bg:#f7f6f2;--card:#fff;--text:#1a1208;--muted:#6b6559;
+  --border:#e8e3d8;--border-light:#f0ece3;
+  --shadow:0 2px 16px rgba(26,18,8,.07);--shadow-md:0 4px 32px rgba(26,18,8,.1);--shadow-lg:0 8px 48px rgba(26,18,8,.13);
+  --radius:.875rem;--radius-lg:1.5rem;
+  --sidebar:#0e0e0c;--sb-hover:rgba(201,147,58,.1);--sb-active:rgba(201,147,58,.18);
+  --tr:all .22s cubic-bezier(.4,0,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,textarea{font-family:inherit;}
+
+/* ===== FRONTEND ===== */
+.frontend{min-height:100vh;}
+.top-bar{background:rgba(255,255,255,.94);backdrop-filter:blur(18px);position:fixed;top:0;left:0;right:0;z-index:1000;border-bottom:1px solid var(--border);padding:.85rem 2rem;}
+.tbc{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.logo{display:flex;align-items:center;gap:.7rem;}
+.logo-icon{width:2.6rem;height:2.6rem;background:linear-gradient(135deg,#c9933a,#e8b865);border-radius:.8rem;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;box-shadow:0 4px 14px rgba(201,147,58,.3);}
+.logo-text{font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:700;color:var(--text);}
+.nav-menu{display:flex;gap:1.75rem;}
+.nav-link{color:var(--muted);font-weight:500;font-size:.92rem;transition:var(--tr);position:relative;padding:.3rem 0;}
+.nav-link:hover{color:var(--gold);}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);border-radius:2px;transition:var(--tr);}
+.nav-link:hover::after{width:100%;}
+.cart-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.1rem;border-radius:2rem;border:1.5px solid var(--border);background:#fff;color:var(--text);font-weight:600;font-size:.88rem;transition:var(--tr);}
+.cart-btn:hover{border-color:var(--gold);color:var(--gold);}
+.cart-badge{min-width:1.4rem;height:1.4rem;border-radius:9999px;background:var(--gold);color:#fff;font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;padding:0 .3rem;}
+.announce-bar{background:linear-gradient(90deg,var(--gold),var(--gold-light));color:#fff;text-align:center;padding:.55rem 1rem;font-size:.82rem;font-weight:600;position:relative;top:4.5rem;}
+.announce-bar.hidden{display:none;}
+.hero{padding:10rem 2rem 5rem;max-width:1280px;margin:0 auto;text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.38rem .95rem;background:rgba(201,147,58,.09);border:1px solid rgba(201,147,58,.22);border-radius:2rem;color:var(--gold);font-size:.78rem;font-weight:600;letter-spacing:.06em;margin-bottom:1.4rem;}
+.hero-title{font-family:'Noto Serif TC',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;color:var(--text);margin-bottom:1.1rem;line-height:1.15;}
+.hero-title em{font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:42rem;margin:0 auto 2.4rem;line-height:1.9;}
+.btn{padding:.8rem 1.6rem;border:none;border-radius:2rem;font-weight:600;font-size:.9rem;cursor:pointer;transition:var(--tr);display:inline-flex;align-items:center;gap:.55rem;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;box-shadow:0 4px 18px rgba(201,147,58,.32);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 7px 26px rgba(201,147,58,.42);}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn-ghost{background:rgba(201,147,58,.08);color:var(--gold);border:1.5px solid rgba(201,147,58,.2);}
+.btn-ghost:hover{background:rgba(201,147,58,.15);}
+.btn-danger{background:linear-gradient(135deg,#f87171,#ef4444);color:#fff;border:none;}
+.btn-sm{padding:.5rem 1rem;font-size:.82rem;border-radius:1.5rem;}
+.products-section{padding:5rem 2rem;max-width:1280px;margin:0 auto;}
+.sec-header{max-width:600px;margin:0 auto 2.75rem;text-align:center;}
+.sec-eyebrow{display:inline-block;padding:.28rem .85rem;background:rgba(201,147,58,.09);color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:2rem;margin-bottom:.65rem;}
+.sec-title{font-family:'Noto Serif TC',serif;font-size:1.85rem;font-weight:700;color:var(--text);margin-bottom:.65rem;}
+.sec-desc{color:var(--muted);font-size:.92rem;line-height:1.85;}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.6rem;}
+.product-card{background:var(--card);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);transition:var(--tr);border:1px solid var(--border);}
+.product-card:hover{transform:translateY(-.45rem);box-shadow:var(--shadow-lg);}
+.product-img{height:230px;background:linear-gradient(155deg,#f9f3e8,#edddb8);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.product-img img{width:100%;height:100%;object-fit:cover;}
+.product-img-icon{font-size:3.2rem;color:rgba(201,147,58,.45);position:relative;z-index:1;}
+.product-region-badge{position:absolute;top:.85rem;left:.85rem;padding:.22rem .65rem;border-radius:2rem;font-size:.68rem;font-weight:700;background:rgba(255,255,255,.88);color:var(--gold);border:1px solid rgba(201,147,58,.2);backdrop-filter:blur(4px);}
+.product-body{padding:1.35rem;}
+.product-title{font-family:'Noto Serif TC',serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.45rem;}
+.product-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.7rem;}
+.product-tag{display:inline-flex;align-items:center;gap:.25rem;padding:.18rem .55rem;background:var(--border-light);color:var(--muted);border-radius:.5rem;font-size:.68rem;font-weight:600;}
+.product-desc{color:var(--muted);font-size:.85rem;margin-bottom:1.1rem;line-height:1.7;}
+.product-price-row{display:flex;align-items:baseline;gap:.5rem;margin-bottom:1.1rem;}
+.product-price{font-size:1.45rem;font-weight:700;color:var(--gold);font-family:'Noto Serif TC',serif;}
+.product-actions{display:flex;gap:.5rem;}
+.product-actions .btn{flex:1;justify-content:center;padding:.65rem .8rem;font-size:.82rem;}
+.about-section{padding:5.5rem 2rem;background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.about-wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.about-content h2{font-family:'Noto Serif TC',serif;font-size:1.85rem;font-weight:700;margin-bottom:1.1rem;}
+.about-content p{color:var(--muted);line-height:1.9;margin-bottom:.9rem;font-size:.92rem;}
+.svc-list{list-style:none;margin:1.25rem 0;}
+.svc-list li{display:flex;align-items:center;gap:.65rem;padding:.65rem 0;border-bottom:1px solid var(--border);font-size:.9rem;}
+.svc-list li:last-child{border-bottom:none;}
+.svc-list li i{color:var(--gold);}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1.75rem;}
+.stat-box{background:var(--bg);padding:1.1rem;border-radius:var(--radius);text-align:center;border:1px solid var(--border);}
+.stat-num{font-family:'Noto Serif TC',serif;font-size:1.65rem;font-weight:700;color:var(--gold);display:block;}
+.stat-lbl{font-size:.72rem;color:var(--muted);font-weight:500;margin-top:.2rem;}
+.about-visual{background:linear-gradient(155deg,var(--gold-pale),#f0e6cc);border-radius:var(--radius-lg);padding:2.25rem;border:1px solid rgba(201,147,58,.18);}
+.about-visual h3{font-family:'Noto Serif TC',serif;font-size:1.25rem;font-weight:700;margin-bottom:1.35rem;}
+.footer{background:#0e0e0c;color:#94a3b8;padding:4rem 2rem 2rem;}
+.footer-wrap{max-width:1280px;margin:0 auto;position:relative;}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2.25rem;margin-bottom:2.75rem;}
+.footer-col h3{color:#f1f5f9;font-size:.95rem;font-weight:700;margin-bottom:1.1rem;font-family:'Noto Serif TC',serif;}
+.footer-col a{color:#94a3b8;display:block;margin-bottom:.65rem;font-size:.82rem;transition:var(--tr);}
+.footer-col a:hover{color:#f1f5f9;}
+.footer-col p{font-size:.82rem;line-height:1.75;}
+.admin-trigger{position:absolute;right:0;bottom:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.15);border-radius:50%;transition:var(--tr);}
+.admin-trigger:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.1);transform:scale(1.1);}
+.footer-copy{text-align:center;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.05);color:#475569;font-size:.78rem;}
+/* Loading overlay */
+.loading-overlay{position:fixed;inset:0;background:rgba(247,246,242,.85);z-index:3000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;backdrop-filter:blur(4px);}
+.loading-overlay.hidden{display:none;}
+.spinner{width:2.5rem;height:2.5rem;border:3px solid rgba(201,147,58,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:.9rem;color:var(--muted);font-weight:500;}
+.products-loading{text-align:center;padding:3rem;color:var(--muted);}
+.products-loading .spinner{margin:0 auto 1rem;}
+
+/* ===== MODALS ===== */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,8,.74);z-index:2000;align-items:center;justify-content:center;padding:1.25rem;backdrop-filter:blur(3px);}
+.modal-overlay.show{display:flex;}
+.modal-box{background:#fff;border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.22);width:100%;animation:mIn .2s ease;}
+@keyframes mIn{from{opacity:0;transform:scale(.96) translateY(8px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.mhdr{display:flex;justify-content:space-between;align-items:center;padding:1.35rem 1.6rem;border-bottom:1px solid var(--border);}
+.mhdr h3{font-family:'Noto Serif TC',serif;font-size:1.1rem;font-weight:700;color:var(--text);}
+.mbtn-close{width:1.9rem;height:1.9rem;border:none;background:#f1f5f9;border-radius:.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:var(--tr);font-size:.85rem;}
+.mbtn-close:hover{background:#e2e8f0;color:var(--text);}
+.mbody{padding:1.6rem;max-height:72vh;overflow-y:auto;}
+.mfooter{padding:1.1rem 1.6rem;background:#f8f7f4;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.65rem;}
+/* Cart */
+.cart-modal .modal-box{max-width:660px;}
+.cart-item{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--border);align-items:center;}
+.cart-item:last-child{border-bottom:none;}
+.cart-item-name{font-weight:600;font-size:.92rem;margin-bottom:.18rem;}
+.cart-item-price{color:var(--muted);font-size:.82rem;}
+.cart-empty{text-align:center;padding:2.5rem 0;color:var(--muted);}
+.cart-empty i{font-size:2.2rem;margin-bottom:.75rem;display:block;opacity:.3;}
+.cart-total{display:flex;justify-content:space-between;align-items:center;padding-top:.9rem;border-top:2px solid var(--border);margin-top:.4rem;}
+.cart-total-lbl{font-weight:600;color:var(--muted);font-size:.88rem;}
+.cart-total-amt{font-size:1.3rem;font-weight:700;color:var(--gold);font-family:'Noto Serif TC',serif;}
+/* Checkout Modal */
+.checkout-modal .modal-box{max-width:520px;}
+.coupon-row{display:flex;gap:.5rem;margin-top:.5rem;}
+.coupon-row input{flex:1;}
+.coupon-result{font-size:.8rem;margin-top:.35rem;min-height:1.1rem;}
+.coupon-result.ok{color:var(--green);}
+.coupon-result.err{color:var(--red);}
+/* Login */
+.login-modal .modal-box{max-width:380px;background:#0e0e0c;border:1px solid rgba(255,255,255,.06);}
+.login-modal .mhdr{background:#0e0e0c;border-bottom:1px solid rgba(255,255,255,.06);}
+.login-modal .mhdr h3{color:#f1f5f9;}
+.login-icon{width:3.2rem;height:3.2rem;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:.875rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;color:#fff;font-size:1.25rem;}
+.login-h{font-family:'Noto Serif TC',serif;font-size:1.5rem;font-weight:700;color:#f1f5f9;text-align:center;margin-bottom:.35rem;}
+.login-sub{color:#64748b;font-size:.85rem;text-align:center;margin-bottom:1.75rem;}
+.fg{margin-bottom:1.1rem;}
+.fg label{display:block;font-size:.8rem;font-weight:600;color:#cbd5e1;margin-bottom:.4rem;}
+.fi{width:100%;padding:.82rem .95rem;border-radius:.7rem;border:1.5px solid rgba(148,163,184,.18);background:rgba(255,255,255,.04);color:#f1f5f9;font-size:.9rem;transition:var(--tr);outline:none;}
+.fi:focus{border-color:rgba(201,147,58,.5);box-shadow:0 0 0 3px rgba(201,147,58,.1);}
+.fi::placeholder{color:#334155;}
+.login-btn-main{width:100%;padding:.9rem;border:none;border-radius:.7rem;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;transition:var(--tr);margin-top:.4rem;}
+.login-btn-main:hover{transform:translateY(-1px);box-shadow:0 5px 18px rgba(201,147,58,.32);}
+.login-err{color:#f87171;font-size:.82rem;text-align:center;margin-top:.65rem;min-height:1.1rem;}
+/* Form Modal */
+.fm-modal .modal-box{max-width:540px;}
+.fmg{margin-bottom:1.1rem;}
+.fml{display:block;font-size:.76rem;font-weight:700;color:var(--muted);margin-bottom:.38rem;text-transform:uppercase;letter-spacing:.04em;}
+.fmc{width:100%;padding:.75rem .9rem;border-radius:.75rem;border:1.5px solid var(--border);background:#fff;color:var(--text);font-size:.88rem;transition:var(--tr);outline:none;}
+.fmc:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow);}
+.fmc-ta{resize:vertical;min-height:72px;}
+.fmr{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
+.fmc-sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%236b6559' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center;}
+.color-row{display:flex;align-items:center;gap:.75rem;}
+.color-swatch{width:2.1rem;height:2.1rem;border-radius:.5rem;border:2px solid var(--border);cursor:pointer;flex-shrink:0;padding:0;}
+
+/* ===== BACKEND ===== */
+.backend{display:none;min-height:100vh;}
+.app-wrap{display:flex;min-height:100vh;}
+.sb{width:252px;background:var(--sidebar);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;border-right:1px solid rgba(255,255,255,.04);flex-shrink:0;}
+.sb-brand{padding:1.5rem 1.25rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.sb-brand-inner{display:flex;align-items:center;gap:.65rem;}
+.sb-logo-icon{width:2.1rem;height:2.1rem;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:.55rem;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.9rem;flex-shrink:0;}
+.sb-brand-text{font-family:'Noto Serif TC',serif;font-size:.95rem;font-weight:700;color:#f1f5f9;}
+.sb-brand-sub{font-size:.66rem;color:#475569;margin-top:.08rem;}
+.sb-front-btn{margin:1rem 1.25rem .25rem;display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:.75rem;background:rgba(201,147,58,.14);border:1.5px solid rgba(201,147,58,.28);color:var(--gold-light);font-size:.82rem;font-weight:600;cursor:pointer;transition:var(--tr);}
+.sb-front-btn:hover{background:rgba(201,147,58,.22);}
+.sb-nav{flex:1;padding:.5rem 0 .75rem;}
+.nav-grp{margin-bottom:.5rem;}
+.nav-grp-title{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#334155;padding:.15rem 1.25rem .6rem;}
+.sbi{display:flex;align-items:center;gap:.65rem;padding:.68rem 1.25rem;color:#64748b;cursor:pointer;transition:var(--tr);font-size:.82rem;font-weight:500;border-left:3px solid transparent;user-select:none;}
+.sbi i{width:.9rem;text-align:center;font-size:.84rem;flex-shrink:0;}
+.sbi:hover{background:var(--sb-hover);color:#cbd5e1;border-left-color:rgba(201,147,58,.3);}
+.sbi.active{background:var(--sb-active);color:var(--gold-light);border-left-color:var(--gold);}
+.sb-footer{padding:1rem 1.25rem;border-top:1px solid rgba(255,255,255,.06);}
+.admin-info{display:flex;align-items:center;gap:.65rem;margin-bottom:.75rem;}
+.admin-av{width:2.1rem;height:2.1rem;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.78rem;font-weight:700;flex-shrink:0;}
+.admin-name{font-size:.82rem;font-weight:600;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px;}
+.admin-role{font-size:.66rem;color:#475569;}
+.sb-logout{display:flex;align-items:center;gap:.6rem;padding:.62rem 1rem;border-radius:.7rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);color:#f87171;font-size:.8rem;font-weight:600;cursor:pointer;transition:var(--tr);width:100%;}
+.sb-logout:hover{background:rgba(239,68,68,.15);}
+.bk-main{flex:1;overflow:auto;background:#f1f0ec;min-width:0;}
+.pg-header{background:#fff;border-bottom:1px solid var(--border);padding:1.35rem 1.75rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+.pg-header-l h1{font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.6rem;}
+.pg-header-l h1 i{color:var(--gold);font-size:1.15rem;}
+.pg-header-l p{font-size:.75rem;color:var(--muted);margin-top:.12rem;}
+.pg-content{padding:1.5rem 1.75rem;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.1rem;margin-bottom:1.5rem;}
+.stat-card{background:#fff;padding:1.35rem;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);}
+.stat-icon{width:2.2rem;height:2.2rem;border-radius:.65rem;display:flex;align-items:center;justify-content:center;font-size:.9rem;margin-bottom:.85rem;}
+.si-blue{background:rgba(79,70,229,.1);color:var(--indigo);}
+.si-green{background:rgba(22,163,74,.1);color:var(--green);}
+.si-amber{background:rgba(201,147,58,.12);color:var(--gold);}
+.si-red{background:rgba(239,68,68,.1);color:var(--red);}
+.si-purple{background:rgba(168,85,247,.1);color:#a855f7;}
+.stat-val{font-family:'Noto Serif TC',serif;font-size:1.7rem;font-weight:700;color:var(--text);line-height:1;margin-bottom:.28rem;}
+.stat-lbl{font-size:.74rem;color:var(--muted);font-weight:500;}
+.tc{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden;margin-bottom:1.25rem;}
+.tc-hdr{padding:1.1rem 1.4rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;}
+.tc-title{font-weight:700;font-size:.95rem;color:var(--text);}
+.tc-sub{font-size:.74rem;color:var(--muted);margin-top:.12rem;}
+.tw{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:.84rem;}
+thead tr{background:#f8f7f4;}
+th{padding:.875rem 1.1rem;text-align:left;font-weight:700;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;}
+td{padding:.8rem 1.1rem;border-top:1px solid var(--border);color:var(--text);vertical-align:middle;}
+tr:hover td{background:#faf9f7;}
+.bdg{display:inline-flex;align-items:center;padding:.2rem .62rem;border-radius:2rem;font-size:.68rem;font-weight:700;white-space:nowrap;}
+.bdg-green{background:rgba(22,163,74,.1);color:var(--green);}
+.bdg-amber{background:rgba(217,119,6,.12);color:var(--amber);}
+.bdg-blue{background:rgba(79,70,229,.1);color:var(--indigo);}
+.bdg-red{background:rgba(239,68,68,.1);color:var(--red);}
+.bdg-gray{background:#f1f5f9;color:#64748b;}
+.ib{width:1.85rem;height:1.85rem;border:none;border-radius:.45rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;transition:var(--tr);}
+.ib-edit{background:#eff6ff;color:var(--indigo);}
+.ib-edit:hover{background:#dbeafe;}
+.ib-del{background:#fef2f2;color:var(--red);}
+.ib-del:hover{background:#fee2e2;}
+.ib-view{background:#f0fdf4;color:var(--green);}
+.ib-view:hover{background:#dcfce7;}
+.ac{display:flex;gap:.35rem;align-items:center;}
+.chart-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);padding:1.35rem;margin-bottom:1.25rem;}
+.chart-title{font-weight:700;font-size:.95rem;color:var(--text);margin-bottom:1.25rem;}
+.mini-bars{display:flex;gap:.35rem;align-items:flex-end;height:72px;}
+.mb-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:.35rem;}
+.mb{width:100%;border-radius:.25rem .25rem 0 0;transition:var(--tr);}
+.mb-lbl{font-size:.6rem;color:var(--muted);}
+.sc{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);padding:1.5rem;margin-bottom:1.25rem;}
+.sc-title{font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:1.35rem;padding-bottom:.8rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.45rem;}
+.sc-title i{color:var(--gold);}
+.sc-warn{border-left:3px solid var(--red);}
+.sc-warn .sc-title{color:var(--red);}
+.info-box{background:rgba(79,70,229,.04);border:1px solid rgba(79,70,229,.12);border-radius:.75rem;padding:1rem;font-size:.84rem;color:var(--indigo);line-height:1.7;}
+code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;font-family:monospace;font-size:.82rem;}
+.coupon-code-badge{font-family:monospace;font-size:.82rem;background:var(--border-light);padding:.18rem .55rem;border-radius:.45rem;color:var(--indigo);font-weight:700;}
+.stock-alert{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:.75rem;padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;font-size:.84rem;}
+.stock-alert i{color:var(--red);flex-shrink:0;}
+.sync-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:2rem;font-size:.68rem;font-weight:600;background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.2);}
+
+@media(max-width:1024px){.footer-grid{grid-template-columns:repeat(2,1fr);}.about-wrap{grid-template-columns:1fr;}}
+@media(max-width:768px){.nav-menu{display:none;}.sb{width:200px;}.pg-content{padding:1rem;}}
+
+/* Toast */
+.toast{position:fixed;bottom:1.75rem;right:1.75rem;background:#0e0e0c;color:#f8fafc;padding:.75rem 1.35rem;border-radius:.8rem;font-size:.85rem;font-weight:600;z-index:9999;display:flex;align-items:center;gap:.55rem;box-shadow:0 8px 28px rgba(0,0,0,.22);transform:translateY(4rem);opacity:0;transition:all .28s cubic-bezier(.4,0,.2,1);pointer-events:none;max-width:320px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast i{flex-shrink:0;}
+.toast.success i{color:#4ade80;}
+.toast.error i{color:#f87171;}
+.toast.info i{color:#60a5fa;}
+</style>
+</head>
+<body>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay hidden">
+  <div class="spinner"></div>
+  <span class="loading-text" id="loadingText">載入中...</span>
+</div>
+
+<!-- ===== FRONTEND ===== -->
+<div id="frontend" class="frontend">
+  <nav class="top-bar">
+    <div class="tbc">
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fas fa-dharmachakra"></i></div>
+        <span class="logo-text" id="logoText">唐卡藝術館</span>
+      </a>
+      <div class="nav-menu">
+        <a href="#home" class="nav-link">首頁</a>
+        <a href="#products" class="nav-link">唐卡展示</a>
+        <a href="#about" class="nav-link">關於我們</a>
+        <a href="#contact" class="nav-link">聯繫我們</a>
+      </div>
+      <button class="cart-btn" onclick="showCartModal()">
+        <i class="fas fa-bag-shopping"></i><span>我的結緣</span>
+        <span class="cart-badge" id="cartCount">0</span>
+      </button>
+    </div>
+  </nav>
+  <div class="announce-bar hidden" id="frontAnnounceBar"></div>
+  <section class="hero" id="home">
+    <div class="hero-badge"><i class="fas fa-om"></i> 正統藏傳唐卡</div>
+    <h1 class="hero-title"><em id="heroTitle">千年傳承 · 藝術臻品</em></h1>
+    <p class="hero-sub" id="heroSubtitle">專注收藏與結緣西藏、尼泊爾、不丹等地區的珍貴唐卡藝術品。每幅唐卡均由資深畫師手工繪製，蘊含深厚的宗教文化與藝術價值。</p>
+    <a href="#products" class="btn btn-gold"><i class="fas fa-dharmachakra"></i> 探索唐卡收藏</a>
+  </section>
+  <section class="products-section" id="products">
+    <div class="sec-header">
+      <div class="sec-eyebrow">精選藏品</div>
+      <h2 class="sec-title">精選唐卡藏品</h2>
+      <p class="sec-desc">每幅唐卡都經過嚴格挑選，確保藝術價值與宗教意義的完美結合</p>
+    </div>
+    <div class="products-grid" id="frontProducts">
+      <div class="products-loading"><div class="spinner"></div><p>正在載入藏品...</p></div>
+    </div>
+  </section>
+  <section class="about-section" id="about">
+    <div class="about-wrap">
+      <div class="about-content">
+        <div class="sec-eyebrow" style="margin-bottom:.65rem;">關於我們</div>
+        <h2>關於唐卡藝術館</h2>
+        <p id="aboutIntro">我們專注於西藏唐卡藝術的傳承與推廣，與西藏、尼泊爾、不丹等地區的知名畫師和寺院建立長期合作關係。</p>
+        <p id="aboutDetails">我們的唐卡均使用天然礦物顏料繪製，部分作品經過寺院僧人開光加持，兼具藝術收藏與宗教供奉價值。</p>
+        <ul class="svc-list" id="serviceList">
+          <li><i class="fas fa-circle-check"></i>100%手工繪製唐卡</li>
+          <li><i class="fas fa-circle-check"></i>天然礦物顏料</li>
+          <li><i class="fas fa-circle-check"></i>可選開光加持服務</li>
+          <li><i class="fas fa-circle-check"></i>國際運送與保險</li>
+        </ul>
+        <div class="stats-row">
+          <div class="stat-box"><span class="stat-num">15+</span><span class="stat-lbl">合作畫師</span></div>
+          <div class="stat-box"><span class="stat-num">200+</span><span class="stat-lbl">藏品數量</span></div>
+          <div class="stat-box"><span class="stat-num">98%</span><span class="stat-lbl">客戶滿意度</span></div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <h3>服務特色</h3>
+        <ul class="svc-list">
+          <li><i class="fas fa-circle-check"></i>100%手工繪製唐卡</li>
+          <li><i class="fas fa-circle-check"></i>天然礦物顏料</li>
+          <li><i class="fas fa-circle-check"></i>可選開光加持服務</li>
+          <li><i class="fas fa-circle-check"></i>國際運送與保險</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <footer class="footer" id="contact">
+    <div class="footer-wrap">
+      <div class="footer-grid">
+        <div class="footer-col"><h3>唐卡藝術館</h3><p>致力於推廣正統唐卡藝術，傳承千年佛教文化遺產。</p></div>
+        <div class="footer-col"><h3>快速連結</h3><a href="#home">首頁</a><a href="#products">唐卡展示</a><a href="#about">關於我們</a><a href="#contact">聯繫我們</a></div>
+        <div class="footer-col"><h3>服務項目</h3><a href="#">唐卡購買</a><a href="#">開光服務</a><a href="#">藝術諮詢</a><a href="#">定制服務</a></div>
+        <div class="footer-col">
+          <h3>聯繫我們</h3>
+          <a id="footerPhone" href="#">+886 2 2345 6789</a>
+          <a id="footerEmail" href="#">info@thangka-art.com</a>
+          <p id="footerAddress" style="margin-top:.4rem;">台北市信義區唐卡路一段1號</p>
+        </div>
+      </div>
+      <a href="#" class="admin-trigger" onclick="showLoginModal();return false;"><i class="fas fa-lock"></i></a>
+      <div class="footer-copy" id="copyrightText">© 2024 唐卡藝術館. 版權所有.</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== CART MODAL ===== -->
+<div id="cartModal" class="modal-overlay cart-modal">
+  <div class="modal-box">
+    <div class="mhdr"><h3><i class="fas fa-bag-shopping" style="color:var(--gold);"></i> 我的結緣清單</h3><button class="mbtn-close" onclick="hideCartModal()"><i class="fas fa-times"></i></button></div>
+    <div class="mbody" id="cartItems"></div>
+    <div class="mfooter" style="justify-content:space-between;">
+      <div id="cartTotalInfo"></div>
+      <div style="display:flex;gap:.55rem;">
+        <button class="btn btn-outline btn-sm" onclick="hideCartModal()">繼續選購</button>
+        <button class="btn btn-gold btn-sm" onclick="goCheckout()"><i class="fas fa-heart"></i> 前往結緣</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHECKOUT MODAL ===== -->
+<div id="checkoutModal" class="modal-overlay checkout-modal">
+  <div class="modal-box">
+    <div class="mhdr"><h3><i class="fas fa-heart" style="color:var(--gold);"></i> 填寫結緣資訊</h3><button class="mbtn-close" onclick="hideCheckout()"><i class="fas fa-times"></i></button></div>
+    <div class="mbody">
+      <div class="fmr">
+        <div class="fmg"><label class="fml">姓名 *</label><input class="fmc" id="co_name" placeholder="您的姓名"></div>
+        <div class="fmg"><label class="fml">電話 *</label><input class="fmc" id="co_phone" placeholder="聯絡電話"></div>
+      </div>
+      <div class="fmg"><label class="fml">電子郵件</label><input class="fmc" id="co_email" type="email" placeholder="email（選填）"></div>
+      <div class="fmg"><label class="fml">地址</label><input class="fmc" id="co_address" placeholder="收件地址（選填）"></div>
+      <div class="fmg"><label class="fml">付款方式</label>
+        <select class="fmc fmc-sel" id="co_payment">
+          <option value="">請選擇</option>
+          <option>現金匯款</option><option>LINE Pay</option><option>信用卡</option><option>轉帳</option>
+        </select></div>
+      <div class="fmg"><label class="fml">優惠碼</label>
+        <div class="coupon-row">
+          <input class="fmc" id="co_coupon" placeholder="輸入優惠碼（選填）" style="flex:1;">
+          <button class="btn btn-ghost btn-sm" onclick="applyCoupon()">套用</button>
+        </div>
+        <div class="coupon-result" id="couponResult"></div>
+      </div>
+      <div id="checkoutSummary" style="background:#f8f7f4;border-radius:.75rem;padding:1rem;margin-top:.5rem;"></div>
+      <div class="fmg" style="margin-top:1rem;"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="co_notes" placeholder="特別需求或備註"></textarea></div>
+    </div>
+    <div class="mfooter" style="justify-content:space-between;">
+      <button class="btn btn-outline btn-sm" onclick="hideCheckout()">返回修改</button>
+      <button class="btn btn-gold btn-sm" id="submitOrderBtn" onclick="submitOrder()"><i class="fas fa-paper-plane"></i> 確認送出</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LOGIN MODAL ===== -->
+<div id="loginModal" class="modal-overlay login-modal">
+  <div class="modal-box">
+    <div class="mhdr"><h3>管理系統</h3><button class="mbtn-close" style="background:rgba(255,255,255,.06);color:#94a3b8;" onclick="hideLoginModal()"><i class="fas fa-times"></i></button></div>
+    <div class="mbody" style="background:#0e0e0c;padding:1.75rem;">
+      <div class="login-icon"><i class="fas fa-shield-halved"></i></div>
+      <h2 class="login-h">管理員登入</h2>
+      <p class="login-sub">使用 Supabase 管理員帳號登入</p>
+      <div class="fg"><label>電子郵件</label><input type="email" id="loginEmail" class="fi" placeholder="admin@example.com" autocomplete="email"></div>
+      <div class="fg"><label>密碼</label><input type="password" id="loginPass" class="fi" placeholder="••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="login-err" id="loginErr"></div>
+      <button class="login-btn-main" onclick="doLogin()"><i class="fas fa-right-to-bracket"></i> 登入後台</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FORM MODAL ===== -->
+<div id="fmModal" class="modal-overlay fm-modal">
+  <div class="modal-box">
+    <div class="mhdr"><h3 id="fmTitle">表單</h3><button class="mbtn-close" onclick="closeFm()"><i class="fas fa-times"></i></button></div>
+    <div class="mbody" id="fmBody"></div>
+    <div class="mfooter" id="fmFooter">
+      <button class="btn btn-outline btn-sm" onclick="closeFm()">取消</button>
+      <button class="btn btn-gold btn-sm" id="fmSubmit" onclick="execFm()"><i class="fas fa-check"></i> 儲存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BACKEND ===== -->
+<div id="backend" class="backend">
+  <div class="app-wrap">
+    <aside class="sb">
+      <div class="sb-brand">
+        <div class="sb-brand-inner">
+          <div class="sb-logo-icon"><i class="fas fa-dharmachakra"></i></div>
+          <div><div class="sb-brand-text">唐卡藝術館</div><div class="sb-brand-sub">管理後台</div></div>
+        </div>
+      </div>
+      <button class="sb-front-btn" onclick="goFrontend()"><i class="fas fa-arrow-left"></i><span>返回前台網站</span></button>
+      <nav class="sb-nav">
+        <div class="nav-grp">
+          <div class="nav-grp-title">主要功能</div>
+          <div class="sbi" id="sbi-dashboard" onclick="goPage('dashboard')"><i class="fas fa-chart-line"></i><span>數據儀表板</span></div>
+          <div class="sbi" id="sbi-products" onclick="goPage('products')"><i class="fas fa-palette"></i><span>唐卡展示管理</span></div>
+          <div class="sbi" id="sbi-orders" onclick="goPage('orders')"><i class="fas fa-receipt"></i><span>訂單管理</span></div>
+          <div class="sbi" id="sbi-customers" onclick="goPage('customers')"><i class="fas fa-users"></i><span>客戶管理</span></div>
+        </div>
+        <div class="nav-grp">
+          <div class="nav-grp-title">行銷工具</div>
+          <div class="sbi" id="sbi-announce" onclick="goPage('announce')"><i class="fas fa-bullhorn"></i><span>公告管理</span></div>
+          <div class="sbi" id="sbi-coupons" onclick="goPage('coupons')"><i class="fas fa-tag"></i><span>優惠代碼</span></div>
+          <div class="sbi" id="sbi-subscribers" onclick="goPage('subscribers')"><i class="fas fa-envelope"></i><span>訂閱管理</span></div>
+        </div>
+        <div class="nav-grp">
+          <div class="nav-grp-title">系統管理</div>
+          <div class="sbi" id="sbi-content" onclick="goPage('content')"><i class="fas fa-pen-nib"></i><span>內容編輯</span></div>
+          <div class="sbi" id="sbi-design" onclick="goPage('design')"><i class="fas fa-swatchbook"></i><span>外觀設定</span></div>
+          <div class="sbi" id="sbi-settings" onclick="goPage('settings')"><i class="fas fa-gear"></i><span>系統設定</span></div>
+        </div>
+      </nav>
+      <div class="sb-footer">
+        <div class="admin-info">
+          <div class="admin-av"><i class="fas fa-user" style="font-size:.7rem;"></i></div>
+          <div><div class="admin-name" id="adminEmail">管理員</div><div class="admin-role">admin</div></div>
+        </div>
+        <button class="sb-logout" onclick="doLogout()"><i class="fas fa-right-from-bracket"></i><span>登出系統</span></button>
+      </div>
+    </aside>
+    <main class="bk-main" id="bkMain"></main>
+  </div>
+</div>
+
+<div id="toast" class="toast"><i id="toastIcon" class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+/* ============================================================
+   SUPABASE INIT
+============================================================ */
+const SB_URL = 'https://mnqewmhcrzofdbjoitxt.supabase.co';
+const SB_KEY = 'sb_publishable__JKjXoD74jxDBBDiUN_TJw_MJjNENJJ';
+const sb = supabase.createClient(SB_URL, SB_KEY);
+
+/* ============================================================
+   LOCAL CONFIG (non-DB settings)
+============================================================ */
+const LKEYS = { content:'tk_w_content', design:'tk_w_design', config:'tk_w_config', announces:'tk_w_announces', cart:'tk_w_cart' };
+function lload(k,def){ try{const v=localStorage.getItem(LKEYS[k]);return v?JSON.parse(v):def;}catch{return def;} }
+function lsave(k,v){ localStorage.setItem(LKEYS[k],JSON.stringify(v)); }
+
+let pageContent = lload('content',{
+  heroTitle:'千年傳承 · 藝術臻品',
+  heroSubtitle:'專注收藏與結緣西藏、尼泊爾、不丹等地區的珍貴唐卡藝術品。每幅唐卡均由資深畫師手工繪製，蘊含深厚的宗教文化與藝術價值。',
+  aboutIntro:'我們專注於西藏唐卡藝術的傳承與推廣，與西藏、尼泊爾、不丹等地區的知名畫師和寺院建立長期合作關係。',
+  aboutDetails:'我們的唐卡均使用天然礦物顏料繪製，部分作品經過寺院僧人開光加持，兼具藝術收藏與宗教供奉價值。',
+  serviceItems:['100%手工繪製唐卡','天然礦物顏料','可選開光加持服務','國際運送與保險']
+});
+let pageDesign = lload('design',{primaryColor:'#c9933a',heroGradientFrom:'#c9933a',heroGradientTo:'#e8b865',sectionBackground:'#f7f6f2'});
+let sysConfig  = lload('config',{companyName:'唐卡藝術館',supportPhone:'+886 2 2345 6789',supportEmail:'info@thangka-art.com',address:'台北市信義區唐卡路一段1號',copyright:'© 2024 唐卡藝術館. 版權所有.'});
+let announces  = lload('announces',[{id:1,text:'🙏 歡迎蒞臨唐卡藝術館，每幅藏品皆為正統手繪唐卡！',active:true,created:'2024-01-01'}]);
+let cart       = lload('cart',[]);
+
+/* Runtime state */
+let curPage    = 'dashboard';
+let fmAction   = null;
+let curUser    = null;
+let appliedCoupon = null;
+
+/* ============================================================
+   UTILS
+============================================================ */
+function esc(v){ return String(v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function gv(id){ const el=document.getElementById(id); return el?(el.type==='checkbox'?el.checked:el.value.trim()):''; }
+function sv(id,v){ const el=document.getElementById(id); if(el){ el.type==='checkbox'?el.checked=!!v:el.value=v||''; } }
+function today(){ return new Date().toISOString().split('T')[0]; }
+function genOrderNo(){ return 'ORD'+Date.now().toString(36).toUpperCase(); }
+
+function toast(msg,type='success'){
+  const t=document.getElementById('toast');
+  const icons={success:'fas fa-check-circle',error:'fas fa-circle-exclamation',info:'fas fa-circle-info'};
+  document.getElementById('toastIcon').className=icons[type]||icons.success;
+  document.getElementById('toastMsg').textContent=msg;
+  t.className='toast '+type; t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3000);
+}
+function showLoading(msg='載入中...'){ document.getElementById('loadingText').textContent=msg; document.getElementById('loadingOverlay').classList.remove('hidden'); }
+function hideLoading(){ document.getElementById('loadingOverlay').classList.add('hidden'); }
+
+/* ============================================================
+   INIT
+============================================================ */
+document.addEventListener('DOMContentLoaded', async()=>{
+  applySettings();
+  updateBadge();
+  renderFrontAnnounce();
+
+  // Auto check session (in case admin refreshes while on backend)
+  const { data } = await sb.auth.getSession();
+  if(data?.session){
+    curUser = data.session.user;
+  }
+
+  // Load public products
+  await loadFrontProducts();
+
+  // Modal backdrop handlers
+  ['cartModal','loginModal','fmModal','checkoutModal'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.addEventListener('click',e=>{if(e.target===el) el.classList.remove('show');});
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape') document.querySelectorAll('.modal-overlay.show').forEach(m=>m.classList.remove('show'));
+  });
+});
+
+/* ============================================================
+   APPLY SETTINGS (frontend display)
+============================================================ */
+function applySettings(){
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('heroTitle',pageContent.heroTitle);
+  set('heroSubtitle',pageContent.heroSubtitle);
+  set('aboutIntro',pageContent.aboutIntro);
+  set('aboutDetails',pageContent.aboutDetails);
+  const sl=document.getElementById('serviceList');
+  if(sl) sl.innerHTML=pageContent.serviceItems.map(s=>`<li><i class="fas fa-circle-check"></i>${esc(s)}</li>`).join('');
+  const fp=document.getElementById('footerPhone');
+  if(fp){fp.textContent=sysConfig.supportPhone;fp.href='tel:'+sysConfig.supportPhone.replace(/[\s-]/g,'');}
+  const fe=document.getElementById('footerEmail');
+  if(fe){fe.textContent=sysConfig.supportEmail;fe.href='mailto:'+sysConfig.supportEmail;}
+  set('footerAddress',sysConfig.address);
+  set('copyrightText',sysConfig.copyright);
+  const lt=document.getElementById('logoText');if(lt)lt.textContent=sysConfig.companyName;
+  document.title=sysConfig.companyName+'｜專業唐卡收藏與結緣';
+}
+
+function renderFrontAnnounce(){
+  const bar=document.getElementById('frontAnnounceBar');
+  if(!bar) return;
+  const a=announces.find(x=>x.active);
+  if(a){bar.textContent=a.text;bar.classList.remove('hidden');}
+  else bar.classList.add('hidden');
+}
+
+/* ============================================================
+   FRONTEND PRODUCTS (from Supabase items table)
+============================================================ */
+async function loadFrontProducts(){
+  const c=document.getElementById('frontProducts');
+  if(!c) return;
+  try{
+    const { data, error } = await sb
+      .from('items')
+      .select('id,code,name,image,region,painter,maker,price,notes,status')
+      .eq('status','in-stock')
+      .order('createdat',{ascending:false});
+
+    if(error) throw error;
+    renderFrontProducts(data||[]);
+  } catch(e){
+    c.innerHTML=`<div class="products-loading"><i class="fas fa-circle-exclamation" style="color:var(--red);font-size:2rem;margin-bottom:.75rem;display:block;"></i><p>商品載入失敗：${esc(e.message)}</p></div>`;
+    console.error('loadFrontProducts:',e);
+  }
+}
+
+function renderFrontProducts(items){
+  const c=document.getElementById('frontProducts');
+  if(!c) return;
+  if(!items.length){
+    c.innerHTML='<div class="products-loading"><i class="fas fa-dharmachakra" style="font-size:2.5rem;opacity:.25;display:block;margin-bottom:.75rem;"></i><p>目前暫無展示藏品</p></div>';
+    return;
+  }
+  c.innerHTML=items.map(p=>{
+    const name=p.name||'唐卡藏品';
+    const imgHtml=p.image
+      ?`<img src="${p.image}" alt="${esc(name)}">`
+      :`<i class="fas fa-dharmachakra product-img-icon"></i>`;
+    return `<div class="product-card">
+      <div class="product-img">${imgHtml}</div>
+      <div class="product-body">
+        <h3 class="product-title">${esc(name)}</h3>
+        <p class="product-desc">${esc(p.notes||'')}</p>
+        <div class="product-price-row"><span class="product-price">NT$ ${Number(p.price||0).toLocaleString()}</span></div>
+        <div class="product-actions">
+          <button class="btn btn-outline" onclick="viewFrontProduct('${p.id}')"><i class="fas fa-eye"></i> 詳情</button>
+          <button class="btn btn-gold" onclick="addToCart('${p.id}','${esc(name)}',${p.price||0},'','${p.image?'[img]':''}')"><i class="fas fa-om"></i> 結緣</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function viewFrontProduct(id){
+  try{
+    const { data:p } = await sb.from('items').select('*').eq('id',id).single();
+    if(!p) return;
+    const name=p.name||'唐卡藏品';
+    openFm(`<i class="fas fa-dharmachakra" style="color:var(--gold);"></i> ${esc(name)}`,`
+      <div style="background:linear-gradient(155deg,#f9f3e8,#edddb8);border-radius:1rem;height:200px;display:flex;align-items:center;justify-content:center;margin-bottom:1.35rem;overflow:hidden;">
+        ${p.image?`<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;">`:`<i class="fas fa-dharmachakra" style="font-size:4rem;color:rgba(201,147,58,.4);"></i>`}
+      </div>
+      <p style="font-size:.95rem;color:var(--text);line-height:1.9;margin-bottom:1.5rem;">${esc(p.notes||'暫無詳細說明')}</p>
+      <div style="font-size:1.6rem;font-weight:700;color:var(--gold);font-family:'Noto Serif TC',serif;">NT$ ${Number(p.price||0).toLocaleString()}</div>
+    `,null,false);
+  } catch(e){ toast('載入失敗','error'); }
+}
+
+/* ============================================================
+   CART
+============================================================ */
+function addToCart(id,name,price,imgFlag){
+  const it=cart.find(x=>x.id===id);
+  if(it) it.quantity++;
+  else cart.push({id,name,price:Number(price),hasImg:imgFlag==='[img]',quantity:1});
+  lsave('cart',cart); updateBadge();
+  toast(`「${name}」已加入結緣清單`);
+}
+function updateBadge(){
+  const n=cart.reduce((s,i)=>s+i.quantity,0);
+  const b=document.getElementById('cartCount');if(b)b.textContent=n;
+}
+function showCartModal(){ document.getElementById('cartModal').classList.add('show'); renderCart(); }
+function hideCartModal(){ document.getElementById('cartModal').classList.remove('show'); }
+function renderCart(){
+  const c=document.getElementById('cartItems'),ti=document.getElementById('cartTotalInfo');
+  if(!c||!ti) return;
+  if(!cart.length){c.innerHTML='<div class="cart-empty"><i class="fas fa-bag-shopping"></i>結緣清單目前是空的</div>';ti.innerHTML='';return;}
+  let total=0;
+  c.innerHTML=cart.map(it=>{const sub=it.price*it.quantity;total+=sub;return`
+    <div class="cart-item">
+      <div><div class="cart-item-name">${esc(it.name)}</div><div class="cart-item-price">NT$ ${it.price.toLocaleString()} × ${it.quantity}</div></div>
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <span style="font-weight:700;color:var(--gold);">NT$ ${sub.toLocaleString()}</span>
+        <button class="ib ib-del" onclick="removeCart('${it.id}')"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`;}).join('')+`<div class="cart-total"><span class="cart-total-lbl">小計</span><span class="cart-total-amt">NT$ ${total.toLocaleString()}</span></div>`;
+  ti.innerHTML='';
+}
+function removeCart(id){ cart=cart.filter(i=>i.id!==id);lsave('cart',cart);updateBadge();renderCart(); }
+
+/* ============================================================
+   CHECKOUT
+============================================================ */
+function goCheckout(){
+  if(!cart.length){toast('請先加入結緣商品','error');return;}
+  hideCartModal();
+  appliedCoupon=null;
+  document.getElementById('couponResult').textContent='';
+  renderCheckoutSummary();
+  document.getElementById('checkoutModal').classList.add('show');
+}
+function hideCheckout(){ document.getElementById('checkoutModal').classList.remove('show'); }
+function renderCheckoutSummary(){
+  const s=document.getElementById('checkoutSummary');
+  if(!s) return;
+  const subtotal=cart.reduce((sum,i)=>sum+i.price*i.quantity,0);
+  let discount=0;
+  if(appliedCoupon){
+    if(appliedCoupon.type==='percent') discount=Math.round(subtotal*appliedCoupon.value/100);
+    else discount=appliedCoupon.value;
+    discount=Math.min(discount,subtotal);
+  }
+  const total=subtotal-discount;
+  s.innerHTML=`
+    <div style="font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem;">訂單明細</div>
+    ${cart.map(it=>`<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:.4rem 0;border-bottom:1px solid var(--border);">
+      <span>${esc(it.name)} ×${it.quantity}</span>
+      <span>NT$ ${(it.price*it.quantity).toLocaleString()}</span>
+    </div>`).join('')}
+    ${discount?`<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:.4rem 0;color:var(--green);"><span>優惠折扣 (${esc(appliedCoupon.code)})</span><span>-NT$ ${discount.toLocaleString()}</span></div>`:''}
+    <div style="display:flex;justify-content:space-between;font-size:1rem;font-weight:700;padding:.6rem 0;color:var(--gold);font-family:'Noto Serif TC',serif;">
+      <span>結緣總金額</span><span>NT$ ${total.toLocaleString()}</span>
+    </div>`;
+  s._total=total;
+}
+
+async function applyCoupon(){
+  const code=gv('co_coupon');
+  const res=document.getElementById('couponResult');
+  if(!code){res.className='coupon-result err';res.textContent='請輸入優惠碼';return;}
+  try{
+    const { data,error } = await sb.from('coupons').select('*').eq('code',code.toUpperCase()).eq('active',true).single();
+    if(error||!data){res.className='coupon-result err';res.textContent='優惠碼不存在或已失效';appliedCoupon=null;return;}
+    if(data.expires_at&&new Date(data.expires_at)<new Date()){res.className='coupon-result err';res.textContent='此優惠碼已過期';appliedCoupon=null;return;}
+    if(data.used_count>=data.usage_limit){res.className='coupon-result err';res.textContent='此優惠碼已達使用上限';appliedCoupon=null;return;}
+    const subtotal=cart.reduce((s,i)=>s+i.price*i.quantity,0);
+    if(subtotal<(data.min_order||0)){res.className='coupon-result err';res.textContent=`最低消費 NT$ ${data.min_order.toLocaleString()} 才可使用`;appliedCoupon=null;return;}
+    appliedCoupon=data;
+    const desc=data.type==='percent'?`折扣 ${data.value}%`:`折抵 NT$ ${data.value.toLocaleString()}`;
+    res.className='coupon-result ok';res.textContent=`✓ 優惠碼已套用：${desc}`;
+    renderCheckoutSummary();
+  } catch(e){ res.className='coupon-result err';res.textContent='驗證失敗，請稍後再試'; }
+}
+
+async function submitOrder(){
+  const name=gv('co_name'),phone=gv('co_phone');
+  if(!name||!phone){toast('請填寫姓名與電話','error');return;}
+  const btn=document.getElementById('submitOrderBtn');
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> 送出中...';
+  const summary=document.getElementById('checkoutSummary');
+  const total=summary._total||cart.reduce((s,i)=>s+i.price*i.quantity,0);
+  const subtotal=cart.reduce((s,i)=>s+i.price*i.quantity,0);
+  const discount=subtotal-total;
+  try{
+    const orderData={
+      order_no:genOrderNo(),
+      customer_name:name,
+      customer_phone:phone,
+      customer_email:gv('co_email')||'',
+      customer_address:gv('co_address')||'',
+      items:cart.map(i=>({id:i.id,name:i.name,price:i.price,qty:i.quantity})),
+      total_amount:total,
+      deposit:0,
+      balance:total,
+      status:'待發貨',
+      payment_method:gv('co_payment')||'',
+      notes:(gv('co_notes')||'')+(appliedCoupon?` [優惠碼:${appliedCoupon.code} 折扣:NT$${discount}]`:''),
+    };
+    const { error } = await sb.from('orders').insert(orderData);
+    if(error) throw error;
+    // Update coupon used count
+    if(appliedCoupon){
+      await sb.from('coupons').update({used_count:appliedCoupon.used_count+1}).eq('id',appliedCoupon.id);
+    }
+    cart=[]; lsave('cart',cart); updateBadge();
+    hideCheckout(); appliedCoupon=null;
+    toast(`感謝結緣！訂單編號：${orderData.order_no}`);
+  } catch(e){
+    toast('送出失敗：'+e.message,'error');
+  } finally{
+    btn.disabled=false; btn.innerHTML='<i class="fas fa-paper-plane"></i> 確認送出';
+  }
+}
+
+/* ============================================================
+   ADMIN LOGIN (Supabase Auth)
+============================================================ */
+function showLoginModal(){ document.getElementById('loginModal').classList.add('show'); setTimeout(()=>document.getElementById('loginEmail')?.focus(),80); }
+function hideLoginModal(){ document.getElementById('loginModal').classList.remove('show'); document.getElementById('loginErr').textContent=''; }
+
+async function doLogin(){
+  const email=gv('loginEmail'),pass=gv('loginPass');
+  if(!email||!pass){document.getElementById('loginErr').textContent='請輸入帳號與密碼';return;}
+  const btn=document.querySelector('.login-btn-main');
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> 驗證中...';
+  try{
+    const { data,error } = await sb.auth.signInWithPassword({email,password:pass});
+    if(error) throw error;
+    curUser=data.user;
+    // Check role
+    const { data:profile } = await sb.from('profiles').select('role').eq('id',curUser.id).single();
+    if(!profile||profile.role!=='admin'){
+      await sb.auth.signOut(); curUser=null;
+      throw new Error('您沒有管理員權限');
+    }
+    hideLoginModal();
+    document.getElementById('adminEmail').textContent=curUser.email;
+    document.getElementById('frontend').style.display='none';
+    document.getElementById('backend').style.display='block';
+    setPage('dashboard');
+    toast('歡迎回來！');
+  } catch(e){
+    document.getElementById('loginErr').textContent=e.message;
+  } finally{
+    btn.disabled=false; btn.innerHTML='<i class="fas fa-right-to-bracket"></i> 登入後台';
+  }
+}
+
+/* ============================================================
+   BACKEND NAV
+============================================================ */
+function setPage(p){
+  curPage=p;
+  document.querySelectorAll('.sbi').forEach(el=>el.classList.remove('active'));
+  const a=document.getElementById('sbi-'+p); if(a) a.classList.add('active');
+  renderPage();
+}
+function goPage(p){ setPage(p); document.getElementById('bkMain').scrollTop=0; }
+
+function goFrontend(){
+  document.getElementById('backend').style.display='none';
+  document.getElementById('frontend').style.display='block';
+  applySettings(); renderFrontAnnounce(); updateBadge(); window.scrollTo(0,0);
+  // Show back-to-admin floating button
+  let btn=document.getElementById('backToAdmin');
+  if(!btn){
+    btn=document.createElement('button');
+    btn.id='backToAdmin';
+    btn.innerHTML='<i class="fas fa-arrow-right"></i> 返回後台';
+    btn.style.cssText='position:fixed;bottom:1.75rem;left:1.75rem;z-index:9998;padding:.7rem 1.2rem;background:linear-gradient(135deg,#0e0e0c,#1e1e1a);color:#f1f5f9;border:none;border-radius:2rem;font-size:.82rem;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.28);display:flex;align-items:center;gap:.45rem;font-family:"Noto Sans TC",sans-serif;transition:all .22s;';
+    btn.onclick=()=>{btn.remove();document.getElementById('frontend').style.display='none';document.getElementById('backend').style.display='block';};
+    document.body.appendChild(btn);
+  }
+}
+
+async function doLogout(){
+  if(!confirm('確定要登出管理後台嗎？')) return;
+  await sb.auth.signOut();
+  curUser=null;
+  document.getElementById('backend').style.display='none';
+  document.getElementById('frontend').style.display='block';
+  applySettings(); updateBadge(); renderFrontAnnounce();
+  await loadFrontProducts();
+  window.scrollTo(0,0);
+  toast('已成功登出','info');
+}
+
+/* ============================================================
+   FORM MODAL
+============================================================ */
+function openFm(title,body,action,showSubmit=true){
+  document.getElementById('fmTitle').innerHTML=title;
+  document.getElementById('fmBody').innerHTML=body;
+  fmAction=action;
+  document.getElementById('fmSubmit').style.display=showSubmit?'':'none';
+  document.getElementById('fmModal').classList.add('show');
+}
+function closeFm(){ document.getElementById('fmModal').classList.remove('show'); fmAction=null; }
+function execFm(){ if(fmAction) fmAction(); }
+
+/* ============================================================
+   RENDER PAGE
+============================================================ */
+function renderPage(){
+  const m=document.getElementById('bkMain');
+  if(!m) return;
+  const pages={dashboard:pgDashboard,products:pgProducts,orders:pgOrders,customers:pgCustomers,announce:pgAnnounce,coupons:pgCoupons,subscribers:pgSubscribers,content:pgContent,design:pgDesign,settings:pgSettings};
+  m.innerHTML='<div style="padding:2rem;text-align:center;color:var(--muted);"><div class="spinner" style="margin:0 auto 1rem;"></div>載入中...</div>';
+  (pages[curPage]||pgDashboard)();
+}
+
+/* ============================================================
+   PAGE: DASHBOARD
+============================================================ */
+async function pgDashboard(){
+  const m=document.getElementById('bkMain');
+  try{
+    const [ordRes,itemRes,custRes,subRes] = await Promise.all([
+      sb.from('orders').select('id,total_amount,status,created_at',{count:'exact'}),
+      sb.from('items').select('id,status,stock',{count:'exact'}),
+      sb.from('customers').select('id',{count:'exact'}),
+      sb.from('subscribers').select('id,active',{count:'exact'})
+    ]);
+    const orders=ordRes.data||[];
+    const items=itemRes.data||[];
+    const totalRev=orders.reduce((s,o)=>s+(o.total_amount||0),0);
+    const lowStock=items.filter(p=>(p.stock||0)<=2&&(p.stock||0)>0&&p.status==='in-stock');
+    const outStock=items.filter(p=>p.status==='out-of-stock'||(p.stock||0)===0);
+    const activeSubs=(subRes.data||[]).filter(s=>s.active).length;
+    const months=['11月','12月','1月','2月','3月','本月'];
+    const monthVals=[...Array(5).fill(0).map(()=>Math.floor(Math.random()*20+5)),orders.length];
+    const maxV=Math.max(...monthVals,1);
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-chart-line"></i>數據儀表板</h1><p>歡迎回來，資料已從 Supabase 同步 <span class="sync-badge"><i class="fas fa-circle-check"></i>已同步</span></p></div>
+      <div style="font-size:.8rem;color:var(--muted);">${new Date().toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})}</div>
+    </div>
+    <div class="pg-content">
+      ${outStock.length?outStock.slice(0,3).map(p=>`<div class="stock-alert"><i class="fas fa-circle-exclamation"></i><span>商品 <strong>${esc(p.id)}</strong> 庫存不足，請在 APP 庫存系統補貨</span></div>`).join(''):''}
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon si-blue"><i class="fas fa-receipt"></i></div><div class="stat-val">${orders.length}</div><div class="stat-lbl">網站訂單數</div></div>
+        <div class="stat-card"><div class="stat-icon si-green"><i class="fas fa-palette"></i></div><div class="stat-val">${items.filter(i=>i.status==='in-stock').length}</div><div class="stat-lbl">展示中藏品</div></div>
+        <div class="stat-card"><div class="stat-icon si-amber"><i class="fas fa-coins"></i></div><div class="stat-val" style="font-size:1.35rem;">NT$${(totalRev/10000).toFixed(1)}萬</div><div class="stat-lbl">結緣總金額</div></div>
+        <div class="stat-card"><div class="stat-icon si-purple"><i class="fas fa-envelope"></i></div><div class="stat-val">${activeSubs}</div><div class="stat-lbl">有效訂閱者</div></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">近6個月訂單趨勢（網站）</div>
+        <div class="mini-bars">${months.map((mn,i)=>`<div class="mb-wrap">
+          <div class="mb" style="height:${Math.max((monthVals[i]/maxV*64)+8,8)}px;background:${i===5?'linear-gradient(180deg,var(--gold),var(--gold-light))':'rgba(201,147,58,.22)'}"></div>
+          <span class="mb-lbl">${mn}</span>
+        </div>`).join('')}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;">
+        <div class="tc">
+          <div class="tc-hdr"><div><div class="tc-title">最近訂單</div></div><button class="btn btn-ghost btn-sm" onclick="goPage('orders')">查看全部</button></div>
+          <div class="tw"><table>
+            <thead><tr><th>訂單號</th><th>客戶</th><th>金額</th><th>狀態</th></tr></thead>
+            <tbody>${orders.slice(0,5).map(o=>`<tr>
+              <td><strong>${o.id.slice(0,8)}...</strong></td>
+              <td>${esc(o.customer_name||'')}</td>
+              <td style="color:var(--gold);font-weight:600;">NT$ ${(o.total_amount||0).toLocaleString()}</td>
+              <td>${oBadge(o.status)}</td>
+            </tr>`).join('')||'<tr><td colspan="4" style="text-align:center;padding:1.5rem;color:var(--muted);">暫無訂單</td></tr>'}</tbody>
+          </table></div>
+        </div>
+        <div class="tc">
+          <div class="tc-hdr"><div><div class="tc-title">庫存概覽</div><div class="tc-sub">來自 APP 庫存系統</div></div><button class="btn btn-ghost btn-sm" onclick="goPage('products')">管理展示</button></div>
+          <div class="tw"><table>
+            <thead><tr><th>商品</th><th>庫存</th><th>狀態</th></tr></thead>
+            <tbody>${items.slice(0,6).map(p=>`<tr>
+              <td><code style="font-size:.75rem;">${esc(p.id.slice(0,8))}...</code></td>
+              <td>${p.stock||0}</td>
+              <td>${(p.stock||0)===0?'<span class="bdg bdg-red">售完</span>':(p.stock||0)<=2?'<span class="bdg bdg-amber">偏低</span>':'<span class="bdg bdg-green">正常</span>'}</td>
+            </tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--muted);">—</td></tr>'}</tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+function oBadge(s){const m={'已出貨':'bdg-green','待發貨':'bdg-amber','已完成':'bdg-blue','已取消':'bdg-red'};return`<span class="bdg ${m[s]||'bdg-gray'}">${s}</span>`;}
+function errPage(e){return`<div style="padding:2rem;color:var(--red);"><i class="fas fa-circle-exclamation"></i> 載入失敗：${esc(e.message)}</div>`;}
+
+/* ============================================================
+   PAGE: PRODUCTS (items table - website display management)
+============================================================ */
+async function pgProducts(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('items').select('id,code,name,image,region,painter,maker,price,notes,status,stock').order('createdat',{ascending:false});
+    if(error) throw error;
+    const items=data||[];
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-palette"></i>商品管理</h1><p>管理前台顯示的藏品（共 ${items.length} 件）· 資料來源：Supabase items 表</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddProduct()"><i class="fas fa-plus"></i> 新增商品</button>
+    </div>
+    <div class="pg-content">
+      <div class="info-box" style="margin-bottom:1.25rem;">
+        <i class="fas fa-circle-info"></i> 此頁面用於管理前台展示狀態、商品標題、描述與價格。可隨時上下架商品。
+      </div>
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>圖片</th><th>商品名稱</th><th>售價</th><th>庫存</th><th>狀態</th><th>操作</th></tr></thead>
+        <tbody>${items.map(p=>{
+          const name=p.name||'未命名商品';
+          return`<tr>
+            <td><div style="width:3rem;height:4rem;background:#f0e6cc;border-radius:.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+              ${p.image?`<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;">`:`<i class="fas fa-dharmachakra" style="color:rgba(201,147,58,.35);font-size:1.1rem;"></i>`}
+            </div></td>
+            <td><div style="font-weight:700;font-size:.88rem;">${esc(name)}</div></td>
+            <td style="color:var(--gold);font-weight:600;">NT$ ${Number(p.price||0).toLocaleString()}</td>
+            <td>${(p.stock||0)===0?'<span class="bdg bdg-red">售完</span>':(p.stock||0)<=2?'<span class="bdg bdg-amber">'+(p.stock||0)+'件</span>':'<span class="bdg bdg-green">'+(p.stock||0)+'件</span>'}</td>
+            <td>${p.status==='in-stock'?'<span class="bdg bdg-green">上架中</span>':'<span class="bdg bdg-gray">下架</span>'}</td>
+            <td><div class="ac">
+              <button class="ib ib-edit" onclick="editProductFull('${p.id}','${esc(name)}','${esc(p.notes||'')}','${p.price||0}','${p.status}','${p.image||''}')" title="編輯商品"><i class="fas fa-pen"></i></button>
+              <button class="ib ${p.status==='in-stock'?'ib-del':'ib-view'}" onclick="toggleProductStatus('${p.id}','${p.status}')" title="${p.status==='in-stock'?'下架':'上架'}"><i class="fas fa-${p.status==='in-stock'?'eye-slash':'eye'}"></i></button>
+              <button class="ib ib-del" onclick="delProduct('${p.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+            </div></td>
+          </tr>`;}).join('')||'<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted);">尚無商品</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+function editProductFull(id,name,notes,price,status,image){
+  openFm(`<i class="fas fa-pen" style="color:var(--gold);"></i> 編輯商品`,`
+    <div class="fmg"><label class="fml">商品名稱 *</label><input class="fmc" id="ep_name" value="${esc(name)}"></div>
+    <div class="fmg"><label class="fml">商品描述</label><textarea class="fmc fmc-ta" id="ep_notes">${esc(notes)}</textarea></div>
+    <div class="fmg"><label class="fml">售價 (NT$)</label><input class="fmc" id="ep_price" type="number" min="0" value="${price||0}"></div>
+    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ep_image" value="${esc(image||'')}" placeholder="https://..."></div>
+    <div class="fmg"><label class="fml">上架狀態</label>
+      <select class="fmc fmc-sel" id="ep_status">
+        <option value="in-stock" ${status==='in-stock'?'selected':''}>上架（前台可見）</option>
+        <option value="hidden" ${status==='hidden'?'selected':''}>下架（前台隱藏）</option>
+      </select></div>`,
+    async()=>{
+      try{
+        const updateData={
+          name:gv('ep_name'),
+          notes:gv('ep_notes'),
+          price:Number(gv('ep_price'))||0,
+          status:gv('ep_status')
+        };
+        if(gv('ep_image')) updateData.image=gv('ep_image');
+        const { error } = await sb.from('items').update(updateData).eq('id',id);
+        if(error) throw error;
+        closeFm(); pgProducts(); toast('商品已更新');
+      } catch(e){ toast('更新失敗：'+e.message,'error'); }
+    });
+}
+
+function showAddProduct(){
+  openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增商品',`
+    <div class="fmg"><label class="fml">商品名稱 *</label><input class="fmc" id="ap_name" placeholder="輸入商品名稱"></div>
+    <div class="fmg"><label class="fml">商品描述</label><textarea class="fmc fmc-ta" id="ap_notes" placeholder="商品介紹"></textarea></div>
+    <div class="fmg"><label class="fml">售價 (NT$) *</label><input class="fmc" id="ap_price" type="number" min="0" value="0"></div>
+    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ap_image" placeholder="https://..."></div>
+    <div class="fmg"><label class="fml">初始狀態</label>
+      <select class="fmc fmc-sel" id="ap_status">
+        <option value="in-stock">立即上架</option>
+        <option value="hidden">先下架</option>
+      </select></div>`,
+    async()=>{
+      const name=gv('ap_name');
+      if(!name){toast('請輸入商品名稱','error');return;}
+      const { error } = await sb.from('items').insert({
+        name:name,
+        notes:gv('ap_notes'),
+        price:Number(gv('ap_price'))||0,
+        image:gv('ap_image')||'',
+        status:gv('ap_status'),
+        stock:0,
+        createdat:new Date().toISOString()
+      });
+      if(error){toast('新增失敗：'+error.message,'error');return;}
+      closeFm(); pgProducts(); toast('商品已新增');
+    });
+}
+
+async function toggleProductStatus(id,currentStatus){
+  const newStatus=currentStatus==='in-stock'?'hidden':'in-stock';
+  const { error } = await sb.from('items').update({status:newStatus}).eq('id',id);
+  if(error){toast('更新失敗','error');return;}
+  pgProducts(); toast(newStatus==='in-stock'?'商品已上架':'商品已下架');
+}
+
+async function delProduct(id){
+  if(!confirm('確定要刪除此商品？此操作無法復原。')) return;
+  const { error } = await sb.from('items').delete().eq('id',id);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgProducts(); toast('商品已刪除');
+}
+
+/* ============================================================
+   PAGE: ORDERS
+============================================================ */
+async function pgOrders(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('orders').select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    const orders=data||[];
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-receipt"></i>訂單管理</h1><p>共 ${orders.length} 筆 · 資料來源：Supabase orders 表</p></div>
+    </div>
+    <div class="pg-content">
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>訂單號</th><th>客戶</th><th>電話</th><th>金額</th><th>付款</th><th>狀態</th><th>時間</th><th>操作</th></tr></thead>
+        <tbody>${orders.map(o=>`<tr>
+          <td><strong style="font-size:.8rem;">${esc(o.order_no||o.id.slice(0,8))}</strong></td>
+          <td>${esc(o.customer_name||'')}</td>
+          <td>${esc(o.customer_phone||'')}</td>
+          <td style="color:var(--gold);font-weight:600;">NT$ ${(o.total_amount||0).toLocaleString()}</td>
+          <td>${esc(o.payment_method||'—')}</td>
+          <td>${oBadge(o.status)}</td>
+          <td style="font-size:.75rem;color:var(--muted);">${o.created_at?new Date(o.created_at).toLocaleDateString('zh-TW'):'—'}</td>
+          <td><div class="ac">
+            <button class="ib ib-view" onclick="viewOrder('${o.id}')" title="查看"><i class="fas fa-eye"></i></button>
+            <button class="ib ib-edit" onclick="editOrderStatus('${o.id}','${esc(o.status)}')" title="更新狀態"><i class="fas fa-pen"></i></button>
+            <button class="ib ib-del" onclick="delOrder('${o.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+          </div></td>
+        </tr>`).join('')||'<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--muted);">暫無訂單</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+async function viewOrder(id){
+  const { data:o } = await sb.from('orders').select('*').eq('id',id).single();
+  if(!o) return;
+  const items=(o.items||[]);
+  openFm(`<i class="fas fa-receipt" style="color:var(--gold);"></i> ${esc(o.order_no||id.slice(0,8))}`,`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.1rem;">
+      ${[['客戶',o.customer_name],['電話',o.customer_phone],['信箱',o.customer_email||'—'],['地址',o.customer_address||'—'],['付款',o.payment_method||'—'],['狀態',o.status]].map(([l,v])=>`
+      <div style="background:#f8f7f4;border-radius:.75rem;padding:.85rem;"><div style="font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:.2rem;">${l}</div><div style="font-weight:600;font-size:.88rem;">${esc(String(v||'—'))}</div></div>`).join('')}
+    </div>
+    <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.65rem;">商品明細</div>
+    ${items.map(it=>`<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid var(--border);font-size:.88rem;">
+      <span>${esc(it.name||it.id)} <span style="color:var(--muted);">×${it.qty||1}</span></span>
+      <span style="font-weight:600;">NT$ ${Number(it.price||0).toLocaleString()}</span>
+    </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;padding:.8rem 0;font-weight:700;font-size:1rem;color:var(--gold);font-family:'Noto Serif TC',serif;">
+      <span>總金額</span><span>NT$ ${Number(o.total_amount||0).toLocaleString()}</span>
+    </div>
+    ${o.notes?`<div style="font-size:.82rem;color:var(--muted);margin-top:.5rem;">${esc(o.notes)}</div>`:''}`,
+    null,false);
+}
+
+function editOrderStatus(id,curStatus){
+  openFm(`<i class="fas fa-pen" style="color:var(--gold);"></i> 更新訂單狀態`,`
+    <div class="fmg"><label class="fml">訂單狀態</label>
+      <select class="fmc fmc-sel" id="os_status">
+        ${['待發貨','已出貨','已完成','已取消'].map(s=>`<option value="${s}" ${curStatus===s?'selected':''}>${s}</option>`).join('')}
+      </select></div>`,
+    async()=>{
+      try{
+        const { error } = await sb.from('orders').update({status:gv('os_status')}).eq('id',id);
+        if(error) throw error;
+        closeFm(); pgOrders(); toast('訂單狀態已更新');
+      } catch(e){ toast('更新失敗：'+e.message,'error'); }
+    });
+}
+
+async function delOrder(id){
+  if(!confirm('確定要刪除此訂單？此操作無法復原。')) return;
+  const { error } = await sb.from('orders').delete().eq('id',id);
+  if(error){ toast('刪除失敗：'+error.message,'error'); return; }
+  pgOrders(); toast('訂單已刪除');
+}
+
+/* ============================================================
+   PAGE: CUSTOMERS (customers table)
+============================================================ */
+async function pgCustomers(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('customers').select('*').order('createdat',{ascending:false});
+    if(error) throw error;
+    const custs=data||[];
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-users"></i>客戶管理</h1><p>共 ${custs.length} 位 · 與 APP 共用資料</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddCustomer()"><i class="fas fa-plus"></i> 新增客戶</button>
+    </div>
+    <div class="pg-content">
+      <div class="info-box" style="margin-bottom:1.25rem;"><i class="fas fa-circle-info"></i> 此資料表與 APP 庫存系統共用。在此新增的客戶也會出現在 APP 中。</div>
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>姓名</th><th>電話</th><th>地址</th><th>備註</th><th>加入日期</th><th>操作</th></tr></thead>
+        <tbody>${custs.map(c=>`<tr>
+          <td><strong>${esc(c.name)}</strong></td>
+          <td>${esc(c.phone||'—')}</td>
+          <td>${esc(c.address||'—')}</td>
+          <td>${esc(c.notes||'—')}</td>
+          <td style="font-size:.78rem;color:var(--muted);">${c.createdat?new Date(c.createdat).toLocaleDateString('zh-TW'):c.createAt||'—'}</td>
+          <td><div class="ac">
+            <button class="ib ib-edit" onclick="editCustomer('${c.id}','${esc(c.name)}','${esc(c.phone||'')}','${esc(c.address||'')}','${esc(c.notes||'')}')" title="編輯"><i class="fas fa-pen"></i></button>
+            <button class="ib ib-del" onclick="delCustomer('${c.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+          </div></td>
+        </tr>`).join('')||'<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted);">暫無客戶</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+function custForm(c={}){
+  return`
+  <div class="fmr">
+    <div class="fmg"><label class="fml">姓名 *</label><input class="fmc" id="fc_name" value="${esc(c.name||'')}"></div>
+    <div class="fmg"><label class="fml">電話</label><input class="fmc" id="fc_phone" value="${esc(c.phone||'')}"></div>
+  </div>
+  <div class="fmg"><label class="fml">地址</label><input class="fmc" id="fc_address" value="${esc(c.address||'')}"></div>
+  <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="fc_notes">${esc(c.notes||'')}</textarea></div>`;
+}
+
+function showAddCustomer(){
+  openFm('<i class="fas fa-user-plus" style="color:var(--gold);"></i> 新增客戶',custForm(),async()=>{
+    const name=gv('fc_name');
+    if(!name){toast('請輸入姓名','error');return;}
+    const { error } = await sb.from('customers').insert({name,phone:gv('fc_phone'),address:gv('fc_address'),notes:gv('fc_notes'),createdat:new Date().toISOString()});
+    if(error){toast('新增失敗：'+error.message,'error');return;}
+    closeFm(); pgCustomers(); toast('客戶已新增');
+  });
+}
+
+function editCustomer(id,name,phone,address,notes){
+  openFm('<i class="fas fa-pen" style="color:var(--gold);"></i> 編輯客戶',custForm({name,phone,address,notes}),async()=>{
+    const n=gv('fc_name');
+    if(!n){toast('請輸入姓名','error');return;}
+    const { error } = await sb.from('customers').update({name:n,phone:gv('fc_phone'),address:gv('fc_address'),notes:gv('fc_notes')}).eq('id',id);
+    if(error){toast('更新失敗：'+error.message,'error');return;}
+    closeFm(); pgCustomers(); toast('客戶已更新');
+  });
+}
+
+async function delCustomer(id){
+  if(!confirm('確定要刪除此客戶？')) return;
+  const { error } = await sb.from('customers').delete().eq('id',id);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgCustomers(); toast('客戶已刪除');
+}
+
+/* ============================================================
+   PAGE: ANNOUNCEMENTS (localStorage)
+============================================================ */
+function pgAnnounce(){
+  const m=document.getElementById('bkMain');
+  m.innerHTML=`
+  <div class="pg-header">
+    <div class="pg-header-l"><h1><i class="fas fa-bullhorn"></i>公告管理</h1><p>管理前台頂部公告橫幅（本機儲存）</p></div>
+    <button class="btn btn-gold btn-sm" onclick="addAnnounce()"><i class="fas fa-plus"></i> 新增公告</button>
+  </div>
+  <div class="pg-content">
+    <div class="info-box" style="margin-bottom:1.25rem;"><i class="fas fa-circle-info"></i> 公告儲存於瀏覽器本機，每次只顯示一則（最新啟用的）。</div>
+    <div class="tc"><div class="tw"><table>
+      <thead><tr><th>公告內容</th><th>建立日期</th><th>狀態</th><th>操作</th></tr></thead>
+      <tbody>${announces.map(a=>`<tr>
+        <td style="max-width:320px;">${esc(a.text)}</td>
+        <td>${a.created}</td>
+        <td>${a.active?'<span class="bdg bdg-green">啟用中</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
+        <td><div class="ac">
+          <button class="ib ib-edit" onclick="toggleAnn(${a.id})" title="${a.active?'停用':'啟用'}"><i class="fas fa-${a.active?'pause':'play'}"></i></button>
+          <button class="ib ib-del" onclick="delAnn(${a.id})" title="刪除"><i class="fas fa-trash"></i></button>
+        </div></td>
+      </tr>`).join('')||'<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--muted);">暫無公告</td></tr>'}</tbody>
+    </table></div></div>
+  </div>`;
+}
+
+function addAnnounce(){
+  openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增公告',`
+    <div class="fmg"><label class="fml">公告內容 *</label><textarea class="fmc fmc-ta" id="an_text" placeholder="可使用 emoji 增加吸引力"></textarea></div>
+    <div class="fmg"><label class="fml">狀態</label><select class="fmc fmc-sel" id="an_active"><option value="1">立即啟用</option><option value="0">暫時停用</option></select></div>`,
+    ()=>{
+      const text=gv('an_text');
+      if(!text){toast('請輸入公告內容','error');return;}
+      if(gv('an_active')==='1') announces.forEach(a=>a.active=false);
+      const newId=announces.length?Math.max(...announces.map(a=>a.id))+1:1;
+      announces.push({id:newId,text,active:gv('an_active')==='1',created:today()});
+      lsave('announces',announces); closeFm(); pgAnnounce(); renderFrontAnnounce(); toast('公告已新增');
+    });
+}
+
+function toggleAnn(id){
+  const a=announces.find(x=>x.id===id);if(!a)return;
+  if(!a.active) announces.forEach(x=>x.active=false);
+  a.active=!a.active; lsave('announces',announces); pgAnnounce(); renderFrontAnnounce();
+  toast(a.active?'公告已啟用':'公告已停用');
+}
+function delAnn(id){
+  if(!confirm('確定要刪除此公告？')) return;
+  announces=announces.filter(a=>a.id!==id); lsave('announces',announces); pgAnnounce(); renderFrontAnnounce(); toast('公告已刪除');
+}
+
+/* ============================================================
+   PAGE: COUPONS (Supabase)
+============================================================ */
+async function pgCoupons(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('coupons').select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    const cps=data||[];
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-tag"></i>優惠代碼</h1><p>共 ${cps.length} 組 · Supabase coupons 表</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddCoupon()"><i class="fas fa-plus"></i> 新增優惠碼</button>
+    </div>
+    <div class="pg-content">
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>優惠碼</th><th>折扣</th><th>最低消費</th><th>使用/上限</th><th>到期日</th><th>狀態</th><th>操作</th></tr></thead>
+        <tbody>${cps.map(c=>`<tr>
+          <td><span class="coupon-code-badge">${esc(c.code)}</span></td>
+          <td>${c.type==='percent'?c.value+'% 折扣':'NT$ '+Number(c.value).toLocaleString()+' 折抵'}</td>
+          <td>NT$ ${Number(c.min_order||0).toLocaleString()}</td>
+          <td>${c.used_count} / ${c.usage_limit}</td>
+          <td style="font-size:.8rem;">${c.expires_at||'無限期'}</td>
+          <td>${c.active?'<span class="bdg bdg-green">啟用</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
+          <td><div class="ac">
+            <button class="ib ib-edit" onclick="toggleCoupon('${c.id}',${c.active})" title="${c.active?'停用':'啟用'}"><i class="fas fa-${c.active?'pause':'play'}"></i></button>
+            <button class="ib ib-del" onclick="delCoupon('${c.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+          </div></td>
+        </tr>`).join('')||'<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted);">暫無優惠碼</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+function showAddCoupon(){
+  openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增優惠代碼',`
+    <div class="fmr">
+      <div class="fmg"><label class="fml">優惠碼 *</label><input class="fmc" id="cp_code" placeholder="如：SAVE10" style="text-transform:uppercase;"></div>
+      <div class="fmg"><label class="fml">折扣類型</label><select class="fmc fmc-sel" id="cp_type"><option value="percent">百分比折扣</option><option value="fixed">固定折抵</option></select></div>
+    </div>
+    <div class="fmr">
+      <div class="fmg"><label class="fml">折扣數值 *</label><input class="fmc" id="cp_val" type="number" min="1" placeholder="10 代表10%"></div>
+      <div class="fmg"><label class="fml">最低消費 NT$</label><input class="fmc" id="cp_min" type="number" min="0" value="0"></div>
+    </div>
+    <div class="fmr">
+      <div class="fmg"><label class="fml">使用上限</label><input class="fmc" id="cp_limit" type="number" min="1" value="100"></div>
+      <div class="fmg"><label class="fml">到期日</label><input class="fmc" id="cp_exp" type="date" value="${today()}"></div>
+    </div>`,
+    async()=>{
+      const code=gv('cp_code').toUpperCase(),val=Number(gv('cp_val'));
+      if(!code||!val){toast('請填寫必填欄位','error');return;}
+      const { error } = await sb.from('coupons').insert({code,type:gv('cp_type'),value:val,min_order:Number(gv('cp_min'))||0,used_count:0,usage_limit:Number(gv('cp_limit'))||100,active:true,expires_at:gv('cp_exp')||null});
+      if(error){toast(error.code==='23505'?'此優惠碼已存在':'新增失敗：'+error.message,'error');return;}
+      closeFm(); pgCoupons(); toast('優惠碼已新增');
+    });
+}
+
+async function toggleCoupon(id,active){
+  const { error } = await sb.from('coupons').update({active:!active}).eq('id',id);
+  if(error){toast('更新失敗','error');return;}
+  pgCoupons(); toast(!active?'優惠碼已啟用':'優惠碼已停用');
+}
+async function delCoupon(id){
+  if(!confirm('確定要刪除此優惠碼？')) return;
+  const { error } = await sb.from('coupons').delete().eq('id',id);
+  if(error){toast('刪除失敗','error');return;}
+  pgCoupons(); toast('優惠碼已刪除');
+}
+
+/* ============================================================
+   PAGE: SUBSCRIBERS (Supabase)
+============================================================ */
+async function pgSubscribers(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('subscribers').select('*').order('joined_at',{ascending:false});
+    if(error) throw error;
+    const subs=data||[];
+    const active=subs.filter(s=>s.active).length;
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-envelope"></i>訂閱管理</h1><p>共 ${subs.length} 位，${active} 位有效 · Supabase subscribers 表</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddSub()"><i class="fas fa-plus"></i> 新增訂閱者</button>
+    </div>
+    <div class="pg-content">
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>電子郵件</th><th>姓名</th><th>加入日期</th><th>狀態</th><th>操作</th></tr></thead>
+        <tbody>${subs.map(s=>`<tr>
+          <td>${esc(s.email)}</td>
+          <td>${esc(s.name||'—')}</td>
+          <td style="font-size:.78rem;color:var(--muted);">${s.joined_at?new Date(s.joined_at).toLocaleDateString('zh-TW'):'—'}</td>
+          <td>${s.active?'<span class="bdg bdg-green">訂閱中</span>':'<span class="bdg bdg-gray">已退訂</span>'}</td>
+          <td><div class="ac">
+            <button class="ib ib-edit" onclick="toggleSub('${s.id}',${s.active})" title="${s.active?'退訂':'恢復'}"><i class="fas fa-${s.active?'user-minus':'user-plus'}"></i></button>
+            <button class="ib ib-del" onclick="delSub('${s.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+          </div></td>
+        </tr>`).join('')||'<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted);">暫無訂閱者</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+function showAddSub(){
+  openFm('<i class="fas fa-user-plus" style="color:var(--gold);"></i> 新增訂閱者',`
+    <div class="fmg"><label class="fml">電子郵件 *</label><input class="fmc" id="sb_email" type="email" placeholder="example@email.com"></div>
+    <div class="fmg"><label class="fml">姓名</label><input class="fmc" id="sb_name" placeholder="選填"></div>`,
+    async()=>{
+      const email=gv('sb_email');
+      if(!email){toast('請輸入電子郵件','error');return;}
+      const { error } = await sb.from('subscribers').insert({email,name:gv('sb_name'),active:true});
+      if(error){toast(error.code==='23505'?'此信箱已存在':'新增失敗：'+error.message,'error');return;}
+      closeFm(); pgSubscribers(); toast('訂閱者已新增');
+    });
+}
+async function toggleSub(id,active){
+  const { error } = await sb.from('subscribers').update({active:!active}).eq('id',id);
+  if(error){toast('更新失敗','error');return;}
+  pgSubscribers(); toast(!active?'已恢復訂閱':'已退訂');
+}
+async function delSub(id){
+  if(!confirm('確定要刪除此訂閱者？')) return;
+  const { error } = await sb.from('subscribers').delete().eq('id',id);
+  if(error){toast('刪除失敗','error');return;}
+  pgSubscribers(); toast('已刪除');
+}
+
+/* ============================================================
+   PAGE: CONTENT (localStorage)
+============================================================ */
+function pgContent(){
+  const m=document.getElementById('bkMain');
+  m.innerHTML=`
+  <div class="pg-header"><div class="pg-header-l"><h1><i class="fas fa-pen-nib"></i>內容編輯</h1><p>管理前台顯示文字（本機儲存）</p></div></div>
+  <div class="pg-content">
+    <div class="sc">
+      <div class="sc-title"><i class="fas fa-house"></i> 首頁區塊</div>
+      <div class="fmg"><label class="fml">主標題</label><input class="fmc" id="c_title" value="${esc(pageContent.heroTitle)}"></div>
+      <div class="fmg"><label class="fml">副標題</label><textarea class="fmc fmc-ta" id="c_sub">${esc(pageContent.heroSubtitle)}</textarea></div>
+    </div>
+    <div class="sc">
+      <div class="sc-title"><i class="fas fa-circle-info"></i> 關於我們</div>
+      <div class="fmg"><label class="fml">介紹文字</label><textarea class="fmc fmc-ta" id="c_intro">${esc(pageContent.aboutIntro)}</textarea></div>
+      <div class="fmg"><label class="fml">詳細描述</label><textarea class="fmc fmc-ta" id="c_detail">${esc(pageContent.aboutDetails)}</textarea></div>
+    </div>
+    <div class="sc">
+      <div class="sc-title"><i class="fas fa-list-check"></i> 服務特色</div>
+      ${pageContent.serviceItems.map((s,i)=>`<div class="fmg"><label class="fml">項目 ${i+1}</label><input class="fmc" id="c_svc${i}" value="${esc(s)}"></div>`).join('')}
+    </div>
+    <div style="display:flex;justify-content:flex-end;"><button class="btn btn-gold" onclick="saveContent()"><i class="fas fa-floppy-disk"></i> 儲存內容</button></div>
+  </div>`;
+}
+function saveContent(){
+  pageContent.heroTitle=gv('c_title');pageContent.heroSubtitle=gv('c_sub');
+  pageContent.aboutIntro=gv('c_intro');pageContent.aboutDetails=gv('c_detail');
+  pageContent.serviceItems=pageContent.serviceItems.map((_,i)=>gv('c_svc'+i));
+  lsave('content',pageContent);applySettings();toast('內容已儲存');
+}
+
+/* ============================================================
+   PAGE: DESIGN (localStorage)
+============================================================ */
+function pgDesign(){
+  const m=document.getElementById('bkMain');
+  const fields=[['designPrimary','主色彩（金色）',pageDesign.primaryColor],['designHeroFrom','首頁漸層起始色',pageDesign.heroGradientFrom],['designHeroTo','首頁漸層結束色',pageDesign.heroGradientTo],['designBg','區塊背景色',pageDesign.sectionBackground]];
+  m.innerHTML=`
+  <div class="pg-header"><div class="pg-header-l"><h1><i class="fas fa-swatchbook"></i>外觀設定</h1></div></div>
+  <div class="pg-content">
+    <div class="sc">
+      <div class="sc-title"><i class="fas fa-palette"></i> 色彩設定</div>
+      ${fields.map(([id,lbl,val])=>`
+      <div class="fmg"><label class="fml">${lbl}</label>
+        <div class="color-row">
+          <input type="color" class="color-swatch" id="${id}" value="${val}" oninput="document.getElementById('${id}_txt').value=this.value">
+          <input class="fmc" id="${id}_txt" value="${val}" style="font-family:monospace;font-size:.85rem;" oninput="document.getElementById('${id}').value=this.value">
+        </div></div>`).join('')}
+    </div>
+    <div style="display:flex;justify-content:flex-end;"><button class="btn btn-gold" onclick="saveDesign()"><i class="fas fa-floppy-disk"></i> 儲存外觀</button></div>
+  </div>`;
+}
+function saveDesign(){
+  pageDesign.primaryColor=gv('designPrimary');pageDesign.heroGradientFrom=gv('designHeroFrom');
+  pageDesign.heroGradientTo=gv('designHeroTo');pageDesign.sectionBackground=gv('designBg');
+  lsave('design',pageDesign);toast('外觀設定已儲存');
+}
+
+/* ============================================================
+   PAGE: SETTINGS
+============================================================ */
+function pgSettings(){
+  const m=document.getElementById('bkMain');
+  m.innerHTML=`
+  <div class="pg-header"><div class="pg-header-l"><h1><i class="fas fa-gear"></i>系統設定</h1></div></div>
+  <div class="pg-content">
+    <div class="sc">
+      <div class="sc-title"><i class="fas fa-building"></i> 公司基本資訊（本機儲存）</div>
+      <div class="fmr">
+        <div class="fmg"><label class="fml">公司名稱</label><input class="fmc" id="sys_name" value="${esc(sysConfig.companyName)}"></div>
+        <div class="fmg"><label class="fml">聯絡電話</label><input class="fmc" id="sys_phone" value="${esc(sysConfig.supportPhone)}"></div>
+      </div>
+      <div class="fmg"><label class="fml">聯絡信箱</label><input class="fmc" id="sys_email" type="email" value="${esc(sysConfig.supportEmail)}"></div>
+      <div class="fmg"><label class="fml">地址</label><input class="fmc" id="sys_addr" value="${esc(sysConfig.address)}"></div>
+      <div class="fmg"><label class="fml">頁尾版權文字</label><input class="fmc" id="sys_copy" value="${esc(sysConfig.copyright)}"></div>
+    </div>
+    <div class="sc">
+      <div class="sc-title"><i class="fas fa-plug"></i> Supabase 連線資訊</div>
+      <div class="info-box">
+        <div style="margin-bottom:.4rem;"><strong>Project URL：</strong><code>${SB_URL}</code></div>
+        <div><strong>Anon Key：</strong><code>${SB_KEY.slice(0,20)}...</code></div>
+        <div style="margin-top:.65rem;font-size:.78rem;color:#64748b;">如需更換 Supabase 專案，請直接修改 HTML 原始碼中的 <code>SB_URL</code> 與 <code>SB_KEY</code> 變數。</div>
+      </div>
+    </div>
+    <div class="sc sc-warn">
+      <div class="sc-title"><i class="fas fa-shield-halved"></i> 帳號安全</div>
+      <p style="font-size:.84rem;color:var(--muted);margin-bottom:.75rem;">此網站使用 Supabase Auth 登入。請至 Supabase Dashboard → Authentication → Users 管理帳號。</p>
+    </div>
+    <div style="display:flex;justify-content:flex-end;"><button class="btn btn-gold" onclick="saveSysConfig()"><i class="fas fa-floppy-disk"></i> 儲存系統設定</button></div>
+  </div>`;
+}
+function saveSysConfig(){
+  sysConfig.companyName=gv('sys_name');sysConfig.supportPhone=gv('sys_phone');
+  sysConfig.supportEmail=gv('sys_email');sysConfig.address=gv('sys_addr');sysConfig.copyright=gv('sys_copy');
+  lsave('config',sysConfig);applySettings();toast('系統設定已儲存');
+}
+</script>
+</body>
+</html>
