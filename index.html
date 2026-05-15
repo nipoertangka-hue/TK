@@ -301,7 +301,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
       <h2 class="sec-title">精選唐卡藏品</h2>
       <p class="sec-desc">每幅唐卡都經過嚴格挑選，確保藝術價值與宗教意義的完美結合</p>
     </div>
-    <div class="products-grid" id="frontProducts">
+    <div id="frontProductsContainer">
       <div class="products-loading"><div class="spinner"></div><p>正在載入藏品...</p></div>
     </div>
   </section>
@@ -590,7 +590,7 @@ function renderFrontAnnounce(){
    FRONTEND PRODUCTS (from Supabase items table)
 ============================================================ */
 async function loadFrontProducts(){
-  const c=document.getElementById('frontProducts');
+  const c=document.getElementById('frontProductsContainer');
   if(!c) return;
   try{
     const { data, error } = await sb
@@ -600,38 +600,87 @@ async function loadFrontProducts(){
       .order('createdat',{ascending:false});
 
     if(error) throw error;
-    renderFrontProducts(data||[]);
+    renderFrontProductsByCategory(data||[]);
   } catch(e){
     c.innerHTML=`<div class="products-loading"><i class="fas fa-circle-exclamation" style="color:var(--red);font-size:2rem;margin-bottom:.75rem;display:block;"></i><p>商品載入失敗：${esc(e.message)}</p></div>`;
     console.error('loadFrontProducts:',e);
   }
 }
 
-function renderFrontProducts(items){
-  const c=document.getElementById('frontProducts');
+function getCategoryInfo(code){
+  if(!code) return {key:'other',label:'其他藏品',icon:'fa-dharmachakra'};
+  const prefix=code.substring(0,3).toLowerCase();
+  const categories={
+    'tk':{key:'thangka',label:'唐卡',icon:'fa-palette'},
+    'bu':{key:'buddha',label:'佛像',icon:'fa-pray'},
+    'su':{key:'merchandise',label:'周邊',icon:'fa-bag-shopping'},
+    'six':{key:'mantra',label:'六字真言',icon:'fa-om'},
+    'ma':{key:'mandala',label:'壇城',icon:'fa-mandala'}
+  };
+  return categories[prefix]||{key:'other',label:'其他藏品',icon:'fa-dharmachakra'};
+}
+
+function renderFrontProductsByCategory(items){
+  const c=document.getElementById('frontProductsContainer');
   if(!c) return;
   if(!items.length){
     c.innerHTML='<div class="products-loading"><i class="fas fa-dharmachakra" style="font-size:2.5rem;opacity:.25;display:block;margin-bottom:.75rem;"></i><p>目前暫無展示藏品</p></div>';
     return;
   }
-  c.innerHTML=items.map(p=>{
-    const name=p.name||'唐卡藏品';
-    const imgHtml=p.image
-      ?`<img src="${p.image}" alt="${esc(name)}">`
-      :`<i class="fas fa-dharmachakra product-img-icon"></i>`;
-    return `<div class="product-card">
-      <div class="product-img">${imgHtml}</div>
-      <div class="product-body">
-        <h3 class="product-title">${esc(name)}</h3>
-        <p class="product-desc">${esc(p.notes||'')}</p>
-        <div class="product-price-row"><span class="product-price">NT$ ${Number(p.price||0).toLocaleString()}</span></div>
-        <div class="product-actions">
-          <button class="btn btn-outline" onclick="viewFrontProduct('${p.id}')"><i class="fas fa-eye"></i> 詳情</button>
-          <button class="btn btn-gold" onclick="addToCart('${p.id}','${esc(name)}',${p.price||0},'','${p.image?'[img]':''}')"><i class="fas fa-om"></i> 結緣</button>
-        </div>
+  
+  // Group items by category
+  const groups={};
+  items.forEach(item=>{
+    const cat=getCategoryInfo(item.code);
+    if(!groups[cat.key]) groups[cat.key]={info:cat,items:[]};
+    groups[cat.key].items.push(item);
+  });
+  
+  // Render grouped sections
+  let html='';
+  Object.values(groups).forEach(group=>{
+    html+=`
+    <div style="margin-bottom:3.5rem;">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:2px solid var(--border);">
+        <i class="fas ${group.info.icon}" style="font-size:1.3rem;color:var(--gold);"></i>
+        <h3 style="font-family:'Noto Serif TC',serif;font-size:1.4rem;font-weight:700;color:var(--text);">${esc(group.info.label)}</h3>
+        <span style="background:rgba(201,147,58,.1);color:var(--gold);padding:.25rem .65rem;border-radius:2rem;font-size:.72rem;font-weight:600;">${group.items.length} 件</span>
+      </div>
+      <div class="products-grid">
+        ${group.items.map(p=>renderProductCard(p)).join('')}
       </div>
     </div>`;
-  }).join('');
+  });
+  
+  c.innerHTML=html;
+}
+
+function renderProductCard(p){
+  const name=p.name||'唐卡藏品';
+  const imgHtml=p.image
+    ?`<img src="${p.image}" alt="${esc(name)}">`
+    :`<i class="fas fa-dharmachakra product-img-icon"></i>`;
+  return `<div class="product-card">
+    <div class="product-img">${imgHtml}</div>
+    <div class="product-body">
+      <h3 class="product-title">${esc(name)}</h3>
+      <div class="product-price-row"><span class="product-price">NT$ ${Number(p.price||0).toLocaleString()}</span></div>
+      <div class="product-actions">
+        <button class="btn btn-outline" onclick="viewFrontProduct('${p.id}')"><i class="fas fa-eye"></i> 詳情</button>
+        <button class="btn btn-gold" onclick="addToCart('${p.id}','${esc(name)}',${p.price||0},'','${p.image?'[img]':''}')"><i class="fas fa-om"></i> 結緣</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderFrontProducts(items){
+  const c=document.getElementById('frontProductsContainer');
+  if(!c) return;
+  if(!items.length){
+    c.innerHTML='<div class="products-loading"><i class="fas fa-dharmachakra" style="font-size:2.5rem;opacity:.25;display:block;margin-bottom:.75rem;"></i><p>目前暫無展示藏品</p></div>';
+    return;
+  }
+  c.innerHTML=`<div class="products-grid">${items.map(p=>renderProductCard(p)).join('')}</div>`;
 }
 
 async function viewFrontProduct(id){
@@ -643,7 +692,6 @@ async function viewFrontProduct(id){
       <div style="background:linear-gradient(155deg,#f9f3e8,#edddb8);border-radius:1rem;height:200px;display:flex;align-items:center;justify-content:center;margin-bottom:1.35rem;overflow:hidden;">
         ${p.image?`<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;">`:`<i class="fas fa-dharmachakra" style="font-size:4rem;color:rgba(201,147,58,.4);"></i>`}
       </div>
-      <p style="font-size:.95rem;color:var(--text);line-height:1.9;margin-bottom:1.5rem;">${esc(p.notes||'暫無詳細說明')}</p>
       <div style="font-size:1.6rem;font-weight:700;color:var(--gold);font-family:'Noto Serif TC',serif;">NT$ ${Number(p.price||0).toLocaleString()}</div>
     `,null,false);
   } catch(e){ toast('載入失敗','error'); }
@@ -881,15 +929,14 @@ async function pgDashboard(){
   try{
     const [ordRes,itemRes,custRes,subRes] = await Promise.all([
       sb.from('orders').select('id,total_amount,status,created_at',{count:'exact'}),
-      sb.from('items').select('id,status,stock',{count:'exact'}),
+      sb.from('items').select('id,status',{count:'exact'}),
       sb.from('customers').select('id',{count:'exact'}),
       sb.from('subscribers').select('id,active',{count:'exact'})
     ]);
     const orders=ordRes.data||[];
     const items=itemRes.data||[];
     const totalRev=orders.reduce((s,o)=>s+(o.total_amount||0),0);
-    const lowStock=items.filter(p=>(p.stock||0)<=2&&(p.stock||0)>0&&p.status==='in-stock');
-    const outStock=items.filter(p=>p.status==='out-of-stock'||(p.stock||0)===0);
+    const outStock=items.filter(p=>p.status==='out-of-stock');
     const activeSubs=(subRes.data||[]).filter(s=>s.active).length;
     const months=['11月','12月','1月','2月','3月','本月'];
     const monthVals=[...Array(5).fill(0).map(()=>Math.floor(Math.random()*20+5)),orders.length];
@@ -900,7 +947,7 @@ async function pgDashboard(){
       <div style="font-size:.8rem;color:var(--muted);">${new Date().toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})}</div>
     </div>
     <div class="pg-content">
-      ${outStock.length?outStock.slice(0,3).map(p=>`<div class="stock-alert"><i class="fas fa-circle-exclamation"></i><span>商品 <strong>${esc(p.id)}</strong> 庫存不足，請在 APP 庫存系統補貨</span></div>`).join(''):''}
+      ${outStock.length?outStock.slice(0,3).map(p=>`<div class="stock-alert"><i class="fas fa-circle-exclamation"></i><span>商品 <strong>${esc(p.id)}</strong> 已售完</span></div>`).join(''):''}
       <div class="stats-grid">
         <div class="stat-card"><div class="stat-icon si-blue"><i class="fas fa-receipt"></i></div><div class="stat-val">${orders.length}</div><div class="stat-lbl">網站訂單數</div></div>
         <div class="stat-card"><div class="stat-icon si-green"><i class="fas fa-palette"></i></div><div class="stat-val">${items.filter(i=>i.status==='in-stock').length}</div><div class="stat-lbl">展示中藏品</div></div>
@@ -928,14 +975,13 @@ async function pgDashboard(){
           </table></div>
         </div>
         <div class="tc">
-          <div class="tc-hdr"><div><div class="tc-title">庫存概覽</div><div class="tc-sub">來自 APP 庫存系統</div></div><button class="btn btn-ghost btn-sm" onclick="goPage('products')">管理展示</button></div>
+          <div class="tc-hdr"><div><div class="tc-title">庫存概覽</div></div><button class="btn btn-ghost btn-sm" onclick="goPage('products')">管理商品</button></div>
           <div class="tw"><table>
-            <thead><tr><th>商品</th><th>庫存</th><th>狀態</th></tr></thead>
+            <thead><tr><th>商品</th><th>狀態</th></tr></thead>
             <tbody>${items.slice(0,6).map(p=>`<tr>
               <td><code style="font-size:.75rem;">${esc(p.id.slice(0,8))}...</code></td>
-              <td>${p.stock||0}</td>
-              <td>${(p.stock||0)===0?'<span class="bdg bdg-red">售完</span>':(p.stock||0)<=2?'<span class="bdg bdg-amber">偏低</span>':'<span class="bdg bdg-green">正常</span>'}</td>
-            </tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--muted);">—</td></tr>'}</tbody>
+              <td>${p.status==='in-stock'?'<span class="bdg bdg-green">上架中</span>':'<span class="bdg bdg-gray">下架</span>'}</td>
+            </tr>`).join('')||'<tr><td colspan="2" style="text-align:center;color:var(--muted);">—</td></tr>'}</tbody>
           </table></div>
         </div>
       </div>
@@ -952,7 +998,7 @@ function errPage(e){return`<div style="padding:2rem;color:var(--red);"><i class=
 async function pgProducts(){
   const m=document.getElementById('bkMain');
   try{
-    const { data,error } = await sb.from('items').select('id,code,name,image,region,painter,maker,price,notes,status,stock').order('createdat',{ascending:false});
+    const { data,error } = await sb.from('items').select('id,code,name,image,region,painter,maker,price,notes,status').order('createdat',{ascending:false});
     if(error) throw error;
     const items=data||[];
     m.innerHTML=`
@@ -965,7 +1011,7 @@ async function pgProducts(){
         <i class="fas fa-circle-info"></i> 此頁面用於管理前台展示狀態、商品標題、描述與價格。可隨時上下架商品。
       </div>
       <div class="tc"><div class="tw"><table>
-        <thead><tr><th>圖片</th><th>商品名稱</th><th>售價</th><th>庫存</th><th>狀態</th><th>操作</th></tr></thead>
+        <thead><tr><th>圖片</th><th>商品名稱</th><th>售價</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${items.map(p=>{
           const name=p.name||'未命名商品';
           return`<tr>
@@ -974,14 +1020,13 @@ async function pgProducts(){
             </div></td>
             <td><div style="font-weight:700;font-size:.88rem;">${esc(name)}</div></td>
             <td style="color:var(--gold);font-weight:600;">NT$ ${Number(p.price||0).toLocaleString()}</td>
-            <td>${(p.stock||0)===0?'<span class="bdg bdg-red">售完</span>':(p.stock||0)<=2?'<span class="bdg bdg-amber">'+(p.stock||0)+'件</span>':'<span class="bdg bdg-green">'+(p.stock||0)+'件</span>'}</td>
             <td>${p.status==='in-stock'?'<span class="bdg bdg-green">上架中</span>':'<span class="bdg bdg-gray">下架</span>'}</td>
             <td><div class="ac">
               <button class="ib ib-edit" onclick="editProductFull('${p.id}','${esc(name)}','${esc(p.notes||'')}','${p.price||0}','${p.status}','${p.image||''}')" title="編輯商品"><i class="fas fa-pen"></i></button>
               <button class="ib ${p.status==='in-stock'?'ib-del':'ib-view'}" onclick="toggleProductStatus('${p.id}','${p.status}')" title="${p.status==='in-stock'?'下架':'上架'}"><i class="fas fa-${p.status==='in-stock'?'eye-slash':'eye'}"></i></button>
               <button class="ib ib-del" onclick="delProduct('${p.id}')" title="刪除"><i class="fas fa-trash"></i></button>
             </div></td>
-          </tr>`;}).join('')||'<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted);">尚無商品</td></tr>'}</tbody>
+          </tr>`;}).join('')||'<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted);">尚無商品</td></tr>'}</tbody>
       </table></div></div>
     </div>`;
   } catch(e){ m.innerHTML=errPage(e); }
@@ -1034,7 +1079,6 @@ function showAddProduct(){
         price:Number(gv('ap_price'))||0,
         image:gv('ap_image')||'',
         status:gv('ap_status'),
-        stock:0,
         createdat:new Date().toISOString()
       });
       if(error){toast('新增失敗：'+error.message,'error');return;}
