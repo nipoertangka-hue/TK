@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="唐卡管理">
-<title>唐卡藝術館｜專業唐卡收藏與結�?/title>
+<title>唐卡藝術館｜專業唐卡收藏與結緣</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.svg">
 <link rel="icon" type="image/svg+xml" sizes="192x192" href="icon-192.svg">
@@ -76,7 +76,7 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .mobile-menu-toggle.active span:nth-child(2){opacity:0;}
 .mobile-menu-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
 
-/* 前臺手機漢堡按鈕（購物車頁面�?*/
+/* 前臺手機漢堡按鈕（購物車頁面） */
 .frontend-menu-toggle{
   display:none;
   background:none;
@@ -93,7 +93,7 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
   opacity:.7;
 }
 
-/* 手機版導航選�?*/
+/* 手機版導航選單 */
 .mobile-nav-dropdown{
   display:none;
   position:fixed;
@@ -140,30 +140,8 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
   text-align:center;
   color:var(--gold);
 }
-
-/* 手機版語言選項 */
-.mobile-lang-option{
-  padding:.6rem 1rem;
-  border-radius:.5rem;
-  cursor:pointer;
-  transition:all .2s ease;
-  color:var(--text);
-  font-weight:500;
-  font-size:.85rem;
-  display:flex;
-  align-items:center;
-  gap:.75rem;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-}
-.mobile-lang-option:active{
-  background:rgba(201,147,58,.08);
-  transform:scale(.98);
-}
 .lang-option i{font-size:.75rem;color:var(--muted);}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
-/* 桌面版導航右側（語言+購物車） */
-.nav-right{display:flex;align-items:center;gap:.75rem;}
 .cart-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.1rem;border-radius:2rem;border:1.5px solid var(--border);background:#fff;color:var(--text);font-weight:600;font-size:.88rem;transition:var(--tr);}
 .cart-btn:hover{border-color:var(--gold);color:var(--gold);}
 .cart-badge{min-width:1.4rem;height:1.4rem;border-radius:9999px;background:var(--gold);color:#fff;font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;padding:0 .3rem;}
@@ -462,7 +440,7 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 /* 側邊欄（桌面版） */
 .sb{width:252px;background:var(--sidebar);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;border-right:1px solid rgba(255,255,255,.04);flex-shrink:0;transition:transform .3s ease;}
 
-/* 後台手機側邊�?*/
+/* 後台手機側邊欄 */
 .sidebar-overlay{
   display:none;
   position:fixed;
@@ -568,7 +546,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
 .stock-alert i{color:var(--red);flex-shrink:0;}
 .sync-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:2rem;font-size:.68rem;font-weight:600;background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.2);}
 
-/* 響應式設�?*/
+/* 響應式設計 */
 /* ===== MOBILE RESPONSIVE ===== */
 @media(max-width:1024px){
   .footer-grid{grid-template-columns:repeat(2,1fr);}
@@ -582,7 +560,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   .mobile-menu-toggle{display:flex !important;}
   .frontend-menu-toggle{display:block !important;}
   
-  /* 隱藏桌面版的語言和結緣按�?*/
+  /* 隱藏桌面版的語言和結緣按鈕 */
   .nav-right{display:none !important;}
   
   /* APP風格底部導航 */
@@ -619,7 +597,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   
   .sb{width:220px;}
   
-  /* 後台手機側邊�?*/
+  /* 後台手機側邊欄 */
   .admin-mobile-toggle{display:block !important;}
   .sb{
     position:fixed;
@@ -640,7 +618,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
     display:flex !important;
   }
   
-  /* 手機版分類選�?*/
+  /* 手機版分類選單 */
   .mobile-category-bar{
     display:block;
     position:sticky;
@@ -713,14 +691,14 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   /* 桌面分類隱藏 */
   #categoryTabs{display:none !important;}
   
-  /* 關於我�?*/
+  /* 關於我們 */
   .about-section{padding:2rem 1rem;}
   .stats-row{grid-template-columns:repeat(3,1fr);gap:.4rem;}
   .stat-box{padding:.6rem;}
   .stat-num{font-size:1rem;}
   .stat-lbl{font-size:.6rem;}
   
-  /* Hero 區�?*/
+  /* Hero 區域 */
   .hero-content h1{font-size:1.6rem;}
   .hero-content p{font-size:.85rem;}
   .hero-actions{flex-direction:column;gap:.6rem;}
@@ -800,14 +778,14 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   /* 手機分類按鈕 */
   .mobile-cat-btn{padding:.45rem .75rem;font-size:.7rem;}
   
-  /* 手機側邊�?*/
+  /* 手機側邊欄 */
   .sb{
     width:260px !important;
     transform:translateX(-100%);
   }
   .sb.show{transform:translateX(0);}
   
-  /* APP底部安全區�?*/
+  /* APP底部安全區域 */
   .app-bottom-nav{
     padding-bottom:env(safe-area-inset-bottom, 0);
   }
@@ -840,34 +818,34 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
 <!-- Loading Overlay -->
 <div id="loadingOverlay" class="loading-overlay hidden">
   <div class="spinner"></div>
-  <span class="loading-text" id="loadingText">載入�?..</span>
+  <span class="loading-text" id="loadingText">載入中...</span>
 </div>
 
 <!-- ===== FRONTEND ===== -->
 <div id="frontend" class="frontend">
   <nav class="top-bar">
     <div class="tbc">
-      <!-- LOGO（左上方�?-->
+      <!-- LOGO（左上方） -->
       <a href="#" class="logo">
         <div class="logo-icon"><i class="fas fa-dharmachakra"></i></div>
-        <span class="logo-text" id="logoText">唐卡藝術�?/span>
+        <span class="logo-text" id="logoText">唐卡藝術館</span>
       </a>
       
-      <!-- 漢堡選單按鈕（手機版�?-->
+      <!-- 漢堡選單按鈕（手機版） -->
       <button class="frontend-menu-toggle" id="frontendMenuToggle" onclick="toggleFrontendMenu()">
         <i class="fas fa-bars"></i>
       </button>
       
-      <!-- 桌面導航（桌面版顯示�?-->
+      <!-- 桌面導航（桌面版顯示） -->
       <div class="nav-menu" id="navMenu">
         <a href="#home" class="nav-link" onclick="closeMobileMenu()">首頁</a>
         <a href="#products" class="nav-link" onclick="closeMobileMenu()">唐卡展示</a>
-        <a href="#about" class="nav-link" onclick="closeMobileMenu()">關於我�?/a>
-        <a href="#contact" class="nav-link" onclick="closeMobileMenu()">聯繫我�?/a>
+        <a href="#about" class="nav-link" onclick="closeMobileMenu()">關於我們</a>
+        <a href="#contact" class="nav-link" onclick="closeMobileMenu()">聯繫我們</a>
       </div>
       
-      <!-- 桌面版語言切換和結緣按�?-->
-      <div class="nav-right">
+      <!-- 桌面版語言切換和結緣按鈕 -->
+      <div class="nav-right" style="display:flex;align-items:center;gap:.75rem;">
         <button class="lang-btn" onclick="toggleLangDropdown()">
           <i class="fas fa-globe"></i>
           <span id="currentLangLabel">繁體中文</span>
@@ -878,14 +856,17 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
             <i class="fas fa-check"></i> 繁體中文
           </div>
           <div class="lang-option" data-lang="zh-CN" onclick="switchLanguage('zh-CN')">
-            <i class="fas fa-check" style="visibility:hidden;"></i> 简体中�?          </div>
+            <i class="fas fa-check" style="visibility:hidden;"></i> 简体中文
+          </div>
           <div class="lang-option" data-lang="en" onclick="switchLanguage('en')">
             <i class="fas fa-check" style="visibility:hidden;"></i> English
           </div>
           <div class="lang-option" data-lang="ja" onclick="switchLanguage('ja')">
-            <i class="fas fa-check" style="visibility:hidden;"></i> 日本�?          </div>
+            <i class="fas fa-check" style="visibility:hidden;"></i> 日本語
+          </div>
           <div class="lang-option" data-lang="ko" onclick="switchLanguage('ko')">
-            <i class="fas fa-check" style="visibility:hidden;"></i> 한국�?          </div>
+            <i class="fas fa-check" style="visibility:hidden;"></i> 한국어
+          </div>
           <div class="lang-option" data-lang="fr" onclick="switchLanguage('fr')">
             <i class="fas fa-check" style="visibility:hidden;"></i> Français
           </div>
@@ -896,7 +877,8 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
             <i class="fas fa-check" style="visibility:hidden;"></i> Español
           </div>
           <div class="lang-option" data-lang="th" onclick="switchLanguage('th')">
-            <i class="fas fa-check" style="visibility:hidden;"></i> ไท�?          </div>
+            <i class="fas fa-check" style="visibility:hidden;"></i> ไทย
+          </div>
           <div class="lang-option" data-lang="vi" onclick="switchLanguage('vi')">
             <i class="fas fa-check" style="visibility:hidden;"></i> Tiếng Việt
           </div>
@@ -910,7 +892,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
     </div>
   </nav>
   
-  <!-- 手機版漢堡選單下拉內�?-->
+  <!-- 手機版漢堡選單下拉內容 -->
   <div class="mobile-nav-dropdown" id="mobileNavDropdown">
     <div class="mobile-nav-item" onclick="scrollToSection('home');closeFrontendMenu();">
       <i class="fas fa-home"></i>
@@ -922,45 +904,17 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
     </div>
     <div class="mobile-nav-item" onclick="scrollToSection('about');closeFrontendMenu();">
       <i class="fas fa-info-circle"></i>
-      <span>關於我�?/span>
+      <span>關於我們</span>
     </div>
     <div class="mobile-nav-item" onclick="scrollToSection('contact');closeFrontendMenu();">
       <i class="fas fa-envelope"></i>
-      <span>聯繫我�?/span>
+      <span>聯繫我們</span>
     </div>
     <hr style="border:none;border-top:1px solid var(--border);margin:.5rem 0;">
-    
-    <!-- 語言切換選項 -->
-    <div class="mobile-nav-item" onclick="toggleMobileLangSelector()">
+    <div class="mobile-nav-item" onclick="toggleLangDropdown();closeFrontendMenu();">
       <i class="fas fa-globe"></i>
-      <span id="mobileLangLabel">語言：繁體中�?/span>
-      <i class="fas fa-chevron-down" style="margin-left:auto;font-size:.7rem;transition:transform .3s;"></i>
+      <span id="mobileLangLabel">語言：繁體中文</span>
     </div>
-    
-    <!-- 語言選擇列表（隱藏） -->
-    <div id="mobileLangSelector" style="display:none;padding:0 1rem .5rem;background:rgba(201,147,58,.03);">
-      <div class="mobile-lang-option" onclick="switchLanguage('zh-TW');closeMobileLangSelector();" data-lang="zh-TW">
-        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);"></i>
-        <span>繁體中文</span>
-      </div>
-      <div class="mobile-lang-option" onclick="switchLanguage('zh-CN');closeMobileLangSelector();" data-lang="zh-CN">
-        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
-        <span>简体中�?/span>
-      </div>
-      <div class="mobile-lang-option" onclick="switchLanguage('en');closeMobileLangSelector();" data-lang="en">
-        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
-        <span>English</span>
-      </div>
-      <div class="mobile-lang-option" onclick="switchLanguage('ja');closeMobileLangSelector();" data-lang="ja">
-        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
-        <span>日本�?/span>
-      </div>
-      <div class="mobile-lang-option" onclick="switchLanguage('ko');closeMobileLangSelector();" data-lang="ko">
-        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
-        <span>한국�?/span>
-      </div>
-    </div>
-    
     <div class="mobile-nav-item" onclick="showCartModal();closeFrontendMenu();">
       <i class="fas fa-shopping-bag"></i>
       <span>我的結緣 (<span id="mobileCartCount">0</span>)</span>
@@ -977,17 +931,17 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   <section class="hero" id="home">
     <div class="hero-badge"><i class="fas fa-om"></i> 正統藏傳唐卡</div>
     <h1 class="hero-title"><em id="heroTitle">千年傳承 · 藝術臻品</em></h1>
-    <p class="hero-sub" id="heroSubtitle">專注收藏與結緣西藏、尼泊爾、不丹等地區的珍貴唐卡藝術品。每幅唐卡均由資深畫師手工繪製，蘊含深厚的宗教文化與藝術價值�?/p>
+    <p class="hero-sub" id="heroSubtitle">專注收藏與結緣西藏、尼泊爾、不丹等地區的珍貴唐卡藝術品。每幅唐卡均由資深畫師手工繪製，蘊含深厚的宗教文化與藝術價值。</p>
     <a href="#products" class="btn btn-gold"><i class="fas fa-dharmachakra"></i> 探索唐卡收藏</a>
   </section>
   <section class="products-section" id="products">
     <div class="sec-header">
       <div class="sec-eyebrow">精選藏品</div>
       <h2 class="sec-title">精選唐卡藏品</h2>
-      <p class="sec-desc">每幅唐卡都經過嚴格挑�?確保藝術價值與宗教意義的完美結�?/p>
+      <p class="sec-desc">每幅唐卡都經過嚴格挑選,確保藝術價值與宗教意義的完美結合</p>
     </div>
       
-    <!-- 手機版分類選單（僅在手機顯示�?-->
+    <!-- 手機版分類選單（僅在手機顯示） -->
     <div class="mobile-category-bar" style="display:none;">
       <div class="mobile-category-scroll" id="mobileCategoryContainer">
         <button class="mobile-cat-btn active" data-category="all" onclick="switchMobileCategory('all')">
@@ -1010,10 +964,10 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   <section class="about-section" id="about">
     <div class="about-wrap">
       <div class="about-content">
-        <div class="sec-eyebrow" style="margin-bottom:.65rem;">關於我�?/div>
-        <h2>關於唐卡藝術�?/h2>
-        <p id="aboutIntro">我們專注於西藏唐卡藝術的傳承與推廣，與西藏、尼泊爾、不丹等地區的知名畫師和寺院建立長期合作關係�?/p>
-        <p id="aboutDetails">我們的唐卡均使用天然礦物顏料繪製，部分作品經過寺院僧人開光加持，兼具藝術收藏與宗教供奉價值�?/p>
+        <div class="sec-eyebrow" style="margin-bottom:.65rem;">關於我們</div>
+        <h2>關於唐卡藝術館</h2>
+        <p id="aboutIntro">我們專注於西藏唐卡藝術的傳承與推廣，與西藏、尼泊爾、不丹等地區的知名畫師和寺院建立長期合作關係。</p>
+        <p id="aboutDetails">我們的唐卡均使用天然礦物顏料繪製，部分作品經過寺院僧人開光加持，兼具藝術收藏與宗教供奉價值。</p>
         <ul class="svc-list" id="serviceList">
           <li><i class="fas fa-circle-check"></i>100%手工繪製唐卡</li>
           <li><i class="fas fa-circle-check"></i>天然礦物顏料</li>
@@ -1023,7 +977,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
         <div class="stats-row">
           <div class="stat-box"><span class="stat-num">15+</span><span class="stat-lbl">合作畫師</span></div>
           <div class="stat-box"><span class="stat-num">200+</span><span class="stat-lbl">藏品數量</span></div>
-          <div class="stat-box"><span class="stat-num">98%</span><span class="stat-lbl">客戶滿意�?/span></div>
+          <div class="stat-box"><span class="stat-num">98%</span><span class="stat-lbl">客戶滿意度</span></div>
         </div>
       </div>
       <div class="about-visual">
@@ -1040,8 +994,8 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   <footer class="footer" id="contact">
     <div class="footer-wrap">
       <div class="footer-grid">
-        <div class="footer-col"><h3>唐卡藝術�?/h3><p>致力於推廣正統唐卡藝術，傳承千年佛教文化遺產�?/p></div>
-        <div class="footer-col"><h3>快速連結</h3><a href="#home">首頁</a><a href="#products">唐卡展示</a><a href="#about">關於我�?/a><a href="#contact">聯繫我�?/a></div>
+        <div class="footer-col"><h3>唐卡藝術館</h3><p>致力於推廣正統唐卡藝術，傳承千年佛教文化遺產。</p></div>
+        <div class="footer-col"><h3>快速連結</h3><a href="#home">首頁</a><a href="#products">唐卡展示</a><a href="#about">關於我們</a><a href="#contact">聯繫我們</a></div>
         <div class="footer-col"><h3>服務項目</h3>
           <a href="#" onclick="openLineModal();return false;">唐卡購買</a>
           <a href="#" onclick="openLineModal();return false;">開光服務</a>
@@ -1049,14 +1003,14 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
           <a href="#" onclick="openLineModal();return false;">定制服務</a>
         </div>
         <div class="footer-col">
-          <h3>聯繫我�?/h3>
+          <h3>聯繫我們</h3>
           <a id="footerPhone" href="#">+886 2 2345 6789</a>
           <a id="footerEmail" href="#">info@thangka-art.com</a>
-          <p id="footerAddress" style="margin-top:.4rem;">台北市信義區唐卡路一�?�?/p>
+          <p id="footerAddress" style="margin-top:.4rem;">台北市信義區唐卡路一段1號</p>
         </div>
       </div>
       <a href="#" class="admin-trigger" onclick="showLoginModal();return false;"><i class="fas fa-lock"></i></a>
-      <div class="footer-copy" id="copyrightText">© 2024 唐卡藝術�? 版權所�?</div>
+      <div class="footer-copy" id="copyrightText">© 2024 唐卡藝術館. 版權所有.</div>
     </div>
   </footer>
 </div>
@@ -1089,12 +1043,12 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
       <div class="fmg"><label class="fml">地址</label><input class="fmc" id="co_address" placeholder="收件地址（選填）"></div>
       <div class="fmg"><label class="fml">付款方式</label>
         <select class="fmc fmc-sel" id="co_payment">
-          <option value="">請選�?/option>
-          <option>現金匯款</option><option>LINE Pay</option><option>信用�?/option><option>轉帳</option>
+          <option value="">請選擇</option>
+          <option>現金匯款</option><option>LINE Pay</option><option>信用卡</option><option>轉帳</option>
         </select></div>
-      <div class="fmg"><label class="fml">優惠�?/label>
+      <div class="fmg"><label class="fml">優惠碼</label>
         <div class="coupon-row">
-          <input class="fmc" id="co_coupon" placeholder="輸入優惠碼（選填�? style="flex:1;">
+          <input class="fmc" id="co_coupon" placeholder="輸入優惠碼（選填）" style="flex:1;">
           <button class="btn btn-ghost btn-sm" onclick="applyCoupon()">套用</button>
         </div>
         <div class="coupon-result" id="couponResult"></div>
@@ -1115,10 +1069,10 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
     <div class="mhdr"><h3>管理系統</h3><button class="mbtn-close" style="background:rgba(255,255,255,.06);color:#94a3b8;" onclick="hideLoginModal()"><i class="fas fa-times"></i></button></div>
     <div class="mbody" style="background:#0e0e0c;padding:1.75rem;">
       <div class="login-icon"><i class="fas fa-shield-halved"></i></div>
-      <h2 class="login-h">管理員登�?/h2>
-      <p class="login-sub">使用 Supabase 管理員帳號登�?/p>
+      <h2 class="login-h">管理員登入</h2>
+      <p class="login-sub">使用 Supabase 管理員帳號登入</p>
       <div class="fg"><label>電子郵件</label><input type="email" id="loginEmail" class="fi" placeholder="admin@example.com" autocomplete="email"></div>
-      <div class="fg"><label>密碼</label><input type="password" id="loginPass" class="fi" placeholder="•••••�? autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="fg"><label>密碼</label><input type="password" id="loginPass" class="fi" placeholder="••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
       <div class="login-err" id="loginErr"></div>
       <button class="login-btn-main" onclick="doLogin()"><i class="fas fa-right-to-bracket"></i> 登入後台</button>
     </div>
@@ -1140,14 +1094,14 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
 <!-- ===== BACKEND ===== -->
 <div id="backend" class="backend">
   <div class="app-wrap">
-    <!-- 手機側邊欄遮�?-->
+    <!-- 手機側邊欄遮罩 -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     
     <aside class="sb" id="sidebar">
       <div class="sb-brand">
         <div class="sb-brand-inner">
           <div class="sb-logo-icon"><i class="fas fa-dharmachakra"></i></div>
-          <div><div class="sb-brand-text">唐卡藝術�?/div><div class="sb-brand-sub">管理後台</div></div>
+          <div><div class="sb-brand-text">唐卡藝術館</div><div class="sb-brand-sub">管理後台</div></div>
         </div>
       </div>
       <button class="sb-front-btn" onclick="goFrontend()"><i class="fas fa-arrow-left"></i><span>返回前台網站</span></button>
@@ -1161,7 +1115,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
           <div class="sbi" id="sbi-customers" onclick="goPage('customers')"><i class="fas fa-users"></i><span>客戶管理</span></div>
         </div>
         <div class="nav-grp">
-          <div class="nav-grp-title">供應鏈管�?/div>
+          <div class="nav-grp-title">供應鏈管理</div>
           <div class="sbi" id="sbi-agents" onclick="goPage('agents')"><i class="fas fa-user-tie"></i><span>代理管理</span></div>
           <div class="sbi" id="sbi-makers" onclick="goPage('makers')"><i class="fas fa-industry"></i><span>廠商管理</span></div>
           <div class="sbi" id="sbi-monks" onclick="goPage('monks')"><i class="fas fa-pray"></i><span>僧人管理</span></div>
@@ -1184,14 +1138,14 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
       <div class="sb-footer">
         <div class="admin-info">
           <div class="admin-av"><i class="fas fa-user" style="font-size:.7rem;"></i></div>
-          <div><div class="admin-name" id="adminEmail">管理�?/div><div class="admin-role">admin</div></div>
+          <div><div class="admin-name" id="adminEmail">管理員</div><div class="admin-role">admin</div></div>
         </div>
         <button class="sb-logout" onclick="doLogout()"><i class="fas fa-right-from-bracket"></i><span>登出系統</span></button>
       </div>
     </aside>
     <main class="bk-main" id="bkMain"></main>
     
-    <!-- APP風格底部導航（手機版�?-->
+    <!-- APP風格底部導航（手機版） -->
     <nav class="app-bottom-nav">
       <div class="app-nav-items">
         <div class="app-nav-item active" onclick="goPage('dashboard')" data-page="dashboard">
@@ -1317,7 +1271,8 @@ function getSupabaseImageUrl(path) {
 
 // Helper function to validate and fix image URLs
 function normalizeImageUrl(imageUrl) {
-  // 處理空�?  if (!imageUrl || imageUrl.trim() === '' || imageUrl === 'null' || imageUrl === 'undefined') {
+  // 處理空值
+  if (!imageUrl || imageUrl.trim() === '' || imageUrl === 'null' || imageUrl === 'undefined') {
     console.log('圖片 URL 為空');
     return '';
   }
@@ -1327,29 +1282,30 @@ function normalizeImageUrl(imageUrl) {
   
   console.log('處理圖片 URL:', imageUrl);
   
-  // 已經是完�?URL
+  // 已經是完整 URL
   if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-    console.log('�?检测到完整 URL');
+    console.log('✓ 检测到完整 URL');
     return imageUrl;
   }
   
   // Supabase storage 路徑
   if (imageUrl.startsWith(IMAGE_BUCKET + '/') || imageUrl.includes('/storage/v1/')) {
-    console.log('�?检测到 Supabase Storage 路徑');
+    console.log('✓ 检测到 Supabase Storage 路徑');
     const storageUrl = getSupabaseImageUrl(imageUrl);
-    console.log('  轉換�?', storageUrl);
+    console.log('  轉換為:', storageUrl);
     return storageUrl;
   }
   
   // Cloudinary URL 模式
   if (imageUrl.includes('cloudinary.com')) {
-    console.log('�?检测到 Cloudinary URL');
+    console.log('✓ 检测到 Cloudinary URL');
     return imageUrl;
   }
   
-  // 假設是相對路徑或存儲�?  console.log('�?假設為存儲路徑，嘗試轉換');
+  // 假設是相對路徑或存儲鍵
+  console.log('✓ 假設為存儲路徑，嘗試轉換');
   const convertedUrl = getSupabaseImageUrl(imageUrl);
-  console.log('  轉換�?', convertedUrl);
+  console.log('  轉換為:', convertedUrl);
   return convertedUrl;
 }
 
@@ -1369,8 +1325,8 @@ function debugImageLoad(imageUrl, productName) {
   
   // Test if image loads
   const img = new Image();
-  img.onload = () => console.log('�?Image loads successfully');
-  img.onerror = () => console.error('�?Image failed to load');
+  img.onload = () => console.log('✓ Image loads successfully');
+  img.onerror = () => console.error('✗ Image failed to load');
   img.src = normalizedUrl;
   
   return normalizedUrl;
@@ -1385,14 +1341,14 @@ function lsave(k,v){ localStorage.setItem(LKEYS[k],JSON.stringify(v)); }
 
 let pageContent = lload('content',{
   heroTitle:'千年傳承 · 藝術臻品',
-  heroSubtitle:'專注收藏與結緣西藏、尼泊爾、不丹等地區的珍貴唐卡藝術品。每幅唐卡均由資深畫師手工繪製，蘊含深厚的宗教文化與藝術價值�?,
-  aboutIntro:'我們專注於西藏唐卡藝術的傳承與推廣，與西藏、尼泊爾、不丹等地區的知名畫師和寺院建立長期合作關係�?,
-  aboutDetails:'我們的唐卡均使用天然礦物顏料繪製，部分作品經過寺院僧人開光加持，兼具藝術收藏與宗教供奉價值�?,
+  heroSubtitle:'專注收藏與結緣西藏、尼泊爾、不丹等地區的珍貴唐卡藝術品。每幅唐卡均由資深畫師手工繪製，蘊含深厚的宗教文化與藝術價值。',
+  aboutIntro:'我們專注於西藏唐卡藝術的傳承與推廣，與西藏、尼泊爾、不丹等地區的知名畫師和寺院建立長期合作關係。',
+  aboutDetails:'我們的唐卡均使用天然礦物顏料繪製，部分作品經過寺院僧人開光加持，兼具藝術收藏與宗教供奉價值。',
   serviceItems:['100%手工繪製唐卡','天然礦物顏料','可選開光加持服務','國際運送與保險']
 });
 let pageDesign = lload('design',{primaryColor:'#c9933a',heroGradientFrom:'#c9933a',heroGradientTo:'#e8b865',sectionBackground:'#f7f6f2'});
-let sysConfig  = lload('config',{companyName:'唐卡藝術�?,supportPhone:'+886 2 2345 6789',supportEmail:'info@thangka-art.com',address:'台北市信義區唐卡路一�?�?,copyright:'© 2024 唐卡藝術�? 版權所�?'});
-// 公告已移�?Supabase 數據庫，不再使用 localStorage
+let sysConfig  = lload('config',{companyName:'唐卡藝術館',supportPhone:'+886 2 2345 6789',supportEmail:'info@thangka-art.com',address:'台北市信義區唐卡路一段1號',copyright:'© 2024 唐卡藝術館. 版權所有.'});
+// 公告已移至 Supabase 數據庫，不再使用 localStorage
 let cart       = lload('cart',[]);
 
 /* Runtime state */
@@ -1426,24 +1382,24 @@ const i18n = {
 function initI18n(){
   // Traditional Chinese (Default)
   i18n.translations['zh-TW'] = {
-    nav_home:'首頁', nav_products:'唐卡展示', nav_about:'關於我�?, nav_contact:'聯繫我�?,
+    nav_home:'首頁', nav_products:'唐卡展示', nav_about:'關於我們', nav_contact:'聯繫我們',
     cart:'我的結緣',
     hero_badge:'正統藏傳唐卡', hero_explore:'探索唐卡收藏',
     products_eyebrow:'精選藏品', products_title:'精選唐卡藏品',
-    products_desc:'每幅唐卡都經過嚴格挑�?確保藝術價值與宗教意義的完美結�?,
+    products_desc:'每幅唐卡都經過嚴格挑選,確保藝術價值與宗教意義的完美結合',
     loading_products:'正在載入藏品...', no_products:'目前暫無展示藏品',
     btn_details:'詳情', btn_cart:'結緣',
-    about_eyebrow:'關於我�?, about_title:'關於唐卡藝術�?,
+    about_eyebrow:'關於我們', about_title:'關於唐卡藝術館',
     service_title:'服務特色',
     svc_handmade:'100%手工繪製唐卡', svc_natural:'天然礦物顏料',
     svc_blessing:'可選開光加持服務', svc_shipping:'國際運送與保險',
-    stat_artists:'合作畫師', stat_items:'藏品數量', stat_satisfaction:'客戶滿意�?,
-    footer_desc:'致力於推廣正統唐卡藝術，傳承千年佛教文化遺產�?,
-    footer_quick:'快速連結', footer_services:'服務項目', footer_contact:'聯繫我�?,
+    stat_artists:'合作畫師', stat_items:'藏品數量', stat_satisfaction:'客戶滿意度',
+    footer_desc:'致力於推廣正統唐卡藝術，傳承千年佛教文化遺產。',
+    footer_quick:'快速連結', footer_services:'服務項目', footer_contact:'聯繫我們',
     footer_buy:'唐卡購買', footer_bless:'開光服務', footer_consult:'藝術諮詢', footer_custom:'定制服務',
     cat_all:'全部藏品', cat_thangka:'唐卡', cat_buddha:'鎏金銅像',
     cat_merchandise:'藏傳周邊產品', cat_mantra:'六字真言', cat_mandala:'壇城', cat_other:'其他藏品',
-    no_items_in_cat:'此分類目前暫無藏�?
+    no_items_in_cat:'此分類目前暫無藏品'
   };
   
   // Simplified Chinese
@@ -1451,21 +1407,21 @@ function initI18n(){
     nav_home:'首页', nav_products:'唐卡展示', nav_about:'关于我们', nav_contact:'联系我们',
     cart:'我的结缘',
     hero_badge:'正统藏传唐卡', hero_explore:'探索唐卡收藏',
-    products_eyebrow:'精选藏�?, products_title:'精选唐卡藏�?,
-    products_desc:'每幅唐卡都经过严格挑�?确保艺术价值与宗教意义的完美结�?,
+    products_eyebrow:'精选藏品', products_title:'精选唐卡藏品',
+    products_desc:'每幅唐卡都经过严格挑选,确保艺术价值与宗教意义的完美结合',
     loading_products:'正在加载藏品...', no_products:'目前暂无展示藏品',
     btn_details:'详情', btn_cart:'结缘',
-    about_eyebrow:'关于我们', about_title:'关于唐卡艺术�?,
+    about_eyebrow:'关于我们', about_title:'关于唐卡艺术馆',
     service_title:'服务特色',
     svc_handmade:'100%手工绘制唐卡', svc_natural:'天然矿物颜料',
-    svc_blessing:'可选开光加持服�?, svc_shipping:'国际运送与保险',
-    stat_artists:'合作画师', stat_items:'藏品数量', stat_satisfaction:'客户满意�?,
-    footer_desc:'致力于推广正统唐卡艺术，传承千年佛教文化遗产�?,
-    footer_quick:'快速链�?, footer_services:'服务项目', footer_contact:'联系我们',
-    footer_buy:'唐卡购买', footer_bless:'开光服�?, footer_consult:'艺术咨询', footer_custom:'定制服务',
+    svc_blessing:'可选开光加持服务', svc_shipping:'国际运送与保险',
+    stat_artists:'合作画师', stat_items:'藏品数量', stat_satisfaction:'客户满意度',
+    footer_desc:'致力于推广正统唐卡艺术，传承千年佛教文化遗产。',
+    footer_quick:'快速链接', footer_services:'服务项目', footer_contact:'联系我们',
+    footer_buy:'唐卡购买', footer_bless:'开光服务', footer_consult:'艺术咨询', footer_custom:'定制服务',
     cat_all:'全部藏品', cat_thangka:'唐卡', cat_buddha:'鎏金铜像',
     cat_merchandise:'藏传周边产品', cat_mantra:'六字真言', cat_mandala:'坛城', cat_other:'其他藏品',
-    no_items_in_cat:'此分类目前暂无藏�?
+    no_items_in_cat:'此分类目前暂无藏品'
   };
   
   // English
@@ -1492,46 +1448,46 @@ function initI18n(){
   
   // Japanese
   i18n.translations['ja'] = {
-    nav_home:'ホー�?, nav_products:'ギャラリ�?, nav_about:'概要', nav_contact:'お問い合わせ',
+    nav_home:'ホーム', nav_products:'ギャラリー', nav_about:'概要', nav_contact:'お問い合わせ',
     cart:'我的收藏',
-    hero_badge:'正統チベット仏教タン�?, hero_explore:'コレクションを探�?,
-    products_eyebrow:'厳選コレクション', products_title:'精選タンカ芸術作�?,
+    hero_badge:'正統チベット仏教タンカ', hero_explore:'コレクションを探す',
+    products_eyebrow:'厳選コレクション', products_title:'精選タンカ芸術作品',
     products_desc:'各タンカは芸術的価値と宗教的意義の完璧な組み合わせを保証するために慎重に選ばれています',
-    loading_products:'読み込み�?..', no_products:'現在展示中の作品はありません',
+    loading_products:'読み込み中...', no_products:'現在展示中の作品はありません',
     btn_details:'詳細', btn_cart:'收藏する',
-    about_eyebrow:'私たちについ�?, about_title:'タンカ芸術館について',
+    about_eyebrow:'私たちについて', about_title:'タンカ芸術館について',
     service_title:'サービス特色',
     svc_handmade:'100%手描きタンカ', svc_natural:'天然鉱物顔料',
     svc_blessing:'開光加持サービス利用可能', svc_shipping:'国際配送と保険',
-    stat_artists:'提携画家', stat_items:'コレクション�?, stat_satisfaction:'顧客満足度',
-    footer_desc:'正統タンカ芸術の普及と千年の仏教文化遺産の継承に取り組んでいます�?,
-    footer_quick:'クイックリン�?, footer_services:'サービス', footer_contact:'お問い合わせ',
-    footer_buy:'タンカ購�?, footer_bless:'開光サービス', footer_consult:'芸術相談', footer_custom:'オーダーメイド',
-    cat_all:'全コレクショ�?, cat_thangka:'タン�?, cat_buddha:'金銅仏像',
-    cat_merchandise:'チベットグッ�?, cat_mantra:'六字真言', cat_mandala:'曼荼�?, cat_other:'その�?,
+    stat_artists:'提携画家', stat_items:'コレクション数', stat_satisfaction:'顧客満足度',
+    footer_desc:'正統タンカ芸術の普及と千年の仏教文化遺産の継承に取り組んでいます。',
+    footer_quick:'クイックリンク', footer_services:'サービス', footer_contact:'お問い合わせ',
+    footer_buy:'タンカ購入', footer_bless:'開光サービス', footer_consult:'芸術相談', footer_custom:'オーダーメイド',
+    cat_all:'全コレクション', cat_thangka:'タンカ', cat_buddha:'金銅仏像',
+    cat_merchandise:'チベットグッズ', cat_mantra:'六字真言', cat_mandala:'曼荼羅', cat_other:'その他',
     no_items_in_cat:'このカテゴリには現在アイテムがありません'
   };
   
   // Korean (Basic - can be extended)
   i18n.translations['ko'] = {
-    nav_home:'�?, nav_products:'갤러�?, nav_about:'소개', nav_contact:'연락�?,
-    cart:'나의 컬렉�?,
-    hero_badge:'정통 티베�?탱카', hero_explore:'컬렉�?탐색',
-    products_eyebrow:'엄선�?컬렉�?, products_title:'정선 탱카 예술 작품',
-    products_desc:'�?탱카�?예술�?가치와 종교�?의미�?완벽�?조합�?보장하기 위해 신중하게 선택됩니�?,
-    loading_products:'로딩 �?..', no_products:'현재 전시 중인 작품�?없습니다',
+    nav_home:'홈', nav_products:'갤러리', nav_about:'소개', nav_contact:'연락처',
+    cart:'나의 컬렉션',
+    hero_badge:'정통 티베트 탱카', hero_explore:'컬렉션 탐색',
+    products_eyebrow:'엄선된 컬렉션', products_title:'정선 탱카 예술 작품',
+    products_desc:'각 탱카는 예술적 가치와 종교적 의미의 완벽한 조합을 보장하기 위해 신중하게 선택됩니다',
+    loading_products:'로딩 중...', no_products:'현재 전시 중인 작품이 없습니다',
     btn_details:'상세', btn_cart:'소장하기',
     about_eyebrow:'소개', about_title:'탱카 예술관 소개',
-    service_title:'서비�?특징',
+    service_title:'서비스 특징',
     svc_handmade:'100% 수제 탱카', svc_natural:'천연 광물 안료',
-    svc_blessing:'개광加持 서비�?이용 가�?, svc_shipping:'국제 배송 �?보험',
-    stat_artists:'제휴 화가', stat_items:'컬렉�?�?, stat_satisfaction:'고객 만족�?,
-    footer_desc:'정통 탱카 예술 보급�?천년 불교 문화유산 계승�?힘쓰�?있습니다.',
-    footer_quick:'빠른 링크', footer_services:'서비�?, footer_contact:'연락�?,
-    footer_buy:'탱카 구매', footer_bless:'개광 서비�?, footer_consult:'예술 상담', footer_custom:'주문 제작',
-    cat_all:'전체 컬렉�?, cat_thangka:'탱카', cat_buddha:'금동 불상',
-    cat_merchandise:'티베�?굿즈', cat_mantra:'육자진언', cat_mandala:'만다�?, cat_other:'기타',
-    no_items_in_cat:'�?카테고리에는 현재 아이템이 없습니다'
+    svc_blessing:'개광加持 서비스 이용 가능', svc_shipping:'국제 배송 및 보험',
+    stat_artists:'제휴 화가', stat_items:'컬렉션 수', stat_satisfaction:'고객 만족도',
+    footer_desc:'정통 탱카 예술 보급과 천년 불교 문화유산 계승에 힘쓰고 있습니다.',
+    footer_quick:'빠른 링크', footer_services:'서비스', footer_contact:'연락처',
+    footer_buy:'탱카 구매', footer_bless:'개광 서비스', footer_consult:'예술 상담', footer_custom:'주문 제작',
+    cat_all:'전체 컬렉션', cat_thangka:'탱카', cat_buddha:'금동 불상',
+    cat_merchandise:'티베트 굿즈', cat_mantra:'육자진언', cat_mandala:'만다라', cat_other:'기타',
+    no_items_in_cat:'이 카테고리에는 현재 아이템이 없습니다'
   };
   
   // French (Basic - can be extended)
@@ -1602,54 +1558,54 @@ function initI18n(){
   
   // Thai (Basic - can be extended)
   i18n.translations['th'] = {
-    nav_home:'หน้าแร�?, nav_products:'แกลเลอรี', nav_about:'เกี่ยวกับเรา', nav_contact:'ติดต่อ',
+    nav_home:'หน้าแรก', nav_products:'แกลเลอรี', nav_about:'เกี่ยวกับเรา', nav_contact:'ติดต่อ',
     cart:'คอลเลคชั่นของฉัน',
-    hero_badge:' thang kaทิเบตแท�?, hero_explore:'สำรวจคอลเลคชั่น',
-    products_eyebrow:'คอลเลคชั่นคัดสรร', products_title:'ผลงานศิลปะ thang ka อันประณี�?,
-    products_desc:' thang ka แต่ละชิ้นได้รับการคัดเลือกอย่างพิถีพิถันเพื่อให้แน่ใจว่าการผสมผสานที่สมบูรณ์แบบของคุณค่าทางศิลปะและความสำคัญทางศาสน�?,
-    loading_products:'กำลังโหล�?..', no_products:'ไม่มีผลงานในขณะนี้',
+    hero_badge:' thang kaทิเบตแท้', hero_explore:'สำรวจคอลเลคชั่น',
+    products_eyebrow:'คอลเลคชั่นคัดสรร', products_title:'ผลงานศิลปะ thang ka อันประณีต',
+    products_desc:' thang ka แต่ละชิ้นได้รับการคัดเลือกอย่างพิถีพิถันเพื่อให้แน่ใจว่าการผสมผสานที่สมบูรณ์แบบของคุณค่าทางศิลปะและความสำคัญทางศาสนา',
+    loading_products:'กำลังโหลด...', no_products:'ไม่มีผลงานในขณะนี้',
     btn_details:'รายละเอียด', btn_cart:'สะสม',
-    about_eyebrow:'เกี่ยวกับเรา', about_title:'เกี่ยวกับหอศิลป�?thang ka',
+    about_eyebrow:'เกี่ยวกับเรา', about_title:'เกี่ยวกับหอศิลป์ thang ka',
     service_title:'บริการของเรา',
-    svc_handmade:' thang ka เขียนด้วยมื�?100%', svc_natural:'สีแร่ธรรมชาต�?,
-    svc_blessing:'บริการปลุกเสกทางเลือก', svc_shipping:'จัดส่งระหว่างประเทศและประกั�?,
-    stat_artists:'ศิลปินพันธมิตร', stat_items:'คอลเลคชั่นผลงา�?, stat_satisfaction:'ความพึงพอใจของลูกค้า',
-    footer_desc:'มุ่งมั่นที่จะส่งเสริมศิลป�?thang ka แท้และอนุรักษ์มรดกทางวัฒนธรรมพุทธศาสนาพันป�?,
-    footer_quick:'ลิงก์ด่ว�?, footer_services:'บริการ', footer_contact:'ติดต่อเรา',
-    footer_buy:'ซื้อ thang ka', footer_bless:'ปลุกเสก', footer_consult:'ปรึกษาศิลป�?, footer_custom:'สั่งทำพิเศษ',
-    cat_all:'คอลเลคชั่นทั้งหม�?, cat_thangka:' thang ka', cat_buddha:'พระพุทธรูปทองสัมฤทธิ�?,
-    cat_merchandise:'สินค้าทิเบต', cat_mantra:'คาถาหกพยางค์', cat_mandala:'มันดาล�?, cat_other:'คอลเลคชั่นอื่น�?,
+    svc_handmade:' thang ka เขียนด้วยมือ 100%', svc_natural:'สีแร่ธรรมชาติ',
+    svc_blessing:'บริการปลุกเสกทางเลือก', svc_shipping:'จัดส่งระหว่างประเทศและประกัน',
+    stat_artists:'ศิลปินพันธมิตร', stat_items:'คอลเลคชั่นผลงาน', stat_satisfaction:'ความพึงพอใจของลูกค้า',
+    footer_desc:'มุ่งมั่นที่จะส่งเสริมศิลปะ thang ka แท้และอนุรักษ์มรดกทางวัฒนธรรมพุทธศาสนาพันปี',
+    footer_quick:'ลิงก์ด่วน', footer_services:'บริการ', footer_contact:'ติดต่อเรา',
+    footer_buy:'ซื้อ thang ka', footer_bless:'ปลุกเสก', footer_consult:'ปรึกษาศิลปะ', footer_custom:'สั่งทำพิเศษ',
+    cat_all:'คอลเลคชั่นทั้งหมด', cat_thangka:' thang ka', cat_buddha:'พระพุทธรูปทองสัมฤทธิ์',
+    cat_merchandise:'สินค้าทิเบต', cat_mantra:'คาถาหกพยางค์', cat_mandala:'มันดาลา', cat_other:'คอลเลคชั่นอื่นๆ',
     no_items_in_cat:'ไม่มีรายการในหมวดหมู่นี้'
   };
   
   // Vietnamese (Basic - can be extended)
   i18n.translations['vi'] = {
-    nav_home:'Trang Ch�?, nav_products:'B�?Sưu Tập', nav_about:'Giới Thiệu', nav_contact:'Liên H�?,
-    cart:'B�?Sưu Tập Của Tôi',
-    hero_badge:'Thangka Tây Tạng Chính Thống', hero_explore:'Khám Phá B�?Sưu Tập',
-    products_eyebrow:'B�?Sưu Tập Chọn Lọc', products_title:'Tác Phẩm Ngh�?Thuật Thangka Tinh Xảo',
-    products_desc:'Mỗi bức thangka đều được lựa chọn cẩn thận đ�?đảm bảo s�?kết hợp hoàn hảo giữa giá tr�?ngh�?thuật và ý nghĩa tôn giáo',
+    nav_home:'Trang Chủ', nav_products:'Bộ Sưu Tập', nav_about:'Giới Thiệu', nav_contact:'Liên Hệ',
+    cart:'Bộ Sưu Tập Của Tôi',
+    hero_badge:'Thangka Tây Tạng Chính Thống', hero_explore:'Khám Phá Bộ Sưu Tập',
+    products_eyebrow:'Bộ Sưu Tập Chọn Lọc', products_title:'Tác Phẩm Nghệ Thuật Thangka Tinh Xảo',
+    products_desc:'Mỗi bức thangka đều được lựa chọn cẩn thận để đảm bảo sự kết hợp hoàn hảo giữa giá trị nghệ thuật và ý nghĩa tôn giáo',
     loading_products:'Đang tải...', no_products:'Hiện không có tác phẩm nào',
     btn_details:'Chi Tiết', btn_cart:'Sưu Tập',
-    about_eyebrow:'Giới Thiệu', about_title:'V�?Phòng Trưng Bày Ngh�?Thuật Thangka',
-    service_title:'Dịch V�?Của Chúng Tôi',
-    svc_handmade:'Thangka V�?Tay 100%', svc_natural:'Màu Khoáng Sản T�?Nhiên',
-    svc_blessing:'Dịch V�?Khai Quang Tùy Chọn', svc_shipping:'Vận Chuyển Quốc T�?& Bảo Hiểm',
-    stat_artists:'Họa Sĩ Đối Tác', stat_items:'B�?Sưu Tập Tác Phẩm', stat_satisfaction:'S�?Hài Lòng Của Khách Hàng',
-    footer_desc:'Tận tâm quảng bá ngh�?thuật Thangka chính thống và bảo tồn di sản văn hóa Phật giáo ngàn năm.',
-    footer_quick:'Liên Kết Nhanh', footer_services:'Dịch V�?, footer_contact:'Liên H�?Với Chúng Tôi',
-    footer_buy:'Mua Thangka', footer_bless:'Khai Quang', footer_consult:'Tư Vấn Ngh�?Thuật', footer_custom:'Đơn Đặt Hàng Đặc Biệt',
-    cat_all:'Tất C�?B�?Sưu Tập', cat_thangka:'Thangka', cat_buddha:'Tượng Đồng M�?Vàng',
-    cat_merchandise:'Sản Phẩm Tây Tạng', cat_mantra:'Chân Ngôn Sáu Âm', cat_mandala:'Mandala', cat_other:'B�?Sưu Tập Khác',
+    about_eyebrow:'Giới Thiệu', about_title:'Về Phòng Trưng Bày Nghệ Thuật Thangka',
+    service_title:'Dịch Vụ Của Chúng Tôi',
+    svc_handmade:'Thangka Vẽ Tay 100%', svc_natural:'Màu Khoáng Sản Tự Nhiên',
+    svc_blessing:'Dịch Vụ Khai Quang Tùy Chọn', svc_shipping:'Vận Chuyển Quốc Tế & Bảo Hiểm',
+    stat_artists:'Họa Sĩ Đối Tác', stat_items:'Bộ Sưu Tập Tác Phẩm', stat_satisfaction:'Sự Hài Lòng Của Khách Hàng',
+    footer_desc:'Tận tâm quảng bá nghệ thuật Thangka chính thống và bảo tồn di sản văn hóa Phật giáo ngàn năm.',
+    footer_quick:'Liên Kết Nhanh', footer_services:'Dịch Vụ', footer_contact:'Liên Hệ Với Chúng Tôi',
+    footer_buy:'Mua Thangka', footer_bless:'Khai Quang', footer_consult:'Tư Vấn Nghệ Thuật', footer_custom:'Đơn Đặt Hàng Đặc Biệt',
+    cat_all:'Tất Cả Bộ Sưu Tập', cat_thangka:'Thangka', cat_buddha:'Tượng Đồng Mạ Vàng',
+    cat_merchandise:'Sản Phẩm Tây Tạng', cat_mantra:'Chân Ngôn Sáu Âm', cat_mandala:'Mandala', cat_other:'Bộ Sưu Tập Khác',
     no_items_in_cat:'Không có mục nào trong danh mục này'
   };
 }
 
 // Language display names
 const langNames = {
-  'zh-TW': '繁體中文', 'zh-CN': '简体中�?, 'en': 'English', 'ja': '日本�?,
-  'ko': '한국�?, 'fr': 'Français', 'de': 'Deutsch', 'es': 'Español',
-  'pt': 'Português', 'ru': 'Русский', 'ar': 'العربية', 'th': 'ไท�?,
+  'zh-TW': '繁體中文', 'zh-CN': '简体中文', 'en': 'English', 'ja': '日本語',
+  'ko': '한국어', 'fr': 'Français', 'de': 'Deutsch', 'es': 'Español',
+  'pt': 'Português', 'ru': 'Русский', 'ar': 'العربية', 'th': 'ไทย',
   'vi': 'Tiếng Việt', 'id': 'Bahasa Indonesia'
 };
 
@@ -1697,13 +1653,15 @@ function closeMobileMenu(){
   if(toggle) toggle.classList.remove('active');
 }
 
-// 前臺漢堡選單切換（購物車頁面�?function toggleFrontendMenu(){
+// 前臺漢堡選單切換（購物車頁面）
+function toggleFrontendMenu(){
   const dropdown = document.getElementById('mobileNavDropdown');
   const toggle = document.getElementById('frontendMenuToggle');
   if(dropdown && toggle){
     dropdown.classList.toggle('show');
     toggle.classList.toggle('active');
-    // 更新購物車數�?    updateMobileCartCount();
+    // 更新購物車數量
+    updateMobileCartCount();
   }
 }
 
@@ -1713,32 +1671,6 @@ function closeFrontendMenu(){
   const toggle = document.getElementById('frontendMenuToggle');
   if(dropdown) dropdown.classList.remove('show');
   if(toggle) toggle.classList.remove('active');
-  // 同時關閉語言選擇�?  closeMobileLangSelector();
-}
-
-// 切換手機版語言選擇器
-function toggleMobileLangSelector(){
-  const selector = document.getElementById('mobileLangSelector');
-  const chevron = document.querySelector('.mobile-nav-item[onclick="toggleMobileLangSelector()"] .fa-chevron-down');
-  
-  if(selector){
-    const isVisible = selector.style.display !== 'none';
-    selector.style.display = isVisible ? 'none' : 'block';
-    
-    // 旋轉箭頭
-    if(chevron){
-      chevron.style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)';
-    }
-  }
-}
-
-// 關閉手機版語言選擇器
-function closeMobileLangSelector(){
-  const selector = document.getElementById('mobileLangSelector');
-  const chevron = document.querySelector('.mobile-nav-item[onclick="toggleMobileLangSelector()"] .fa-chevron-down');
-  
-  if(selector) selector.style.display = 'none';
-  if(chevron) chevron.style.transform = 'rotate(0deg)';
 }
 
 // 滾動到指定區域
@@ -1756,14 +1688,16 @@ function updateMobileCartCount(){
   if(mobileCount) mobileCount.textContent = count;
 }
 
-// 後台側邊欄切�?function toggleAdminSidebar(){
+// 後台側邊欄切換
+function toggleAdminSidebar(){
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebarOverlay');
   if(sidebar) sidebar.classList.toggle('show');
   if(overlay) overlay.classList.toggle('show');
 }
 
-// 關閉後台側邊�?function closeSidebar(){
+// 關閉後台側邊欄
+function closeSidebar(){
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebarOverlay');
   if(sidebar) sidebar.classList.remove('show');
@@ -1786,7 +1720,7 @@ function switchLanguage(lang){
   
   // 更新手機版語言標籤
   const mobileLangLabel = document.getElementById('mobileLangLabel');
-  if(mobileLangLabel) mobileLangLabel.textContent = '語言�? + (langNames[lang] || lang);
+  if(mobileLangLabel) mobileLangLabel.textContent = '語言：' + (langNames[lang] || lang);
   
   // Update active state in dropdown
   document.querySelectorAll('.lang-option').forEach(opt => {
@@ -1903,7 +1837,7 @@ function toast(msg,type='success'){
   t.className='toast '+type; t.classList.add('show');
   clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3000);
 }
-function showLoading(msg='載入�?..'){ document.getElementById('loadingText').textContent=msg; document.getElementById('loadingOverlay').classList.remove('hidden'); }
+function showLoading(msg='載入中...'){ document.getElementById('loadingText').textContent=msg; document.getElementById('loadingOverlay').classList.remove('hidden'); }
 function hideLoading(){ document.getElementById('loadingOverlay').classList.add('hidden'); }
 
 /* ============================================================
@@ -1922,7 +1856,7 @@ document.addEventListener('DOMContentLoaded', async()=>{
     
     // 設置手機版語言標籤
     const mobileLangLabel = document.getElementById('mobileLangLabel');
-    if(mobileLangLabel) mobileLangLabel.textContent = '語言�? + (langNames[savedLang] || savedLang);
+    if(mobileLangLabel) mobileLangLabel.textContent = '語言：' + (langNames[savedLang] || savedLang);
     
     document.querySelectorAll('.lang-option').forEach(opt => {
       opt.classList.toggle('active', opt.dataset.lang === savedLang);
@@ -1931,18 +1865,20 @@ document.addEventListener('DOMContentLoaded', async()=>{
     });
   }
   
-  // �?從資料庫載入系統設定（優先於本機�?  const loadedFromDB = await loadSysConfigFromDB();
+  // ✅ 從資料庫載入系統設定（優先於本機）
+  const loadedFromDB = await loadSysConfigFromDB();
   
-  // 無論是否從資料庫載入，都應用設定到前�?  applySettings();
+  // 無論是否從資料庫載入，都應用設定到前台
+  applySettings();
   
   if(loadedFromDB){
-    console.log('�?已應用資料庫設定到前�?);
+    console.log('✅ 已應用資料庫設定到前台');
   } else {
     console.log('⚠️ 已應用本機預設設定到前台');
   }
   
   updateBadge();
-  await renderFrontAnnounce(); // �?Supabase 載入公告
+  await renderFrontAnnounce(); // 從 Supabase 載入公告
   applyTranslations(); // Apply initial translations
   
   // 載入商品
@@ -1952,11 +1888,11 @@ document.addEventListener('DOMContentLoaded', async()=>{
   const { data } = await sb.auth.getSession();
   if(data?.session){
     curUser = data.session.user;
-    // �?僅在管理員登入時啟用即時同步
+    // ✅ 僅在管理員登入時啟用即時同步
     setupRealtimeSync();
-    console.log('�?管理員已登入，啟用即時同�?);
+    console.log('✅ 管理員已登入，啟用即時同步');
   } else {
-    console.log(' 訪客模式，跳過即時同�?);
+    console.log(' 訪客模式，跳過即時同步');
   }
 
   // Modal backdrop handlers
@@ -1968,11 +1904,13 @@ document.addEventListener('DOMContentLoaded', async()=>{
     if(e.key==='Escape') {
       document.querySelectorAll('.modal-overlay.show').forEach(m=>m.classList.remove('show'));
       document.getElementById('langDropdown')?.classList.remove('show');
-      // 關閉手機版漢堡選�?      closeFrontendMenu();
+      // 關閉手機版漢堡選單
+      closeFrontendMenu();
     }
   });
   
-  // 點擊外部關閉手機版漢堡選�?  document.addEventListener('click', e => {
+  // 點擊外部關閉手機版漢堡選單
+  document.addEventListener('click', e => {
     const dropdown = document.getElementById('mobileNavDropdown');
     const toggle = document.getElementById('frontendMenuToggle');
     if(dropdown && dropdown.classList.contains('show')){
@@ -1996,7 +1934,7 @@ document.addEventListener('DOMContentLoaded', async()=>{
   if('serviceWorker' in navigator){
     window.addEventListener('load',()=>{
       navigator.serviceWorker.register('/sw.js').then(reg=>{
-        console.log('�?Service Worker registered');
+        console.log('✅ Service Worker registered');
       }).catch(err=>{
         console.log('⚠️ Service Worker registration failed:',err);
       });
@@ -2009,28 +1947,29 @@ document.addEventListener('DOMContentLoaded', async()=>{
     e.preventDefault();
     deferredPrompt=e;
     // 可以在此顯示自定義的安裝按鈕
-    console.log(' APP安裝提示已準�?);
+    console.log(' APP安裝提示已準備');
   });
   
-  // �?添加控制台測試命�?  window.testSettings = function(){
+  // ✅ 添加控制台測試命令
+  window.testSettings = function(){
     console.log('=== 系統設定測試 ===');
     console.log('sysConfig:', sysConfig);
-    console.log('資料庫載入標�?', localStorage.getItem('sysConfig_loaded_from_db'));
+    console.log('資料庫載入標記:', localStorage.getItem('sysConfig_loaded_from_db'));
     
     const phone = document.getElementById('footerPhone');
     const email = document.getElementById('footerEmail');
     const address = document.getElementById('footerAddress');
     
     console.log('前台頁腳顯示:', {
-      phone: phone ? phone.textContent : '未找�?,
-      email: email ? email.textContent : '未找�?,
-      address: address ? address.textContent : '未找�?
+      phone: phone ? phone.textContent : '未找到',
+      email: email ? email.textContent : '未找到',
+      address: address ? address.textContent : '未找到'
     });
     
     console.log('===================');
   };
   
-  console.log('💡 提示：在控制台輸�?testSettings() 可以測試系統設定');
+  console.log('💡 提示：在控制台輸入 testSettings() 可以測試系統設定');
 });
 
 /* ============================================================
@@ -2045,7 +1984,8 @@ function applySettings(){
   const sl=document.getElementById('serviceList');
   if(sl) sl.innerHTML=pageContent.serviceItems.map(s=>`<li><i class="fas fa-circle-check"></i>${esc(s)}</li>`).join('');
   
-  // �?更新頁腳聯繫資訊（電話、郵箱、地址�?  const fp=document.getElementById('footerPhone');
+  // ✅ 更新頁腳聯繫資訊（電話、郵箱、地址）
+  const fp=document.getElementById('footerPhone');
   if(fp){
     fp.textContent=sysConfig.supportPhone;
     fp.href='tel:'+sysConfig.supportPhone.replace(/[\s-]/g,'');
@@ -2060,7 +2000,7 @@ function applySettings(){
   const lt=document.getElementById('logoText');if(lt)lt.textContent=sysConfig.companyName;
   document.title=sysConfig.companyName+'｜專業唐卡收藏與結緣';
   
-  console.log('�?系統設定已應用到前台:', {
+  console.log('✅ 系統設定已應用到前台:', {
     phone: sysConfig.supportPhone,
     email: sysConfig.supportEmail,
     address: sysConfig.address
@@ -2076,11 +2016,11 @@ async function loadSysConfigFromDB(){
       .order('updated_at',{ascending:false})
       .limit(1);
     
-    console.log('資料庫查詢結�?', { error, data: settingsData });
+    console.log('資料庫查詢結果:', { error, data: settingsData });
     
     if(!error && settingsData && settingsData.length > 0){
       const dbSettings = settingsData[0];
-      console.log('📋 資料庫設�?', dbSettings);
+      console.log('📋 資料庫設定:', dbSettings);
       
       sysConfig.companyName = dbSettings.company_name || sysConfig.companyName;
       sysConfig.supportPhone = dbSettings.support_phone || sysConfig.supportPhone;
@@ -2088,22 +2028,23 @@ async function loadSysConfigFromDB(){
       sysConfig.address = dbSettings.address || sysConfig.address;
       sysConfig.copyright = dbSettings.copyright || sysConfig.copyright;
       
-      console.log('�?sysConfig 已更�?', {
+      console.log('✅ sysConfig 已更新:', {
         phone: sysConfig.supportPhone,
         email: sysConfig.supportEmail,
         address: sysConfig.address
       });
       
-      // 標記已從資料庫載�?      localStorage.setItem('sysConfig_loaded_from_db', 'true');
+      // 標記已從資料庫載入
+      localStorage.setItem('sysConfig_loaded_from_db', 'true');
       
-      console.log('�?系統設定已從資料庫載�?);
+      console.log('✅ 系統設定已從資料庫載入');
       return true; // 返回 true 表示成功載入
     } else {
-      console.log('⚠️ 無資料庫設定，使用本機設�?);
+      console.log('⚠️ 無資料庫設定，使用本機設定');
       return false; // 返回 false 表示使用本機設定
     }
   } catch(e){
-    console.log('⚠️ 載入系統設定失敗，使用本機設�?',e.message);
+    console.log('⚠️ 載入系統設定失敗，使用本機設定:',e.message);
     console.error('錯誤詳情:', e);
     return false;
   }
@@ -2114,7 +2055,7 @@ async function renderFrontAnnounce(){
   if(!bar) return;
   
   try{
-    // �?Supabase 讀取啟用的公告
+    // 從 Supabase 讀取啟用的公告
     const { data,error } = await sb.from('announcements')
       .select('text')
       .eq('active',true)
@@ -2153,7 +2094,8 @@ function setupRealtimeSync() {
     sb.removeChannel(itemsChannel);
   }
   
-  // 隱藏連線狀態指示器（預設不顯示�?  if(statusEl) statusEl.style.display = 'none';
+  // 隱藏連線狀態指示器（預設不顯示）
+  if(statusEl) statusEl.style.display = 'none';
   
   // Subscribe to items table changes
   itemsChannel = sb
@@ -2179,11 +2121,13 @@ function setupRealtimeSync() {
     .subscribe((status) => {
       console.log('Real-time sync status:', status);
       
-      // 不顯示任何連線狀態提示（避免干擾用戶�?      if (status === 'SUBSCRIBED') {
-        console.log('�?Real-time product sync enabled');
+      // 不顯示任何連線狀態提示（避免干擾用戶）
+      if (status === 'SUBSCRIBED') {
+        console.log('✓ Real-time product sync enabled');
       } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
-        console.warn('�?Real-time sync error:', status, '- 將在背景重試');
-        // 不顯示錯誤提示，Supabase 會自動重�?        if(statusEl) statusEl.style.display = 'none';
+        console.warn('⚠ Real-time sync error:', status, '- 將在背景重試');
+        // 不顯示錯誤提示，Supabase 會自動重試
+        if(statusEl) statusEl.style.display = 'none';
       }
     });
 }
@@ -2207,20 +2151,21 @@ async function loadFrontProducts(){
     console.log('=== 數據庫返回的原始數據 ===');
     console.log('商品數量:', (data||[]).length);
     
-    // 特別檢查 SIX 開頭的商�?    const sixItems = (data||[]).filter(p => p.code && p.code.toUpperCase().startsWith('SIX'));
+    // 特別檢查 SIX 開頭的商品
+    const sixItems = (data||[]).filter(p => p.code && p.code.toUpperCase().startsWith('SIX'));
     console.log('SIX 開頭商品數量:', sixItems.length);
     if(sixItems.length > 0) {
       console.log('=== SIX 開頭商品詳細信息 ===');
       sixItems.forEach((item, index) => {
         console.log(`[${index+1}] 商品: ${item.name}`);
         console.log(`    編號: ${item.code}`);
-        console.log(`    圖片: ${item.image || '(�?'}`);
-        console.log(`    狀�? ${item.status}`);
+        console.log(`    圖片: ${item.image || '(空)'}`);
+        console.log(`    狀態: ${item.status}`);
       });
     }
     
     if(data && data.length > 0) {
-      console.log('第一筆商品數�?', data[0]);
+      console.log('第一筆商品數據:', data[0]);
       console.log('第一筆商品的 image 字段:', data[0].image);
     }
     
@@ -2233,7 +2178,7 @@ async function loadFrontProducts(){
       if(originalImage !== normalizedImage) {
         console.log(`商品 "${p.name}" 圖片 URL 轉換:`);
         console.log('  原始:', originalImage);
-        console.log('  轉換�?', normalizedImage);
+        console.log('  轉換後:', normalizedImage);
       }
       
       return {
@@ -2247,7 +2192,7 @@ async function loadFrontProducts(){
     
     renderFrontProductsByCategory(productsWithValidImages);
   } catch(e){
-    c.innerHTML=`<div class="products-loading"><i class="fas fa-circle-exclamation" style="color:var(--red);font-size:2rem;margin-bottom:.75rem;display:block;"></i><p>商品載入失敗�?{esc(e.message)}</p></div>`;
+    c.innerHTML=`<div class="products-loading"><i class="fas fa-circle-exclamation" style="color:var(--red);font-size:2rem;margin-bottom:.75rem;display:block;"></i><p>商品載入失敗：${esc(e.message)}</p></div>`;
     console.error('loadFrontProducts:',e);
   }
 }
@@ -2280,7 +2225,8 @@ function switchCategory(category){
   renderFilteredProducts();
 }
 
-// 手機版分類切�?function switchMobileCategory(category){
+// 手機版分類切換
+function switchMobileCategory(category){
   switchCategory(category);  // 调用統一切換函數
 }
 
@@ -2327,9 +2273,11 @@ function renderFrontProductsByCategory(items){
     categorySet.add(cat.key);
   });
   
-  // 桌面版分類標�?  let tabsHTML=`<button class="cat-tab active" data-category="all" onclick="switchCategory('all')"><i class="fas fa-th-large"></i> ${esc(t('cat_all'))}</button>`;
+  // 桌面版分類標籤
+  let tabsHTML=`<button class="cat-tab active" data-category="all" onclick="switchCategory('all')"><i class="fas fa-th-large"></i> ${esc(t('cat_all'))}</button>`;
   
-  // 手機版分類按�?  let mobileTabsHTML=`<button class="mobile-cat-btn active" data-category="all" onclick="switchMobileCategory('all')"><i class="fas fa-th-large"></i> ${esc(t('cat_all'))}</button>`;
+  // 手機版分類按鈕
+  let mobileTabsHTML=`<button class="mobile-cat-btn active" data-category="all" onclick="switchMobileCategory('all')"><i class="fas fa-th-large"></i> ${esc(t('cat_all'))}</button>`;
   
   const categoryOrder=['thangka','buddha','merchandise','mantra','other'];
   const sortedCategories=[...categorySet].sort((a,b)=>{
@@ -2351,16 +2299,19 @@ function renderFrontProductsByCategory(items){
       const transKey = 'cat_' + info.key;
       const translatedLabel = t(transKey) || info.label;
       
-      // 桌面�?      tabsHTML+=`<button class="cat-tab" data-category="${info.key}" onclick="switchCategory('${info.key}')"><i class="fas ${info.icon}"></i> ${esc(translatedLabel)} (${count})</button>`;
+      // 桌面版
+      tabsHTML+=`<button class="cat-tab" data-category="${info.key}" onclick="switchCategory('${info.key}')"><i class="fas ${info.icon}"></i> ${esc(translatedLabel)} (${count})</button>`;
       
-      // 手機�?      mobileTabsHTML+=`<button class="mobile-cat-btn" data-category="${info.key}" onclick="switchMobileCategory('${info.key}')"><i class="fas ${info.icon}"></i> ${esc(translatedLabel)}</button>`;
+      // 手機版
+      mobileTabsHTML+=`<button class="mobile-cat-btn" data-category="${info.key}" onclick="switchMobileCategory('${info.key}')"><i class="fas ${info.icon}"></i> ${esc(translatedLabel)}</button>`;
     }
   });
   
   tabsContainer.innerHTML=tabsHTML;
   tabsContainer.style.display='flex';
   
-  // 插入手機版分類標�?  if(mobileTabsContainer){
+  // 插入手機版分類標籤
+  if(mobileTabsContainer){
     mobileTabsContainer.innerHTML=mobileTabsHTML;
     mobileTabsContainer.parentElement.style.display='block';
   }
@@ -2372,15 +2323,17 @@ function renderFrontProductsByCategory(items){
 
 function renderProductCard(p){
   const name=p.name||'唐卡藏品';
-  const description=p.productdescription||'';  // 修正：使�?productdescription 而非 notes
+  const description=p.productdescription||'';  // 修正：使用 productdescription 而非 notes
   
   // 更強大的圖片處理邏輯
   let imgHtml;
   if(p.image && p.image.trim() !== '') {
-    // 有圖�?URL，嘗試加�?    imgHtml = `<img src="${p.image}" alt="${esc(name)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+    // 有圖片 URL，嘗試加載
+    imgHtml = `<img src="${p.image}" alt="${esc(name)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
                <i class="fas fa-dharmachakra product-img-icon" style="display:none;"></i>`;
   } else {
-    // 沒有圖片，顯示默認圖�?    imgHtml = `<i class="fas fa-dharmachakra product-img-icon"></i>`;
+    // 沒有圖片，顯示默認圖標
+    imgHtml = `<i class="fas fa-dharmachakra product-img-icon"></i>`;
   }
   
   // Add click handler for zoom if image exists
@@ -2424,12 +2377,13 @@ async function viewFrontProduct(id){
     const name=p.name||'唐卡藏品';
     const rawDescription=p.productdescription||'';  // 原始描述文字
     const price=Number(p.price||0);
-    const sizeDimensions = p.size_dimensions || '';  // 新增：尺寸資�?    
+    const sizeDimensions = p.size_dimensions || '';  // 新增：尺寸資訊
+    
     // 解析並格式化商品描述
     const formattedDescription = formatProductDescription(rawDescription);
     
     openFm(`<i class="fas fa-dharmachakra" style="color:var(--gold);"></i> ${esc(name)}`,`
-      <!-- 產品圖片（可點擊放大�?-->
+      <!-- 產品圖片（可點擊放大） -->
       <div style="background:linear-gradient(155deg,#f9f3e8,#edddb8);border-radius:1rem;height:280px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;overflow:hidden;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.08);" onclick="openImageZoom('${normalizedImage}')">
         ${normalizedImage?`<img src="${normalizedImage}" style="width:100%;height:100%;object-fit:cover;transition:transform .3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">`:`<i class="fas fa-dharmachakra" style="font-size:4rem;color:rgba(201,147,58,.4);"></i>`}
       </div>
@@ -2454,7 +2408,7 @@ async function viewFrontProduct(id){
       </div>
       ` : ''}
       
-      <!-- 商品描述（分段格式化�?-->
+      <!-- 商品描述（分段格式化） -->
       <div style="margin-bottom:1.5rem;">
         <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
           <i class="fas fa-align-left" style="color:var(--gold);"></i> 商品介紹
@@ -2464,7 +2418,7 @@ async function viewFrontProduct(id){
         </div>
       </div>
       
-      <!-- 分隔�?-->
+      <!-- 分隔線 -->
       <div style="height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:1.5rem 0;"></div>
       
       <!-- 操作按鈕 -->
@@ -2488,7 +2442,8 @@ function formatProductDescription(rawText){
   let currentSection = null;
   let sectionContent = [];
   
-  // 定義標題匹配規則（支�?emoji + 標題文字�?  const titlePattern = /^[\uff00-\uffef]?\s*([🔮🎨🛋️💡✨⚙️🎯📏🏷️]\s*[^\n|�?]+)/;
+  // 定義標題匹配規則（支持 emoji + 標題文字）
+  const titlePattern = /^[\uff00-\uffef]?\s*([🔮🎨🛋️💡✨⚙️🎯📏🏷️]\s*[^\n|：:]+)/;
   
   const flushSection = () => {
     if(currentSection && sectionContent.length > 0){
@@ -2516,7 +2471,8 @@ function formatProductDescription(rawText){
     const match = trimmedPara.match(titlePattern);
     
     if(match){
-      // 找到新標題，先保存之前的區�?      flushSection();
+      // 找到新標題，先保存之前的區塊
+      flushSection();
       
       // 根據標題內容匹配對應的顏色和圖標
       const title = match[1].trim();
@@ -2545,13 +2501,16 @@ function formatProductDescription(rawText){
       
       currentSection = { title, color, icon };
     } else if(currentSection){
-      // 當前段落屬於正在處理的區�?      sectionContent.push(trimmedPara);
+      // 當前段落屬於正在處理的區塊
+      sectionContent.push(trimmedPara);
     } else {
-      // 沒有匹配到標題，作為普通段落處�?      html += `<p style="margin-bottom:1rem;text-align:justify;line-height:1.9;">${esc(trimmedPara)}</p>`;
+      // 沒有匹配到標題，作為普通段落處理
+      html += `<p style="margin-bottom:1rem;text-align:justify;line-height:1.9;">${esc(trimmedPara)}</p>`;
     }
   });
   
-  // 保存最後一個區�?  flushSection();
+  // 保存最後一個區塊
+  flushSection();
   
   return html;
 }
@@ -2560,7 +2519,8 @@ function formatProductDescription(rawText){
    CART
 ============================================================ */
 function addToCart(id,name,price,imageUrl){
-  // 清理圖片 URL，移除可能的錯誤�?  let cleanImageUrl = imageUrl || '';
+  // 清理圖片 URL，移除可能的錯誤值
+  let cleanImageUrl = imageUrl || '';
   if(cleanImageUrl === 'this.style' || cleanImageUrl === 'undefined' || cleanImageUrl === 'null') {
     cleanImageUrl = '';
   }
@@ -2579,7 +2539,7 @@ function addToCart(id,name,price,imageUrl){
   }
   lsave('cart',cart); 
   updateBadge();
-  toast(`�?{name}」已加入結緣清單`);
+  toast(`「${name}」已加入結緣清單`);
   
   // Auto-open cart modal to prevent conversion loss
   setTimeout(()=>{
@@ -2597,15 +2557,18 @@ function hideCartModal(){ document.getElementById('cartModal').classList.remove(
 function renderCart(){
   const c=document.getElementById('cartItems'),ti=document.getElementById('cartTotalInfo');
   if(!c||!ti) return;
-  if(!cart.length){c.innerHTML='<div class="cart-empty"><i class="fas fa-bag-shopping"></i>結緣清單目前是空�?/div>';ti.innerHTML='';return;}
+  if(!cart.length){c.innerHTML='<div class="cart-empty"><i class="fas fa-bag-shopping"></i>結緣清單目前是空的</div>';ti.innerHTML='';return;}
   let total=0;
   c.innerHTML=cart.map(it=>{const sub=it.price*it.quantity;total+=sub;
     
-    // 圖片處理邏輯 - 簡化並移除所有調試代�?    let imgHtml;
+    // 圖片處理邏輯 - 簡化並移除所有調試代碼
+    let imgHtml;
     if(it.image && it.image.trim() !== '' && it.image !== 'this.style' && it.image !== 'undefined' && it.image !== 'null') {
-      // 有有效圖�?URL，顯示圖�?      imgHtml = `<img src="${it.image}" alt="${esc(it.name)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-dharmachakra\"></i>';">`;
+      // 有有效圖片 URL，顯示圖片
+      imgHtml = `<img src="${it.image}" alt="${esc(it.name)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-dharmachakra\"></i>';">`;
     } else {
-      // 沒有圖片或圖�?URL 無效，顯示預設圖�?      imgHtml = `<i class="fas fa-dharmachakra"></i>`;
+      // 沒有圖片或圖片 URL 無效，顯示預設圖標
+      imgHtml = `<i class="fas fa-dharmachakra"></i>`;
     }
     
     return `
@@ -2616,7 +2579,7 @@ function renderCart(){
       <div class="cart-item-info">
         <div class="cart-item-name">${esc(it.name)}</div>
         <div style="font-size:.78rem;color:var(--muted);margin-top:.15rem;">
-          <i class="fas fa-layer-group" style="font-size:.7rem;"></i> 數量�?{it.quantity}
+          <i class="fas fa-layer-group" style="font-size:.7rem;"></i> 數量：${it.quantity}
         </div>
       </div>
       <div style="display:flex;align-items:center;">
@@ -2644,7 +2607,7 @@ function goLineInquiry(){
   // Open LINE in new tab
   window.open(lineUrl,'_blank');
   
-  toast('已開�?LINE 詢價視窗');
+  toast('已開啟 LINE 詢價視窗');
 }
 
 /* ============================================================
@@ -2710,7 +2673,7 @@ function renderCheckoutSummary(){
     </div>`).join('')}
     ${discount?`<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:.4rem 0;color:var(--green);"><span>優惠折扣 (${esc(appliedCoupon.code)})</span><span style="display:none;">-NT$ ${discount.toLocaleString()}</span></div>`:''}
     <div style="display:none;">
-      <span>結緣總金�?/span><span>NT$ ${total.toLocaleString()}</span>
+      <span>結緣總金額</span><span>NT$ ${total.toLocaleString()}</span>
     </div>`;
   s._total=total;
 }
@@ -2722,13 +2685,13 @@ async function applyCoupon(){
   try{
     const { data,error } = await sb.from('coupons').select('*').eq('code',code.toUpperCase()).eq('active',true).single();
     if(error||!data){res.className='coupon-result err';res.textContent='優惠碼不存在或已失效';appliedCoupon=null;return;}
-    if(data.expires_at&&new Date(data.expires_at)<new Date()){res.className='coupon-result err';res.textContent='此優惠碼已過�?;appliedCoupon=null;return;}
+    if(data.expires_at&&new Date(data.expires_at)<new Date()){res.className='coupon-result err';res.textContent='此優惠碼已過期';appliedCoupon=null;return;}
     if(data.used_count>=data.usage_limit){res.className='coupon-result err';res.textContent='此優惠碼已達使用上限';appliedCoupon=null;return;}
     const subtotal=cart.reduce((s,i)=>s+i.price*i.quantity,0);
-    if(subtotal<(data.min_order||0)){res.className='coupon-result err';res.textContent=`最低消�?NT$ ${data.min_order.toLocaleString()} 才可使用`;appliedCoupon=null;return;}
+    if(subtotal<(data.min_order||0)){res.className='coupon-result err';res.textContent=`最低消費 NT$ ${data.min_order.toLocaleString()} 才可使用`;appliedCoupon=null;return;}
     appliedCoupon=data;
     const desc=data.type==='percent'?`折扣 ${data.value}%`:`折抵 NT$ ${data.value.toLocaleString()}`;
-    res.className='coupon-result ok';res.textContent=`�?優惠碼已套用�?{desc}`;
+    res.className='coupon-result ok';res.textContent=`✓ 優惠碼已套用：${desc}`;
     renderCheckoutSummary();
   } catch(e){ res.className='coupon-result err';res.textContent='驗證失敗，請稍後再試'; }
 }
@@ -2737,7 +2700,7 @@ async function submitOrder(){
   const name=gv('co_name'),phone=gv('co_phone');
   if(!name||!phone){toast('請填寫姓名與電話','error');return;}
   const btn=document.getElementById('submitOrderBtn');
-  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> 送出�?..';
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> 送出中...';
   const summary=document.getElementById('checkoutSummary');
   const total=summary._total||cart.reduce((s,i)=>s+i.price*i.quantity,0);
   const subtotal=cart.reduce((s,i)=>s+i.price*i.quantity,0);
@@ -2753,9 +2716,9 @@ async function submitOrder(){
       total_amount:total,
       deposit:0,
       balance:total,
-      status:'待發�?,
+      status:'待發貨',
       payment_method:gv('co_payment')||'',
-      notes:(gv('co_notes')||'')+(appliedCoupon?` [優惠�?${appliedCoupon.code} 折扣:NT$${discount}]`:''),
+      notes:(gv('co_notes')||'')+(appliedCoupon?` [優惠碼:${appliedCoupon.code} 折扣:NT$${discount}]`:''),
     };
     const { error } = await sb.from('orders').insert(orderData);
     if(error) throw error;
@@ -2767,7 +2730,7 @@ async function submitOrder(){
     hideCheckout(); appliedCoupon=null;
     toast(`感謝結緣！訂單編號：${orderData.order_no}`);
   } catch(e){
-    toast('送出失敗�?+e.message,'error');
+    toast('送出失敗：'+e.message,'error');
   } finally{
     btn.disabled=false; btn.innerHTML='<i class="fas fa-paper-plane"></i> 確認送出';
   }
@@ -2783,7 +2746,7 @@ async function doLogin(){
   const email=gv('loginEmail'),pass=gv('loginPass');
   if(!email||!pass){document.getElementById('loginErr').textContent='請輸入帳號與密碼';return;}
   const btn=document.querySelector('.login-btn-main');
-  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> 驗證�?..';
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> 驗證中...';
   try{
     const { data,error } = await sb.auth.signInWithPassword({email,password:pass});
     if(error) throw error;
@@ -2799,7 +2762,7 @@ async function doLogin(){
     document.getElementById('frontend').style.display='none';
     document.getElementById('backend').style.display='block';
     setPage('dashboard');
-    toast('歡迎回來�?);
+    toast('歡迎回來！');
   } catch(e){
     document.getElementById('loginErr').textContent=e.message;
   } finally{
@@ -2841,7 +2804,7 @@ function goFrontend(){
 }
 
 async function doLogout(){
-  if(!confirm('確定要登出管理後台嗎�?)) return;
+  if(!confirm('確定要登出管理後台嗎？')) return;
   await sb.auth.signOut();
   curUser=null;
   document.getElementById('backend').style.display='none';
@@ -2849,7 +2812,7 @@ async function doLogout(){
   applySettings(); updateBadge(); renderFrontAnnounce();
   await loadFrontProducts();
   window.scrollTo(0,0);
-  toast('已成功登�?,'info');
+  toast('已成功登出','info');
 }
 
 /* ============================================================
@@ -2872,7 +2835,7 @@ function renderPage(){
   const m=document.getElementById('bkMain');
   if(!m) return;
   const pages={dashboard:pgDashboard,products:pgProducts,orders:pgOrders,customers:pgCustomers,agents:pgAgents,makers:pgMakers,monks:pgMonks,warehouses:pgWarehouses,announce:pgAnnounce,coupons:pgCoupons,subscribers:pgSubscribers,content:pgContent,design:pgDesign,permissions:pgPermissions,settings:pgSettings};
-  m.innerHTML='<div style="padding:2rem;text-align:center;color:var(--muted);"><div class="spinner" style="margin:0 auto 1rem;"></div>載入�?..</div>';
+  m.innerHTML='<div style="padding:2rem;text-align:center;color:var(--muted);"><div class="spinner" style="margin:0 auto 1rem;"></div>載入中...</div>';
   (pages[curPage]||pgDashboard)();
 }
 
@@ -2901,31 +2864,31 @@ async function pgDashboard(){
     const makersCount=makerRes.count||0;
     const monksCount=monkRes.count||0;
     const warehousesCount=whRes.count||0;
-    const months=['11�?,'12�?,'1�?,'2�?,'3�?,'本月'];
+    const months=['11月','12月','1月','2月','3月','本月'];
     const monthVals=[...Array(5).fill(0).map(()=>Math.floor(Math.random()*20+5)),orders.length];
     const maxV=Math.max(...monthVals,1);
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-chart-line"></i>數據儀表板</h1><p>歡迎回來，資料已�?Supabase 同步 <span class="sync-badge"><i class="fas fa-circle-check"></i>已同�?/span></p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-chart-line"></i>數據儀表板</h1><p>歡迎回來，資料已從 Supabase 同步 <span class="sync-badge"><i class="fas fa-circle-check"></i>已同步</span></p></div>
       <div style="font-size:.8rem;color:var(--muted);">${new Date().toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})}</div>
     </div>
     <div class="pg-content">
-      ${outStock.length?outStock.slice(0,3).map(p=>`<div class="stock-alert"><i class="fas fa-circle-exclamation"></i><span>商品 <strong>${esc(p.id)}</strong> 已售�?/span></div>`).join(''):''}
+      ${outStock.length?outStock.slice(0,3).map(p=>`<div class="stock-alert"><i class="fas fa-circle-exclamation"></i><span>商品 <strong>${esc(p.id)}</strong> 已售完</span></div>`).join(''):''}
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon si-blue"><i class="fas fa-receipt"></i></div><div class="stat-val">${orders.length}</div><div class="stat-lbl">網站訂單�?/div></div>
-        <div class="stat-card"><div class="stat-icon si-green"><i class="fas fa-palette"></i></div><div class="stat-val">${items.filter(i=>i.status==='in-stock').length}</div><div class="stat-lbl">展示中藏�?/div></div>
-        <div class="stat-card"><div class="stat-icon si-amber"><i class="fas fa-coins"></i></div><div class="stat-val" style="font-size:1.35rem;">NT$${(totalRev/10000).toFixed(1)}�?/div><div class="stat-lbl">結緣總金�?/div></div>
-        <div class="stat-card"><div class="stat-icon si-purple"><i class="fas fa-envelope"></i></div><div class="stat-val">${activeSubs}</div><div class="stat-lbl">有效訂閱�?/div></div>
+        <div class="stat-card"><div class="stat-icon si-blue"><i class="fas fa-receipt"></i></div><div class="stat-val">${orders.length}</div><div class="stat-lbl">網站訂單數</div></div>
+        <div class="stat-card"><div class="stat-icon si-green"><i class="fas fa-palette"></i></div><div class="stat-val">${items.filter(i=>i.status==='in-stock').length}</div><div class="stat-lbl">展示中藏品</div></div>
+        <div class="stat-card"><div class="stat-icon si-amber"><i class="fas fa-coins"></i></div><div class="stat-val" style="font-size:1.35rem;">NT$${(totalRev/10000).toFixed(1)}萬</div><div class="stat-lbl">結緣總金額</div></div>
+        <div class="stat-card"><div class="stat-icon si-purple"><i class="fas fa-envelope"></i></div><div class="stat-val">${activeSubs}</div><div class="stat-lbl">有效訂閱者</div></div>
       </div>
       <div class="stats-grid" style="margin-top:.75rem;">
-        <div class="stat-card" onclick="goPage('agents')" style="cursor:pointer;"><div class="stat-icon" style="background:rgba(16,185,129,.1);color:#059669;"><i class="fas fa-user-tie"></i></div><div class="stat-val">${agentsCount}</div><div class="stat-lbl">代理�?/div></div>
+        <div class="stat-card" onclick="goPage('agents')" style="cursor:pointer;"><div class="stat-icon" style="background:rgba(16,185,129,.1);color:#059669;"><i class="fas fa-user-tie"></i></div><div class="stat-val">${agentsCount}</div><div class="stat-lbl">代理商</div></div>
         <div class="stat-card" onclick="goPage('makers')" style="cursor:pointer;"><div class="stat-icon" style="background:rgba(59,130,246,.1);color:#2563eb;"><i class="fas fa-industry"></i></div><div class="stat-val">${makersCount}</div><div class="stat-lbl">合作廠商</div></div>
         <div class="stat-card" onclick="goPage('monks')" style="cursor:pointer;"><div class="stat-icon" style="background:rgba(139,92,246,.1);color:#7c3aed;"><i class="fas fa-pray"></i></div><div class="stat-val">${monksCount}</div><div class="stat-lbl">僧人</div></div>
         <div class="stat-card" onclick="goPage('warehouses')" style="cursor:pointer;"><div class="stat-icon" style="background:rgba(245,158,11,.1);color:#d97706;"><i class="fas fa-warehouse"></i></div><div class="stat-val">${warehousesCount}</div><div class="stat-lbl">倉庫</div></div>
       </div>
       <div class="chart-card">
-        <div class="chart-title">�?個月訂單趨勢（網站）</div>
+        <div class="chart-title">近6個月訂單趨勢（網站）</div>
         <div class="mini-bars">${months.map((mn,i)=>`<div class="mb-wrap">
           <div class="mb" style="height:${Math.max((monthVals[i]/maxV*64)+8,8)}px;background:${i===5?'linear-gradient(180deg,var(--gold),var(--gold-light))':'rgba(201,147,58,.22)'}"></div>
           <span class="mb-lbl">${mn}</span>
@@ -2933,9 +2896,9 @@ async function pgDashboard(){
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;">
         <div class="tc">
-          <div class="tc-hdr"><div><div class="tc-title">最近訂�?/div></div><button class="btn btn-ghost btn-sm" onclick="goPage('orders')">查看全部</button></div>
+          <div class="tc-hdr"><div><div class="tc-title">最近訂單</div></div><button class="btn btn-ghost btn-sm" onclick="goPage('orders')">查看全部</button></div>
           <div class="tw"><table>
-            <thead><tr><th>訂單�?/th><th>客戶</th><th>金額</th><th>狀�?/th></tr></thead>
+            <thead><tr><th>訂單號</th><th>客戶</th><th>金額</th><th>狀態</th></tr></thead>
             <tbody>${orders.slice(0,5).map(o=>`<tr>
               <td><strong>${o.id.slice(0,8)}...</strong></td>
               <td>${esc(o.customer_name||'')}</td>
@@ -2947,11 +2910,11 @@ async function pgDashboard(){
         <div class="tc">
           <div class="tc-hdr"><div><div class="tc-title">庫存概覽</div></div><button class="btn btn-ghost btn-sm" onclick="goPage('products')">管理商品</button></div>
           <div class="tw"><table>
-            <thead><tr><th>商品</th><th>狀�?/th></tr></thead>
+            <thead><tr><th>商品</th><th>狀態</th></tr></thead>
             <tbody>${items.slice(0,6).map(p=>`<tr>
               <td><code style="font-size:.75rem;">${esc(p.id.slice(0,8))}...</code></td>
-              <td>${p.status==='in-stock'?'<span class="bdg bdg-green">上架�?/span>':'<span class="bdg bdg-gray">下架</span>'}</td>
-            </tr>`).join('')||'<tr><td colspan="2" style="text-align:center;color:var(--muted);">�?/td></tr>'}</tbody>
+              <td>${p.status==='in-stock'?'<span class="bdg bdg-green">上架中</span>':'<span class="bdg bdg-gray">下架</span>'}</td>
+            </tr>`).join('')||'<tr><td colspan="2" style="text-align:center;color:var(--muted);">—</td></tr>'}</tbody>
           </table></div>
         </div>
       </div>
@@ -2959,8 +2922,8 @@ async function pgDashboard(){
   } catch(e){ m.innerHTML=errPage(e); }
 }
 
-function oBadge(s){const m={'已出�?:'bdg-green','待發�?:'bdg-amber','已完�?:'bdg-blue','已取�?:'bdg-red'};return`<span class="bdg ${m[s]||'bdg-gray'}">${s}</span>`;}
-function errPage(e){return`<div style="padding:2rem;color:var(--red);"><i class="fas fa-circle-exclamation"></i> 載入失敗�?{esc(e.message)}</div>`;}
+function oBadge(s){const m={'已出貨':'bdg-green','待發貨':'bdg-amber','已完成':'bdg-blue','已取消':'bdg-red'};return`<span class="bdg ${m[s]||'bdg-gray'}">${s}</span>`;}
+function errPage(e){return`<div style="padding:2rem;color:var(--red);"><i class="fas fa-circle-exclamation"></i> 載入失敗：${esc(e.message)}</div>`;}
 
 /* ============================================================
    PAGE: PRODUCTS (items table - website display management)
@@ -2987,12 +2950,13 @@ async function pgProducts(){
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-palette"></i>商品管理</h1><p>管理前台顯示的藏品（�?${items.length} 件）· 資料來源：Supabase items �?/p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-palette"></i>商品管理</h1><p>管理前台顯示的藏品（共 ${items.length} 件）· 資料來源：Supabase items 表</p></div>
       <button class="btn btn-gold btn-sm" onclick="showAddProduct()"><i class="fas fa-plus"></i> 新增商品</button>
     </div>
     <div class="pg-content">
       <div class="info-box" style="margin-bottom:1.25rem;">
-        <i class="fas fa-circle-info"></i> 此頁面用於管理前台展示狀態、商品標題、描述與價格。可隨時上下架商品�?      </div>
+        <i class="fas fa-circle-info"></i> 此頁面用於管理前台展示狀態、商品標題、描述與價格。可隨時上下架商品。
+      </div>
       
       <!-- Category Filter Tabs -->
       <div style="display:flex;gap:.65rem;margin-bottom:1.5rem;flex-wrap:wrap;">
@@ -3004,19 +2968,19 @@ async function pgProducts(){
       </div>
       
       <div class="tc"><div class="tw"><table id="adminProductsTable">
-        <thead><tr><th>圖片</th><th>SKU</th><th>分類</th><th>商品名稱</th><th>售價</th><th>狀�?/th><th>操作</th></tr></thead>
+        <thead><tr><th>圖片</th><th>SKU</th><th>分類</th><th>商品名稱</th><th>售價</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${items.map(p=>{
-          const name=p.name||'未命名商�?;
+          const name=p.name||'未命名商品';
           const cat=getCategoryInfo(p.code);
           return`<tr data-category="${cat.key}">
             <td><div style="width:3rem;height:4rem;background:#f0e6cc;border-radius:.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
               ${p.image?`<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;">`:`<i class="fas fa-dharmachakra" style="color:rgba(201,147,58,.35);font-size:1.1rem;"></i>`}
             </div></td>
-            <td><code style="font-size:.72rem;background:var(--border-light);padding:.2rem .45rem;border-radius:.35rem;">${esc(p.code||'�?)}</code></td>
+            <td><code style="font-size:.72rem;background:var(--border-light);padding:.2rem .45rem;border-radius:.35rem;">${esc(p.code||'—')}</code></td>
             <td><span style="display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:2rem;font-size:.72rem;font-weight:600;background:rgba(201,147,58,.1);color:var(--gold);"><i class="fas ${cat.icon}"></i> ${esc(cat.label)}</span></td>
             <td><div style="font-weight:700;font-size:.88rem;">${esc(name)}</div></td>
             <td style="color:var(--gold);font-weight:600;">NT$ ${Number(p.price||0).toLocaleString()}</td>
-            <td>${p.status==='in-stock'?'<span class="bdg bdg-green">上架�?/span>':'<span class="bdg bdg-gray">下架</span>'}</td>
+            <td>${p.status==='in-stock'?'<span class="bdg bdg-green">上架中</span>':'<span class="bdg bdg-gray">下架</span>'}</td>
             <td><div class="ac">
               <button class="ib ib-edit" onclick="editProductFull('${p.id}')" title="編輯商品"><i class="fas fa-pen"></i></button>
               <button class="ib ${p.status==='in-stock'?'ib-del':'ib-view'}" onclick="toggleProductStatus('${p.id}','${p.status}')" title="${p.status==='in-stock'?'下架':'上架'}"><i class="fas fa-${p.status==='in-stock'?'eye-slash':'eye'}"></i></button>
@@ -3046,7 +3010,8 @@ function filterAdminProducts(category){
 }
 
 async function editProductFull(id){
-  // 從資料庫獲取完整的商品資�?  const { data:p, error } = await sb.from('items').select('*').eq('id',id).single();
+  // 從資料庫獲取完整的商品資料
+  const { data:p, error } = await sb.from('items').select('*').eq('id',id).single();
   if(error || !p){toast('載入商品資料失敗','error');return;}
   
   const cat=getCategoryInfo(p.code||'');
@@ -3074,24 +3039,24 @@ async function editProductFull(id){
     </div>
     <div class="fmg"><label class="fml">商品名稱 *</label><input class="fmc" id="ep_name" value="${esc(p.name||'')}"></div>
     <div class="fmg"><label class="fml">商品描述</label><textarea class="fmc fmc-ta" id="ep_description" placeholder="商品詳細描述">${esc(p.productdescription||'')}</textarea></div>
-    <div class="fmg"><label class="fml">尺寸（長 × �?× 高，單位：cm�?/label>
+    <div class="fmg"><label class="fml">尺寸（長 × 寬 × 高，單位：cm）</label>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
-        <input class="fmc" id="ep_size_length" type="number" min="0" step="0.1" placeholder="�? value="${sizeLength}">
-        <input class="fmc" id="ep_size_width" type="number" min="0" step="0.1" placeholder="�? value="${sizeWidth}">
-        <input class="fmc" id="ep_size_height" type="number" min="0" step="0.1" placeholder="�? value="${sizeHeight}">
+        <input class="fmc" id="ep_size_length" type="number" min="0" step="0.1" placeholder="長" value="${sizeLength}">
+        <input class="fmc" id="ep_size_width" type="number" min="0" step="0.1" placeholder="寬" value="${sizeWidth}">
+        <input class="fmc" id="ep_size_height" type="number" min="0" step="0.1" placeholder="高" value="${sizeHeight}">
       </div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:.35rem;"><i class="fas fa-info-circle"></i> 例：20 × 26 × 3（cm�?/div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.35rem;"><i class="fas fa-info-circle"></i> 例：20 × 26 × 3（cm）</div>
     </div>
     <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="ep_notes" placeholder="內部備註">${esc(p.notes||'')}</textarea></div>
     <div class="fmg"><label class="fml">售價 (NT$)</label><input class="fmc" id="ep_price" type="number" min="0" value="${p.price||0}"></div>
-    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ep_image" value="${esc(p.image||'')}" placeholder="https://... �?Supabase Storage 路徑" oninput="previewEditImage(this.value)"></div>
+    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ep_image" value="${esc(p.image||'')}" placeholder="https://... 或 Supabase Storage 路徑" oninput="previewEditImage(this.value)"></div>
     <div id="ep_image_preview" style="margin-top:.5rem;display:${normalizedImage?'block':'none'};">
       <div style="font-size:.72rem;color:var(--muted);font-weight:700;margin-bottom:.35rem;">圖片預覽</div>
       <div style="width:100%;height:150px;background:#f0e6cc;border-radius:.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
         ${normalizedImage?`<img src="${normalizedImage}" style="width:100%;height:100%;object-fit:cover;">`:`<i class="fas fa-dharmachakra" style="font-size:2rem;color:rgba(201,147,58,.3);"></i>`}
       </div>
     </div>
-    <div class="fmg"><label class="fml">上架狀�?/label>
+    <div class="fmg"><label class="fml">上架狀態</label>
       <select class="fmc fmc-sel" id="ep_status">
         <option value="in-stock" ${p.status==='in-stock'?'selected':''}>上架（前台可見）</option>
         <option value="hidden" ${p.status==='hidden'?'selected':''}>下架（前台隱藏）</option>
@@ -3109,16 +3074,17 @@ async function editProductFull(id){
         
         const updateData={
           name:gv('ep_name'),
-          productdescription:gv('ep_description'),  // 修正：商品描述對�?productdescription
-          size_dimensions: sizeDimensions,  // 新增：尺寸欄�?          notes:gv('ep_notes'),                      // 備註對應 notes
+          productdescription:gv('ep_description'),  // 修正：商品描述對應 productdescription
+          size_dimensions: sizeDimensions,  // 新增：尺寸欄位
+          notes:gv('ep_notes'),                      // 備註對應 notes
           price:Number(gv('ep_price'))||0,
           status:gv('ep_status')
         };
         if(gv('ep_image')) updateData.image=gv('ep_image');
         const { error } = await sb.from('items').update(updateData).eq('id',id);
         if(error) throw error;
-        closeFm(); pgProducts(); toast('商品已更�?);
-      } catch(e){ toast('更新失敗�?+e.message,'error'); }
+        closeFm(); pgProducts(); toast('商品已更新');
+      } catch(e){ toast('更新失敗：'+e.message,'error'); }
     });
 }
 
@@ -3162,31 +3128,31 @@ function showAddProduct(){
   openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增商品',`
     <div class="fmg"><label class="fml">商品名稱 *</label><input class="fmc" id="ap_name" placeholder="輸入商品名稱"></div>
     <div class="fmg"><label class="fml">商品描述</label><textarea class="fmc fmc-ta" id="ap_description" placeholder="商品詳細描述"></textarea></div>
-    <div class="fmg"><label class="fml">尺寸（長 × �?× 高，單位：cm�?/label>
+    <div class="fmg"><label class="fml">尺寸（長 × 寬 × 高，單位：cm）</label>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
-        <input class="fmc" id="ap_size_length" type="number" min="0" step="0.1" placeholder="�?>
-        <input class="fmc" id="ap_size_width" type="number" min="0" step="0.1" placeholder="�?>
-        <input class="fmc" id="ap_size_height" type="number" min="0" step="0.1" placeholder="�?>
+        <input class="fmc" id="ap_size_length" type="number" min="0" step="0.1" placeholder="長">
+        <input class="fmc" id="ap_size_width" type="number" min="0" step="0.1" placeholder="寬">
+        <input class="fmc" id="ap_size_height" type="number" min="0" step="0.1" placeholder="高">
       </div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:.35rem;"><i class="fas fa-info-circle"></i> 例：20 × 26 × 3（cm�?/div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.35rem;"><i class="fas fa-info-circle"></i> 例：20 × 26 × 3（cm）</div>
     </div>
     <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="ap_notes" placeholder="內部備註"></textarea></div>
     <div class="fmg"><label class="fml">售價 (NT$) *</label><input class="fmc" id="ap_price" type="number" min="0" value="0"></div>
-    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ap_image" placeholder="https://... �?Supabase Storage 路徑" oninput="previewAddImage(this.value)"></div>
+    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ap_image" placeholder="https://... 或 Supabase Storage 路徑" oninput="previewAddImage(this.value)"></div>
     <div id="ap_image_preview" style="margin-top:.5rem;display:none;">
       <div style="font-size:.72rem;color:var(--muted);font-weight:700;margin-bottom:.35rem;">圖片預覽</div>
       <div style="width:100%;height:150px;background:#f0e6cc;border-radius:.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
         <i class="fas fa-dharmachakra" style="font-size:2rem;color:rgba(201,147,58,.3);"></i>
       </div>
     </div>
-    <div class="fmg"><label class="fml">初始狀�?/label>
+    <div class="fmg"><label class="fml">初始狀態</label>
       <select class="fmc fmc-sel" id="ap_status">
         <option value="in-stock">立即上架</option>
-        <option value="hidden">先下�?/option>
+        <option value="hidden">先下架</option>
       </select></div>`,
     async()=>{
       const name=gv('ap_name');
-      if(!name){toast('請輸入商品名�?,'error');return;}
+      if(!name){toast('請輸入商品名稱','error');return;}
       
       // Build size string from length × width × height
       const sizeLength = gv('ap_size_length');
@@ -3199,15 +3165,16 @@ function showAddProduct(){
       
       const { error } = await sb.from('items').insert({
         name:name,
-        productdescription:gv('ap_description'),  // 修正：商品描述對�?productdescription
-        size_dimensions: sizeDimensions,  // 新增：尺寸欄�?        notes:gv('ap_notes'),                      // 備註對應 notes
+        productdescription:gv('ap_description'),  // 修正：商品描述對應 productdescription
+        size_dimensions: sizeDimensions,  // 新增：尺寸欄位
+        notes:gv('ap_notes'),                      // 備註對應 notes
         price:Number(gv('ap_price'))||0,
         image:gv('ap_image')||'',
         status:gv('ap_status'),
-        created_at:new Date().toISOString()  // 修正：使�?created_at 而非 createdat
+        created_at:new Date().toISOString()  // 修正：使用 created_at 而非 createdat
       });
-      if(error){toast('新增失敗�?+error.message,'error');return;}
-      closeFm(); pgProducts(); toast('商品已新�?);
+      if(error){toast('新增失敗：'+error.message,'error');return;}
+      closeFm(); pgProducts(); toast('商品已新增');
     });
 }
 
@@ -3215,14 +3182,14 @@ async function toggleProductStatus(id,currentStatus){
   const newStatus=currentStatus==='in-stock'?'hidden':'in-stock';
   const { error } = await sb.from('items').update({status:newStatus}).eq('id',id);
   if(error){toast('更新失敗','error');return;}
-  pgProducts(); toast(newStatus==='in-stock'?'商品已上�?:'商品已下�?);
+  pgProducts(); toast(newStatus==='in-stock'?'商品已上架':'商品已下架');
 }
 
 async function delProduct(id){
-  if(!confirm('確定要刪除此商品？此操作無法復原�?)) return;
+  if(!confirm('確定要刪除此商品？此操作無法復原。')) return;
   const { error } = await sb.from('items').delete().eq('id',id);
-  if(error){toast('刪除失敗�?+error.message,'error');return;}
-  pgProducts(); toast('商品已刪�?);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgProducts(); toast('商品已刪除');
 }
 
 /* ============================================================
@@ -3241,60 +3208,60 @@ async function pgOrders(){
       statusCount[o.status]=(statusCount[o.status]||0)+1;
     });
     const totalRevenue=orders.reduce((s,o)=>s+(o.total_amount||0),0);
-    const pendingCount=statusCount['待發�?]||0;
-    const shippedCount=statusCount['已出�?]||0;
-    const completedCount=statusCount['已完�?]||0;
-    const cancelledCount=statusCount['已取�?]||0;
+    const pendingCount=statusCount['待發貨']||0;
+    const shippedCount=statusCount['已出貨']||0;
+    const completedCount=statusCount['已完成']||0;
+    const cancelledCount=statusCount['已取消']||0;
     
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-receipt"></i>訂單管理</h1><p>�?${orders.length} �?· 資料來源：Supabase orders �?/p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-receipt"></i>訂單管理</h1><p>共 ${orders.length} 筆 · 資料來源：Supabase orders 表</p></div>
       <div style="display:flex;gap:.5rem;">
-        <button class="btn btn-gold btn-sm" onclick="showBatchStatusUpdate()"><i class="fas fa-layer-group"></i> 批次更新狀�?/button>
+        <button class="btn btn-gold btn-sm" onclick="showBatchStatusUpdate()"><i class="fas fa-layer-group"></i> 批次更新狀態</button>
         <button class="btn btn-ghost btn-sm" onclick="exportOrderNotes()"><i class="fas fa-file-export"></i> 匯出備註</button>
         <button class="btn btn-ghost btn-sm" onclick="showOrderStats()"><i class="fas fa-chart-bar"></i> 統計報表</button>
       </div>
     </div>
     <div class="pg-content">
-      <!-- 狀態統計卡�?-->
+      <!-- 狀態統計卡片 -->
       <div class="stats-grid" style="margin-bottom:1.25rem;">
-        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('待發�?)">
+        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('待發貨')">
           <div class="stat-icon si-amber"><i class="fas fa-clock"></i></div>
           <div class="stat-val">${pendingCount}</div>
-          <div class="stat-lbl">待發�?/div>
+          <div class="stat-lbl">待發貨</div>
         </div>
-        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('已出�?)">
+        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('已出貨')">
           <div class="stat-icon si-blue"><i class="fas fa-truck"></i></div>
           <div class="stat-val">${shippedCount}</div>
-          <div class="stat-lbl">已出�?/div>
+          <div class="stat-lbl">已出貨</div>
         </div>
-        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('已完�?)">
+        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('已完成')">
           <div class="stat-icon si-green"><i class="fas fa-check-circle"></i></div>
           <div class="stat-val">${completedCount}</div>
-          <div class="stat-lbl">已完�?/div>
+          <div class="stat-lbl">已完成</div>
         </div>
-        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('已取�?)">
+        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('已取消')">
           <div class="stat-icon si-red"><i class="fas fa-times-circle"></i></div>
           <div class="stat-val">${cancelledCount}</div>
-          <div class="stat-lbl">已取�?/div>
+          <div class="stat-lbl">已取消</div>
         </div>
       </div>
       
       <div class="tc"><div class="tw"><table>
-        <thead><tr><th><input type="checkbox" id="selectAllOrders" onchange="toggleSelectAllOrders(this.checked)"></th><th>訂單�?/th><th>客戶</th><th>電話</th><th>金額</th><th>付款</th><th>狀�?/th><th>時間</th><th>操作</th></tr></thead>
+        <thead><tr><th><input type="checkbox" id="selectAllOrders" onchange="toggleSelectAllOrders(this.checked)"></th><th>訂單號</th><th>客戶</th><th>電話</th><th>金額</th><th>付款</th><th>狀態</th><th>時間</th><th>操作</th></tr></thead>
         <tbody>${orders.map(o=>`<tr>
           <td><input type="checkbox" class="order-checkbox" value="${o.id}" data-status="${esc(o.status)}"></td>
           <td><strong style="font-size:.8rem;">${esc(o.order_no||o.id.slice(0,8))}</strong></td>
           <td>${esc(o.customer_name||'')}</td>
           <td>${esc(o.customer_phone||'')}</td>
           <td style="color:var(--gold);font-weight:600;">NT$ ${(o.total_amount||0).toLocaleString()}</td>
-          <td>${esc(o.payment_method||'�?)}</td>
+          <td>${esc(o.payment_method||'—')}</td>
           <td>${oBadge(o.status)}</td>
-          <td style="font-size:.75rem;color:var(--muted);">${o.created_at?new Date(o.created_at).toLocaleDateString('zh-TW'):'�?}</td>
+          <td style="font-size:.75rem;color:var(--muted);">${o.created_at?new Date(o.created_at).toLocaleDateString('zh-TW'):'—'}</td>
           <td><div class="ac">
             <button class="ib ib-view" onclick="viewOrder('${o.id}')" title="查看"><i class="fas fa-eye"></i></button>
-            <button class="ib ib-edit" onclick="editOrderStatus('${o.id}','${esc(o.status)}')" title="更新狀�?><i class="fas fa-pen"></i></button>
+            <button class="ib ib-edit" onclick="editOrderStatus('${o.id}','${esc(o.status)}')" title="更新狀態"><i class="fas fa-pen"></i></button>
             <button class="ib ib-del" onclick="delOrder('${o.id}')" title="刪除"><i class="fas fa-trash"></i></button>
           </div></td>
         </tr>`).join('')||'<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--muted);">暫無訂單</td></tr>'}</tbody>
@@ -3308,17 +3275,18 @@ async function viewOrder(id){
   if(!o) return;
   const items=(o.items||[]);
   
-  // 檢查是否有退�?退貨申�?  const hasRefund=o.refund_status && o.refund_status!=='none';
+  // 檢查是否有退款/退貨申請
+  const hasRefund=o.refund_status && o.refund_status!=='none';
   const refundBadge=hasRefund?`
     <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:.75rem;padding:1rem;margin-bottom:1rem;">
       <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;">
         <i class="fas fa-exclamation-triangle" style="color:#dc2626;"></i>
-        <strong style="color:#991b1b;">退�?退貨申�?/strong>
+        <strong style="color:#991b1b;">退款/退貨申請</strong>
       </div>
       <div style="font-size:.88rem;color:#7f1d1d;margin-bottom:.5rem;">
-        <strong>狀態：</strong>${o.refund_status==='pending'?'<span style="color:#dc2626;">待處�?/span>':o.refund_status==='approved'?'<span style="color:#059669;">已核�?/span>':'<span style="color:#6b7280;">已拒�?/span>'}
+        <strong>狀態：</strong>${o.refund_status==='pending'?'<span style="color:#dc2626;">待處理</span>':o.refund_status==='approved'?'<span style="color:#059669;">已核准</span>':'<span style="color:#6b7280;">已拒絕</span>'}
       </div>
-      ${o.refund_reason?`<div style="font-size:.88rem;color:#7f1d1d;margin-bottom:.5rem;"><strong>原因�?/strong>${esc(o.refund_reason)}</div>`:''}
+      ${o.refund_reason?`<div style="font-size:.88rem;color:#7f1d1d;margin-bottom:.5rem;"><strong>原因：</strong>${esc(o.refund_reason)}</div>`:''}
       ${o.refund_amount?`<div style="font-size:.88rem;color:#7f1d1d;"><strong>退款金額：</strong>NT$ ${Number(o.refund_amount).toLocaleString()}</div>`:''}
       ${o.refund_status==='pending'?`
         <div style="display:flex;gap:.5rem;margin-top:.75rem;">
@@ -3332,8 +3300,8 @@ async function viewOrder(id){
   openFm(`<i class="fas fa-receipt" style="color:var(--gold);"></i> ${esc(o.order_no||id.slice(0,8))}`,`
     ${refundBadge}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.1rem;">
-      ${[['客戶',o.customer_name],['電話',o.customer_phone],['信箱',o.customer_email||'�?],['地址',o.customer_address||'�?],['付款',o.payment_method||'�?],['狀�?,o.status]].map(([l,v])=>`
-      <div style="background:#f8f7f4;border-radius:.75rem;padding:.85rem;"><div style="font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:.2rem;">${l}</div><div style="font-weight:600;font-size:.88rem;">${esc(String(v||'�?))}</div></div>`).join('')}
+      ${[['客戶',o.customer_name],['電話',o.customer_phone],['信箱',o.customer_email||'—'],['地址',o.customer_address||'—'],['付款',o.payment_method||'—'],['狀態',o.status]].map(([l,v])=>`
+      <div style="background:#f8f7f4;border-radius:.75rem;padding:.85rem;"><div style="font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:.2rem;">${l}</div><div style="font-weight:600;font-size:.88rem;">${esc(String(v||'—'))}</div></div>`).join('')}
     </div>
     <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.65rem;">商品明細</div>
     ${items.map(it=>`<div style="display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid var(--border);font-size:.88rem;">
@@ -3341,32 +3309,32 @@ async function viewOrder(id){
       <span style="font-weight:600;">NT$ ${Number(it.price||0).toLocaleString()}</span>
     </div>`).join('')}
     <div style="display:flex;justify-content:space-between;padding:.8rem 0;font-weight:700;font-size:1rem;color:var(--gold);font-family:'Noto Serif TC',serif;">
-      <span>總金�?/span><span>NT$ ${Number(o.total_amount||0).toLocaleString()}</span>
+      <span>總金額</span><span>NT$ ${Number(o.total_amount||0).toLocaleString()}</span>
     </div>
-    ${o.notes?`<div style="font-size:.82rem;color:var(--muted);margin-top:.5rem;padding:.75rem;background:#f8f7f4;border-radius:.5rem;"><strong>備註�?/strong>${esc(o.notes)}</div>`:''}`,
+    ${o.notes?`<div style="font-size:.82rem;color:var(--muted);margin-top:.5rem;padding:.75rem;background:#f8f7f4;border-radius:.5rem;"><strong>備註：</strong>${esc(o.notes)}</div>`:''}`,
     null,false);
 }
 
 function editOrderStatus(id,curStatus){
   openFm(`<i class="fas fa-pen" style="color:var(--gold);"></i> 更新訂單狀態`,`
-    <div class="fmg"><label class="fml">訂單狀�?/label>
+    <div class="fmg"><label class="fml">訂單狀態</label>
       <select class="fmc fmc-sel" id="os_status">
-        ${['待發�?,'已出�?,'已完�?,'已取�?].map(s=>`<option value="${s}" ${curStatus===s?'selected':''}>${s}</option>`).join('')}
+        ${['待發貨','已出貨','已完成','已取消'].map(s=>`<option value="${s}" ${curStatus===s?'selected':''}>${s}</option>`).join('')}
       </select></div>`,
     async()=>{
       try{
         const { error } = await sb.from('orders').update({status:gv('os_status')}).eq('id',id);
         if(error) throw error;
         closeFm(); pgOrders(); toast('訂單狀態已更新');
-      } catch(e){ toast('更新失敗�?+e.message,'error'); }
+      } catch(e){ toast('更新失敗：'+e.message,'error'); }
     });
 }
 
 async function delOrder(id){
-  if(!confirm('確定要刪除此訂單？此操作無法復原�?)) return;
+  if(!confirm('確定要刪除此訂單？此操作無法復原。')) return;
   const { error } = await sb.from('orders').delete().eq('id',id);
-  if(error){ toast('刪除失敗�?+error.message,'error'); return; }
-  pgOrders(); toast('訂單已刪�?);
+  if(error){ toast('刪除失敗：'+error.message,'error'); return; }
+  pgOrders(); toast('訂單已刪除');
 }
 
 // 全選/取消全選訂單
@@ -3374,7 +3342,8 @@ function toggleSelectAllOrders(checked){
   document.querySelectorAll('.order-checkbox').forEach(cb=>cb.checked=checked);
 }
 
-// 依狀態篩選訂�?function filterByStatus(status){
+// 依狀態篩選訂單
+function filterByStatus(status){
   const checkboxes=document.querySelectorAll('.order-checkbox');
   checkboxes.forEach(cb=>{
     cb.checked=cb.dataset.status===status;
@@ -3382,19 +3351,21 @@ function toggleSelectAllOrders(checked){
   toast(`已篩選：${status}`);
 }
 
-// 批次更新訂單狀�?function showBatchStatusUpdate(){
+// 批次更新訂單狀態
+function showBatchStatusUpdate(){
   const selectedIds=Array.from(document.querySelectorAll('.order-checkbox:checked')).map(cb=>cb.value);
   if(selectedIds.length===0){toast('請先選擇要更新的訂單','error');return;}
   
   openFm(`<i class="fas fa-layer-group" style="color:var(--gold);"></i> 批次更新狀態`,`
     <div class="info-box" style="margin-bottom:1rem;background:#dbeafe;color:#1e40af;border-color:#93c5fd;">
-      <i class="fas fa-info-circle"></i> 已選�?<strong>${selectedIds.length}</strong> 筆訂�?    </div>
-    <div class="fmg"><label class="fml">新狀�?/label>
+      <i class="fas fa-info-circle"></i> 已選擇 <strong>${selectedIds.length}</strong> 筆訂單
+    </div>
+    <div class="fmg"><label class="fml">新狀態</label>
       <select class="fmc fmc-sel" id="batch_status">
-        <option value="待發�?>待發�?/option>
-        <option value="已出�?>已出�?/option>
-        <option value="已完�?>已完�?/option>
-        <option value="已取�?>已取�?/option>
+        <option value="待發貨">待發貨</option>
+        <option value="已出貨">已出貨</option>
+        <option value="已完成">已完成</option>
+        <option value="已取消">已取消</option>
       </select>
     </div>`,
     async()=>{
@@ -3408,12 +3379,13 @@ function toggleSelectAllOrders(checked){
         closeFm(); pgOrders();
         toast(`成功更新 ${successCount}/${selectedIds.length} 筆訂單`);
       } catch(e){
-        toast('批次更新失敗�?+e.message,'error');
+        toast('批次更新失敗：'+e.message,'error');
       }
     });
 }
 
-// 處理退�?退貨申�?async function handleRefund(orderId,action){
+// 處理退款/退貨申請
+async function handleRefund(orderId,action){
   if(action==='approved'){
     if(!confirm('確定要核准此退款申請？')) return;
   } else {
@@ -3430,21 +3402,21 @@ function toggleSelectAllOrders(checked){
     closeFm(); pgOrders();
     toast(action==='approved'?'退款已核准':'退款已拒絕');
   } catch(e){
-    toast('處理失敗�?+e.message,'error');
+    toast('處理失敗：'+e.message,'error');
   }
 }
 
-// 匯出訂單備註�?CSV
+// 匯出訂單備註為 CSV
 async function exportOrderNotes(){
   try{
     const { data,error } = await sb.from('orders').select('*').order('created_at',{ascending:false});
     if(error) throw error;
     
     const orders=data||[];
-    if(orders.length===0){toast('暫無訂單可匯�?,'error');return;}
+    if(orders.length===0){toast('暫無訂單可匯出','error');return;}
     
     // 建立 CSV 內容
-    const headers=['訂單�?,'客戶姓名','電話','Email','地址','總金�?,'狀�?,'付款方式','備註','建立時間'];
+    const headers=['訂單號','客戶姓名','電話','Email','地址','總金額','狀態','付款方式','備註','建立時間'];
     const rows=orders.map(o=>[
       o.order_no||o.id.slice(0,8),
       o.customer_name||'',
@@ -3458,7 +3430,7 @@ async function exportOrderNotes(){
       o.created_at?new Date(o.created_at).toLocaleString('zh-TW'):''
     ]);
     
-    // 轉換�?CSV 格式
+    // 轉換為 CSV 格式
     const csvContent=[
       headers.join(','),
       ...rows.map(row=>row.map(cell=>`"${String(cell).replace(/"/g,'""')}"`).join(','))
@@ -3471,9 +3443,9 @@ async function exportOrderNotes(){
     link.download=`訂單備註_${new Date().toISOString().slice(0,10)}.csv`;
     link.click();
     
-    toast(`已匯�?${orders.length} 筆訂單備註`);
+    toast(`已匯出 ${orders.length} 筆訂單備註`);
   } catch(e){
-    toast('匯出失敗�?+e.message,'error');
+    toast('匯出失敗：'+e.message,'error');
   }
 }
 
@@ -3494,13 +3466,15 @@ async function showOrderStats(){
     let monthlyData={};
     
     orders.forEach(o=>{
-      // 狀態統�?      statusCount[o.status]=(statusCount[o.status]||0)+1;
+      // 狀態統計
+      statusCount[o.status]=(statusCount[o.status]||0)+1;
       
       // 付款方式統計
-      const method=o.payment_method||'未指�?;
+      const method=o.payment_method||'未指定';
       paymentMethodCount[method]=(paymentMethodCount[method]||0)+1;
       
-      // 總營�?      totalRevenue+=(o.total_amount||0);
+      // 總營收
+      totalRevenue+=(o.total_amount||0);
       
       // 月度統計
       if(o.created_at){
@@ -3519,7 +3493,7 @@ async function showOrderStats(){
     <div class="pg-header">
       <div class="pg-header-l">
         <h1><i class="fas fa-chart-bar"></i>訂單統計報表</h1>
-        <p>�?${orders.length} 筆訂�?· 總營�?NT$ ${totalRevenue.toLocaleString()}</p>
+        <p>共 ${orders.length} 筆訂單 · 總營收 NT$ ${totalRevenue.toLocaleString()}</p>
       </div>
       <button class="btn btn-ghost btn-sm" onclick="goPage('orders')"><i class="fas fa-arrow-left"></i> 返回訂單列表</button>
     </div>
@@ -3533,8 +3507,8 @@ async function showOrderStats(){
         </div>
         <div class="stat-card">
           <div class="stat-icon si-green"><i class="fas fa-coins"></i></div>
-          <div class="stat-val" style="font-size:1.2rem;">NT$ ${(totalRevenue/10000).toFixed(1)}�?/div>
-          <div class="stat-lbl">總營�?/div>
+          <div class="stat-val" style="font-size:1.2rem;">NT$ ${(totalRevenue/10000).toFixed(1)}萬</div>
+          <div class="stat-lbl">總營收</div>
         </div>
         <div class="stat-card">
           <div class="stat-icon si-amber"><i class="fas fa-calculator"></i></div>
@@ -3548,10 +3522,10 @@ async function showOrderStats(){
         </div>
       </div>
       
-      <!-- 狀態分�?-->
+      <!-- 狀態分佈 -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;">
         <div class="tc">
-          <div class="tc-hdr"><div><div class="tc-title">訂單狀態分�?/div></div></div>
+          <div class="tc-hdr"><div><div class="tc-title">訂單狀態分佈</div></div></div>
           <div style="padding:1.5rem;">
             ${Object.entries(statusCount).map(([status,count])=>`
               <div style="display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border);">
@@ -3577,7 +3551,7 @@ async function showOrderStats(){
       
       <!-- 月度趨勢圖表 -->
       <div class="tc">
-        <div class="tc-hdr"><div><div class="tc-title">�?${recentMonths.length} 個月訂單趨勢</div></div></div>
+        <div class="tc-hdr"><div><div class="tc-title">近 ${recentMonths.length} 個月訂單趨勢</div></div></div>
         <div style="padding:1.5rem;">
           <div style="display:flex;align-items:flex-end;justify-content:space-around;height:200px;gap:.5rem;">
             ${recentMonths.map(month=>{
@@ -3588,7 +3562,7 @@ async function showOrderStats(){
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.5rem;">
                   <div style="width:100%;max-width:60px;height:${height}px;background:linear-gradient(180deg,var(--gold),var(--gold-light));border-radius:.5rem .5rem 0 0;transition:all .3s;"></div>
                   <div style="font-size:.75rem;color:var(--muted);text-align:center;">${month}</div>
-                  <div style="font-size:.7rem;font-weight:600;">${data.count}�?/div>
+                  <div style="font-size:.7rem;font-weight:600;">${data.count}筆</div>
                   <div style="font-size:.65rem;color:var(--gold);">NT$${(data.revenue/1000).toFixed(0)}k</div>
                 </div>
               `;
@@ -3614,19 +3588,19 @@ async function pgCustomers(){
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-users"></i>客戶管理</h1><p>�?${custs.length} �?· �?APP 共用資料</p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-users"></i>客戶管理</h1><p>共 ${custs.length} 位 · 與 APP 共用資料</p></div>
       <button class="btn btn-gold btn-sm" onclick="showAddCustomer()"><i class="fas fa-plus"></i> 新增客戶</button>
     </div>
     <div class="pg-content">
-      <div class="info-box" style="margin-bottom:1.25rem;"><i class="fas fa-circle-info"></i> 此資料表�?APP 庫存系統共用。在此新增的客戶也會出現�?APP 中�?/div>
+      <div class="info-box" style="margin-bottom:1.25rem;"><i class="fas fa-circle-info"></i> 此資料表與 APP 庫存系統共用。在此新增的客戶也會出現在 APP 中。</div>
       <div class="tc"><div class="tw"><table>
         <thead><tr><th>姓名</th><th>電話</th><th>地址</th><th>備註</th><th>加入日期</th><th>操作</th></tr></thead>
         <tbody>${custs.map(c=>`<tr>
           <td><strong>${esc(c.name)}</strong></td>
-          <td>${esc(c.phone||'�?)}</td>
-          <td>${esc(c.address||'�?)}</td>
-          <td>${esc(c.notes||'�?)}</td>
-          <td style="font-size:.78rem;color:var(--muted);">${c.created_at?new Date(c.created_at).toLocaleDateString('zh-TW'):'�?}</td>
+          <td>${esc(c.phone||'—')}</td>
+          <td>${esc(c.address||'—')}</td>
+          <td>${esc(c.notes||'—')}</td>
+          <td style="font-size:.78rem;color:var(--muted);">${c.created_at?new Date(c.created_at).toLocaleDateString('zh-TW'):'—'}</td>
           <td><div class="ac">
             <button class="ib ib-edit" onclick="editCustomer('${c.id}','${esc(c.name)}','${esc(c.phone||'')}','${esc(c.address||'')}','${esc(c.notes||'')}')" title="編輯"><i class="fas fa-pen"></i></button>
             <button class="ib ib-del" onclick="delCustomer('${c.id}')" title="刪除"><i class="fas fa-trash"></i></button>
@@ -3650,28 +3624,28 @@ function custForm(c={}){
 function showAddCustomer(){
   openFm('<i class="fas fa-user-plus" style="color:var(--gold);"></i> 新增客戶',custForm(),async()=>{
     const name=gv('fc_name');
-    if(!name){toast('請輸入姓�?,'error');return;}
+    if(!name){toast('請輸入姓名','error');return;}
     const { error } = await sb.from('customers').insert({name,phone:gv('fc_phone'),address:gv('fc_address'),notes:gv('fc_notes'),created_at:new Date().toISOString()});
-    if(error){toast('新增失敗�?+error.message,'error');return;}
-    closeFm(); pgCustomers(); toast('客戶已新�?);
+    if(error){toast('新增失敗：'+error.message,'error');return;}
+    closeFm(); pgCustomers(); toast('客戶已新增');
   });
 }
 
 function editCustomer(id,name,phone,address,notes){
   openFm('<i class="fas fa-pen" style="color:var(--gold);"></i> 編輯客戶',custForm({name,phone,address,notes}),async()=>{
     const n=gv('fc_name');
-    if(!n){toast('請輸入姓�?,'error');return;}
+    if(!n){toast('請輸入姓名','error');return;}
     const { error } = await sb.from('customers').update({name:n,phone:gv('fc_phone'),address:gv('fc_address'),notes:gv('fc_notes')}).eq('id',id);
-    if(error){toast('更新失敗�?+error.message,'error');return;}
-    closeFm(); pgCustomers(); toast('客戶已更�?);
+    if(error){toast('更新失敗：'+error.message,'error');return;}
+    closeFm(); pgCustomers(); toast('客戶已更新');
   });
 }
 
 async function delCustomer(id){
-  if(!confirm('確定要刪除此客戶�?)) return;
+  if(!confirm('確定要刪除此客戶？')) return;
   const { error } = await sb.from('customers').delete().eq('id',id);
-  if(error){toast('刪除失敗�?+error.message,'error');return;}
-  pgCustomers(); toast('客戶已刪�?);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgCustomers(); toast('客戶已刪除');
 }
 
 /* ============================================================
@@ -3686,17 +3660,17 @@ async function pgAgents(){
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-user-tie"></i>代理管理</h1><p>�?${agents.length} 位代�?· Supabase agents �?/p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-user-tie"></i>代理管理</h1><p>共 ${agents.length} 位代理 · Supabase agents 表</p></div>
       <button class="btn btn-gold btn-sm" onclick="showAddAgent()"><i class="fas fa-plus"></i> 新增代理</button>
     </div>
     <div class="pg-content">
       <div class="tc"><div class="tw"><table>
-        <thead><tr><th>姓名</th><th>電話</th><th>Email</th><th>區�?/th><th>狀�?/th><th>操作</th></tr></thead>
+        <thead><tr><th>姓名</th><th>電話</th><th>Email</th><th>區域</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${agents.map(a=>`<tr>
-          <td><strong>${esc(a.name||'�?)}</strong></td>
-          <td>${esc(a.phone||'�?)}</td>
-          <td>${esc(a.email||'�?)}</td>
-          <td>${esc(a.region||'�?)}</td>
+          <td><strong>${esc(a.name||'—')}</strong></td>
+          <td>${esc(a.phone||'—')}</td>
+          <td>${esc(a.email||'—')}</td>
+          <td>${esc(a.region||'—')}</td>
           <td>${a.active?'<span class="bdg bdg-green">啟用</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
           <td><div class="ac">
             <button class="ib ib-edit" onclick="editAgent('${a.id}')" title="編輯"><i class="fas fa-edit"></i></button>
@@ -3717,37 +3691,37 @@ function showAddAgent(agent=null){
     </div>
     <div class="fmr">
       <div class="fmg"><label class="fml">Email</label><input class="fmc" id="ag_email" type="email" value="${esc(agent?.email||'')}"></div>
-      <div class="fmg"><label class="fml">區�?/label><input class="fmc" id="ag_region" value="${esc(agent?.region||'')}"></div>
+      <div class="fmg"><label class="fml">區域</label><input class="fmc" id="ag_region" value="${esc(agent?.region||'')}"></div>
     </div>
     <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="ag_notes" rows="3">${esc(agent?.notes||'')}</textarea></div>`,
     async()=>{
       const name=gv('ag_name');
-      if(!name){toast('請填寫姓�?,'error');return;}
+      if(!name){toast('請填寫姓名','error');return;}
       const agentData={name,phone:gv('ag_phone'),email:gv('ag_email'),region:gv('ag_region'),notes:gv('ag_notes'),active:true};
       if(isEdit){
         const { error } = await sb.from('agents').update(agentData).eq('id',agent.id);
-        if(error){toast('更新失敗�?+error.message,'error');return;}
-        closeFm(); pgAgents(); toast('代理已更�?);
+        if(error){toast('更新失敗：'+error.message,'error');return;}
+        closeFm(); pgAgents(); toast('代理已更新');
       } else {
         agentData.created_at=new Date().toISOString();
         const { error } = await sb.from('agents').insert(agentData);
-        if(error){toast('新增失敗�?+error.message,'error');return;}
-        closeFm(); pgAgents(); toast('代理已新�?);
+        if(error){toast('新增失敗：'+error.message,'error');return;}
+        closeFm(); pgAgents(); toast('代理已新增');
       }
     });
 }
 
 async function editAgent(id){
   const { data:agent,error } = await sb.from('agents').select('*').eq('id',id).single();
-  if(error||!agent){toast('找不到代理資�?,'error');return;}
+  if(error||!agent){toast('找不到代理資料','error');return;}
   showAddAgent(agent);
 }
 
 async function delAgent(id){
-  if(!confirm('確定要刪除此代理�?)) return;
+  if(!confirm('確定要刪除此代理？')) return;
   const { error } = await sb.from('agents').delete().eq('id',id);
-  if(error){toast('刪除失敗�?+error.message,'error');return;}
-  pgAgents(); toast('代理已刪�?);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgAgents(); toast('代理已刪除');
 }
 
 /* ============================================================
@@ -3762,17 +3736,17 @@ async function pgMakers(){
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-industry"></i>廠商管理</h1><p>�?${makers.length} 家廠�?· Supabase makers �?/p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-industry"></i>廠商管理</h1><p>共 ${makers.length} 家廠商 · Supabase makers 表</p></div>
       <button class="btn btn-gold btn-sm" onclick="showAddMaker()"><i class="fas fa-plus"></i> 新增廠商</button>
     </div>
     <div class="pg-content">
       <div class="tc"><div class="tw"><table>
-        <thead><tr><th>廠商名稱</th><th>聯絡�?/th><th>電話</th><th>Email</th><th>狀�?/th><th>操作</th></tr></thead>
+        <thead><tr><th>廠商名稱</th><th>聯絡人</th><th>電話</th><th>Email</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${makers.map(mk=>`<tr>
-          <td><strong>${esc(mk.name||'�?)}</strong></td>
-          <td>${esc(mk.contact_person||'�?)}</td>
-          <td>${esc(mk.phone||'�?)}</td>
-          <td>${esc(mk.email||'�?)}</td>
+          <td><strong>${esc(mk.name||'—')}</strong></td>
+          <td>${esc(mk.contact_person||'—')}</td>
+          <td>${esc(mk.phone||'—')}</td>
+          <td>${esc(mk.email||'—')}</td>
           <td>${mk.active?'<span class="bdg bdg-green">啟用</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
           <td><div class="ac">
             <button class="ib ib-edit" onclick="editMaker('${mk.id}')" title="編輯"><i class="fas fa-edit"></i></button>
@@ -3789,7 +3763,7 @@ function showAddMaker(maker=null){
   openFm(`<i class="fas fa-${isEdit?'edit':'plus'}" style="color:var(--gold);"></i> ${isEdit?'編輯':'新增'}廠商`,`
     <div class="fmr">
       <div class="fmg"><label class="fml">廠商名稱 *</label><input class="fmc" id="mk_name" value="${esc(maker?.name||'')}"></div>
-      <div class="fmg"><label class="fml">聯絡�?/label><input class="fmc" id="mk_contact" value="${esc(maker?.contact_person||'')}"></div>
+      <div class="fmg"><label class="fml">聯絡人</label><input class="fmc" id="mk_contact" value="${esc(maker?.contact_person||'')}"></div>
     </div>
     <div class="fmr">
       <div class="fmg"><label class="fml">電話</label><input class="fmc" id="mk_phone" value="${esc(maker?.phone||'')}"></div>
@@ -3799,32 +3773,32 @@ function showAddMaker(maker=null){
     <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="mk_notes" rows="3">${esc(maker?.notes||'')}</textarea></div>`,
     async()=>{
       const name=gv('mk_name');
-      if(!name){toast('請填寫廠商名�?,'error');return;}
+      if(!name){toast('請填寫廠商名稱','error');return;}
       const makerData={name,contact_person:gv('mk_contact'),phone:gv('mk_phone'),email:gv('mk_email'),address:gv('mk_address'),notes:gv('mk_notes'),active:true};
       if(isEdit){
         const { error } = await sb.from('makers').update(makerData).eq('id',maker.id);
-        if(error){toast('更新失敗�?+error.message,'error');return;}
-        closeFm(); pgMakers(); toast('廠商已更�?);
+        if(error){toast('更新失敗：'+error.message,'error');return;}
+        closeFm(); pgMakers(); toast('廠商已更新');
       } else {
         makerData.created_at=new Date().toISOString();
         const { error } = await sb.from('makers').insert(makerData);
-        if(error){toast('新增失敗�?+error.message,'error');return;}
-        closeFm(); pgMakers(); toast('廠商已新�?);
+        if(error){toast('新增失敗：'+error.message,'error');return;}
+        closeFm(); pgMakers(); toast('廠商已新增');
       }
     });
 }
 
 async function editMaker(id){
   const { data:maker,error } = await sb.from('makers').select('*').eq('id',id).single();
-  if(error||!maker){toast('找不到廠商資�?,'error');return;}
+  if(error||!maker){toast('找不到廠商資料','error');return;}
   showAddMaker(maker);
 }
 
 async function delMaker(id){
-  if(!confirm('確定要刪除此廠商�?)) return;
+  if(!confirm('確定要刪除此廠商？')) return;
   const { error } = await sb.from('makers').delete().eq('id',id);
-  if(error){toast('刪除失敗�?+error.message,'error');return;}
-  pgMakers(); toast('廠商已刪�?);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgMakers(); toast('廠商已刪除');
 }
 
 /* ============================================================
@@ -3839,19 +3813,19 @@ async function pgMonks(){
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-pray"></i>僧人管理</h1><p>�?${monks.length} 位僧�?· Supabase monks �?/p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-pray"></i>僧人管理</h1><p>共 ${monks.length} 位僧人 · Supabase monks 表</p></div>
       <button class="btn btn-gold btn-sm" onclick="showAddMonk()"><i class="fas fa-plus"></i> 新增僧人</button>
     </div>
     <div class="pg-content">
       <div class="tc"><div class="tw"><table>
         <thead><tr><th>法名</th><th>地區</th><th>電話</th><th>聯絡方式</th><th>認識來源</th><th>服務地區</th><th>操作</th></tr></thead>
         <tbody>${monks.map(mk=>`<tr>
-          <td><strong>${esc(mk.name||'�?)}</strong></td>
-          <td>${esc(mk.region||'�?)}</td>
-          <td>${esc(mk.phone||'�?)}</td>
-          <td>${esc(mk.contact||'�?)}</td>
-          <td>${esc(mk.channel||'�?)}</td>
-          <td>${esc(mk.serviceregion||'�?)}</td>
+          <td><strong>${esc(mk.name||'—')}</strong></td>
+          <td>${esc(mk.region||'—')}</td>
+          <td>${esc(mk.phone||'—')}</td>
+          <td>${esc(mk.contact||'—')}</td>
+          <td>${esc(mk.channel||'—')}</td>
+          <td>${esc(mk.serviceregion||'—')}</td>
           <td><div class="ac">
             <button class="ib ib-edit" onclick="editMonk('${mk.id}')" title="編輯"><i class="fas fa-edit"></i></button>
             <button class="ib ib-del" onclick="delMonk('${mk.id}')" title="刪除"><i class="fas fa-trash"></i></button>
@@ -3866,16 +3840,16 @@ function showAddMonk(monk=null){
   const isEdit=!!monk;
   
   // 地區選項
-  const regionOptions=['請選�?,'西藏','尼泊�?,'不丹','拉達�?,'蒙古','內地','其他'];
+  const regionOptions=['請選擇','西藏','尼泊爾','不丹','拉達克','蒙古','內地','其他'];
   // 認識來源選項
-  const channelOptions=['請選�?,'展會認識','網路搜尋','朋友介紹','主動開發','社群媒體','廠商自薦','其他'];
+  const channelOptions=['請選擇','展會認識','網路搜尋','朋友介紹','主動開發','社群媒體','廠商自薦','其他'];
   
   openFm(`<i class="fas fa-${isEdit?'edit':'plus'}" style="color:var(--gold);"></i> ${isEdit?'編輯':'新增'}僧人`,`
     <div class="fmr">
       <div class="fmg"><label class="fml">法名 *</label><input class="fmc" id="mn_name" value="${esc(monk?.name||'')}"></div>
       <div class="fmg"><label class="fml">地區 *</label>
         <select class="fmc fmc-sel" id="mn_region">
-          ${regionOptions.map(r=>`<option value="${r==='請選�??'':r}" ${monk?.region===r?'selected':''}>${r}</option>`).join('')}
+          ${regionOptions.map(r=>`<option value="${r==='請選擇'?'':r}" ${monk?.region===r?'selected':''}>${r}</option>`).join('')}
         </select>
       </div>
     </div>
@@ -3886,7 +3860,7 @@ function showAddMonk(monk=null){
     <div class="fmr">
       <div class="fmg"><label class="fml">認識來源</label>
         <select class="fmc fmc-sel" id="mn_channel">
-          ${channelOptions.map(c=>`<option value="${c==='請選�??'':c}" ${monk?.channel===c?'selected':''}>${c}</option>`).join('')}
+          ${channelOptions.map(c=>`<option value="${c==='請選擇'?'':c}" ${monk?.channel===c?'selected':''}>${c}</option>`).join('')}
         </select>
       </div>
       <div class="fmg"><label class="fml">服務地區</label><input class="fmc" id="mn_serviceregion" value="${esc(monk?.serviceregion||'')}" placeholder="例：全台可約"></div>
@@ -3897,7 +3871,7 @@ function showAddMonk(monk=null){
     </div>`,
     async()=>{
       const name=gv('mn_name');
-      if(!name){toast('請填寫法�?,'error');return;}
+      if(!name){toast('請填寫法名','error');return;}
       const monkData={
         name,
         region:gv('mn_region'),
@@ -3910,30 +3884,30 @@ function showAddMonk(monk=null){
       };
       if(isEdit){
         const { error } = await sb.from('monks').update(monkData).eq('id',monk.id);
-        if(error){toast('更新失敗�?+error.message,'error');return;}
-        closeFm(); pgMonks(); toast('僧人已更�?);
+        if(error){toast('更新失敗：'+error.message,'error');return;}
+        closeFm(); pgMonks(); toast('僧人已更新');
       } else {
         // 生成 UUID 作為 ID
         monkData.id=crypto.randomUUID();
         monkData.created_at=new Date().toISOString();
         const { error } = await sb.from('monks').insert(monkData);
-        if(error){toast('新增失敗�?+error.message,'error');return;}
-        closeFm(); pgMonks(); toast('僧人已新�?);
+        if(error){toast('新增失敗：'+error.message,'error');return;}
+        closeFm(); pgMonks(); toast('僧人已新增');
       }
     });
 }
 
 async function editMonk(id){
   const { data:monk,error } = await sb.from('monks').select('*').eq('id',id).single();
-  if(error||!monk){toast('找不到僧人資�?,'error');return;}
+  if(error||!monk){toast('找不到僧人資料','error');return;}
   showAddMonk(monk);
 }
 
 async function delMonk(id){
-  if(!confirm('確定要刪除此僧人�?)) return;
+  if(!confirm('確定要刪除此僧人？')) return;
   const { error } = await sb.from('monks').delete().eq('id',id);
-  if(error){toast('刪除失敗�?+error.message,'error');return;}
-  pgMonks(); toast('僧人已刪�?);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgMonks(); toast('僧人已刪除');
 }
 
 /* ============================================================
@@ -3947,17 +3921,17 @@ async function pgWarehouses(){
     const warehouses=data||[];
     m.innerHTML=`
     <div class="pg-header">
-      <div class="pg-header-l"><h1><i class="fas fa-warehouse"></i>倉庫管理</h1><p>�?${warehouses.length} 個倉庫 · Supabase warehouses �?/p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-warehouse"></i>倉庫管理</h1><p>共 ${warehouses.length} 個倉庫 · Supabase warehouses 表</p></div>
       <button class="btn btn-gold btn-sm" onclick="showAddWarehouse()"><i class="fas fa-plus"></i> 新增倉庫</button>
     </div>
     <div class="pg-content">
       <div class="tc"><div class="tw"><table>
-        <thead><tr><th>倉庫名稱</th><th>位置</th><th>容量</th><th>聯絡�?/th><th>狀�?/th><th>操作</th></tr></thead>
+        <thead><tr><th>倉庫名稱</th><th>位置</th><th>容量</th><th>聯絡人</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${warehouses.map(w=>`<tr>
-          <td><strong>${esc(w.name||'�?)}</strong></td>
-          <td>${esc(w.location||'�?)}</td>
-          <td>${w.capacity||'�?}</td>
-          <td>${esc(w.contact_person||'�?)}</td>
+          <td><strong>${esc(w.name||'—')}</strong></td>
+          <td>${esc(w.location||'—')}</td>
+          <td>${w.capacity||'—'}</td>
+          <td>${esc(w.contact_person||'—')}</td>
           <td>${w.active?'<span class="bdg bdg-green">啟用</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
           <td><div class="ac">
             <button class="ib ib-edit" onclick="editWarehouse('${w.id}')" title="編輯"><i class="fas fa-edit"></i></button>
@@ -3978,7 +3952,7 @@ function showAddWarehouse(wh=null){
     </div>
     <div class="fmr">
       <div class="fmg"><label class="fml">容量</label><input class="fmc" id="wh_capacity" type="number" min="0" value="${wh?.capacity||''}"></div>
-      <div class="fmg"><label class="fml">聯絡�?/label><input class="fmc" id="wh_contact" value="${esc(wh?.contact_person||'')}"></div>
+      <div class="fmg"><label class="fml">聯絡人</label><input class="fmc" id="wh_contact" value="${esc(wh?.contact_person||'')}"></div>
     </div>
     <div class="fmg"><label class="fml">地址</label><input class="fmc" id="wh_address" value="${esc(wh?.address||'')}"></div>
     <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="wh_notes" rows="3">${esc(wh?.notes||'')}</textarea></div>`,
@@ -3988,13 +3962,13 @@ function showAddWarehouse(wh=null){
       const whData={name,location:gv('wh_location'),capacity:Number(gv('wh_capacity'))||null,contact_person:gv('wh_contact'),address:gv('wh_address'),notes:gv('wh_notes'),active:true};
       if(isEdit){
         const { error } = await sb.from('warehouses').update(whData).eq('id',wh.id);
-        if(error){toast('更新失敗�?+error.message,'error');return;}
-        closeFm(); pgWarehouses(); toast('倉庫已更�?);
+        if(error){toast('更新失敗：'+error.message,'error');return;}
+        closeFm(); pgWarehouses(); toast('倉庫已更新');
       } else {
         whData.created_at=new Date().toISOString();
         const { error } = await sb.from('warehouses').insert(whData);
-        if(error){toast('新增失敗�?+error.message,'error');return;}
-        closeFm(); pgWarehouses(); toast('倉庫已新�?);
+        if(error){toast('新增失敗：'+error.message,'error');return;}
+        closeFm(); pgWarehouses(); toast('倉庫已新增');
       }
     });
 }
@@ -4006,10 +3980,10 @@ async function editWarehouse(id){
 }
 
 async function delWarehouse(id){
-  if(!confirm('確定要刪除此倉庫�?)) return;
+  if(!confirm('確定要刪除此倉庫？')) return;
   const { error } = await sb.from('warehouses').delete().eq('id',id);
-  if(error){toast('刪除失敗�?+error.message,'error');return;}
-  pgWarehouses(); toast('倉庫已刪�?);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgWarehouses(); toast('倉庫已刪除');
 }
 
 /* ============================================================
@@ -4028,13 +4002,13 @@ async function pgAnnounce(){
       <button class="btn btn-gold btn-sm" onclick="addAnnounce()"><i class="fas fa-plus"></i> 新增公告</button>
     </div>
     <div class="pg-content">
-      <div class="info-box" style="margin-bottom:1.25rem;background:#dbeafe;color:#1e40af;border-color:#93c5fd;"><i class="fas fa-cloud"></i> 公告已儲存於 Supabase 雲端數據庫，所有客戶都能看到最新公告�?/div>
+      <div class="info-box" style="margin-bottom:1.25rem;background:#dbeafe;color:#1e40af;border-color:#93c5fd;"><i class="fas fa-cloud"></i> 公告已儲存於 Supabase 雲端數據庫，所有客戶都能看到最新公告。</div>
       <div class="tc"><div class="tw"><table>
-        <thead><tr><th>公告內容</th><th>建立日期</th><th>狀�?/th><th>操作</th></tr></thead>
+        <thead><tr><th>公告內容</th><th>建立日期</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${announces.map(a=>`<tr>
           <td style="max-width:320px;">${esc(a.text)}</td>
           <td>${new Date(a.created_at).toLocaleDateString('zh-TW')}</td>
-          <td>${a.active?'<span class="bdg bdg-green">啟用�?/span>':'<span class="bdg bdg-gray">停用</span>'}</td>
+          <td>${a.active?'<span class="bdg bdg-green">啟用中</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
           <td><div class="ac">
             <button class="ib ib-edit" onclick="toggleAnn('${a.id}')" title="${a.active?'停用':'啟用'}"><i class="fas fa-${a.active?'pause':'play'}"></i></button>
             <button class="ib ib-del" onclick="delAnn('${a.id}')" title="刪除"><i class="fas fa-trash"></i></button>
@@ -4047,13 +4021,14 @@ async function pgAnnounce(){
 
 async function addAnnounce(){
   openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增公告',`
-    <div class="fmg"><label class="fml">公告內容 *</label><textarea class="fmc fmc-ta" id="an_text" placeholder="可使�?emoji 增加吸引�?></textarea></div>
-    <div class="fmg"><label class="fml">狀�?/label><select class="fmc fmc-sel" id="an_active"><option value="1">立即啟用</option><option value="0">暫時停用</option></select></div>`,
+    <div class="fmg"><label class="fml">公告內容 *</label><textarea class="fmc fmc-ta" id="an_text" placeholder="可使用 emoji 增加吸引力"></textarea></div>
+    <div class="fmg"><label class="fml">狀態</label><select class="fmc fmc-sel" id="an_active"><option value="1">立即啟用</option><option value="0">暫時停用</option></select></div>`,
     async ()=>{
       const text=gv('an_text');
-      if(!text){toast('請輸入公告內�?,'error');return;}
+      if(!text){toast('請輸入公告內容','error');return;}
       
-      // 如果選擇啟用，先停用其他所有公�?      if(gv('an_active')==='1') {
+      // 如果選擇啟用，先停用其他所有公告
+      if(gv('an_active')==='1') {
         await sb.from('announcements').update({active:false}).eq('active',true);
       }
       
@@ -4062,8 +4037,8 @@ async function addAnnounce(){
         active:gv('an_active')==='1'
       });
       
-      if(error){toast('新增失敗�?+error.message,'error');return;}
-      closeFm(); pgAnnounce(); renderFrontAnnounce(); toast('公告已新�?);
+      if(error){toast('新增失敗：'+error.message,'error');return;}
+      closeFm(); pgAnnounce(); renderFrontAnnounce(); toast('公告已新增');
     });
 }
 
@@ -4071,7 +4046,8 @@ async function toggleAnn(id){
   const { data:ann } = await sb.from('announcements').select('*').eq('id',id).single();
   if(!ann) return;
   
-  // 如果啟用的話，先停用其他所有公�?  if(!ann.active) {
+  // 如果啟用的話，先停用其他所有公告
+  if(!ann.active) {
     await sb.from('announcements').update({active:false}).eq('active',true);
   }
   
@@ -4079,16 +4055,16 @@ async function toggleAnn(id){
     active:!ann.active
   }).eq('id',id);
   
-  if(error){toast('更新失敗�?+error.message,'error');return;}
+  if(error){toast('更新失敗：'+error.message,'error');return;}
   pgAnnounce(); renderFrontAnnounce();
-  toast(!ann.active?'公告已啟�?:'公告已停�?);
+  toast(!ann.active?'公告已啟用':'公告已停用');
 }
 
 async function delAnn(id){
-  if(!confirm('確定要刪除此公告�?)) return;
+  if(!confirm('確定要刪除此公告？')) return;
   const { error } = await sb.from('announcements').delete().eq('id',id);
-  if(error){toast('刪除失敗�?+error.message,'error');return;}
-  pgAnnounce(); renderFrontAnnounce(); toast('公告已刪�?);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgAnnounce(); renderFrontAnnounce(); toast('公告已刪除');
 }
 
 /* ============================================================
@@ -4102,24 +4078,24 @@ async function pgCoupons(){
     const cps=data||[];
     m.innerHTML=`
     <div class="pg-header">
-      <div class="pg-header-l"><h1><i class="fas fa-tag"></i>優惠代碼</h1><p>�?${cps.length} �?· Supabase coupons �?/p></div>
-      <button class="btn btn-gold btn-sm" onclick="showAddCoupon()"><i class="fas fa-plus"></i> 新增優惠�?/button>
+      <div class="pg-header-l"><h1><i class="fas fa-tag"></i>優惠代碼</h1><p>共 ${cps.length} 組 · Supabase coupons 表</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddCoupon()"><i class="fas fa-plus"></i> 新增優惠碼</button>
     </div>
     <div class="pg-content">
       <div class="tc"><div class="tw"><table>
-        <thead><tr><th>優惠�?/th><th>折扣</th><th>最低消�?/th><th>使用/上限</th><th>到期�?/th><th>狀�?/th><th>操作</th></tr></thead>
+        <thead><tr><th>優惠碼</th><th>折扣</th><th>最低消費</th><th>使用/上限</th><th>到期日</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${cps.map(c=>`<tr>
           <td><span class="coupon-code-badge">${esc(c.code)}</span></td>
           <td>${c.type==='percent'?c.value+'% 折扣':'NT$ '+Number(c.value).toLocaleString()+' 折抵'}</td>
           <td>NT$ ${Number(c.min_order||0).toLocaleString()}</td>
           <td>${c.used_count} / ${c.usage_limit}</td>
-          <td style="font-size:.8rem;">${c.expires_at||'無限�?}</td>
+          <td style="font-size:.8rem;">${c.expires_at||'無限期'}</td>
           <td>${c.active?'<span class="bdg bdg-green">啟用</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
           <td><div class="ac">
             <button class="ib ib-edit" onclick="toggleCoupon('${c.id}',${c.active})" title="${c.active?'停用':'啟用'}"><i class="fas fa-${c.active?'pause':'play'}"></i></button>
             <button class="ib ib-del" onclick="delCoupon('${c.id}')" title="刪除"><i class="fas fa-trash"></i></button>
           </div></td>
-        </tr>`).join('')||'<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted);">暫無優惠�?/td></tr>'}</tbody>
+        </tr>`).join('')||'<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted);">暫無優惠碼</td></tr>'}</tbody>
       </table></div></div>
     </div>`;
   } catch(e){ m.innerHTML=errPage(e); }
@@ -4128,22 +4104,22 @@ async function pgCoupons(){
 function showAddCoupon(){
   openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增優惠代碼',`
     <div class="fmr">
-      <div class="fmg"><label class="fml">優惠�?*</label><input class="fmc" id="cp_code" placeholder="如：SAVE10" style="text-transform:uppercase;"></div>
-      <div class="fmg"><label class="fml">折扣類型</label><select class="fmc fmc-sel" id="cp_type"><option value="percent">百分比折�?/option><option value="fixed">固定折抵</option></select></div>
+      <div class="fmg"><label class="fml">優惠碼 *</label><input class="fmc" id="cp_code" placeholder="如：SAVE10" style="text-transform:uppercase;"></div>
+      <div class="fmg"><label class="fml">折扣類型</label><select class="fmc fmc-sel" id="cp_type"><option value="percent">百分比折扣</option><option value="fixed">固定折抵</option></select></div>
     </div>
     <div class="fmr">
-      <div class="fmg"><label class="fml">折扣數�?*</label><input class="fmc" id="cp_val" type="number" min="1" placeholder="10 代表10%"></div>
-      <div class="fmg"><label class="fml">最低消�?NT$</label><input class="fmc" id="cp_min" type="number" min="0" value="0"></div>
+      <div class="fmg"><label class="fml">折扣數值 *</label><input class="fmc" id="cp_val" type="number" min="1" placeholder="10 代表10%"></div>
+      <div class="fmg"><label class="fml">最低消費 NT$</label><input class="fmc" id="cp_min" type="number" min="0" value="0"></div>
     </div>
     <div class="fmr">
       <div class="fmg"><label class="fml">使用上限</label><input class="fmc" id="cp_limit" type="number" min="1" value="100"></div>
-      <div class="fmg"><label class="fml">到期�?/label><input class="fmc" id="cp_exp" type="date" value="${today()}"></div>
+      <div class="fmg"><label class="fml">到期日</label><input class="fmc" id="cp_exp" type="date" value="${today()}"></div>
     </div>`,
     async()=>{
       const code=gv('cp_code').toUpperCase(),val=Number(gv('cp_val'));
-      if(!code||!val){toast('請填寫必填欄�?,'error');return;}
+      if(!code||!val){toast('請填寫必填欄位','error');return;}
       const { error } = await sb.from('coupons').insert({code,type:gv('cp_type'),value:val,min_order:Number(gv('cp_min'))||0,used_count:0,usage_limit:Number(gv('cp_limit'))||100,active:true,expires_at:gv('cp_exp')||null});
-      if(error){toast(error.code==='23505'?'此優惠碼已存�?:'新增失敗�?+error.message,'error');return;}
+      if(error){toast(error.code==='23505'?'此優惠碼已存在':'新增失敗：'+error.message,'error');return;}
       closeFm(); pgCoupons(); toast('優惠碼已新增');
     });
 }
@@ -4172,49 +4148,49 @@ async function pgSubscribers(){
     const active=subs.filter(s=>s.active).length;
     m.innerHTML=`
     <div class="pg-header">
-      <div class="pg-header-l"><h1><i class="fas fa-envelope"></i>訂閱管理</h1><p>�?${subs.length} 位，${active} 位有�?· Supabase subscribers �?/p></div>
-      <button class="btn btn-gold btn-sm" onclick="showAddSub()"><i class="fas fa-plus"></i> 新增訂閱�?/button>
+      <div class="pg-header-l"><h1><i class="fas fa-envelope"></i>訂閱管理</h1><p>共 ${subs.length} 位，${active} 位有效 · Supabase subscribers 表</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddSub()"><i class="fas fa-plus"></i> 新增訂閱者</button>
     </div>
     <div class="pg-content">
       <div class="tc"><div class="tw"><table>
-        <thead><tr><th>電子郵件</th><th>姓名</th><th>加入日期</th><th>狀�?/th><th>操作</th></tr></thead>
+        <thead><tr><th>電子郵件</th><th>姓名</th><th>加入日期</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${subs.map(s=>`<tr>
           <td>${esc(s.email)}</td>
-          <td>${esc(s.name||'�?)}</td>
-          <td style="font-size:.78rem;color:var(--muted);">${s.joined_at?new Date(s.joined_at).toLocaleDateString('zh-TW'):'�?}</td>
-          <td>${s.active?'<span class="bdg bdg-green">訂閱�?/span>':'<span class="bdg bdg-gray">已退�?/span>'}</td>
+          <td>${esc(s.name||'—')}</td>
+          <td style="font-size:.78rem;color:var(--muted);">${s.joined_at?new Date(s.joined_at).toLocaleDateString('zh-TW'):'—'}</td>
+          <td>${s.active?'<span class="bdg bdg-green">訂閱中</span>':'<span class="bdg bdg-gray">已退訂</span>'}</td>
           <td><div class="ac">
-            <button class="ib ib-edit" onclick="toggleSub('${s.id}',${s.active})" title="${s.active?'退�?:'恢復'}"><i class="fas fa-${s.active?'user-minus':'user-plus'}"></i></button>
+            <button class="ib ib-edit" onclick="toggleSub('${s.id}',${s.active})" title="${s.active?'退訂':'恢復'}"><i class="fas fa-${s.active?'user-minus':'user-plus'}"></i></button>
             <button class="ib ib-del" onclick="delSub('${s.id}')" title="刪除"><i class="fas fa-trash"></i></button>
           </div></td>
-        </tr>`).join('')||'<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted);">暫無訂閱�?/td></tr>'}</tbody>
+        </tr>`).join('')||'<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted);">暫無訂閱者</td></tr>'}</tbody>
       </table></div></div>
     </div>`;
   } catch(e){ m.innerHTML=errPage(e); }
 }
 
 function showAddSub(){
-  openFm('<i class="fas fa-user-plus" style="color:var(--gold);"></i> 新增訂閱�?,`
+  openFm('<i class="fas fa-user-plus" style="color:var(--gold);"></i> 新增訂閱者',`
     <div class="fmg"><label class="fml">電子郵件 *</label><input class="fmc" id="sb_email" type="email" placeholder="example@email.com"></div>
     <div class="fmg"><label class="fml">姓名</label><input class="fmc" id="sb_name" placeholder="選填"></div>`,
     async()=>{
       const email=gv('sb_email');
-      if(!email){toast('請輸入電子郵�?,'error');return;}
+      if(!email){toast('請輸入電子郵件','error');return;}
       const { error } = await sb.from('subscribers').insert({email,name:gv('sb_name'),active:true});
-      if(error){toast(error.code==='23505'?'此信箱已存在':'新增失敗�?+error.message,'error');return;}
+      if(error){toast(error.code==='23505'?'此信箱已存在':'新增失敗：'+error.message,'error');return;}
       closeFm(); pgSubscribers(); toast('訂閱者已新增');
     });
 }
 async function toggleSub(id,active){
   const { error } = await sb.from('subscribers').update({active:!active}).eq('id',id);
   if(error){toast('更新失敗','error');return;}
-  pgSubscribers(); toast(!active?'已恢復訂�?:'已退�?);
+  pgSubscribers(); toast(!active?'已恢復訂閱':'已退訂');
 }
 async function delSub(id){
   if(!confirm('確定要刪除此訂閱者？')) return;
   const { error } = await sb.from('subscribers').delete().eq('id',id);
   if(error){toast('刪除失敗','error');return;}
-  pgSubscribers(); toast('已刪�?);
+  pgSubscribers(); toast('已刪除');
 }
 
 /* ============================================================
@@ -4226,12 +4202,12 @@ function pgContent(){
   <div class="pg-header"><div class="pg-header-l"><h1><i class="fas fa-pen-nib"></i>內容編輯</h1><p>管理前台顯示文字（本機儲存）</p></div></div>
   <div class="pg-content">
     <div class="sc">
-      <div class="sc-title"><i class="fas fa-house"></i> 首頁區�?/div>
-      <div class="fmg"><label class="fml">主標�?/label><input class="fmc" id="c_title" value="${esc(pageContent.heroTitle)}"></div>
-      <div class="fmg"><label class="fml">副標�?/label><textarea class="fmc fmc-ta" id="c_sub">${esc(pageContent.heroSubtitle)}</textarea></div>
+      <div class="sc-title"><i class="fas fa-house"></i> 首頁區塊</div>
+      <div class="fmg"><label class="fml">主標題</label><input class="fmc" id="c_title" value="${esc(pageContent.heroTitle)}"></div>
+      <div class="fmg"><label class="fml">副標題</label><textarea class="fmc fmc-ta" id="c_sub">${esc(pageContent.heroSubtitle)}</textarea></div>
     </div>
     <div class="sc">
-      <div class="sc-title"><i class="fas fa-circle-info"></i> 關於我�?/div>
+      <div class="sc-title"><i class="fas fa-circle-info"></i> 關於我們</div>
       <div class="fmg"><label class="fml">介紹文字</label><textarea class="fmc fmc-ta" id="c_intro">${esc(pageContent.aboutIntro)}</textarea></div>
       <div class="fmg"><label class="fml">詳細描述</label><textarea class="fmc fmc-ta" id="c_detail">${esc(pageContent.aboutDetails)}</textarea></div>
     </div>
@@ -4246,7 +4222,7 @@ function saveContent(){
   pageContent.heroTitle=gv('c_title');pageContent.heroSubtitle=gv('c_sub');
   pageContent.aboutIntro=gv('c_intro');pageContent.aboutDetails=gv('c_detail');
   pageContent.serviceItems=pageContent.serviceItems.map((_,i)=>gv('c_svc'+i));
-  lsave('content',pageContent);applySettings();toast('內容已儲�?);
+  lsave('content',pageContent);applySettings();toast('內容已儲存');
 }
 
 /* ============================================================
@@ -4254,7 +4230,7 @@ function saveContent(){
 ============================================================ */
 function pgDesign(){
   const m=document.getElementById('bkMain');
-  const fields=[['designPrimary','主色彩（金色�?,pageDesign.primaryColor],['designHeroFrom','首頁漸層起始�?,pageDesign.heroGradientFrom],['designHeroTo','首頁漸層結束�?,pageDesign.heroGradientTo],['designBg','區塊背景色',pageDesign.sectionBackground]];
+  const fields=[['designPrimary','主色彩（金色）',pageDesign.primaryColor],['designHeroFrom','首頁漸層起始色',pageDesign.heroGradientFrom],['designHeroTo','首頁漸層結束色',pageDesign.heroGradientTo],['designBg','區塊背景色',pageDesign.sectionBackground]];
   m.innerHTML=`
   <div class="pg-header"><div class="pg-header-l"><h1><i class="fas fa-swatchbook"></i>外觀設定</h1></div></div>
   <div class="pg-content">
@@ -4273,7 +4249,7 @@ function pgDesign(){
 function saveDesign(){
   pageDesign.primaryColor=gv('designPrimary');pageDesign.heroGradientFrom=gv('designHeroFrom');
   pageDesign.heroGradientTo=gv('designHeroTo');pageDesign.sectionBackground=gv('designBg');
-  lsave('design',pageDesign);toast('外觀設定已儲�?);
+  lsave('design',pageDesign);toast('外觀設定已儲存');
 }
 
 /* ============================================================
@@ -4282,7 +4258,7 @@ function saveDesign(){
 async function pgPermissions(){
   const m=document.getElementById('bkMain');
   try{
-    // 獲取所�?profiles
+    // 獲取所有 profiles
     const { data:profiles,error } = await sb.from('profiles').select('*');
     if(error) throw error;
     
@@ -4290,18 +4266,19 @@ async function pgPermissions(){
     
     m.innerHTML=`
     <div class="pg-header">
-      <div class="pg-header-l"><h1><i class="fas fa-user-shield"></i>權限管理</h1><p>管理後台成員的存取權限（資料來自 Supabase profiles�?/p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-user-shield"></i>權限管理</h1><p>管理後台成員的存取權限（資料來自 Supabase profiles）</p></div>
       <button class="btn btn-gold btn-sm" onclick="addPermission()"><i class="fas fa-plus"></i> 新增成員</button>
     </div>
     <div class="pg-content">
       <div class="info-box" style="margin-bottom:1.25rem;background:#fef3c7;color:#92400e;border-color:#fcd34d;">
         <i class="fas fa-info-circle"></i> 
-        <strong>提示�?/strong>用戶 ID 對應 Supabase Authentication 中的用戶。如需查看電子郵件，請前往 Supabase Dashboard �?Authentication �?Users�?      </div>
+        <strong>提示：</strong>用戶 ID 對應 Supabase Authentication 中的用戶。如需查看電子郵件，請前往 Supabase Dashboard → Authentication → Users。
+      </div>
       <div class="info-box" style="margin-bottom:1.25rem;background:#dbeafe;color:#1e40af;border-color:#93c5fd;">
         <i class="fas fa-info-circle"></i> 
-        <strong>權限等級說明�?/strong>
+        <strong>權限等級說明：</strong>
         <ul style="margin:.5rem 0 0 1.5rem;font-size:.85rem;">
-          <li><strong>Admin（管理員�?/strong>：完整權限，可管理所有功能及用戶權限</li>
+          <li><strong>Admin（管理員）</strong>：完整權限，可管理所有功能及用戶權限</li>
           <li><strong>Editor（一般成員）</strong>：可編輯商品、訂單等內容，但無法管理權限</li>
           <li><strong>Viewer（查看者）</strong>：僅可查看數據，無法修改任何內容</li>
         </ul>
@@ -4329,7 +4306,7 @@ async function pgPermissions(){
                         u.role==='editor'?'background:#dbeafe;color:#1e40af;border:1px solid #93c5fd;':
                         'background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;'
                       }">
-                        ${u.role==='admin'?'👑 Admin':u.role==='editor'?'✏️ Editor':'👁�?Viewer'}
+                        ${u.role==='admin'?'👑 Admin':u.role==='editor'?'✏️ Editor':'👁️ Viewer'}
                       </span>
                     </td>
                     <td>
@@ -4358,14 +4335,14 @@ async function addPermission(){
   openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增成員',`
     <div class="info-box" style="margin-bottom:1rem;background:#fef3c7;color:#92400e;border-color:#fcd34d;">
       <i class="fas fa-info-circle"></i> 
-      <strong>步驟�?/strong><br>
-      1. 前往 Supabase Dashboard �?Authentication �?Users<br>
+      <strong>步驟：</strong><br>
+      1. 前往 Supabase Dashboard → Authentication → Users<br>
       2. 複製要新增的用戶 ID (UUID)<br>
       3. 在此處貼上並設定權限
     </div>
     <div class="fmg">
       <label class="fml">用戶 ID (UUID) *</label>
-      <input class="fmc" id="perm_user_id" placeholder="例如�?50e8400-e29b-41d4-a716-446655440000" required>
+      <input class="fmc" id="perm_user_id" placeholder="例如：550e8400-e29b-41d4-a716-446655440000" required>
       <small style="color:var(--muted);font-size:.78rem;">必須是有效的 UUID 格式</small>
     </div>
     <div class="fmg">
@@ -4377,7 +4354,7 @@ async function addPermission(){
       <select class="fmc" id="perm_role">
         <option value="viewer">Viewer（查看者）</option>
         <option value="editor">Editor（一般成員）</option>
-        <option value="admin">Admin（管理員�?/option>
+        <option value="admin">Admin（管理員）</option>
       </select>
     </div>
   `,
@@ -4391,7 +4368,7 @@ async function addPermission(){
       return;
     }
     
-    // 檢查是否已存�?profiles
+    // 檢查是否已存在 profiles
     const { data:existing,error:checkError } = await sb.from('profiles').select('id').eq('id',userId).single();
     
     let result;
@@ -4402,22 +4379,22 @@ async function addPermission(){
         role
       }).eq('id',userId);
       
-      if(result.error){toast('更新失敗�?+result.error.message,'error');return;}
+      if(result.error){toast('更新失敗：'+result.error.message,'error');return;}
       closeFm();
       await pgPermissions();
-      toast('權限已更�?);
+      toast('權限已更新');
     } else {
-      // 創建�?profile
+      // 創建新 profile
       result=await sb.from('profiles').insert({
         id:userId,
         display_name:displayName,
         role
       });
       
-      if(result.error){toast('新增失敗�?+result.error.message,'error');return;}
+      if(result.error){toast('新增失敗：'+result.error.message,'error');return;}
       closeFm();
       await pgPermissions();
-      toast('成員已新�?);
+      toast('成員已新增');
     }
   });
 }
@@ -4425,7 +4402,7 @@ async function addPermission(){
 // 編輯成員權限
 async function editPermission(userId){
   const { data:profile,error } = await sb.from('profiles').select('*').eq('id',userId).single();
-  if(error||!profile){toast('找不到用戶資�?,'error');return;}
+  if(error||!profile){toast('找不到用戶資料','error');return;}
   
   openFm('<i class="fas fa-edit" style="color:var(--gold);"></i> 編輯權限',`
     <div class="fmg">
@@ -4433,7 +4410,7 @@ async function editPermission(userId){
       <input class="fmc" value="${esc(profile.id)}" disabled style="background:#f1f5f9;font-family:monospace;font-size:.85rem;">
     </div>
     <div class="info-box" style="margin-bottom:1rem;background:#fef3c7;color:#92400e;border-color:#fcd34d;font-size:.82rem;">
-      <i class="fas fa-info-circle"></i> 如需查看電子郵件，請前往 Supabase Dashboard �?Authentication �?Users
+      <i class="fas fa-info-circle"></i> 如需查看電子郵件，請前往 Supabase Dashboard → Authentication → Users
     </div>
     <div class="fmg">
       <label class="fml">顯示名稱</label>
@@ -4444,7 +4421,7 @@ async function editPermission(userId){
       <select class="fmc" id="perm_role">
         <option value="viewer" ${profile.role==='viewer'?'selected':''}>Viewer（查看者）</option>
         <option value="editor" ${profile.role==='editor'?'selected':''}>Editor（一般成員）</option>
-        <option value="admin" ${profile.role==='admin'?'selected':''}>Admin（管理員�?/option>
+        <option value="admin" ${profile.role==='admin'?'selected':''}>Admin（管理員）</option>
       </select>
     </div>
   `,
@@ -4457,21 +4434,21 @@ async function editPermission(userId){
       role
     }).eq('id',userId);
     
-    if(error){toast('更新失敗�?+error.message,'error');return;}
+    if(error){toast('更新失敗：'+error.message,'error');return;}
     closeFm();
     await pgPermissions();
-    toast('權限已更�?);
+    toast('權限已更新');
   });
 }
 
 // 刪除成員權限
 async function deletePermission(userId){
-  if(!confirm(`確定要刪除此用戶的權限設定？\n\n用戶 ID: ${userId.substring(0,8)}...\n\n注意：這不會刪�?Supabase Auth 帳號，只會移�?profiles 記錄。`)) return;
+  if(!confirm(`確定要刪除此用戶的權限設定？\n\n用戶 ID: ${userId.substring(0,8)}...\n\n注意：這不會刪除 Supabase Auth 帳號，只會移除 profiles 記錄。`)) return;
   
   const { error } = await sb.from('profiles').delete().eq('id',userId);
-  if(error){toast('刪除失敗�?+error.message,'error');return;}
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
   await pgPermissions();
-  toast('權限已刪�?);
+  toast('權限已刪除');
 }
 
 /* ============================================================
@@ -4480,7 +4457,7 @@ async function deletePermission(userId){
 async function pgSettings(){
   const m=document.getElementById('bkMain');
   
-  // �?Supabase 載入最新的系統設定
+  // 從 Supabase 載入最新的系統設定
   try{
     const { data:settingsData, error } = await sb.from('site_settings')
       .select('*')
@@ -4497,7 +4474,7 @@ async function pgSettings(){
       sysConfig.copyright = dbSettings.copyright || sysConfig.copyright;
     }
   } catch(e){
-    console.log('載入系統設定失敗，使用本機設�?',e);
+    console.log('載入系統設定失敗，使用本機設定:',e);
   }
   
   m.innerHTML=`
@@ -4507,9 +4484,10 @@ async function pgSettings(){
   </div>
   <div class="pg-content">
     <div class="sc">
-      <div class="sc-title"><i class="fas fa-building"></i> 公司基本資訊（資料庫同步�?/div>
+      <div class="sc-title"><i class="fas fa-building"></i> 公司基本資訊（資料庫同步）</div>
       <div class="info-box" style="margin-bottom:1rem;background:#f0fdf4;border-color:#86efac;">
-        <i class="fas fa-circle-check"></i> 此設定已連接�?Supabase 資料庫，所有裝置即時同�?      </div>
+        <i class="fas fa-circle-check"></i> 此設定已連接到 Supabase 資料庫，所有裝置即時同步
+      </div>
       <div class="fmr">
         <div class="fmg"><label class="fml">公司名稱</label><input class="fmc" id="sys_name" value="${esc(sysConfig.companyName)}"></div>
         <div class="fmg"><label class="fml">聯絡電話</label><input class="fmc" id="sys_phone" value="${esc(sysConfig.supportPhone)}"></div>
@@ -4521,14 +4499,14 @@ async function pgSettings(){
     <div class="sc">
       <div class="sc-title"><i class="fas fa-plug"></i> Supabase 連線資訊</div>
       <div class="info-box">
-        <div style="margin-bottom:.4rem;"><strong>Project URL�?/strong><code>${SB_URL}</code></div>
-        <div><strong>Anon Key�?/strong><code>${SB_KEY.slice(0,20)}...</code></div>
-        <div style="margin-top:.65rem;font-size:.78rem;color:#64748b;">如需更換 Supabase 專案，請直接修改 HTML 原始碼中�?<code>SB_URL</code> �?<code>SB_KEY</code> 變數�?/div>
+        <div style="margin-bottom:.4rem;"><strong>Project URL：</strong><code>${SB_URL}</code></div>
+        <div><strong>Anon Key：</strong><code>${SB_KEY.slice(0,20)}...</code></div>
+        <div style="margin-top:.65rem;font-size:.78rem;color:#64748b;">如需更換 Supabase 專案，請直接修改 HTML 原始碼中的 <code>SB_URL</code> 與 <code>SB_KEY</code> 變數。</div>
       </div>
     </div>
     <div class="sc sc-warn">
       <div class="sc-title"><i class="fas fa-shield-halved"></i> 帳號安全</div>
-      <p style="font-size:.84rem;color:var(--muted);margin-bottom:.75rem;">此網站使�?Supabase Auth 登入。請�?Supabase Dashboard �?Authentication �?Users 管理帳號�?/p>
+      <p style="font-size:.84rem;color:var(--muted);margin-bottom:.75rem;">此網站使用 Supabase Auth 登入。請至 Supabase Dashboard → Authentication → Users 管理帳號。</p>
     </div>
     <div style="display:flex;justify-content:space-between;gap:1rem;">
           <button class="btn btn-outline" onclick="testFrontendSettings()"><i class="fas fa-eye"></i> 預覽前台設定</button>
@@ -4546,7 +4524,8 @@ async function saveSysConfig(){
   sysConfig.copyright=gv('sys_copy');
   
   try{
-    // 嘗試存入 Supabase 資料�?    const { data:existingData } = await sb.from('site_settings')
+    // 嘗試存入 Supabase 資料庫
+    const { data:existingData } = await sb.from('site_settings')
       .select('id')
       .order('updated_at',{ascending:false})
       .limit(1);
@@ -4568,7 +4547,8 @@ async function saveSysConfig(){
         .eq('id', existingData[0].id);
       error = updError;
     } else {
-      // 新增第一筆設�?      const { error:insError } = await sb.from('site_settings')
+      // 新增第一筆設定
+      const { error:insError } = await sb.from('site_settings')
         .insert({
           ...settingsData,
           created_at: new Date().toISOString()
@@ -4585,10 +4565,10 @@ async function saveSysConfig(){
     toast('系統設定已儲存並同步至資料庫');
   } catch(e){
     // 如果資料庫失敗，仍然保存本機
-    console.error('資料庫儲存失�?',e);
+    console.error('資料庫儲存失敗:',e);
     lsave('config',sysConfig);
     applySettings();
-    toast('系統設定已儲存（本機�?,'warning');
+    toast('系統設定已儲存（本機）','warning');
   }
 }
 
@@ -4597,7 +4577,8 @@ function testFrontendSettings(){
   console.log(' 測試前台設定顯示...');
   console.log('目前 sysConfig:', sysConfig);
   
-  // 切換到前台查�?  showFrontend();
+  // 切換到前台查看
+  showFrontend();
   
   // 等待一秒後檢查頁腳元素
   setTimeout(()=>{
@@ -4605,7 +4586,7 @@ function testFrontendSettings(){
     const email = document.getElementById('footerEmail');
     const address = document.getElementById('footerAddress');
     
-    console.log('頁腳元素當前�?', {
+    console.log('頁腳元素當前值:', {
       phone: phone ? phone.textContent : 'not found',
       email: email ? email.textContent : 'not found',
       address: address ? address.textContent : 'not found'
@@ -4614,7 +4595,7 @@ function testFrontendSettings(){
     if(phone && phone.textContent === '+886 2 2345 6789'){
       toast('⚠️ 頁腳仍顯示預設值，請檢查資料庫連線', 'warning');
     } else if(phone) {
-      toast('�?頁腳已正確顯示資料庫設定', 'success');
+      toast('✅ 頁腳已正確顯示資料庫設定', 'success');
     }
   }, 1000);
 }
@@ -4720,12 +4701,13 @@ document.addEventListener('DOMContentLoaded',function(){
         <h3 style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.5rem;">歡迎加入 LINE 官方帳號</h3>
         <p style="font-size:.95rem;color:var(--muted);line-height:1.7;">
           立即添加好友，獲取專屬服務：<br>
-          <span style="color:var(--gold);font-weight:600;">開光服務</span>�?span style="color:var(--gold);font-weight:600;">藝術諮詢</span>�?span style="color:var(--gold);font-weight:600;">定制服務</span>
+          <span style="color:var(--gold);font-weight:600;">開光服務</span>・<span style="color:var(--gold);font-weight:600;">藝術諮詢</span>・<span style="color:var(--gold);font-weight:600;">定制服務</span>
         </p>
       </div>
       <div style="background:#f0fdf4;border:2px solid #06C755;border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;">
         <p style="font-size:.85rem;color:#06C755;font-weight:700;margin-bottom:.75rem;">
-          <i class="fas fa-qrcode"></i> 掃描 QR Code 或直接點�?        </p>
+          <i class="fas fa-qrcode"></i> 掃描 QR Code 或直接點擊
+        </p>
         <div style="margin-bottom:1rem;">
           <i class="fab fa-line" style="font-size:4rem;color:#06C755;"></i>
         </div>
@@ -4744,31 +4726,3 @@ document.addEventListener('DOMContentLoaded',function(){
 
 </body>
 </html>
-        <p style="font-size:.95rem;color:var(--muted);line-height:1.7;">
-          立即添加好友，獲取專屬服務：<br>
-          <span style="color:var(--gold);font-weight:600;">開光服務</span>�?span style="color:var(--gold);font-weight:600;">藝術諮詢</span>�?span style="color:var(--gold);font-weight:600;">定制服務</span>
-        </p>
-      </div>
-      <div style="background:#f0fdf4;border:2px solid #06C755;border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;">
-        <p style="font-size:.85rem;color:#06C755;font-weight:700;margin-bottom:.75rem;">
-          <i class="fas fa-qrcode"></i> 掃描 QR Code 或直接點�?        </p>
-        <div style="margin-bottom:1rem;">
-          <i class="fab fa-line" style="font-size:4rem;color:#06C755;"></i>
-        </div>
-        <a href="https://lin.ee/Zp9jWfq" target="_blank" rel="noopener" class="btn" style="background:#06C755;color:white;padding:.85rem 2rem;font-size:1rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;">
-          <i class="fab fa-line"></i> 加入 LINE 好友
-        </a>
-      </div>
-      <div style="font-size:.85rem;color:var(--muted);line-height:1.6;">
-        <p><i class="fas fa-check-circle" style="color:#06C755;"></i> 專屬客服一對一服務</p>
-        <p><i class="fas fa-check-circle" style="color:#06C755;"></i> 新品上架第一時間通知</p>
-        <p><i class="fas fa-check-circle" style="color:#06C755;"></i> 限量唐卡優先預購資格</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>
-
-
