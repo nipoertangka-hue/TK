@@ -3887,13 +3887,37 @@ async function deletePermission(userId){
 /* ============================================================
    PAGE: SETTINGS
 ============================================================ */
-function pgSettings(){
+async function pgSettings(){
   const m=document.getElementById('bkMain');
+  
+  // 從 Supabase 載入最新的系統設定
+  try{
+    const { data:settingsData, error } = await sb.from('site_settings')
+      .select('*')
+      .order('updated_at',{ascending:false})
+      .limit(1);
+    
+    if(!error && settingsData && settingsData.length > 0){
+      // 使用資料庫的設定
+      const dbSettings = settingsData[0];
+      sysConfig.companyName = dbSettings.company_name || sysConfig.companyName;
+      sysConfig.supportPhone = dbSettings.support_phone || sysConfig.supportPhone;
+      sysConfig.supportEmail = dbSettings.support_email || sysConfig.supportEmail;
+      sysConfig.address = dbSettings.address || sysConfig.address;
+      sysConfig.copyright = dbSettings.copyright || sysConfig.copyright;
+    }
+  } catch(e){
+    console.log('載入系統設定失敗，使用本機設定:',e);
+  }
+  
   m.innerHTML=`
   <div class="pg-header"><div class="pg-header-l"><h1><i class="fas fa-gear"></i>系統設定</h1></div></div>
   <div class="pg-content">
     <div class="sc">
-      <div class="sc-title"><i class="fas fa-building"></i> 公司基本資訊（本機儲存）</div>
+      <div class="sc-title"><i class="fas fa-building"></i> 公司基本資訊（資料庫同步）</div>
+      <div class="info-box" style="margin-bottom:1rem;background:#f0fdf4;border-color:#86efac;">
+        <i class="fas fa-circle-check"></i> 此設定已連接到 Supabase 資料庫，所有裝置即時同步
+      </div>
       <div class="fmr">
         <div class="fmg"><label class="fml">公司名稱</label><input class="fmc" id="sys_name" value="${esc(sysConfig.companyName)}"></div>
         <div class="fmg"><label class="fml">聯絡電話</label><input class="fmc" id="sys_phone" value="${esc(sysConfig.supportPhone)}"></div>
@@ -3917,10 +3941,62 @@ function pgSettings(){
     <div style="display:flex;justify-content:flex-end;"><button class="btn btn-gold" onclick="saveSysConfig()"><i class="fas fa-floppy-disk"></i> 儲存系統設定</button></div>
   </div>`;
 }
-function saveSysConfig(){
-  sysConfig.companyName=gv('sys_name');sysConfig.supportPhone=gv('sys_phone');
-  sysConfig.supportEmail=gv('sys_email');sysConfig.address=gv('sys_addr');sysConfig.copyright=gv('sys_copy');
-  lsave('config',sysConfig);applySettings();toast('系統設定已儲存');
+
+async function saveSysConfig(){
+  // 更新本機變數
+  sysConfig.companyName=gv('sys_name');
+  sysConfig.supportPhone=gv('sys_phone');
+  sysConfig.supportEmail=gv('sys_email');
+  sysConfig.address=gv('sys_addr');
+  sysConfig.copyright=gv('sys_copy');
+  
+  try{
+    // 嘗試存入 Supabase 資料庫
+    const { data:existingData } = await sb.from('site_settings')
+      .select('id')
+      .order('updated_at',{ascending:false})
+      .limit(1);
+    
+    const settingsData = {
+      company_name: sysConfig.companyName,
+      support_phone: sysConfig.supportPhone,
+      support_email: sysConfig.supportEmail,
+      address: sysConfig.address,
+      copyright: sysConfig.copyright,
+      updated_at: new Date().toISOString()
+    };
+    
+    let error;
+    if(existingData && existingData.length > 0){
+      // 更新現有設定
+      const { error:updError } = await sb.from('site_settings')
+        .update(settingsData)
+        .eq('id', existingData[0].id);
+      error = updError;
+    } else {
+      // 新增第一筆設定
+      const { error:insError } = await sb.from('site_settings')
+        .insert({
+          ...settingsData,
+          created_at: new Date().toISOString()
+        });
+      error = insError;
+    }
+    
+    if(error) throw error;
+    
+    // 同時更新本機儲存（備用）
+    lsave('config',sysConfig);
+    
+    applySettings();
+    toast('系統設定已儲存並同步至資料庫');
+  } catch(e){
+    // 如果資料庫失敗，仍然保存本機
+    console.error('資料庫儲存失敗:',e);
+    lsave('config',sysConfig);
+    applySettings();
+    toast('系統設定已儲存（本機）','warning');
+  }
 }
 
 /* ============================================================
