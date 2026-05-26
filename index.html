@@ -385,7 +385,7 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 
 /* ===== BACKEND ===== */
 .backend{display:none;min-height:100vh;background:#f1f0ec;}
-.app-wrap{display:flex;min-height:100vh;position:relative;flex-direction:column;}
+.app-wrap{display:flex;height:100vh;position:relative;overflow:hidden;}
 
 /* APP風格底部導航 */
 .app-bottom-nav{
@@ -438,7 +438,23 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 }
 
 /* 側邊欄（桌面版） */
-.sb{width:252px;background:var(--sidebar);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;border-right:1px solid rgba(255,255,255,.04);flex-shrink:0;transition:transform .3s ease;}
+.sb{width:252px;background:var(--sidebar);display:flex;flex-direction:column;height:100vh;border-right:1px solid rgba(255,255,255,.04);flex-shrink:0;transition:transform .3s ease;overflow-y:auto;}
+
+/* 自定義滾動條樣式 - 後台側邊欄 */
+.sb::-webkit-scrollbar{width:6px;}
+.sb::-webkit-scrollbar-track{background:rgba(255,255,255,.02);}
+.sb::-webkit-scrollbar-thumb{background:rgba(201,147,58,.3);border-radius:3px;}
+.sb::-webkit-scrollbar-thumb:hover{background:rgba(201,147,58,.5);}
+
+/* 自定義滾動條樣式 - 主內容區域 */
+.bk-main::-webkit-scrollbar{width:8px;}
+.bk-main::-webkit-scrollbar-track{background:#f1f0ec;}
+.bk-main::-webkit-scrollbar-thumb{background:rgba(201,147,58,.25);border-radius:4px;}
+.bk-main::-webkit-scrollbar-thumb:hover{background:rgba(201,147,58,.45);}
+
+/* Firefox 滾動條樣式 */
+.sb{scrollbar-width:thin;scrollbar-color:rgba(201,147,58,.3) rgba(255,255,255,.02);}
+.bk-main{scrollbar-width:thin;scrollbar-color:rgba(201,147,58,.25) #f1f0ec;}
 
 /* 後台手機側邊欄 */
 .sidebar-overlay{
@@ -610,7 +626,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   .sb.show{transform:translateX(0);}
   
   .pg-content{padding:1rem;}
-  .pg-header{padding:1rem;}
+  .pg-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem;}
   .pg-header-l h1{font-size:1.1rem;}
   
   /* 手機漢堡選單 */
@@ -744,7 +760,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   .sb-brand{padding:1rem;}
   .sb-front-btn{margin:.75rem 1rem .25rem;padding:.6rem .8rem;font-size:.75rem;}
   .sbi{padding:.6rem 1rem;font-size:.78rem;}
-  .pg-header{padding:.8rem 1rem;}
+  .pg-header{display:flex;justify-content:space-between;align-items:center;gap:.75rem;padding:.8rem 1rem;}
   .pg-header-l h1{font-size:1rem;}
   .pg-content{padding:.75rem;}
   
