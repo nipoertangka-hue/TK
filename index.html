@@ -1435,19 +1435,23 @@ document.addEventListener('DOMContentLoaded', async()=>{
     });
   }
   
+  // ✅ 從資料庫載入系統設定（優先於本機）
+  await loadSysConfigFromDB();
+  
+  // 應用設定到前台
   applySettings();
   updateBadge();
   await renderFrontAnnounce(); // 從 Supabase 載入公告
   applyTranslations(); // Apply initial translations
-
+  
+  // 載入商品
+  await loadFrontProducts();
+  
   // Auto check session (in case admin refreshes while on backend)
   const { data } = await sb.auth.getSession();
   if(data?.session){
     curUser = data.session.user;
   }
-
-  // Load public products
-  await loadFrontProducts();
 
   // Setup real-time synchronization for items table
   setupRealtimeSync();
@@ -1493,6 +1497,33 @@ function applySettings(){
   set('copyrightText',sysConfig.copyright);
   const lt=document.getElementById('logoText');if(lt)lt.textContent=sysConfig.companyName;
   document.title=sysConfig.companyName+'｜專業唐卡收藏與結緣';
+}
+
+// 從資料庫載入系統設定並應用到前台
+async function loadSysConfigFromDB(){
+  try{
+    const { data:settingsData, error } = await sb.from('site_settings')
+      .select('*')
+      .order('updated_at',{ascending:false})
+      .limit(1);
+    
+    if(!error && settingsData && settingsData.length > 0){
+      const dbSettings = settingsData[0];
+      sysConfig.companyName = dbSettings.company_name || sysConfig.companyName;
+      sysConfig.supportPhone = dbSettings.support_phone || sysConfig.supportPhone;
+      sysConfig.supportEmail = dbSettings.support_email || sysConfig.supportEmail;
+      sysConfig.address = dbSettings.address || sysConfig.address;
+      sysConfig.copyright = dbSettings.copyright || sysConfig.copyright;
+      
+      // 立即應用到前台顯示
+      applySettings();
+      console.log('✅ 系統設定已從資料庫載入');
+    } else {
+      console.log('⚠️ 無資料庫設定，使用本機設定');
+    }
+  } catch(e){
+    console.log('⚠️ 載入系統設定失敗，使用本機設定:',e.message);
+  }
 }
 
 async function renderFrontAnnounce(){
