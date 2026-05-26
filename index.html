@@ -36,6 +36,17 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .nav-link:hover{color:var(--gold);}
 .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);border-radius:2px;transition:var(--tr);}
 .nav-link:hover::after{width:100%;}
+/* Language Switcher */
+.lang-switcher{position:relative;display:inline-block;}
+.lang-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .85rem;border-radius:2rem;border:1.5px solid var(--border);background:#fff;color:var(--text);font-weight:600;font-size:.82rem;cursor:pointer;transition:var(--tr);}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold);}
+.lang-dropdown{position:absolute;top:calc(100% + .5rem);right:0;background:#fff;border:1px solid var(--border);border-radius:.75rem;box-shadow:var(--shadow-md);min-width:140px;z-index:1000;display:none;overflow:hidden;}
+.lang-dropdown.show{display:block;animation:fadeIn .2s ease;}
+.lang-option{padding:.65rem 1rem;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--text);}
+.lang-option:hover{background:rgba(201,147,58,.08);color:var(--gold);}
+.lang-option.active{background:rgba(201,147,58,.12);color:var(--gold);font-weight:700;}
+.lang-option i{font-size:.75rem;color:var(--muted);}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
 .cart-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.1rem;border-radius:2rem;border:1.5px solid var(--border);background:#fff;color:var(--text);font-weight:600;font-size:.88rem;transition:var(--tr);}
 .cart-btn:hover{border-color:var(--gold);color:var(--gold);}
 .cart-badge{min-width:1.4rem;height:1.4rem;border-radius:9999px;background:var(--gold);color:#fff;font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;padding:0 .3rem;}
@@ -53,8 +64,14 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
 .btn-ghost{background:rgba(201,147,58,.08);color:var(--gold);border:1.5px solid rgba(201,147,58,.2);}
 .btn-ghost:hover{background:rgba(201,147,58,.15);}
+.btn-line{background:linear-gradient(135deg,#06C755,#05a647);color:#fff;box-shadow:0 4px 18px rgba(6,199,85,.32);}
+.btn-line:hover{transform:translateY(-2px);box-shadow:0 7px 26px rgba(6,199,85,.42);}
 .btn-danger{background:linear-gradient(135deg,#f87171,#ef4444);color:#fff;border:none;}
 .btn-sm{padding:.5rem 1rem;font-size:.82rem;border-radius:1.5rem;}
+/* Category Tabs */
+.cat-tab{padding:.65rem 1.35rem;border-radius:2rem;border:1.5px solid var(--border);background:#fff;color:var(--muted);font-weight:600;font-size:.88rem;cursor:pointer;transition:var(--tr);display:inline-flex;align-items:center;gap:.5rem;}
+.cat-tab:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 12px rgba(201,147,58,.15);}
+.cat-tab.active{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border-color:var(--gold);box-shadow:0 4px 16px rgba(201,147,58,.3);}
 .products-section{padding:5rem 2rem;max-width:1280px;margin:0 auto;}
 .sec-header{max-width:600px;margin:0 auto 2.75rem;text-align:center;}
 .sec-eyebrow{display:inline-block;padding:.28rem .85rem;background:rgba(201,147,58,.09);color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:2rem;margin-bottom:.65rem;}
@@ -64,7 +81,8 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .product-card{background:var(--card);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);transition:var(--tr);border:1px solid var(--border);}
 .product-card:hover{transform:translateY(-.45rem);box-shadow:var(--shadow-lg);}
 .product-img{height:230px;background:linear-gradient(155deg,#f9f3e8,#edddb8);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.product-img img{width:100%;height:100%;object-fit:cover;}
+.product-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.product-img img[src=""], .product-img img:not([src]){display:none !important;}
 .product-img-icon{font-size:3.2rem;color:rgba(201,147,58,.45);position:relative;z-index:1;}
 .product-region-badge{position:absolute;top:.85rem;left:.85rem;padding:.22rem .65rem;border-radius:2rem;font-size:.68rem;font-weight:700;background:rgba(255,255,255,.88);color:var(--gold);border:1px solid rgba(201,147,58,.2);backdrop-filter:blur(4px);}
 .product-body{padding:1.35rem;}
@@ -72,9 +90,110 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .product-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.7rem;}
 .product-tag{display:inline-flex;align-items:center;gap:.25rem;padding:.18rem .55rem;background:var(--border-light);color:var(--muted);border-radius:.5rem;font-size:.68rem;font-weight:600;}
 .product-desc{color:var(--muted);font-size:.85rem;margin-bottom:1.1rem;line-height:1.7;}
-.product-price-row{display:flex;align-items:baseline;gap:.5rem;margin-bottom:1.1rem;}
+.product-price-row{display:none;}
 .product-price{font-size:1.45rem;font-weight:700;color:var(--gold);font-family:'Noto Serif TC',serif;}
 .product-actions{display:flex;gap:.5rem;}
+.product-img{cursor:pointer;position:relative;}
+.product-img::after{
+  content:'\f00e';
+  font-family:'Font Awesome 6 Free';
+  font-weight:900;
+  position:absolute;
+  bottom:.8rem;
+  right:.8rem;
+  background:rgba(255,255,255,.9);
+  color:var(--gold);
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.9rem;
+  opacity:0;
+  transition:opacity .3s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  z-index:2;
+}
+.product-card:hover .product-img::after{
+  opacity:1;
+}
+
+/* Image Zoom Modal */
+.image-zoom-modal{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.92);
+  z-index:10000;
+  cursor:zoom-out;
+  animation:fadeIn .3s ease;
+}
+.image-zoom-modal.show{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.image-zoom-container{
+  position:relative;
+  max-width:90vw;
+  max-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.image-zoom-container img{
+  max-width:100%;
+  max-height:90vh;
+  object-fit:contain;
+  border-radius:var(--radius-lg);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  cursor:grab;
+  transition:transform .3s ease;
+}
+.image-zoom-container img:active{
+  cursor:grabbing;
+}
+.image-zoom-close{
+  position:absolute;
+  top:-50px;
+  right:0;
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  border:2px solid rgba(255,255,255,.3);
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.2rem;
+  cursor:pointer;
+  transition:all .3s ease;
+  backdrop-filter:blur(10px);
+}
+.image-zoom-close:hover{
+  background:rgba(255,255,255,.25);
+  border-color:rgba(255,255,255,.5);
+  transform:rotate(90deg);
+}
+.image-zoom-hint{
+  position:absolute;
+  bottom:-45px;
+  left:50%;
+  transform:translateX(-50%);
+  color:rgba(255,255,255,.7);
+  font-size:.85rem;
+  text-align:center;
+  white-space:nowrap;
+}
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
 .product-actions .btn{flex:1;justify-content:center;padding:.65rem .8rem;font-size:.82rem;}
 .about-section{padding:5.5rem 2rem;background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 .about-wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
@@ -122,15 +241,19 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .mfooter{padding:1.1rem 1.6rem;background:#f8f7f4;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.65rem;}
 /* Cart */
 .cart-modal .modal-box{max-width:660px;}
-.cart-item{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--border);align-items:center;}
+.cart-item{display:flex;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--border);align-items:center;}
 .cart-item:last-child{border-bottom:none;}
-.cart-item-name{font-weight:600;font-size:.92rem;margin-bottom:.18rem;}
-.cart-item-price{color:var(--muted);font-size:.82rem;}
+.cart-item-img{width:70px;height:70px;border-radius:.5rem;overflow:hidden;background:linear-gradient(155deg,#f9f3e8,#edddb8);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.cart-item-img img{width:100%;height:100%;object-fit:cover;}
+.cart-item-img i{font-size:1.5rem;color:rgba(201,147,58,.4);}
+.cart-item-info{flex:1;}
+.cart-item-name{font-weight:600;font-size:.92rem;margin-bottom:.25rem;}
+.cart-item-price{display:none;}
 .cart-empty{text-align:center;padding:2.5rem 0;color:var(--muted);}
 .cart-empty i{font-size:2.2rem;margin-bottom:.75rem;display:block;opacity:.3;}
-.cart-total{display:flex;justify-content:space-between;align-items:center;padding-top:.9rem;border-top:2px solid var(--border);margin-top:.4rem;}
-.cart-total-lbl{font-weight:600;color:var(--muted);font-size:.88rem;}
-.cart-total-amt{font-size:1.3rem;font-weight:700;color:var(--gold);font-family:'Noto Serif TC',serif;}
+.cart-total{display:none;}
+.cart-total-lbl{display:none;}
+.cart-total-amt{display:none;}
 /* Checkout Modal */
 .checkout-modal .modal-box{max-width:520px;}
 .coupon-row{display:flex;gap:.5rem;margin-top:.5rem;}
@@ -248,8 +371,153 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
 .stock-alert i{color:var(--red);flex-shrink:0;}
 .sync-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:2rem;font-size:.68rem;font-weight:600;background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.2);}
 
-@media(max-width:1024px){.footer-grid{grid-template-columns:repeat(2,1fr);}.about-wrap{grid-template-columns:1fr;}}
-@media(max-width:768px){.nav-menu{display:none;}.sb{width:200px;}.pg-content{padding:1rem;}}
+/* 響應式設計 */
+@media(max-width:1024px){
+  .footer-grid{grid-template-columns:repeat(2,1fr);}
+  .about-wrap{grid-template-columns:1fr;}
+  .products-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;}
+}
+
+@media(max-width:768px){
+  /* 導航欄 */
+  .nav-menu{display:none;}
+  .sb{width:200px;}
+  .pg-content{padding:1rem;}
+  
+  /* 手機版分類選單 */
+  .mobile-category-bar{
+    display:block;
+    position:sticky;
+    top:0;
+    background:rgba(247,246,242,.95);
+    backdrop-filter:blur(10px);
+    z-index:100;
+    padding:1rem;
+    border-bottom:1px solid var(--border);
+    margin-bottom:1.5rem;
+  }
+  .mobile-category-scroll{
+    display:flex;
+    gap:.5rem;
+    overflow-x:auto;
+    padding-bottom:.5rem;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .mobile-category-scroll::-webkit-scrollbar{
+    display:none;
+  }
+  .mobile-cat-btn{
+    flex-shrink:0;
+    padding:.6rem 1.2rem;
+    border:1px solid var(--border);
+    border-radius:2rem;
+    background:#fff;
+    color:var(--text);
+    font-size:.82rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:var(--tr);
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+    white-space:nowrap;
+  }
+  .mobile-cat-btn:active{
+    transform:scale(.95);
+  }
+  .mobile-cat-btn.active{
+    background:var(--gold);
+    color:#fff;
+    border-color:var(--gold);
+  }
+  
+  /* 產品網格 */
+  .products-section{padding:2rem 1rem;}
+  .products-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:.8rem;
+  }
+  .product-card{
+    border-radius:var(--radius);
+  }
+  .product-img{
+    height:150px;
+  }
+  .product-body{
+    padding:1rem;
+  }
+  .product-title{
+    font-size:.95rem;
+    margin-bottom:.3rem;
+  }
+  .product-desc{
+    font-size:.78rem;
+    margin-bottom:.8rem;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .product-actions{
+    flex-direction:column;
+    gap:.4rem;
+  }
+  .product-actions .btn{
+    padding:.55rem .6rem;
+    font-size:.78rem;
+  }
+  
+  /* 標題區域 */
+  .sec-header{margin-bottom:1.5rem;}
+  .sec-title{font-size:1.4rem;}
+  .sec-desc{font-size:.85rem;}
+  
+  /* 桌面版分類隱藏 */
+  #categoryTabs{
+    display:none !important;
+  }
+  
+  /* 關於我們 */
+  .about-section{padding:3rem 1rem;}
+  .stats-row{grid-template-columns:repeat(3,1fr);gap:.5rem;}
+  .stat-box{padding:.8rem;}
+  .stat-num{font-size:1.2rem;}
+  .stat-lbl{font-size:.65rem;}
+  
+  /* 頁腳 */
+  .footer{padding:2.5rem 1rem 1.5rem;}
+  .footer-grid{grid-template-columns:1fr;gap:1.5rem;}
+}
+
+@media(max-width:480px){
+  /* 超小螢幕 */
+  .products-grid{
+    grid-template-columns:1fr;
+    gap:1rem;
+  }
+  .product-img{
+    height:200px;
+  }
+  .product-body{
+    padding:1.2rem;
+  }
+  .product-title{
+    font-size:1rem;
+  }
+  .product-desc{
+    -webkit-line-clamp:3;
+  }
+  .product-actions{
+    flex-direction:row;
+  }
+  
+  /* Hero 區域 */
+  .hero-content h1{font-size:1.8rem;}
+  .hero-content p{font-size:.9rem;}
+  .hero-actions{flex-direction:column;}
+  .hero-actions .btn{width:100%;}
+}
 
 /* Toast */
 .toast{position:fixed;bottom:1.75rem;right:1.75rem;background:#0e0e0c;color:#f8fafc;padding:.75rem 1.35rem;border-radius:.8rem;font-size:.85rem;font-weight:600;z-index:9999;display:flex;align-items:center;gap:.55rem;box-shadow:0 8px 28px rgba(0,0,0,.22);transform:translateY(4rem);opacity:0;transition:all .28s cubic-bezier(.4,0,.2,1);pointer-events:none;max-width:320px;}
@@ -282,13 +550,61 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
         <a href="#about" class="nav-link">關於我們</a>
         <a href="#contact" class="nav-link">聯繫我們</a>
       </div>
+      
+      <!-- Language Switcher -->
+      <div class="lang-switcher">
+        <button class="lang-btn" onclick="toggleLangDropdown()">
+          <i class="fas fa-globe"></i>
+          <span id="currentLangLabel">繁體中文</span>
+          <i class="fas fa-chevron-down" style="font-size:.65rem;"></i>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+          <div class="lang-option active" data-lang="zh-TW" onclick="switchLanguage('zh-TW')">
+            <i class="fas fa-check"></i> 繁體中文
+          </div>
+          <div class="lang-option" data-lang="zh-CN" onclick="switchLanguage('zh-CN')">
+            <i class="fas fa-check" style="visibility:hidden;"></i> 简体中文
+          </div>
+          <div class="lang-option" data-lang="en" onclick="switchLanguage('en')">
+            <i class="fas fa-check" style="visibility:hidden;"></i> English
+          </div>
+          <div class="lang-option" data-lang="ja" onclick="switchLanguage('ja')">
+            <i class="fas fa-check" style="visibility:hidden;"></i> 日本語
+          </div>
+          <div class="lang-option" data-lang="ko" onclick="switchLanguage('ko')">
+            <i class="fas fa-check" style="visibility:hidden;"></i> 한국어
+          </div>
+          <div class="lang-option" data-lang="fr" onclick="switchLanguage('fr')">
+            <i class="fas fa-check" style="visibility:hidden;"></i> Français
+          </div>
+          <div class="lang-option" data-lang="de" onclick="switchLanguage('de')">
+            <i class="fas fa-check" style="visibility:hidden;"></i> Deutsch
+          </div>
+          <div class="lang-option" data-lang="es" onclick="switchLanguage('es')">
+            <i class="fas fa-check" style="visibility:hidden;"></i> Español
+          </div>
+          <div class="lang-option" data-lang="th" onclick="switchLanguage('th')">
+            <i class="fas fa-check" style="visibility:hidden;"></i> ไทย
+          </div>
+          <div class="lang-option" data-lang="vi" onclick="switchLanguage('vi')">
+            <i class="fas fa-check" style="visibility:hidden;"></i> Tiếng Việt
+          </div>
+        </div>
+      </div>
+      
       <button class="cart-btn" onclick="showCartModal()">
-        <i class="fas fa-bag-shopping"></i><span>我的結緣</span>
+        <i class="fas fa-bag-shopping"></i><span data-i18n="cart">我的結緣</span>
         <span class="cart-badge" id="cartCount">0</span>
       </button>
     </div>
   </nav>
   <div class="announce-bar hidden" id="frontAnnounceBar"></div>
+  
+  <!-- ===== CONNECTION STATUS INDICATOR ===== -->
+  <div id="connectionStatus" style="position:fixed;top:10px;right:10px;z-index:9999;padding:6px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;display:none;">
+    <i class="fas fa-circle" style="font-size:0.6rem;margin-right:5px;"></i>
+    <span id="connectionStatusText">Connecting...</span>
+  </div>
   <section class="hero" id="home">
     <div class="hero-badge"><i class="fas fa-om"></i> 正統藏傳唐卡</div>
     <h1 class="hero-title"><em id="heroTitle">千年傳承 · 藝術臻品</em></h1>
@@ -299,8 +615,25 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
     <div class="sec-header">
       <div class="sec-eyebrow">精選藏品</div>
       <h2 class="sec-title">精選唐卡藏品</h2>
-      <p class="sec-desc">每幅唐卡都經過嚴格挑選，確保藝術價值與宗教意義的完美結合</p>
+      <p class="sec-desc">每幅唐卡都經過嚴格挑選,確保藝術價值與宗教意義的完美結合</p>
     </div>
+      
+    <!-- 手機版分類選單（僅在手機顯示） -->
+    <div class="mobile-category-bar" style="display:none;">
+      <div class="mobile-category-scroll" id="mobileCategoryContainer">
+        <button class="mobile-cat-btn active" data-category="all" onclick="switchMobileCategory('all')">
+          <i class="fas fa-th-large"></i> 全部
+        </button>
+      </div>
+    </div>
+    
+    <!-- Category Tabs -->
+    <div id="categoryTabs" style="display:flex;justify-content:center;gap:.75rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+      <button class="cat-tab active" data-category="all" onclick="switchCategory('all')">
+        <i class="fas fa-th-large"></i> 全部藏品
+      </button>
+    </div>
+      
     <div id="frontProductsContainer">
       <div class="products-loading"><div class="spinner"></div><p>正在載入藏品...</p></div>
     </div>
@@ -340,7 +673,12 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
       <div class="footer-grid">
         <div class="footer-col"><h3>唐卡藝術館</h3><p>致力於推廣正統唐卡藝術，傳承千年佛教文化遺產。</p></div>
         <div class="footer-col"><h3>快速連結</h3><a href="#home">首頁</a><a href="#products">唐卡展示</a><a href="#about">關於我們</a><a href="#contact">聯繫我們</a></div>
-        <div class="footer-col"><h3>服務項目</h3><a href="#">唐卡購買</a><a href="#">開光服務</a><a href="#">藝術諮詢</a><a href="#">定制服務</a></div>
+        <div class="footer-col"><h3>服務項目</h3>
+          <a href="#" onclick="openLineModal();return false;">唐卡購買</a>
+          <a href="#" onclick="openLineModal();return false;">開光服務</a>
+          <a href="#" onclick="openLineModal();return false;">藝術諮詢</a>
+          <a href="#" onclick="openLineModal();return false;">定制服務</a>
+        </div>
         <div class="footer-col">
           <h3>聯繫我們</h3>
           <a id="footerPhone" href="#">+886 2 2345 6789</a>
@@ -363,7 +701,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
       <div id="cartTotalInfo"></div>
       <div style="display:flex;gap:.55rem;">
         <button class="btn btn-outline btn-sm" onclick="hideCartModal()">繼續選購</button>
-        <button class="btn btn-gold btn-sm" onclick="goCheckout()"><i class="fas fa-heart"></i> 前往結緣</button>
+        <button class="btn btn-line btn-sm" onclick="goLineInquiry()"><i class="fab fa-line"></i> LINE 詢價結緣</button>
       </div>
     </div>
   </div>
@@ -446,8 +784,16 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
           <div class="nav-grp-title">主要功能</div>
           <div class="sbi" id="sbi-dashboard" onclick="goPage('dashboard')"><i class="fas fa-chart-line"></i><span>數據儀表板</span></div>
           <div class="sbi" id="sbi-products" onclick="goPage('products')"><i class="fas fa-palette"></i><span>唐卡展示管理</span></div>
+          <div class="sbi" id="sbi-inventory" onclick="window.open('https://nipoertangka-hue.github.io/-/', '_blank')"><i class="fas fa-boxes-stacked"></i><span>庫存管理</span></div>
           <div class="sbi" id="sbi-orders" onclick="goPage('orders')"><i class="fas fa-receipt"></i><span>訂單管理</span></div>
           <div class="sbi" id="sbi-customers" onclick="goPage('customers')"><i class="fas fa-users"></i><span>客戶管理</span></div>
+        </div>
+        <div class="nav-grp">
+          <div class="nav-grp-title">供應鏈管理</div>
+          <div class="sbi" id="sbi-agents" onclick="goPage('agents')"><i class="fas fa-user-tie"></i><span>代理管理</span></div>
+          <div class="sbi" id="sbi-makers" onclick="goPage('makers')"><i class="fas fa-industry"></i><span>廠商管理</span></div>
+          <div class="sbi" id="sbi-monks" onclick="goPage('monks')"><i class="fas fa-pray"></i><span>僧人管理</span></div>
+          <div class="sbi" id="sbi-warehouses" onclick="goPage('warehouses')"><i class="fas fa-warehouse"></i><span>倉庫管理</span></div>
         </div>
         <div class="nav-grp">
           <div class="nav-grp-title">行銷工具</div>
@@ -459,6 +805,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
           <div class="nav-grp-title">系統管理</div>
           <div class="sbi" id="sbi-content" onclick="goPage('content')"><i class="fas fa-pen-nib"></i><span>內容編輯</span></div>
           <div class="sbi" id="sbi-design" onclick="goPage('design')"><i class="fas fa-swatchbook"></i><span>外觀設定</span></div>
+          <div class="sbi" id="sbi-permissions" onclick="goPage('permissions')"><i class="fas fa-user-shield"></i><span>權限管理</span></div>
           <div class="sbi" id="sbi-settings" onclick="goPage('settings')"><i class="fas fa-gear"></i><span>系統設定</span></div>
         </div>
       </nav>
@@ -480,10 +827,158 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
 <script>
 /* ============================================================
    SUPABASE INIT
+   
+   IMPORTANT: Database Setup Requirements
+   =======================================
+   1. Supabase Project Configuration:
+      - Project URL: https://mnqewmhcrzofdbjoitxt.supabase.co
+      - API Key: sb_publishable__JKjXoD74jxDBBDiUN_TJw_MJjNENJJ
+   
+   2. Required Database Tables:
+      a) items table:
+         - id (uuid, primary key)
+         - code (text, product SKU/category code)
+         - name (text, product name)
+         - image (text, image URL or Supabase storage path)
+         - region (text, product region/origin)
+         - painter (text, artist name)
+         - maker (text, manufacturer)
+         - price (numeric, product price)
+         - notes (text, product description)
+         - status (text, 'in-stock' or 'hidden')
+         - createdat (timestamp)
+      
+      b) orders table:
+         - id (uuid, primary key)
+         - total_amount (numeric)
+         - status (text)
+         - created_at (timestamp)
+      
+      c) customers table:
+         - id (uuid, primary key)
+         - createdat (timestamp)
+      
+      d) coupons table:
+         - id (uuid, primary key)
+         - code (text, coupon code)
+         - active (boolean)
+         - type (text, 'percent' or 'fixed')
+         - value (numeric)
+         - usage_limit (integer)
+         - used_count (integer)
+         - min_order (numeric)
+         - expires_at (timestamp)
+         - created_at (timestamp)
+      
+      e) subscribers table:
+         - id (uuid, primary key)
+         - active (boolean)
+         - joined_at (timestamp)
+      
+      f) profiles table:
+         - id (uuid, primary key, references auth.users)
+         - role (text, 'admin' or 'user')
+   
+   3. Supabase Storage Setup:
+      - Create bucket: 'product-images'
+      - Set bucket to public access
+      - Upload product images to this bucket
+      - Store image paths in items.image field
+      - Supported formats: Full URLs, Supabase storage paths, Cloudinary URLs
+   
+   4. Real-time Subscription:
+      - Enable Realtime for 'items' table in Supabase dashboard
+      - This allows automatic sync between frontend and admin panel
+   
+   5. Row Level Security (RLS) Policies:
+      - items: SELECT policy for authenticated users
+      - items: INSERT/UPDATE/DELETE policies for admin role
+      - orders: INSERT policy for authenticated users
+      - orders: SELECT policy for admin role
+      - coupons: SELECT policy for authenticated users
+      - coupons: CRUD policies for admin role
 ============================================================ */
 const SB_URL = 'https://mnqewmhcrzofdbjoitxt.supabase.co';
 const SB_KEY = 'sb_publishable__JKjXoD74jxDBBDiUN_TJw_MJjNENJJ';
 const sb = supabase.createClient(SB_URL, SB_KEY);
+
+// Supabase Storage bucket for images
+const IMAGE_BUCKET = 'product-images';
+
+// Helper function to generate Supabase Storage image URL
+function getSupabaseImageUrl(path) {
+  if (!path) return '';
+  // If it's already a full URL (http/https), return as-is
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+  // Generate Supabase Storage URL
+  const { data } = sb.storage.from(IMAGE_BUCKET).getPublicUrl(path);
+  return data?.publicUrl || '';
+}
+
+// Helper function to validate and fix image URLs
+function normalizeImageUrl(imageUrl) {
+  // 處理空值
+  if (!imageUrl || imageUrl.trim() === '' || imageUrl === 'null' || imageUrl === 'undefined') {
+    console.log('圖片 URL 為空');
+    return '';
+  }
+  
+  // 去除前後空白
+  imageUrl = imageUrl.trim();
+  
+  console.log('處理圖片 URL:', imageUrl);
+  
+  // 已經是完整 URL
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+    console.log('✓ 检测到完整 URL');
+    return imageUrl;
+  }
+  
+  // Supabase storage 路徑
+  if (imageUrl.startsWith(IMAGE_BUCKET + '/') || imageUrl.includes('/storage/v1/')) {
+    console.log('✓ 检测到 Supabase Storage 路徑');
+    const storageUrl = getSupabaseImageUrl(imageUrl);
+    console.log('  轉換為:', storageUrl);
+    return storageUrl;
+  }
+  
+  // Cloudinary URL 模式
+  if (imageUrl.includes('cloudinary.com')) {
+    console.log('✓ 检测到 Cloudinary URL');
+    return imageUrl;
+  }
+  
+  // 假設是相對路徑或存儲鍵
+  console.log('✓ 假設為存儲路徑，嘗試轉換');
+  const convertedUrl = getSupabaseImageUrl(imageUrl);
+  console.log('  轉換為:', convertedUrl);
+  return convertedUrl;
+}
+
+// Debug function to test image loading
+function debugImageLoad(imageUrl, productName) {
+  const normalizedUrl = normalizeImageUrl(imageUrl);
+  console.log(`=== Image Debug: ${productName} ===`);
+  console.log('Original URL:', imageUrl);
+  console.log('Normalized URL:', normalizedUrl);
+  console.log('URL Type:', 
+    !imageUrl ? 'Empty' :
+    imageUrl.startsWith('http') ? 'External URL' :
+    imageUrl.includes('supabase') ? 'Supabase Storage' :
+    imageUrl.includes('cloudinary') ? 'Cloudinary' :
+    'Unknown format'
+  );
+  
+  // Test if image loads
+  const img = new Image();
+  img.onload = () => console.log('✓ Image loads successfully');
+  img.onerror = () => console.error('✗ Image failed to load');
+  img.src = normalizedUrl;
+  
+  return normalizedUrl;
+}
 
 /* ============================================================
    LOCAL CONFIG (non-DB settings)
@@ -501,7 +996,7 @@ let pageContent = lload('content',{
 });
 let pageDesign = lload('design',{primaryColor:'#c9933a',heroGradientFrom:'#c9933a',heroGradientTo:'#e8b865',sectionBackground:'#f7f6f2'});
 let sysConfig  = lload('config',{companyName:'唐卡藝術館',supportPhone:'+886 2 2345 6789',supportEmail:'info@thangka-art.com',address:'台北市信義區唐卡路一段1號',copyright:'© 2024 唐卡藝術館. 版權所有.'});
-let announces  = lload('announces',[{id:1,text:'🙏 歡迎蒞臨唐卡藝術館，每幅藏品皆為正統手繪唐卡！',active:true,created:'2024-01-01'}]);
+// 公告已移至 Supabase 數據庫，不再使用 localStorage
 let cart       = lload('cart',[]);
 
 /* Runtime state */
@@ -509,6 +1004,8 @@ let curPage    = 'dashboard';
 let fmAction   = null;
 let curUser    = null;
 let appliedCoupon = null;
+let currentCategory = 'all';
+let allProducts = [];
 
 /* ============================================================
    UTILS
@@ -518,6 +1015,394 @@ function gv(id){ const el=document.getElementById(id); return el?(el.type==='che
 function sv(id,v){ const el=document.getElementById(id); if(el){ el.type==='checkbox'?el.checked=!!v:el.value=v||''; } }
 function today(){ return new Date().toISOString().split('T')[0]; }
 function genOrderNo(){ return 'ORD'+Date.now().toString(36).toUpperCase(); }
+
+/* ============================================================
+   MULTI-LANGUAGE SUPPORT (Flexible & Extensible)
+============================================================ */
+// Translation storage - can be extended dynamically
+const i18n = {
+  current: 'zh-TW',
+  fallback: 'zh-TW',
+  translations: {}
+};
+
+// Initialize with default translations
+function initI18n(){
+  // Traditional Chinese (Default)
+  i18n.translations['zh-TW'] = {
+    nav_home:'首頁', nav_products:'唐卡展示', nav_about:'關於我們', nav_contact:'聯繫我們',
+    cart:'我的結緣',
+    hero_badge:'正統藏傳唐卡', hero_explore:'探索唐卡收藏',
+    products_eyebrow:'精選藏品', products_title:'精選唐卡藏品',
+    products_desc:'每幅唐卡都經過嚴格挑選,確保藝術價值與宗教意義的完美結合',
+    loading_products:'正在載入藏品...', no_products:'目前暫無展示藏品',
+    btn_details:'詳情', btn_cart:'結緣',
+    about_eyebrow:'關於我們', about_title:'關於唐卡藝術館',
+    service_title:'服務特色',
+    svc_handmade:'100%手工繪製唐卡', svc_natural:'天然礦物顏料',
+    svc_blessing:'可選開光加持服務', svc_shipping:'國際運送與保險',
+    stat_artists:'合作畫師', stat_items:'藏品數量', stat_satisfaction:'客戶滿意度',
+    footer_desc:'致力於推廣正統唐卡藝術，傳承千年佛教文化遺產。',
+    footer_quick:'快速連結', footer_services:'服務項目', footer_contact:'聯繫我們',
+    footer_buy:'唐卡購買', footer_bless:'開光服務', footer_consult:'藝術諮詢', footer_custom:'定制服務',
+    cat_all:'全部藏品', cat_thangka:'唐卡', cat_buddha:'鎏金銅像',
+    cat_merchandise:'藏傳周邊產品', cat_mantra:'六字真言', cat_mandala:'壇城', cat_other:'其他藏品',
+    no_items_in_cat:'此分類目前暫無藏品'
+  };
+  
+  // Simplified Chinese
+  i18n.translations['zh-CN'] = {
+    nav_home:'首页', nav_products:'唐卡展示', nav_about:'关于我们', nav_contact:'联系我们',
+    cart:'我的结缘',
+    hero_badge:'正统藏传唐卡', hero_explore:'探索唐卡收藏',
+    products_eyebrow:'精选藏品', products_title:'精选唐卡藏品',
+    products_desc:'每幅唐卡都经过严格挑选,确保艺术价值与宗教意义的完美结合',
+    loading_products:'正在加载藏品...', no_products:'目前暂无展示藏品',
+    btn_details:'详情', btn_cart:'结缘',
+    about_eyebrow:'关于我们', about_title:'关于唐卡艺术馆',
+    service_title:'服务特色',
+    svc_handmade:'100%手工绘制唐卡', svc_natural:'天然矿物颜料',
+    svc_blessing:'可选开光加持服务', svc_shipping:'国际运送与保险',
+    stat_artists:'合作画师', stat_items:'藏品数量', stat_satisfaction:'客户满意度',
+    footer_desc:'致力于推广正统唐卡艺术，传承千年佛教文化遗产。',
+    footer_quick:'快速链接', footer_services:'服务项目', footer_contact:'联系我们',
+    footer_buy:'唐卡购买', footer_bless:'开光服务', footer_consult:'艺术咨询', footer_custom:'定制服务',
+    cat_all:'全部藏品', cat_thangka:'唐卡', cat_buddha:'鎏金铜像',
+    cat_merchandise:'藏传周边产品', cat_mantra:'六字真言', cat_mandala:'坛城', cat_other:'其他藏品',
+    no_items_in_cat:'此分类目前暂无藏品'
+  };
+  
+  // English
+  i18n.translations['en'] = {
+    nav_home:'Home', nav_products:'Gallery', nav_about:'About', nav_contact:'Contact',
+    cart:'My Collection',
+    hero_badge:'Authentic Tibetan Thangka', hero_explore:'Explore Collection',
+    products_eyebrow:'Featured Collection', products_title:'Exquisite Thangka Artworks',
+    products_desc:'Each thangka is carefully selected to ensure the perfect combination of artistic value and religious significance',
+    loading_products:'Loading artworks...', no_products:'No artworks available at the moment',
+    btn_details:'Details', btn_cart:'Collect',
+    about_eyebrow:'About Us', about_title:'About Thangka Art Gallery',
+    service_title:'Our Services',
+    svc_handmade:'100% Hand-painted Thangka', svc_natural:'Natural Mineral Pigments',
+    svc_blessing:'Optional Consecration Service', svc_shipping:'International Shipping & Insurance',
+    stat_artists:'Partner Artists', stat_items:'Artwork Collection', stat_satisfaction:'Customer Satisfaction',
+    footer_desc:'Dedicated to promoting authentic Thangka art and preserving Buddhist cultural heritage.',
+    footer_quick:'Quick Links', footer_services:'Services', footer_contact:'Contact Us',
+    footer_buy:'Purchase Thangka', footer_bless:'Consecration', footer_consult:'Art Consultation', footer_custom:'Custom Orders',
+    cat_all:'All Collections', cat_thangka:'Thangka', cat_buddha:'Gilded Bronze Statues',
+    cat_merchandise:'Tibetan Merchandise', cat_mantra:'Six-Syllable Mantra', cat_mandala:'Mandala', cat_other:'Other Collections',
+    no_items_in_cat:'No items in this category'
+  };
+  
+  // Japanese
+  i18n.translations['ja'] = {
+    nav_home:'ホーム', nav_products:'ギャラリー', nav_about:'概要', nav_contact:'お問い合わせ',
+    cart:'我的收藏',
+    hero_badge:'正統チベット仏教タンカ', hero_explore:'コレクションを探す',
+    products_eyebrow:'厳選コレクション', products_title:'精選タンカ芸術作品',
+    products_desc:'各タンカは芸術的価値と宗教的意義の完璧な組み合わせを保証するために慎重に選ばれています',
+    loading_products:'読み込み中...', no_products:'現在展示中の作品はありません',
+    btn_details:'詳細', btn_cart:'收藏する',
+    about_eyebrow:'私たちについて', about_title:'タンカ芸術館について',
+    service_title:'サービス特色',
+    svc_handmade:'100%手描きタンカ', svc_natural:'天然鉱物顔料',
+    svc_blessing:'開光加持サービス利用可能', svc_shipping:'国際配送と保険',
+    stat_artists:'提携画家', stat_items:'コレクション数', stat_satisfaction:'顧客満足度',
+    footer_desc:'正統タンカ芸術の普及と千年の仏教文化遺産の継承に取り組んでいます。',
+    footer_quick:'クイックリンク', footer_services:'サービス', footer_contact:'お問い合わせ',
+    footer_buy:'タンカ購入', footer_bless:'開光サービス', footer_consult:'芸術相談', footer_custom:'オーダーメイド',
+    cat_all:'全コレクション', cat_thangka:'タンカ', cat_buddha:'金銅仏像',
+    cat_merchandise:'チベットグッズ', cat_mantra:'六字真言', cat_mandala:'曼荼羅', cat_other:'その他',
+    no_items_in_cat:'このカテゴリには現在アイテムがありません'
+  };
+  
+  // Korean (Basic - can be extended)
+  i18n.translations['ko'] = {
+    nav_home:'홈', nav_products:'갤러리', nav_about:'소개', nav_contact:'연락처',
+    cart:'나의 컬렉션',
+    hero_badge:'정통 티베트 탱카', hero_explore:'컬렉션 탐색',
+    products_eyebrow:'엄선된 컬렉션', products_title:'정선 탱카 예술 작품',
+    products_desc:'각 탱카는 예술적 가치와 종교적 의미의 완벽한 조합을 보장하기 위해 신중하게 선택됩니다',
+    loading_products:'로딩 중...', no_products:'현재 전시 중인 작품이 없습니다',
+    btn_details:'상세', btn_cart:'소장하기',
+    about_eyebrow:'소개', about_title:'탱카 예술관 소개',
+    service_title:'서비스 특징',
+    svc_handmade:'100% 수제 탱카', svc_natural:'천연 광물 안료',
+    svc_blessing:'개광加持 서비스 이용 가능', svc_shipping:'국제 배송 및 보험',
+    stat_artists:'제휴 화가', stat_items:'컬렉션 수', stat_satisfaction:'고객 만족도',
+    footer_desc:'정통 탱카 예술 보급과 천년 불교 문화유산 계승에 힘쓰고 있습니다.',
+    footer_quick:'빠른 링크', footer_services:'서비스', footer_contact:'연락처',
+    footer_buy:'탱카 구매', footer_bless:'개광 서비스', footer_consult:'예술 상담', footer_custom:'주문 제작',
+    cat_all:'전체 컬렉션', cat_thangka:'탱카', cat_buddha:'금동 불상',
+    cat_merchandise:'티베트 굿즈', cat_mantra:'육자진언', cat_mandala:'만다라', cat_other:'기타',
+    no_items_in_cat:'이 카테고리에는 현재 아이템이 없습니다'
+  };
+  
+  // French (Basic - can be extended)
+  i18n.translations['fr'] = {
+    nav_home:'Accueil', nav_products:'Galerie', nav_about:'À propos', nav_contact:'Contact',
+    cart:'Ma Collection',
+    hero_badge:'Thangka Tibétain Authentique', hero_explore:'Explorer la Collection',
+    products_eyebrow:'Collection Sélectionnée', products_title:'Œuvres d\'Art Thangka Exquises',
+    products_desc:'Chaque thangka est soigneusement sélectionné pour assurer la combinaison parfaite de valeur artistique et de signification religieuse',
+    loading_products:'Chargement...', no_products:'Aucune œuvre disponible pour le moment',
+    btn_details:'Détails', btn_cart:'Collectionner',
+    about_eyebrow:'À Propos', about_title:'À Propos de la Galerie d\'Art Thangka',
+    service_title:'Nos Services',
+    svc_handmade:'Thangka 100% Peint à la Main', svc_natural:'Pigments Minéraux Naturels',
+    svc_blessing:'Service de Consécration en Option', svc_shipping:'Livraison Internationale & Assurance',
+    stat_artists:'Artistes Partenaires', stat_items:'Collection d\'Œuvres', stat_satisfaction:'Satisfaction Client',
+    footer_desc:'Dédié à la promotion de l\'art Thangka authentique et à la préservation du patrimoine culturel bouddhiste millénaire.',
+    footer_quick:'Liens Rapides', footer_services:'Services', footer_contact:'Contactez-nous',
+    footer_buy:'Acheter Thangka', footer_bless:'Consécration', footer_consult:'Consultation Artistique', footer_custom:'Commandes Personnalisées',
+    cat_all:'Toutes les Collections', cat_thangka:'Thangka', cat_buddha:'Statues en Bronze Doré',
+    cat_merchandise:'Produits Tibétains', cat_mantra:'Mantra à Six Syllabes', cat_mandala:'Mandala', cat_other:'Autres Collections',
+    no_items_in_cat:'Aucun article dans cette catégorie'
+  };
+  
+  // German (Basic - can be extended)
+  i18n.translations['de'] = {
+    nav_home:'Startseite', nav_products:'Galerie', nav_about:'Über Uns', nav_contact:'Kontakt',
+    cart:'Meine Sammlung',
+    hero_badge:'Authentisches Tibetisches Thangka', hero_explore:'Sammlung Entdecken',
+    products_eyebrow:'Ausgewählte Sammlung', products_title:'Exquisite Thangka-Kunstwerke',
+    products_desc:'Jedes Thangka wird sorgfältig ausgewählt, um die perfekte Kombination aus künstlerischem Wert und religiöser Bedeutung zu gewährleisten',
+    loading_products:'Wird geladen...', no_products:'Derzeit keine Kunstwerke verfügbar',
+    btn_details:'Details', btn_cart:'Sammeln',
+    about_eyebrow:'Über Uns', about_title:'Über die Thangka-Kunstgalerie',
+    service_title:'Unsere Dienstleistungen',
+    svc_handmade:'100% Handgemaltes Thangka', svc_natural:'Natürliche Mineralpigmente',
+    svc_blessing:'Optionale Weihezeremonie', svc_shipping:'Internationaler Versand & Versicherung',
+    stat_artists:'Partnerkünstler', stat_items:'Kunstwerksammlung', stat_satisfaction:'Kundenzufriedenheit',
+    footer_desc:'Wir widmen uns der Förderung authentischer Thangka-Kunst und der Bewahrung des tausendjährigen buddhistischen Kulturerbes.',
+    footer_quick:'Schnelllinks', footer_services:'Dienstleistungen', footer_contact:'Kontaktieren Sie Uns',
+    footer_buy:'Thangka Kaufen', footer_bless:'Weihezeremonie', footer_consult:'Kunstberatung', footer_custom:'Sonderanfertigungen',
+    cat_all:'Alle Sammlungen', cat_thangka:'Thangka', cat_buddha:'Vergoldete Bronzestatuen',
+    cat_merchandise:'Tibetische Produkte', cat_mantra:'Sechs-Silben-Mantra', cat_mandala:'Mandala', cat_other:'Andere Sammlungen',
+    no_items_in_cat:'Keine Artikel in dieser Kategorie'
+  };
+  
+  // Spanish (Basic - can be extended)
+  i18n.translations['es'] = {
+    nav_home:'Inicio', nav_products:'Galería', nav_about:'Nosotros', nav_contact:'Contacto',
+    cart:'Mi Colección',
+    hero_badge:'Thangka Tibetano Auténtico', hero_explore:'Explorar Colección',
+    products_eyebrow:'Colección Seleccionada', products_title:'Exquisitas Obras de Arte Thangka',
+    products_desc:'Cada thangka es cuidadosamente seleccionado para garantizar la combinación perfecta de valor artístico y significado religioso',
+    loading_products:'Cargando...', no_products:'No hay obras disponibles en este momento',
+    btn_details:'Detalles', btn_cart:'Coleccionar',
+    about_eyebrow:'Sobre Nosotros', about_title:'Sobre la Galería de Arte Thangka',
+    service_title:'Nuestros Servicios',
+    svc_handmade:'Thangka 100% Pintado a Mano', svc_natural:'Pigmentos Minerales Naturales',
+    svc_blessing:'Servicio de Consagración Opcional', svc_shipping:'Envío Internacional y Seguro',
+    stat_artists:'Artistas Asociados', stat_items:'Colección de Obras', stat_satisfaction:'Satisfacción del Cliente',
+    footer_desc:'Dedicados a promover el arte Thangka auténtico y preservar el patrimonio cultural budista milenario.',
+    footer_quick:'Enlaces Rápidos', footer_services:'Servicios', footer_contact:'Contáctenos',
+    footer_buy:'Comprar Thangka', footer_bless:'Consagración', footer_consult:'Consulta Artística', footer_custom:'Pedidos Personalizados',
+    cat_all:'Todas las Colecciones', cat_thangka:'Thangka', cat_buddha:'Estatuas de Bronce Dorado',
+    cat_merchandise:'Productos Tibetanos', cat_mantra:'Mantra de Seis Sílabas', cat_mandala:'Mandala', cat_other:'Otras Colecciones',
+    no_items_in_cat:'No hay artículos en esta categoría'
+  };
+  
+  // Thai (Basic - can be extended)
+  i18n.translations['th'] = {
+    nav_home:'หน้าแรก', nav_products:'แกลเลอรี', nav_about:'เกี่ยวกับเรา', nav_contact:'ติดต่อ',
+    cart:'คอลเลคชั่นของฉัน',
+    hero_badge:' thang kaทิเบตแท้', hero_explore:'สำรวจคอลเลคชั่น',
+    products_eyebrow:'คอลเลคชั่นคัดสรร', products_title:'ผลงานศิลปะ thang ka อันประณีต',
+    products_desc:' thang ka แต่ละชิ้นได้รับการคัดเลือกอย่างพิถีพิถันเพื่อให้แน่ใจว่าการผสมผสานที่สมบูรณ์แบบของคุณค่าทางศิลปะและความสำคัญทางศาสนา',
+    loading_products:'กำลังโหลด...', no_products:'ไม่มีผลงานในขณะนี้',
+    btn_details:'รายละเอียด', btn_cart:'สะสม',
+    about_eyebrow:'เกี่ยวกับเรา', about_title:'เกี่ยวกับหอศิลป์ thang ka',
+    service_title:'บริการของเรา',
+    svc_handmade:' thang ka เขียนด้วยมือ 100%', svc_natural:'สีแร่ธรรมชาติ',
+    svc_blessing:'บริการปลุกเสกทางเลือก', svc_shipping:'จัดส่งระหว่างประเทศและประกัน',
+    stat_artists:'ศิลปินพันธมิตร', stat_items:'คอลเลคชั่นผลงาน', stat_satisfaction:'ความพึงพอใจของลูกค้า',
+    footer_desc:'มุ่งมั่นที่จะส่งเสริมศิลปะ thang ka แท้และอนุรักษ์มรดกทางวัฒนธรรมพุทธศาสนาพันปี',
+    footer_quick:'ลิงก์ด่วน', footer_services:'บริการ', footer_contact:'ติดต่อเรา',
+    footer_buy:'ซื้อ thang ka', footer_bless:'ปลุกเสก', footer_consult:'ปรึกษาศิลปะ', footer_custom:'สั่งทำพิเศษ',
+    cat_all:'คอลเลคชั่นทั้งหมด', cat_thangka:' thang ka', cat_buddha:'พระพุทธรูปทองสัมฤทธิ์',
+    cat_merchandise:'สินค้าทิเบต', cat_mantra:'คาถาหกพยางค์', cat_mandala:'มันดาลา', cat_other:'คอลเลคชั่นอื่นๆ',
+    no_items_in_cat:'ไม่มีรายการในหมวดหมู่นี้'
+  };
+  
+  // Vietnamese (Basic - can be extended)
+  i18n.translations['vi'] = {
+    nav_home:'Trang Chủ', nav_products:'Bộ Sưu Tập', nav_about:'Giới Thiệu', nav_contact:'Liên Hệ',
+    cart:'Bộ Sưu Tập Của Tôi',
+    hero_badge:'Thangka Tây Tạng Chính Thống', hero_explore:'Khám Phá Bộ Sưu Tập',
+    products_eyebrow:'Bộ Sưu Tập Chọn Lọc', products_title:'Tác Phẩm Nghệ Thuật Thangka Tinh Xảo',
+    products_desc:'Mỗi bức thangka đều được lựa chọn cẩn thận để đảm bảo sự kết hợp hoàn hảo giữa giá trị nghệ thuật và ý nghĩa tôn giáo',
+    loading_products:'Đang tải...', no_products:'Hiện không có tác phẩm nào',
+    btn_details:'Chi Tiết', btn_cart:'Sưu Tập',
+    about_eyebrow:'Giới Thiệu', about_title:'Về Phòng Trưng Bày Nghệ Thuật Thangka',
+    service_title:'Dịch Vụ Của Chúng Tôi',
+    svc_handmade:'Thangka Vẽ Tay 100%', svc_natural:'Màu Khoáng Sản Tự Nhiên',
+    svc_blessing:'Dịch Vụ Khai Quang Tùy Chọn', svc_shipping:'Vận Chuyển Quốc Tế & Bảo Hiểm',
+    stat_artists:'Họa Sĩ Đối Tác', stat_items:'Bộ Sưu Tập Tác Phẩm', stat_satisfaction:'Sự Hài Lòng Của Khách Hàng',
+    footer_desc:'Tận tâm quảng bá nghệ thuật Thangka chính thống và bảo tồn di sản văn hóa Phật giáo ngàn năm.',
+    footer_quick:'Liên Kết Nhanh', footer_services:'Dịch Vụ', footer_contact:'Liên Hệ Với Chúng Tôi',
+    footer_buy:'Mua Thangka', footer_bless:'Khai Quang', footer_consult:'Tư Vấn Nghệ Thuật', footer_custom:'Đơn Đặt Hàng Đặc Biệt',
+    cat_all:'Tất Cả Bộ Sưu Tập', cat_thangka:'Thangka', cat_buddha:'Tượng Đồng Mạ Vàng',
+    cat_merchandise:'Sản Phẩm Tây Tạng', cat_mantra:'Chân Ngôn Sáu Âm', cat_mandala:'Mandala', cat_other:'Bộ Sưu Tập Khác',
+    no_items_in_cat:'Không có mục nào trong danh mục này'
+  };
+}
+
+// Language display names
+const langNames = {
+  'zh-TW': '繁體中文', 'zh-CN': '简体中文', 'en': 'English', 'ja': '日本語',
+  'ko': '한국어', 'fr': 'Français', 'de': 'Deutsch', 'es': 'Español',
+  'pt': 'Português', 'ru': 'Русский', 'ar': 'العربية', 'th': 'ไทย',
+  'vi': 'Tiếng Việt', 'id': 'Bahasa Indonesia'
+};
+
+// Get translation with fallback
+function t(key, lang){
+  const language = lang || i18n.current;
+  if(i18n.translations[language] && i18n.translations[language][key]){
+    return i18n.translations[language][key];
+  }
+  // Fallback to default language
+  if(language !== i18n.fallback && i18n.translations[i18n.fallback] && i18n.translations[i18n.fallback][key]){
+    return i18n.translations[i18n.fallback][key];
+  }
+  // Return key itself if no translation found
+  return key;
+}
+
+// Add new language dynamically
+function addLanguage(langCode, translations){
+  i18n.translations[langCode] = translations;
+  langNames[langCode] = langNames[langCode] || langCode.toUpperCase();
+}
+
+// Toggle language dropdown
+function toggleLangDropdown(){
+  const dropdown = document.getElementById('langDropdown');
+  if(dropdown) dropdown.classList.toggle('show');
+}
+
+// Switch language
+function switchLanguage(lang){
+  if(!i18n.translations[lang]){
+    console.warn(`Language '${lang}' not loaded yet`);
+    return;
+  }
+  
+  i18n.current = lang;
+  localStorage.setItem('tk_lang', lang);
+  
+  // Update UI
+  const labelEl = document.getElementById('currentLangLabel');
+  if(labelEl) labelEl.textContent = langNames[lang] || lang;
+  
+  // Update active state in dropdown
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    const isActive = opt.dataset.lang === lang;
+    opt.classList.toggle('active', isActive);
+    const check = opt.querySelector('i');
+    if(check) check.style.visibility = isActive ? 'visible' : 'hidden';
+  });
+  
+  // Close dropdown
+  const dropdown = document.getElementById('langDropdown');
+  if(dropdown) dropdown.classList.remove('show');
+  
+  // Apply translations safely
+  try {
+    applyTranslations();
+    // Re-render products if loaded
+    if(allProducts && allProducts.length > 0) {
+      renderFrontProductsByCategory(allProducts);
+    }
+  } catch(e) {
+    console.error('Translation error:', e);
+  }
+}
+
+// Apply translations to page elements
+function applyTranslations(){
+  try {
+    // Update elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      const translated = t(key);
+      if(translated && translated !== key) {
+        el.textContent = translated;
+      }
+    });
+    
+    // Hero section
+    const heroBadge = document.querySelector('.hero-badge');
+    if(heroBadge) heroBadge.innerHTML = `<i class="fas fa-om"></i> ${t('hero_badge')}`;
+    
+    const exploreBtn = document.querySelector('.hero .btn-gold');
+    if(exploreBtn) exploreBtn.innerHTML = `<i class="fas fa-dharmachakra"></i> ${t('hero_explore')}`;
+    
+    // Products section
+    const prodEyebrow = document.querySelector('.products-section .sec-eyebrow');
+    if(prodEyebrow) prodEyebrow.textContent = t('products_eyebrow');
+    
+    const prodTitle = document.querySelector('.products-section .sec-title');
+    if(prodTitle) prodTitle.textContent = t('products_title');
+    
+    const prodDesc = document.querySelector('.products-section .sec-desc');
+    if(prodDesc) prodDesc.textContent = t('products_desc');
+    
+    // About section
+    const aboutEyebrow = document.querySelector('.about-section .sec-eyebrow');
+    if(aboutEyebrow) aboutEyebrow.textContent = t('about_eyebrow');
+    
+    const aboutTitle = document.querySelector('.about-content h2');
+    if(aboutTitle) aboutTitle.textContent = t('about_title');
+    
+    const serviceTitle = document.querySelector('.about-visual h3');
+    if(serviceTitle) serviceTitle.textContent = t('service_title');
+    
+    // Service list (update only if exists)
+    const svcList = document.querySelectorAll('.svc-list li');
+    if(svcList.length >= 4){
+      svcList[0].innerHTML = `<i class="fas fa-circle-check"></i>${t('svc_handmade')}`;
+      svcList[1].innerHTML = `<i class="fas fa-circle-check"></i>${t('svc_natural')}`;
+      svcList[2].innerHTML = `<i class="fas fa-circle-check"></i>${t('svc_blessing')}`;
+      svcList[3].innerHTML = `<i class="fas fa-circle-check"></i>${t('svc_shipping')}`;
+    }
+    
+    // Stats labels
+    const statLabels = document.querySelectorAll('.stat-lbl');
+    if(statLabels.length >= 3){
+      statLabels[0].textContent = t('stat_artists');
+      statLabels[1].textContent = t('stat_items');
+      statLabels[2].textContent = t('stat_satisfaction');
+    }
+    
+    // Footer
+    const footerCols = document.querySelectorAll('.footer-col');
+    if(footerCols.length >= 4){
+      const links1 = footerCols[1].querySelectorAll('a');
+      if(links1.length >= 4){
+        links1[0].textContent = t('nav_home');
+        links1[1].textContent = t('nav_products');
+        links1[2].textContent = t('nav_about');
+        links1[3].textContent = t('nav_contact');
+      }
+      
+      const links2 = footerCols[2].querySelectorAll('a');
+      if(links2.length >= 4){
+        links2[0].textContent = t('footer_buy');
+        links2[1].textContent = t('footer_bless');
+        links2[2].textContent = t('footer_consult');
+        links2[3].textContent = t('footer_custom');
+      }
+      
+      const contactTitle = footerCols[3].querySelector('h3');
+      if(contactTitle) contactTitle.textContent = t('footer_contact');
+    }
+  } catch(e) {
+    console.error('Error applying translations:', e);
+  }
+}
 
 function toast(msg,type='success'){
   const t=document.getElementById('toast');
@@ -534,9 +1419,26 @@ function hideLoading(){ document.getElementById('loadingOverlay').classList.add(
    INIT
 ============================================================ */
 document.addEventListener('DOMContentLoaded', async()=>{
+  // Initialize i18n system
+  initI18n();
+  
+  // Load saved language preference
+  const savedLang = localStorage.getItem('tk_lang');
+  if(savedLang && i18n.translations[savedLang]){
+    i18n.current = savedLang;
+    const labelEl = document.getElementById('currentLangLabel');
+    if(labelEl) labelEl.textContent = langNames[savedLang] || savedLang;
+    document.querySelectorAll('.lang-option').forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.lang === savedLang);
+      const check = opt.querySelector('i');
+      if(check) check.style.visibility = opt.dataset.lang === savedLang ? 'visible' : 'hidden';
+    });
+  }
+  
   applySettings();
   updateBadge();
-  renderFrontAnnounce();
+  await renderFrontAnnounce(); // 從 Supabase 載入公告
+  applyTranslations(); // Apply initial translations
 
   // Auto check session (in case admin refreshes while on backend)
   const { data } = await sb.auth.getSession();
@@ -547,13 +1449,28 @@ document.addEventListener('DOMContentLoaded', async()=>{
   // Load public products
   await loadFrontProducts();
 
+  // Setup real-time synchronization for items table
+  setupRealtimeSync();
+
   // Modal backdrop handlers
   ['cartModal','loginModal','fmModal','checkoutModal'].forEach(id=>{
     const el=document.getElementById(id);
     if(el) el.addEventListener('click',e=>{if(e.target===el) el.classList.remove('show');});
   });
   document.addEventListener('keydown',e=>{
-    if(e.key==='Escape') document.querySelectorAll('.modal-overlay.show').forEach(m=>m.classList.remove('show'));
+    if(e.key==='Escape') {
+      document.querySelectorAll('.modal-overlay.show').forEach(m=>m.classList.remove('show'));
+      document.getElementById('langDropdown')?.classList.remove('show');
+    }
+  });
+  
+  // Close language dropdown when clicking outside
+  document.addEventListener('click',e=>{
+    const langSwitcher=document.querySelector('.lang-switcher');
+    const dropdown=document.getElementById('langDropdown');
+    if(langSwitcher && dropdown && !langSwitcher.contains(e.target)){
+      dropdown.classList.remove('show');
+    }
   });
 });
 
@@ -578,12 +1495,89 @@ function applySettings(){
   document.title=sysConfig.companyName+'｜專業唐卡收藏與結緣';
 }
 
-function renderFrontAnnounce(){
+async function renderFrontAnnounce(){
   const bar=document.getElementById('frontAnnounceBar');
   if(!bar) return;
-  const a=announces.find(x=>x.active);
-  if(a){bar.textContent=a.text;bar.classList.remove('hidden');}
-  else bar.classList.add('hidden');
+  
+  try{
+    // 從 Supabase 讀取啟用的公告
+    const { data,error } = await sb.from('announcements')
+      .select('text')
+      .eq('active',true)
+      .order('created_at',{ascending:false})
+      .limit(1);
+    
+    if(error) {
+      console.error('Failed to load announcements:',error);
+      return;
+    }
+    
+    const a=data&&data.length>0?data[0]:null;
+    if(a){
+      bar.textContent=a.text;
+      bar.classList.remove('hidden');
+    } else {
+      bar.classList.add('hidden');
+    }
+  } catch(e){
+    console.error('Error rendering announcement:',e);
+    bar.classList.add('hidden');
+  }
+}
+
+/* ============================================================
+   REAL-TIME DATA SYNCHRONIZATION
+============================================================ */
+let itemsChannel = null;
+
+function setupRealtimeSync() {
+  const statusEl = document.getElementById('connectionStatus');
+  const statusText = document.getElementById('connectionStatusText');
+  
+  // Unsubscribe if already exists
+  if (itemsChannel) {
+    sb.removeChannel(itemsChannel);
+  }
+  
+  // Subscribe to items table changes
+  itemsChannel = sb
+    .channel('items_changes')
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'items'
+      },
+      (payload) => {
+        console.log('Items table changed:', payload.eventType, payload.new);
+        // Reload frontend products when any change occurs
+        loadFrontProducts();
+        
+        // If admin page is active, refresh it too
+        if (curPage === 'products') {
+          pgProducts();
+        }
+      }
+    )
+    .subscribe((status) => {
+      console.log('Real-time sync status:', status);
+      
+      // Update connection status indicator (hidden by default)
+      if (statusEl && statusText) {
+        if (status === 'SUBSCRIBED') {
+          console.log('✓ Real-time product sync enabled');
+          // Status indicator remains hidden
+        } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+          console.warn('⚠ Real-time sync error:', status);
+          // Show error indicator only on failure
+          statusEl.style.display = 'block';
+          statusEl.style.background = '#ef4444';
+          statusEl.style.color = '#fff';
+          statusText.textContent = 'Connection Error - Retrying...';
+        }
+      }
+    });
 }
 
 /* ============================================================
@@ -600,7 +1594,51 @@ async function loadFrontProducts(){
       .order('createdat',{ascending:false});
 
     if(error) throw error;
-    renderFrontProductsByCategory(data||[]);
+    
+    // Debug: Log raw data from database
+    console.log('=== 數據庫返回的原始數據 ===');
+    console.log('商品數量:', (data||[]).length);
+    
+    // 特別檢查 SIX 開頭的商品
+    const sixItems = (data||[]).filter(p => p.code && p.code.toUpperCase().startsWith('SIX'));
+    console.log('SIX 開頭商品數量:', sixItems.length);
+    if(sixItems.length > 0) {
+      console.log('=== SIX 開頭商品詳細信息 ===');
+      sixItems.forEach((item, index) => {
+        console.log(`[${index+1}] 商品: ${item.name}`);
+        console.log(`    編號: ${item.code}`);
+        console.log(`    圖片: ${item.image || '(空)'}`);
+        console.log(`    狀態: ${item.status}`);
+      });
+    }
+    
+    if(data && data.length > 0) {
+      console.log('第一筆商品數據:', data[0]);
+      console.log('第一筆商品的 image 字段:', data[0].image);
+    }
+    
+    // Normalize image URLs for all products
+    const productsWithValidImages = (data||[]).map(p => {
+      const originalImage = p.image;
+      const normalizedImage = normalizeImageUrl(p.image);
+      
+      // Debug logging
+      if(originalImage !== normalizedImage) {
+        console.log(`商品 "${p.name}" 圖片 URL 轉換:`);
+        console.log('  原始:', originalImage);
+        console.log('  轉換後:', normalizedImage);
+      }
+      
+      return {
+        ...p,
+        image: normalizedImage
+      };
+    });
+    
+    console.log('=== 處理後的商品數據 ===');
+    console.log('有圖片的商品數量:', productsWithValidImages.filter(p => p.image).length);
+    
+    renderFrontProductsByCategory(productsWithValidImages);
   } catch(e){
     c.innerHTML=`<div class="products-loading"><i class="fas fa-circle-exclamation" style="color:var(--red);font-size:2rem;margin-bottom:.75rem;display:block;"></i><p>商品載入失敗：${esc(e.message)}</p></div>`;
     console.error('loadFrontProducts:',e);
@@ -609,65 +1647,158 @@ async function loadFrontProducts(){
 
 function getCategoryInfo(code){
   if(!code) return {key:'other',label:'其他藏品',icon:'fa-dharmachakra'};
-  const prefix=code.substring(0,3).toLowerCase();
-  const categories={
-    'tk':{key:'thangka',label:'唐卡',icon:'fa-palette'},
-    'bu':{key:'buddha',label:'佛像',icon:'fa-pray'},
-    'su':{key:'merchandise',label:'周邊',icon:'fa-bag-shopping'},
-    'six':{key:'mantra',label:'六字真言',icon:'fa-om'},
-    'ma':{key:'mandala',label:'壇城',icon:'fa-mandala'}
-  };
-  return categories[prefix]||{key:'other',label:'其他藏品',icon:'fa-dharmachakra'};
+  const codeLower=code.toLowerCase();
+  
+  // Check prefixes in order of length (longest first to avoid conflicts)
+  if(codeLower.startsWith('six')) return {key:'mantra',label:'六字真言',icon:'fa-om'};
+  if(codeLower.startsWith('tk')) return {key:'thangka',label:'唐卡',icon:'fa-palette'};
+  if(codeLower.startsWith('bu')) return {key:'buddha',label:'鎏金銅像',icon:'fa-pray'};
+  if(codeLower.startsWith('su')) return {key:'merchandise',label:'藏傳周邊產品',icon:'fa-bag-shopping'};
+  if(codeLower.startsWith('ma')) return {key:'mandala',label:'壇城',icon:'fa-mandala'};
+  
+  return {key:'other',label:'其他藏品',icon:'fa-dharmachakra'};
 }
 
-function renderFrontProductsByCategory(items){
+function switchCategory(category){
+  currentCategory=category;
+  // Update tab UI
+  document.querySelectorAll('.cat-tab').forEach(tab=>{
+    tab.classList.toggle('active',tab.dataset.category===category);
+  });
+  // Update mobile tab UI
+  document.querySelectorAll('.mobile-cat-btn').forEach(tab=>{
+    tab.classList.toggle('active',tab.dataset.category===category);
+  });
+  // Render filtered products
+  renderFilteredProducts();
+}
+
+// 手機版分類切換
+function switchMobileCategory(category){
+  switchCategory(category);  // 调用統一切換函數
+}
+
+function renderFilteredProducts(){
   const c=document.getElementById('frontProductsContainer');
   if(!c) return;
-  if(!items.length){
-    c.innerHTML='<div class="products-loading"><i class="fas fa-dharmachakra" style="font-size:2.5rem;opacity:.25;display:block;margin-bottom:.75rem;"></i><p>目前暫無展示藏品</p></div>';
+  
+  let filtered=allProducts;
+  if(currentCategory!=='all'){
+    filtered=allProducts.filter(item=>{
+      const cat=getCategoryInfo(item.code);
+      return cat.key===currentCategory;
+    });
+  }
+  
+  if(!filtered.length){
+    const emptyMsg = t('no_items_in_cat');
+    c.innerHTML=`<div class="products-loading"><i class="fas fa-inbox" style="font-size:2.5rem;opacity:.25;display:block;margin-bottom:.75rem;"></i><p>${esc(emptyMsg)}</p></div>`;
     return;
   }
   
-  // Group items by category
-  const groups={};
+  c.innerHTML=`<div class="products-grid">${filtered.map(p=>renderProductCard(p)).join('')}</div>`;
+}
+
+function renderFrontProductsByCategory(items){
+  allProducts=items;
+  
+  const c=document.getElementById('frontProductsContainer');
+  const tabsContainer=document.getElementById('categoryTabs');
+  const mobileTabsContainer=document.getElementById('mobileCategoryContainer');
+  if(!c||!tabsContainer) return;
+  
+  if(!items.length){
+    c.innerHTML='<div class="products-loading"><i class="fas fa-dharmachakra" style="font-size:2.5rem;opacity:.25;display:block;margin-bottom:.75rem;"></i><p>目前暫無展示藏品</p></div>';
+    tabsContainer.style.display='none';
+    if(mobileTabsContainer) mobileTabsContainer.parentElement.style.display='none';
+    return;
+  }
+  
+  // Build category tabs dynamically
+  const categorySet=new Set();
   items.forEach(item=>{
     const cat=getCategoryInfo(item.code);
-    if(!groups[cat.key]) groups[cat.key]={info:cat,items:[]};
-    groups[cat.key].items.push(item);
+    categorySet.add(cat.key);
   });
   
-  // Render grouped sections
-  let html='';
-  Object.values(groups).forEach(group=>{
-    html+=`
-    <div style="margin-bottom:3.5rem;">
-      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:2px solid var(--border);">
-        <i class="fas ${group.info.icon}" style="font-size:1.3rem;color:var(--gold);"></i>
-        <h3 style="font-family:'Noto Serif TC',serif;font-size:1.4rem;font-weight:700;color:var(--text);">${esc(group.info.label)}</h3>
-        <span style="background:rgba(201,147,58,.1);color:var(--gold);padding:.25rem .65rem;border-radius:2rem;font-size:.72rem;font-weight:600;">${group.items.length} 件</span>
-      </div>
-      <div class="products-grid">
-        ${group.items.map(p=>renderProductCard(p)).join('')}
-      </div>
-    </div>`;
+  // 桌面版分類標籤
+  let tabsHTML=`<button class="cat-tab active" data-category="all" onclick="switchCategory('all')"><i class="fas fa-th-large"></i> ${esc(t('cat_all'))}</button>`;
+  
+  // 手機版分類按鈕
+  let mobileTabsHTML=`<button class="mobile-cat-btn active" data-category="all" onclick="switchMobileCategory('all')"><i class="fas fa-th-large"></i> ${esc(t('cat_all'))}</button>`;
+  
+  const categoryOrder=['thangka','buddha','merchandise','mantra','other'];
+  const sortedCategories=[...categorySet].sort((a,b)=>{
+    const idxA=categoryOrder.indexOf(a);
+    const idxB=categoryOrder.indexOf(b);
+    if(idxA===-1&&idxB===-1) return a.localeCompare(b);
+    if(idxA===-1) return 1;
+    if(idxB===-1) return -1;
+    return idxA-idxB;
   });
   
-  c.innerHTML=html;
+  sortedCategories.forEach(catKey=>{
+    const catInfo=Object.values(getCategoryInfo('')).find(()=>false)||getCategoryInfo('');
+    const sampleItem=items.find(item=>getCategoryInfo(item.code).key===catKey);
+    if(sampleItem){
+      const info=getCategoryInfo(sampleItem.code);
+      const count=items.filter(item=>getCategoryInfo(item.code).key===catKey).length;
+      // Get translated label with fallback
+      const transKey = 'cat_' + info.key;
+      const translatedLabel = t(transKey) || info.label;
+      
+      // 桌面版
+      tabsHTML+=`<button class="cat-tab" data-category="${info.key}" onclick="switchCategory('${info.key}')"><i class="fas ${info.icon}"></i> ${esc(translatedLabel)} (${count})</button>`;
+      
+      // 手機版
+      mobileTabsHTML+=`<button class="mobile-cat-btn" data-category="${info.key}" onclick="switchMobileCategory('${info.key}')"><i class="fas ${info.icon}"></i> ${esc(translatedLabel)}</button>`;
+    }
+  });
+  
+  tabsContainer.innerHTML=tabsHTML;
+  tabsContainer.style.display='flex';
+  
+  // 插入手機版分類標籤
+  if(mobileTabsContainer){
+    mobileTabsContainer.innerHTML=mobileTabsHTML;
+    mobileTabsContainer.parentElement.style.display='block';
+  }
+  
+  // Render initial view (all products)
+  currentCategory='all';
+  renderFilteredProducts();
 }
 
 function renderProductCard(p){
   const name=p.name||'唐卡藏品';
-  const imgHtml=p.image
-    ?`<img src="${p.image}" alt="${esc(name)}">`
-    :`<i class="fas fa-dharmachakra product-img-icon"></i>`;
+  const description=p.productdescription||'';  // 修正：使用 productdescription 而非 notes
+  
+  // 更強大的圖片處理邏輯
+  let imgHtml;
+  if(p.image && p.image.trim() !== '') {
+    // 有圖片 URL，嘗試加載
+    imgHtml = `<img src="${p.image}" alt="${esc(name)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+               <i class="fas fa-dharmachakra product-img-icon" style="display:none;"></i>`;
+  } else {
+    // 沒有圖片，顯示默認圖標
+    imgHtml = `<i class="fas fa-dharmachakra product-img-icon"></i>`;
+  }
+  
+  // Add click handler for zoom if image exists
+  const imgClickHandler=p.image?`onclick="openImageZoom('${p.image}')"`:'';
+  
+  // Build description HTML if exists
+  const descHtml=description?`<p class="product-desc">${esc(description)}</p>`:'';
+  
   return `<div class="product-card">
-    <div class="product-img">${imgHtml}</div>
+    <div class="product-img" ${imgClickHandler}>${imgHtml}</div>
     <div class="product-body">
       <h3 class="product-title">${esc(name)}</h3>
+      ${descHtml}
       <div class="product-price-row"><span class="product-price">NT$ ${Number(p.price||0).toLocaleString()}</span></div>
       <div class="product-actions">
         <button class="btn btn-outline" onclick="viewFrontProduct('${p.id}')"><i class="fas fa-eye"></i> 詳情</button>
-        <button class="btn btn-gold" onclick="addToCart('${p.id}','${esc(name)}',${p.price||0},'','${p.image?'[img]':''}')"><i class="fas fa-om"></i> 結緣</button>
+        <button class="btn btn-gold" onclick="addToCart('${p.id}','${esc(name)}',${p.price||0},'${p.image||''}')"><i class="fas fa-om"></i> 結緣</button>
       </div>
     </div>
   </div>`;
@@ -687,25 +1818,181 @@ async function viewFrontProduct(id){
   try{
     const { data:p } = await sb.from('items').select('*').eq('id',id).single();
     if(!p) return;
+    
+    // Normalize image URL
+    const normalizedImage = normalizeImageUrl(p.image);
+    
     const name=p.name||'唐卡藏品';
+    const rawDescription=p.productdescription||'';  // 原始描述文字
+    const price=Number(p.price||0);
+    const sizeDimensions = p.size_dimensions || '';  // 新增：尺寸資訊
+    
+    // 解析並格式化商品描述
+    const formattedDescription = formatProductDescription(rawDescription);
+    
     openFm(`<i class="fas fa-dharmachakra" style="color:var(--gold);"></i> ${esc(name)}`,`
-      <div style="background:linear-gradient(155deg,#f9f3e8,#edddb8);border-radius:1rem;height:200px;display:flex;align-items:center;justify-content:center;margin-bottom:1.35rem;overflow:hidden;">
-        ${p.image?`<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;">`:`<i class="fas fa-dharmachakra" style="font-size:4rem;color:rgba(201,147,58,.4);"></i>`}
+      <!-- 產品圖片（可點擊放大） -->
+      <div style="background:linear-gradient(155deg,#f9f3e8,#edddb8);border-radius:1rem;height:280px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;overflow:hidden;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.08);" onclick="openImageZoom('${normalizedImage}')">
+        ${normalizedImage?`<img src="${normalizedImage}" style="width:100%;height:100%;object-fit:cover;transition:transform .3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">`:`<i class="fas fa-dharmachakra" style="font-size:4rem;color:rgba(201,147,58,.4);"></i>`}
       </div>
-      <div style="font-size:1.6rem;font-weight:700;color:var(--gold);font-family:'Noto Serif TC',serif;">NT$ ${Number(p.price||0).toLocaleString()}</div>
+      
+      <!-- 商品名稱 -->
+      <div style="margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:2px solid var(--border);">
+        <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;">
+          <i class="fas fa-tag" style="color:var(--gold);"></i> 商品名稱
+        </div>
+        <div style="font-size:1.2rem;font-weight:700;color:var(--text);line-height:1.5;font-family:'Noto Serif TC',serif;">${esc(name)}</div>
+      </div>
+      
+      ${sizeDimensions ? `
+      <!-- 尺寸資訊 -->
+      <div style="margin-bottom:1.25rem;padding:1rem;background:linear-gradient(135deg,#f0fdf4,#e0f2fe);border-radius:.75rem;border:1px solid #06b6d4;">
+        <div style="font-size:.72rem;color:#0891b2;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;">
+          <i class="fas fa-ruler-combined" style="color:#0891b2;"></i> 產品尺寸
+        </div>
+        <div style="font-size:1.05rem;font-weight:700;color:#0e7490;line-height:1.5;font-family:'Noto Serif TC',serif;">
+          ${esc(sizeDimensions)}
+        </div>
+      </div>
+      ` : ''}
+      
+      <!-- 商品描述（分段格式化） -->
+      <div style="margin-bottom:1.5rem;">
+        <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
+          <i class="fas fa-align-left" style="color:var(--gold);"></i> 商品介紹
+        </div>
+        <div style="font-size:.95rem;color:var(--text);line-height:1.9;">
+          ${formattedDescription}
+        </div>
+      </div>
+      
+      <!-- 分隔線 -->
+      <div style="height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:1.5rem 0;"></div>
+      
+      <!-- 操作按鈕 -->
+      <div style="display:flex;gap:.75rem;">
+        <button class="btn btn-outline" onclick="addToCart('${p.id}','${esc(name)}',${price},'${p.image||''}');closeFm();" style="flex:1;justify-content:center;padding:.85rem;font-size:.95rem;">
+          <i class="fas fa-om"></i> 加入結緣清單
+        </button>
+      </div>
     `,null,false);
   } catch(e){ toast('載入失敗','error'); }
+}
+
+// 格式化商品描述文字（智能分段並保持文案完整性）
+function formatProductDescription(rawText){
+  if(!rawText || rawText.trim()==='') return '<p style="color:var(--muted);font-style:italic;">暫無商品描述</p>';
+  
+  // 將文字按換行符分割成段落
+  const paragraphs = rawText.split('\n').filter(p => p.trim() !== '');
+  
+  let html = '';
+  let currentSection = null;
+  let sectionContent = [];
+  
+  // 定義標題匹配規則（支持 emoji + 標題文字）
+  const titlePattern = /^[\uff00-\uffef]?\s*([🔮🎨🛋️💡✨⚙️🎯📏🏷️]\s*[^\n|：:]+)/;
+  
+  const flushSection = () => {
+    if(currentSection && sectionContent.length > 0){
+      const content = sectionContent.join('\n').trim();
+      if(content){
+        html += `
+          <div style="margin-bottom:1.25rem;padding:1rem;background:#f8f7f4;border-radius:.75rem;border-left:3px solid ${currentSection.color};">
+            <div style="font-size:.95rem;font-weight:700;color:${currentSection.color};margin-bottom:.65rem;display:flex;align-items:center;gap:.5rem;">
+              ${currentSection.icon ? `<i class="fas ${currentSection.icon}" style="font-size:1.1rem;"></i>` : ''} 
+              <span>${esc(currentSection.title)}</span>
+            </div>
+            <div style="font-size:.9rem;color:var(--text);line-height:1.9;text-align:justify;white-space:pre-wrap;">
+              ${esc(content)}
+            </div>
+          </div>
+        `;
+      }
+      currentSection = null;
+      sectionContent = [];
+    }
+  };
+  
+  paragraphs.forEach(para => {
+    const trimmedPara = para.trim();
+    const match = trimmedPara.match(titlePattern);
+    
+    if(match){
+      // 找到新標題，先保存之前的區塊
+      flushSection();
+      
+      // 根據標題內容匹配對應的顏色和圖標
+      const title = match[1].trim();
+      let color = '#c9933a'; // 默認金色
+      let icon = 'fa-star';
+      
+      if(title.includes('核心') || title.includes('象徵')){
+        color = '#c9933a';
+        icon = 'fa-gem';
+      } else if(title.includes('工藝') || title.includes('細節')){
+        color = '#2d5a27';
+        icon = 'fa-palette';
+      } else if(title.includes('顏料') || title.includes('礦物')){
+        color = '#8b4513';
+        icon = 'fa-swatchbook';
+      } else if(title.includes('場景') || title.includes('適用')){
+        color = '#4a5568';
+        icon = 'fa-image';
+      } else if(title.includes('尺寸') || title.includes('規格')){
+        color = '#718096';
+        icon = 'fa-ruler-combined';
+      } else if(title.includes('備註') || title.includes('說明')){
+        color = '#d4a574';
+        icon = 'fa-info-circle';
+      }
+      
+      currentSection = { title, color, icon };
+    } else if(currentSection){
+      // 當前段落屬於正在處理的區塊
+      sectionContent.push(trimmedPara);
+    } else {
+      // 沒有匹配到標題，作為普通段落處理
+      html += `<p style="margin-bottom:1rem;text-align:justify;line-height:1.9;">${esc(trimmedPara)}</p>`;
+    }
+  });
+  
+  // 保存最後一個區塊
+  flushSection();
+  
+  return html;
 }
 
 /* ============================================================
    CART
 ============================================================ */
-function addToCart(id,name,price,imgFlag){
+function addToCart(id,name,price,imageUrl){
+  // 清理圖片 URL，移除可能的錯誤值
+  let cleanImageUrl = imageUrl || '';
+  if(cleanImageUrl === 'this.style' || cleanImageUrl === 'undefined' || cleanImageUrl === 'null') {
+    cleanImageUrl = '';
+  }
+  
   const it=cart.find(x=>x.id===id);
-  if(it) it.quantity++;
-  else cart.push({id,name,price:Number(price),hasImg:imgFlag==='[img]',quantity:1});
-  lsave('cart',cart); updateBadge();
+  if(it) {
+    it.quantity++;
+  } else {
+    cart.push({
+      id, 
+      name, 
+      price:Number(price), 
+      image:cleanImageUrl, 
+      quantity:1
+    });
+  }
+  lsave('cart',cart); 
+  updateBadge();
   toast(`「${name}」已加入結緣清單`);
+  
+  // Auto-open cart modal to prevent conversion loss
+  setTimeout(()=>{
+    showCartModal();
+  },300);
 }
 function updateBadge(){
   const n=cart.reduce((s,i)=>s+i.quantity,0);
@@ -718,17 +2005,88 @@ function renderCart(){
   if(!c||!ti) return;
   if(!cart.length){c.innerHTML='<div class="cart-empty"><i class="fas fa-bag-shopping"></i>結緣清單目前是空的</div>';ti.innerHTML='';return;}
   let total=0;
-  c.innerHTML=cart.map(it=>{const sub=it.price*it.quantity;total+=sub;return`
+  c.innerHTML=cart.map(it=>{const sub=it.price*it.quantity;total+=sub;
+    
+    // 圖片處理邏輯 - 簡化並移除所有調試代碼
+    let imgHtml;
+    if(it.image && it.image.trim() !== '' && it.image !== 'this.style' && it.image !== 'undefined' && it.image !== 'null') {
+      // 有有效圖片 URL，顯示圖片
+      imgHtml = `<img src="${it.image}" alt="${esc(it.name)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-dharmachakra\"></i>';">`;
+    } else {
+      // 沒有圖片或圖片 URL 無效，顯示預設圖標
+      imgHtml = `<i class="fas fa-dharmachakra"></i>`;
+    }
+    
+    return `
     <div class="cart-item">
-      <div><div class="cart-item-name">${esc(it.name)}</div><div class="cart-item-price">NT$ ${it.price.toLocaleString()} × ${it.quantity}</div></div>
-      <div style="display:flex;align-items:center;gap:.5rem;">
-        <span style="font-weight:700;color:var(--gold);">NT$ ${sub.toLocaleString()}</span>
-        <button class="ib ib-del" onclick="removeCart('${it.id}')"><i class="fas fa-trash"></i></button>
+      <div class="cart-item-img">
+        ${imgHtml}
       </div>
-    </div>`;}).join('')+`<div class="cart-total"><span class="cart-total-lbl">小計</span><span class="cart-total-amt">NT$ ${total.toLocaleString()}</span></div>`;
+      <div class="cart-item-info">
+        <div class="cart-item-name">${esc(it.name)}</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.15rem;">
+          <i class="fas fa-layer-group" style="font-size:.7rem;"></i> 數量：${it.quantity}
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;">
+        <button class="ib ib-del" onclick="removeCart('${it.id}')" title="移除"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`;}).join('');
   ti.innerHTML='';
 }
 function removeCart(id){ cart=cart.filter(i=>i.id!==id);lsave('cart',cart);updateBadge();renderCart(); }
+
+function goLineInquiry(){
+  if(!cart.length){toast('請先加入結緣商品','error');return;}
+  
+  // Build product list message
+  let message='您好！我想詢問以下唐卡藏品：\n\n';
+  cart.forEach((it,index)=>{
+    message+=`${index+1}. ${it.name} x ${it.quantity}\n`;
+  });
+  message+='\n請問這些藏品的詳細資訊和結緣方式？謝謝！';
+  
+  // Encode message for URL
+  const encodedMessage=encodeURIComponent(message);
+  const lineUrl=`https://lin.ee/Zp9jWfq?text=${encodedMessage}`;
+  
+  // Open LINE in new tab
+  window.open(lineUrl,'_blank');
+  
+  toast('已開啟 LINE 詢價視窗');
+}
+
+/* ============================================================
+   LINE MODAL
+============================================================ */
+function openLineModal(){
+  document.getElementById('lineModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLineModal(){
+  document.getElementById('lineModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// Close LINE modal when clicking outside
+document.addEventListener('DOMContentLoaded', function(){
+  const lineModal = document.getElementById('lineModal');
+  if(lineModal){
+    lineModal.addEventListener('click', function(e){
+      if(e.target === lineModal){
+        closeLineModal();
+      }
+    });
+  }
+  
+  // Close LINE modal with ESC key
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && lineModal.classList.contains('show')){
+      closeLineModal();
+    }
+  });
+});
 
 /* ============================================================
    CHECKOUT
@@ -754,13 +2112,13 @@ function renderCheckoutSummary(){
   }
   const total=subtotal-discount;
   s.innerHTML=`
-    <div style="font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem;">訂單明細</div>
+    <div style="font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem;">結緣清單</div>
     ${cart.map(it=>`<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:.4rem 0;border-bottom:1px solid var(--border);">
       <span>${esc(it.name)} ×${it.quantity}</span>
-      <span>NT$ ${(it.price*it.quantity).toLocaleString()}</span>
+      <span style="display:none;">NT$ ${(it.price*it.quantity).toLocaleString()}</span>
     </div>`).join('')}
-    ${discount?`<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:.4rem 0;color:var(--green);"><span>優惠折扣 (${esc(appliedCoupon.code)})</span><span>-NT$ ${discount.toLocaleString()}</span></div>`:''}
-    <div style="display:flex;justify-content:space-between;font-size:1rem;font-weight:700;padding:.6rem 0;color:var(--gold);font-family:'Noto Serif TC',serif;">
+    ${discount?`<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:.4rem 0;color:var(--green);"><span>優惠折扣 (${esc(appliedCoupon.code)})</span><span style="display:none;">-NT$ ${discount.toLocaleString()}</span></div>`:''}
+    <div style="display:none;">
       <span>結緣總金額</span><span>NT$ ${total.toLocaleString()}</span>
     </div>`;
   s._total=total;
@@ -916,7 +2274,7 @@ function execFm(){ if(fmAction) fmAction(); }
 function renderPage(){
   const m=document.getElementById('bkMain');
   if(!m) return;
-  const pages={dashboard:pgDashboard,products:pgProducts,orders:pgOrders,customers:pgCustomers,announce:pgAnnounce,coupons:pgCoupons,subscribers:pgSubscribers,content:pgContent,design:pgDesign,settings:pgSettings};
+  const pages={dashboard:pgDashboard,products:pgProducts,orders:pgOrders,customers:pgCustomers,agents:pgAgents,makers:pgMakers,monks:pgMonks,warehouses:pgWarehouses,announce:pgAnnounce,coupons:pgCoupons,subscribers:pgSubscribers,content:pgContent,design:pgDesign,permissions:pgPermissions,settings:pgSettings};
   m.innerHTML='<div style="padding:2rem;text-align:center;color:var(--muted);"><div class="spinner" style="margin:0 auto 1rem;"></div>載入中...</div>';
   (pages[curPage]||pgDashboard)();
 }
@@ -927,17 +2285,25 @@ function renderPage(){
 async function pgDashboard(){
   const m=document.getElementById('bkMain');
   try{
-    const [ordRes,itemRes,custRes,subRes] = await Promise.all([
+    const [ordRes,itemRes,custRes,subRes,agentRes,makerRes,monkRes,whRes] = await Promise.all([
       sb.from('orders').select('id,total_amount,status,created_at',{count:'exact'}),
       sb.from('items').select('id,status',{count:'exact'}),
       sb.from('customers').select('id',{count:'exact'}),
-      sb.from('subscribers').select('id,active',{count:'exact'})
+      sb.from('subscribers').select('id,active',{count:'exact'}),
+      sb.from('agents').select('id',{count:'exact'}),
+      sb.from('makers').select('id',{count:'exact'}),
+      sb.from('monks').select('id',{count:'exact'}),
+      sb.from('warehouses').select('id',{count:'exact'})
     ]);
     const orders=ordRes.data||[];
     const items=itemRes.data||[];
     const totalRev=orders.reduce((s,o)=>s+(o.total_amount||0),0);
     const outStock=items.filter(p=>p.status==='out-of-stock');
     const activeSubs=(subRes.data||[]).filter(s=>s.active).length;
+    const agentsCount=agentRes.count||0;
+    const makersCount=makerRes.count||0;
+    const monksCount=monkRes.count||0;
+    const warehousesCount=whRes.count||0;
     const months=['11月','12月','1月','2月','3月','本月'];
     const monthVals=[...Array(5).fill(0).map(()=>Math.floor(Math.random()*20+5)),orders.length];
     const maxV=Math.max(...monthVals,1);
@@ -953,6 +2319,12 @@ async function pgDashboard(){
         <div class="stat-card"><div class="stat-icon si-green"><i class="fas fa-palette"></i></div><div class="stat-val">${items.filter(i=>i.status==='in-stock').length}</div><div class="stat-lbl">展示中藏品</div></div>
         <div class="stat-card"><div class="stat-icon si-amber"><i class="fas fa-coins"></i></div><div class="stat-val" style="font-size:1.35rem;">NT$${(totalRev/10000).toFixed(1)}萬</div><div class="stat-lbl">結緣總金額</div></div>
         <div class="stat-card"><div class="stat-icon si-purple"><i class="fas fa-envelope"></i></div><div class="stat-val">${activeSubs}</div><div class="stat-lbl">有效訂閱者</div></div>
+      </div>
+      <div class="stats-grid" style="margin-top:.75rem;">
+        <div class="stat-card" onclick="goPage('agents')" style="cursor:pointer;"><div class="stat-icon" style="background:rgba(16,185,129,.1);color:#059669;"><i class="fas fa-user-tie"></i></div><div class="stat-val">${agentsCount}</div><div class="stat-lbl">代理商</div></div>
+        <div class="stat-card" onclick="goPage('makers')" style="cursor:pointer;"><div class="stat-icon" style="background:rgba(59,130,246,.1);color:#2563eb;"><i class="fas fa-industry"></i></div><div class="stat-val">${makersCount}</div><div class="stat-lbl">合作廠商</div></div>
+        <div class="stat-card" onclick="goPage('monks')" style="cursor:pointer;"><div class="stat-icon" style="background:rgba(139,92,246,.1);color:#7c3aed;"><i class="fas fa-pray"></i></div><div class="stat-val">${monksCount}</div><div class="stat-lbl">僧人</div></div>
+        <div class="stat-card" onclick="goPage('warehouses')" style="cursor:pointer;"><div class="stat-icon" style="background:rgba(245,158,11,.1);color:#d97706;"><i class="fas fa-warehouse"></i></div><div class="stat-val">${warehousesCount}</div><div class="stat-lbl">倉庫</div></div>
       </div>
       <div class="chart-card">
         <div class="chart-title">近6個月訂單趨勢（網站）</div>
@@ -998,9 +2370,22 @@ function errPage(e){return`<div style="padding:2rem;color:var(--red);"><i class=
 async function pgProducts(){
   const m=document.getElementById('bkMain');
   try{
-    const { data,error } = await sb.from('items').select('id,code,name,image,region,painter,maker,price,notes,status').order('createdat',{ascending:false});
+    const { data,error } = await sb.from('items').select('*').order('created_at',{ascending:false});
     if(error) throw error;
-    const items=data||[];
+    
+    // Normalize image URLs for all products
+    const items=(data||[]).map(p => ({
+      ...p,
+      image: normalizeImageUrl(p.image)
+    }));
+    
+    // Count items by category
+    const catCounts={};
+    items.forEach(item=>{
+      const cat=getCategoryInfo(item.code);
+      catCounts[cat.key]=(catCounts[cat.key]||0)+1;
+    });
+    
     m.innerHTML=`
     <div class="pg-header">
       <div class="pg-header-l"><h1><i class="fas fa-palette"></i>商品管理</h1><p>管理前台顯示的藏品（共 ${items.length} 件）· 資料來源：Supabase items 表</p></div>
@@ -1010,44 +2395,126 @@ async function pgProducts(){
       <div class="info-box" style="margin-bottom:1.25rem;">
         <i class="fas fa-circle-info"></i> 此頁面用於管理前台展示狀態、商品標題、描述與價格。可隨時上下架商品。
       </div>
-      <div class="tc"><div class="tw"><table>
-        <thead><tr><th>圖片</th><th>商品名稱</th><th>售價</th><th>狀態</th><th>操作</th></tr></thead>
+      
+      <!-- Category Filter Tabs -->
+      <div style="display:flex;gap:.65rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+        <button class="cat-tab active" data-cat="all" onclick="filterAdminProducts('all')" style="padding:.5rem 1rem;font-size:.82rem;"><i class="fas fa-th-large"></i> 全部 (${items.length})</button>
+        ${Object.entries(catCounts).map(([key,count])=>{
+          const info=getCategoryInfo(key==='thangka'?'tk':key==='buddha'?'bu':key==='merchandise'?'su':key==='mantra'?'ma':'other');
+          return `<button class="cat-tab" data-cat="${key}" onclick="filterAdminProducts('${key}')" style="padding:.5rem 1rem;font-size:.82rem;"><i class="fas ${info.icon}"></i> ${esc(info.label)} (${count})</button>`;
+        }).join('')}
+      </div>
+      
+      <div class="tc"><div class="tw"><table id="adminProductsTable">
+        <thead><tr><th>圖片</th><th>SKU</th><th>分類</th><th>商品名稱</th><th>售價</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${items.map(p=>{
           const name=p.name||'未命名商品';
-          return`<tr>
+          const cat=getCategoryInfo(p.code);
+          return`<tr data-category="${cat.key}">
             <td><div style="width:3rem;height:4rem;background:#f0e6cc;border-radius:.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
               ${p.image?`<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;">`:`<i class="fas fa-dharmachakra" style="color:rgba(201,147,58,.35);font-size:1.1rem;"></i>`}
             </div></td>
+            <td><code style="font-size:.72rem;background:var(--border-light);padding:.2rem .45rem;border-radius:.35rem;">${esc(p.code||'—')}</code></td>
+            <td><span style="display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:2rem;font-size:.72rem;font-weight:600;background:rgba(201,147,58,.1);color:var(--gold);"><i class="fas ${cat.icon}"></i> ${esc(cat.label)}</span></td>
             <td><div style="font-weight:700;font-size:.88rem;">${esc(name)}</div></td>
             <td style="color:var(--gold);font-weight:600;">NT$ ${Number(p.price||0).toLocaleString()}</td>
             <td>${p.status==='in-stock'?'<span class="bdg bdg-green">上架中</span>':'<span class="bdg bdg-gray">下架</span>'}</td>
             <td><div class="ac">
-              <button class="ib ib-edit" onclick="editProductFull('${p.id}','${esc(name)}','${esc(p.notes||'')}','${p.price||0}','${p.status}','${p.image||''}')" title="編輯商品"><i class="fas fa-pen"></i></button>
+              <button class="ib ib-edit" onclick="editProductFull('${p.id}')" title="編輯商品"><i class="fas fa-pen"></i></button>
               <button class="ib ${p.status==='in-stock'?'ib-del':'ib-view'}" onclick="toggleProductStatus('${p.id}','${p.status}')" title="${p.status==='in-stock'?'下架':'上架'}"><i class="fas fa-${p.status==='in-stock'?'eye-slash':'eye'}"></i></button>
               <button class="ib ib-del" onclick="delProduct('${p.id}')" title="刪除"><i class="fas fa-trash"></i></button>
             </div></td>
-          </tr>`;}).join('')||'<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--muted);">尚無商品</td></tr>'}</tbody>
+          </tr>`;}).join('')||'<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted);">尚無商品</td></tr>'}</tbody>
       </table></div></div>
     </div>`;
   } catch(e){ m.innerHTML=errPage(e); }
 }
 
-function editProductFull(id,name,notes,price,status,image){
+function filterAdminProducts(category){
+  // Update tab UI
+  document.querySelectorAll('.pg-content .cat-tab').forEach(tab=>{
+    tab.classList.toggle('active',tab.dataset.cat===category);
+  });
+  
+  // Filter table rows
+  const rows=document.querySelectorAll('#adminProductsTable tbody tr');
+  rows.forEach(row=>{
+    if(category==='all' || row.dataset.category===category){
+      row.style.display='';
+    } else {
+      row.style.display='none';
+    }
+  });
+}
+
+async function editProductFull(id){
+  // 從資料庫獲取完整的商品資料
+  const { data:p, error } = await sb.from('items').select('*').eq('id',id).single();
+  if(error || !p){toast('載入商品資料失敗','error');return;}
+  
+  const cat=getCategoryInfo(p.code||'');
+  const normalizedImage = normalizeImageUrl(p.image);
+  
+  // Parse existing size dimensions if available
+  let sizeLength = '', sizeWidth = '', sizeHeight = '';
+  if(p.size_dimensions && p.size_dimensions.includes('×')) {
+    const parts = p.size_dimensions.split('×').map(s => s.replace('cm', '').replace(' ', '').trim());
+    if(parts.length >= 3) {
+      sizeLength = parts[0];
+      sizeWidth = parts[1];
+      sizeHeight = parts[2];
+    }
+  }
+  
   openFm(`<i class="fas fa-pen" style="color:var(--gold);"></i> 編輯商品`,`
-    <div class="fmg"><label class="fml">商品名稱 *</label><input class="fmc" id="ep_name" value="${esc(name)}"></div>
-    <div class="fmg"><label class="fml">商品描述</label><textarea class="fmc fmc-ta" id="ep_notes">${esc(notes)}</textarea></div>
-    <div class="fmg"><label class="fml">售價 (NT$)</label><input class="fmc" id="ep_price" type="number" min="0" value="${price||0}"></div>
-    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ep_image" value="${esc(image||'')}" placeholder="https://..."></div>
+    <div style="background:#f8f7f4;border-radius:.75rem;padding:.85rem;margin-bottom:1.1rem;display:flex;align-items:center;gap:.65rem;">
+      ${normalizedImage?`<img src="${normalizedImage}" style="width:3rem;height:3rem;object-fit:cover;border-radius:.5rem;">`:`<i class="fas fa-dharmachakra" style="font-size:1.1rem;color:var(--gold);"></i>`}
+      <div>
+        <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;">分類</div>
+        <div style="font-weight:700;font-size:.9rem;">${esc(cat.label)}</div>
+      </div>
+      ${p.code?`<div style="margin-left:auto;"><div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;">SKU</div><code style="font-size:.82rem;">${esc(p.code)}</code></div>`:''}
+    </div>
+    <div class="fmg"><label class="fml">商品名稱 *</label><input class="fmc" id="ep_name" value="${esc(p.name||'')}"></div>
+    <div class="fmg"><label class="fml">商品描述</label><textarea class="fmc fmc-ta" id="ep_description" placeholder="商品詳細描述">${esc(p.productdescription||'')}</textarea></div>
+    <div class="fmg"><label class="fml">尺寸（長 × 寬 × 高，單位：cm）</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
+        <input class="fmc" id="ep_size_length" type="number" min="0" step="0.1" placeholder="長" value="${sizeLength}">
+        <input class="fmc" id="ep_size_width" type="number" min="0" step="0.1" placeholder="寬" value="${sizeWidth}">
+        <input class="fmc" id="ep_size_height" type="number" min="0" step="0.1" placeholder="高" value="${sizeHeight}">
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.35rem;"><i class="fas fa-info-circle"></i> 例：20 × 26 × 3（cm）</div>
+    </div>
+    <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="ep_notes" placeholder="內部備註">${esc(p.notes||'')}</textarea></div>
+    <div class="fmg"><label class="fml">售價 (NT$)</label><input class="fmc" id="ep_price" type="number" min="0" value="${p.price||0}"></div>
+    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ep_image" value="${esc(p.image||'')}" placeholder="https://... 或 Supabase Storage 路徑" oninput="previewEditImage(this.value)"></div>
+    <div id="ep_image_preview" style="margin-top:.5rem;display:${normalizedImage?'block':'none'};">
+      <div style="font-size:.72rem;color:var(--muted);font-weight:700;margin-bottom:.35rem;">圖片預覽</div>
+      <div style="width:100%;height:150px;background:#f0e6cc;border-radius:.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+        ${normalizedImage?`<img src="${normalizedImage}" style="width:100%;height:100%;object-fit:cover;">`:`<i class="fas fa-dharmachakra" style="font-size:2rem;color:rgba(201,147,58,.3);"></i>`}
+      </div>
+    </div>
     <div class="fmg"><label class="fml">上架狀態</label>
       <select class="fmc fmc-sel" id="ep_status">
-        <option value="in-stock" ${status==='in-stock'?'selected':''}>上架（前台可見）</option>
-        <option value="hidden" ${status==='hidden'?'selected':''}>下架（前台隱藏）</option>
+        <option value="in-stock" ${p.status==='in-stock'?'selected':''}>上架（前台可見）</option>
+        <option value="hidden" ${p.status==='hidden'?'selected':''}>下架（前台隱藏）</option>
       </select></div>`,
     async()=>{
       try{
+        // Build size string from length × width × height
+        const sizeLength = gv('ep_size_length');
+        const sizeWidth = gv('ep_size_width');
+        const sizeHeight = gv('ep_size_height');
+        let sizeDimensions = '';
+        if(sizeLength && sizeWidth && sizeHeight) {
+          sizeDimensions = `${sizeLength} × ${sizeWidth} × ${sizeHeight} cm`;
+        }
+        
         const updateData={
           name:gv('ep_name'),
-          notes:gv('ep_notes'),
+          productdescription:gv('ep_description'),  // 修正：商品描述對應 productdescription
+          size_dimensions: sizeDimensions,  // 新增：尺寸欄位
+          notes:gv('ep_notes'),                      // 備註對應 notes
           price:Number(gv('ep_price'))||0,
           status:gv('ep_status')
         };
@@ -1059,12 +2526,63 @@ function editProductFull(id,name,notes,price,status,image){
     });
 }
 
+// Image preview function for edit form
+function previewEditImage(imageUrl) {
+  const previewDiv = document.getElementById('ep_image_preview');
+  if (!previewDiv) return;
+  
+  const normalizedUrl = normalizeImageUrl(imageUrl);
+  
+  if (normalizedUrl) {
+    previewDiv.style.display = 'block';
+    const imgContainer = previewDiv.querySelector('div:last-child');
+    imgContainer.innerHTML = normalizedUrl 
+      ? `<img src="${normalizedUrl}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<i class="fas fa-dharmachakra" style="font-size:2rem;color:rgba(201,147,58,.3);"></i>`;
+  } else {
+    previewDiv.style.display = 'none';
+  }
+}
+
+// Image preview function for add form
+function previewAddImage(imageUrl) {
+  const previewDiv = document.getElementById('ap_image_preview');
+  if (!previewDiv) return;
+  
+  const normalizedUrl = normalizeImageUrl(imageUrl);
+  
+  if (normalizedUrl) {
+    previewDiv.style.display = 'block';
+    const imgContainer = previewDiv.querySelector('div:last-child');
+    imgContainer.innerHTML = normalizedUrl 
+      ? `<img src="${normalizedUrl}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<i class="fas fa-dharmachakra" style="font-size:2rem;color:rgba(201,147,58,.3);"></i>`;
+  } else {
+    previewDiv.style.display = 'none';
+  }
+}
+
 function showAddProduct(){
   openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增商品',`
     <div class="fmg"><label class="fml">商品名稱 *</label><input class="fmc" id="ap_name" placeholder="輸入商品名稱"></div>
-    <div class="fmg"><label class="fml">商品描述</label><textarea class="fmc fmc-ta" id="ap_notes" placeholder="商品介紹"></textarea></div>
+    <div class="fmg"><label class="fml">商品描述</label><textarea class="fmc fmc-ta" id="ap_description" placeholder="商品詳細描述"></textarea></div>
+    <div class="fmg"><label class="fml">尺寸（長 × 寬 × 高，單位：cm）</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
+        <input class="fmc" id="ap_size_length" type="number" min="0" step="0.1" placeholder="長">
+        <input class="fmc" id="ap_size_width" type="number" min="0" step="0.1" placeholder="寬">
+        <input class="fmc" id="ap_size_height" type="number" min="0" step="0.1" placeholder="高">
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.35rem;"><i class="fas fa-info-circle"></i> 例：20 × 26 × 3（cm）</div>
+    </div>
+    <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="ap_notes" placeholder="內部備註"></textarea></div>
     <div class="fmg"><label class="fml">售價 (NT$) *</label><input class="fmc" id="ap_price" type="number" min="0" value="0"></div>
-    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ap_image" placeholder="https://..."></div>
+    <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ap_image" placeholder="https://... 或 Supabase Storage 路徑" oninput="previewAddImage(this.value)"></div>
+    <div id="ap_image_preview" style="margin-top:.5rem;display:none;">
+      <div style="font-size:.72rem;color:var(--muted);font-weight:700;margin-bottom:.35rem;">圖片預覽</div>
+      <div style="width:100%;height:150px;background:#f0e6cc;border-radius:.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+        <i class="fas fa-dharmachakra" style="font-size:2rem;color:rgba(201,147,58,.3);"></i>
+      </div>
+    </div>
     <div class="fmg"><label class="fml">初始狀態</label>
       <select class="fmc fmc-sel" id="ap_status">
         <option value="in-stock">立即上架</option>
@@ -1073,13 +2591,25 @@ function showAddProduct(){
     async()=>{
       const name=gv('ap_name');
       if(!name){toast('請輸入商品名稱','error');return;}
+      
+      // Build size string from length × width × height
+      const sizeLength = gv('ap_size_length');
+      const sizeWidth = gv('ap_size_width');
+      const sizeHeight = gv('ap_size_height');
+      let sizeDimensions = '';
+      if(sizeLength && sizeWidth && sizeHeight) {
+        sizeDimensions = `${sizeLength} × ${sizeWidth} × ${sizeHeight} cm`;
+      }
+      
       const { error } = await sb.from('items').insert({
         name:name,
-        notes:gv('ap_notes'),
+        productdescription:gv('ap_description'),  // 修正：商品描述對應 productdescription
+        size_dimensions: sizeDimensions,  // 新增：尺寸欄位
+        notes:gv('ap_notes'),                      // 備註對應 notes
         price:Number(gv('ap_price'))||0,
         image:gv('ap_image')||'',
         status:gv('ap_status'),
-        createdat:new Date().toISOString()
+        created_at:new Date().toISOString()  // 修正：使用 created_at 而非 createdat
       });
       if(error){toast('新增失敗：'+error.message,'error');return;}
       closeFm(); pgProducts(); toast('商品已新增');
@@ -1109,14 +2639,56 @@ async function pgOrders(){
     const { data,error } = await sb.from('orders').select('*').order('created_at',{ascending:false});
     if(error) throw error;
     const orders=data||[];
+    
+    // 計算統計數據
+    const statusCount={};
+    orders.forEach(o=>{
+      statusCount[o.status]=(statusCount[o.status]||0)+1;
+    });
+    const totalRevenue=orders.reduce((s,o)=>s+(o.total_amount||0),0);
+    const pendingCount=statusCount['待發貨']||0;
+    const shippedCount=statusCount['已出貨']||0;
+    const completedCount=statusCount['已完成']||0;
+    const cancelledCount=statusCount['已取消']||0;
+    
     m.innerHTML=`
     <div class="pg-header">
       <div class="pg-header-l"><h1><i class="fas fa-receipt"></i>訂單管理</h1><p>共 ${orders.length} 筆 · 資料來源：Supabase orders 表</p></div>
+      <div style="display:flex;gap:.5rem;">
+        <button class="btn btn-gold btn-sm" onclick="showBatchStatusUpdate()"><i class="fas fa-layer-group"></i> 批次更新狀態</button>
+        <button class="btn btn-ghost btn-sm" onclick="exportOrderNotes()"><i class="fas fa-file-export"></i> 匯出備註</button>
+        <button class="btn btn-ghost btn-sm" onclick="showOrderStats()"><i class="fas fa-chart-bar"></i> 統計報表</button>
+      </div>
     </div>
     <div class="pg-content">
+      <!-- 狀態統計卡片 -->
+      <div class="stats-grid" style="margin-bottom:1.25rem;">
+        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('待發貨')">
+          <div class="stat-icon si-amber"><i class="fas fa-clock"></i></div>
+          <div class="stat-val">${pendingCount}</div>
+          <div class="stat-lbl">待發貨</div>
+        </div>
+        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('已出貨')">
+          <div class="stat-icon si-blue"><i class="fas fa-truck"></i></div>
+          <div class="stat-val">${shippedCount}</div>
+          <div class="stat-lbl">已出貨</div>
+        </div>
+        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('已完成')">
+          <div class="stat-icon si-green"><i class="fas fa-check-circle"></i></div>
+          <div class="stat-val">${completedCount}</div>
+          <div class="stat-lbl">已完成</div>
+        </div>
+        <div class="stat-card" style="cursor:pointer;" onclick="filterByStatus('已取消')">
+          <div class="stat-icon si-red"><i class="fas fa-times-circle"></i></div>
+          <div class="stat-val">${cancelledCount}</div>
+          <div class="stat-lbl">已取消</div>
+        </div>
+      </div>
+      
       <div class="tc"><div class="tw"><table>
-        <thead><tr><th>訂單號</th><th>客戶</th><th>電話</th><th>金額</th><th>付款</th><th>狀態</th><th>時間</th><th>操作</th></tr></thead>
+        <thead><tr><th><input type="checkbox" id="selectAllOrders" onchange="toggleSelectAllOrders(this.checked)"></th><th>訂單號</th><th>客戶</th><th>電話</th><th>金額</th><th>付款</th><th>狀態</th><th>時間</th><th>操作</th></tr></thead>
         <tbody>${orders.map(o=>`<tr>
+          <td><input type="checkbox" class="order-checkbox" value="${o.id}" data-status="${esc(o.status)}"></td>
           <td><strong style="font-size:.8rem;">${esc(o.order_no||o.id.slice(0,8))}</strong></td>
           <td>${esc(o.customer_name||'')}</td>
           <td>${esc(o.customer_phone||'')}</td>
@@ -1129,7 +2701,7 @@ async function pgOrders(){
             <button class="ib ib-edit" onclick="editOrderStatus('${o.id}','${esc(o.status)}')" title="更新狀態"><i class="fas fa-pen"></i></button>
             <button class="ib ib-del" onclick="delOrder('${o.id}')" title="刪除"><i class="fas fa-trash"></i></button>
           </div></td>
-        </tr>`).join('')||'<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--muted);">暫無訂單</td></tr>'}</tbody>
+        </tr>`).join('')||'<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--muted);">暫無訂單</td></tr>'}</tbody>
       </table></div></div>
     </div>`;
   } catch(e){ m.innerHTML=errPage(e); }
@@ -1139,7 +2711,31 @@ async function viewOrder(id){
   const { data:o } = await sb.from('orders').select('*').eq('id',id).single();
   if(!o) return;
   const items=(o.items||[]);
+  
+  // 檢查是否有退款/退貨申請
+  const hasRefund=o.refund_status && o.refund_status!=='none';
+  const refundBadge=hasRefund?`
+    <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:.75rem;padding:1rem;margin-bottom:1rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;">
+        <i class="fas fa-exclamation-triangle" style="color:#dc2626;"></i>
+        <strong style="color:#991b1b;">退款/退貨申請</strong>
+      </div>
+      <div style="font-size:.88rem;color:#7f1d1d;margin-bottom:.5rem;">
+        <strong>狀態：</strong>${o.refund_status==='pending'?'<span style="color:#dc2626;">待處理</span>':o.refund_status==='approved'?'<span style="color:#059669;">已核准</span>':'<span style="color:#6b7280;">已拒絕</span>'}
+      </div>
+      ${o.refund_reason?`<div style="font-size:.88rem;color:#7f1d1d;margin-bottom:.5rem;"><strong>原因：</strong>${esc(o.refund_reason)}</div>`:''}
+      ${o.refund_amount?`<div style="font-size:.88rem;color:#7f1d1d;"><strong>退款金額：</strong>NT$ ${Number(o.refund_amount).toLocaleString()}</div>`:''}
+      ${o.refund_status==='pending'?`
+        <div style="display:flex;gap:.5rem;margin-top:.75rem;">
+          <button class="btn btn-sm" style="background:#059669;color:white;" onclick="handleRefund('${o.id}','approved')"><i class="fas fa-check"></i> 核准</button>
+          <button class="btn btn-sm" style="background:#dc2626;color:white;" onclick="handleRefund('${o.id}','rejected')"><i class="fas fa-times"></i> 拒絕</button>
+        </div>
+      `:''}
+    </div>
+  `:'';
+  
   openFm(`<i class="fas fa-receipt" style="color:var(--gold);"></i> ${esc(o.order_no||id.slice(0,8))}`,`
+    ${refundBadge}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.1rem;">
       ${[['客戶',o.customer_name],['電話',o.customer_phone],['信箱',o.customer_email||'—'],['地址',o.customer_address||'—'],['付款',o.payment_method||'—'],['狀態',o.status]].map(([l,v])=>`
       <div style="background:#f8f7f4;border-radius:.75rem;padding:.85rem;"><div style="font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:.2rem;">${l}</div><div style="font-weight:600;font-size:.88rem;">${esc(String(v||'—'))}</div></div>`).join('')}
@@ -1152,7 +2748,7 @@ async function viewOrder(id){
     <div style="display:flex;justify-content:space-between;padding:.8rem 0;font-weight:700;font-size:1rem;color:var(--gold);font-family:'Noto Serif TC',serif;">
       <span>總金額</span><span>NT$ ${Number(o.total_amount||0).toLocaleString()}</span>
     </div>
-    ${o.notes?`<div style="font-size:.82rem;color:var(--muted);margin-top:.5rem;">${esc(o.notes)}</div>`:''}`,
+    ${o.notes?`<div style="font-size:.82rem;color:var(--muted);margin-top:.5rem;padding:.75rem;background:#f8f7f4;border-radius:.5rem;"><strong>備註：</strong>${esc(o.notes)}</div>`:''}`,
     null,false);
 }
 
@@ -1178,13 +2774,252 @@ async function delOrder(id){
   pgOrders(); toast('訂單已刪除');
 }
 
+// 全選/取消全選訂單
+function toggleSelectAllOrders(checked){
+  document.querySelectorAll('.order-checkbox').forEach(cb=>cb.checked=checked);
+}
+
+// 依狀態篩選訂單
+function filterByStatus(status){
+  const checkboxes=document.querySelectorAll('.order-checkbox');
+  checkboxes.forEach(cb=>{
+    cb.checked=cb.dataset.status===status;
+  });
+  toast(`已篩選：${status}`);
+}
+
+// 批次更新訂單狀態
+function showBatchStatusUpdate(){
+  const selectedIds=Array.from(document.querySelectorAll('.order-checkbox:checked')).map(cb=>cb.value);
+  if(selectedIds.length===0){toast('請先選擇要更新的訂單','error');return;}
+  
+  openFm(`<i class="fas fa-layer-group" style="color:var(--gold);"></i> 批次更新狀態`,`
+    <div class="info-box" style="margin-bottom:1rem;background:#dbeafe;color:#1e40af;border-color:#93c5fd;">
+      <i class="fas fa-info-circle"></i> 已選擇 <strong>${selectedIds.length}</strong> 筆訂單
+    </div>
+    <div class="fmg"><label class="fml">新狀態</label>
+      <select class="fmc fmc-sel" id="batch_status">
+        <option value="待發貨">待發貨</option>
+        <option value="已出貨">已出貨</option>
+        <option value="已完成">已完成</option>
+        <option value="已取消">已取消</option>
+      </select>
+    </div>`,
+    async()=>{
+      const newStatus=gv('batch_status');
+      try{
+        let successCount=0;
+        for(const orderId of selectedIds){
+          const { error } = await sb.from('orders').update({status:newStatus}).eq('id',orderId);
+          if(!error) successCount++;
+        }
+        closeFm(); pgOrders();
+        toast(`成功更新 ${successCount}/${selectedIds.length} 筆訂單`);
+      } catch(e){
+        toast('批次更新失敗：'+e.message,'error');
+      }
+    });
+}
+
+// 處理退款/退貨申請
+async function handleRefund(orderId,action){
+  if(action==='approved'){
+    if(!confirm('確定要核准此退款申請？')) return;
+  } else {
+    if(!confirm('確定要拒絕此退款申請？')) return;
+  }
+  
+  try{
+    const { error } = await sb.from('orders').update({
+      refund_status:action,
+      refund_processed_at:new Date().toISOString()
+    }).eq('id',orderId);
+    
+    if(error) throw error;
+    closeFm(); pgOrders();
+    toast(action==='approved'?'退款已核准':'退款已拒絕');
+  } catch(e){
+    toast('處理失敗：'+e.message,'error');
+  }
+}
+
+// 匯出訂單備註為 CSV
+async function exportOrderNotes(){
+  try{
+    const { data,error } = await sb.from('orders').select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    
+    const orders=data||[];
+    if(orders.length===0){toast('暫無訂單可匯出','error');return;}
+    
+    // 建立 CSV 內容
+    const headers=['訂單號','客戶姓名','電話','Email','地址','總金額','狀態','付款方式','備註','建立時間'];
+    const rows=orders.map(o=>[
+      o.order_no||o.id.slice(0,8),
+      o.customer_name||'',
+      o.customer_phone||'',
+      o.customer_email||'',
+      o.customer_address||'',
+      o.total_amount||0,
+      o.status||'',
+      o.payment_method||'',
+      (o.notes||'').replace(/\n/g,' '),
+      o.created_at?new Date(o.created_at).toLocaleString('zh-TW'):''
+    ]);
+    
+    // 轉換為 CSV 格式
+    const csvContent=[
+      headers.join(','),
+      ...rows.map(row=>row.map(cell=>`"${String(cell).replace(/"/g,'""')}"`).join(','))
+    ].join('\n');
+    
+    // 下載檔案
+    const blob=new Blob(['\ufeff'+csvContent],{type:'text/csv;charset=utf-8;'});
+    const link=document.createElement('a');
+    link.href=URL.createObjectURL(blob);
+    link.download=`訂單備註_${new Date().toISOString().slice(0,10)}.csv`;
+    link.click();
+    
+    toast(`已匯出 ${orders.length} 筆訂單備註`);
+  } catch(e){
+    toast('匯出失敗：'+e.message,'error');
+  }
+}
+
+// 顯示訂單統計報表
+async function showOrderStats(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('orders').select('*');
+    if(error) throw error;
+    
+    const orders=data||[];
+    if(orders.length===0){toast('暫無訂單資料','error');return;}
+    
+    // 計算統計數據
+    const statusCount={};
+    const paymentMethodCount={};
+    let totalRevenue=0;
+    let monthlyData={};
+    
+    orders.forEach(o=>{
+      // 狀態統計
+      statusCount[o.status]=(statusCount[o.status]||0)+1;
+      
+      // 付款方式統計
+      const method=o.payment_method||'未指定';
+      paymentMethodCount[method]=(paymentMethodCount[method]||0)+1;
+      
+      // 總營收
+      totalRevenue+=(o.total_amount||0);
+      
+      // 月度統計
+      if(o.created_at){
+        const month=new Date(o.created_at).toISOString().slice(0,7);
+        if(!monthlyData[month]) monthlyData[month]={count:0,revenue:0};
+        monthlyData[month].count++;
+        monthlyData[month].revenue+=(o.total_amount||0);
+      }
+    });
+    
+    // 排序月份
+    const sortedMonths=Object.keys(monthlyData).sort();
+    const recentMonths=sortedMonths.slice(-6);
+    
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l">
+        <h1><i class="fas fa-chart-bar"></i>訂單統計報表</h1>
+        <p>共 ${orders.length} 筆訂單 · 總營收 NT$ ${totalRevenue.toLocaleString()}</p>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="goPage('orders')"><i class="fas fa-arrow-left"></i> 返回訂單列表</button>
+    </div>
+    <div class="pg-content">
+      <!-- 總覽卡片 -->
+      <div class="stats-grid" style="margin-bottom:1.5rem;">
+        <div class="stat-card">
+          <div class="stat-icon si-blue"><i class="fas fa-receipt"></i></div>
+          <div class="stat-val">${orders.length}</div>
+          <div class="stat-lbl">總訂單數</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon si-green"><i class="fas fa-coins"></i></div>
+          <div class="stat-val" style="font-size:1.2rem;">NT$ ${(totalRevenue/10000).toFixed(1)}萬</div>
+          <div class="stat-lbl">總營收</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon si-amber"><i class="fas fa-calculator"></i></div>
+          <div class="stat-val">NT$ ${Math.round(totalRevenue/orders.length).toLocaleString()}</div>
+          <div class="stat-lbl">平均訂單金額</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon si-purple"><i class="fas fa-calendar"></i></div>
+          <div class="stat-val">${recentMonths.length}</div>
+          <div class="stat-lbl">活躍月份</div>
+        </div>
+      </div>
+      
+      <!-- 狀態分佈 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;">
+        <div class="tc">
+          <div class="tc-hdr"><div><div class="tc-title">訂單狀態分佈</div></div></div>
+          <div style="padding:1.5rem;">
+            ${Object.entries(statusCount).map(([status,count])=>`
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border);">
+                <span>${oBadge(status)}</span>
+                <span style="font-weight:600;font-size:1.1rem;">${count}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        
+        <div class="tc">
+          <div class="tc-hdr"><div><div class="tc-title">付款方式分佈</div></div></div>
+          <div style="padding:1.5rem;">
+            ${Object.entries(paymentMethodCount).map(([method,count])=>`
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border);">
+                <span style="font-weight:500;">${esc(method)}</span>
+                <span style="font-weight:600;font-size:1.1rem;">${count}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+      
+      <!-- 月度趨勢圖表 -->
+      <div class="tc">
+        <div class="tc-hdr"><div><div class="tc-title">近 ${recentMonths.length} 個月訂單趨勢</div></div></div>
+        <div style="padding:1.5rem;">
+          <div style="display:flex;align-items:flex-end;justify-content:space-around;height:200px;gap:.5rem;">
+            ${recentMonths.map(month=>{
+              const data=monthlyData[month];
+              const maxCount=Math.max(...recentMonths.map(m=>monthlyData[m].count));
+              const height=Math.max((data.count/maxCount)*160,20);
+              return `
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.5rem;">
+                  <div style="width:100%;max-width:60px;height:${height}px;background:linear-gradient(180deg,var(--gold),var(--gold-light));border-radius:.5rem .5rem 0 0;transition:all .3s;"></div>
+                  <div style="font-size:.75rem;color:var(--muted);text-align:center;">${month}</div>
+                  <div style="font-size:.7rem;font-weight:600;">${data.count}筆</div>
+                  <div style="font-size:.65rem;color:var(--gold);">NT$${(data.revenue/1000).toFixed(0)}k</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  } catch(e){
+    m.innerHTML=errPage(e);
+  }
+}
+
 /* ============================================================
    PAGE: CUSTOMERS (customers table)
 ============================================================ */
 async function pgCustomers(){
   const m=document.getElementById('bkMain');
   try{
-    const { data,error } = await sb.from('customers').select('*').order('createdat',{ascending:false});
+    const { data,error } = await sb.from('customers').select('*').order('created_at',{ascending:false});
     if(error) throw error;
     const custs=data||[];
     m.innerHTML=`
@@ -1201,7 +3036,7 @@ async function pgCustomers(){
           <td>${esc(c.phone||'—')}</td>
           <td>${esc(c.address||'—')}</td>
           <td>${esc(c.notes||'—')}</td>
-          <td style="font-size:.78rem;color:var(--muted);">${c.createdat?new Date(c.createdat).toLocaleDateString('zh-TW'):c.createAt||'—'}</td>
+          <td style="font-size:.78rem;color:var(--muted);">${c.created_at?new Date(c.created_at).toLocaleDateString('zh-TW'):'—'}</td>
           <td><div class="ac">
             <button class="ib ib-edit" onclick="editCustomer('${c.id}','${esc(c.name)}','${esc(c.phone||'')}','${esc(c.address||'')}','${esc(c.notes||'')}')" title="編輯"><i class="fas fa-pen"></i></button>
             <button class="ib ib-del" onclick="delCustomer('${c.id}')" title="刪除"><i class="fas fa-trash"></i></button>
@@ -1226,7 +3061,7 @@ function showAddCustomer(){
   openFm('<i class="fas fa-user-plus" style="color:var(--gold);"></i> 新增客戶',custForm(),async()=>{
     const name=gv('fc_name');
     if(!name){toast('請輸入姓名','error');return;}
-    const { error } = await sb.from('customers').insert({name,phone:gv('fc_phone'),address:gv('fc_address'),notes:gv('fc_notes'),createdat:new Date().toISOString()});
+    const { error } = await sb.from('customers').insert({name,phone:gv('fc_phone'),address:gv('fc_address'),notes:gv('fc_notes'),created_at:new Date().toISOString()});
     if(error){toast('新增失敗：'+error.message,'error');return;}
     closeFm(); pgCustomers(); toast('客戶已新增');
   });
@@ -1250,55 +3085,419 @@ async function delCustomer(id){
 }
 
 /* ============================================================
-   PAGE: ANNOUNCEMENTS (localStorage)
+   PAGE: AGENTS (Supabase)
 ============================================================ */
-function pgAnnounce(){
+async function pgAgents(){
   const m=document.getElementById('bkMain');
-  m.innerHTML=`
-  <div class="pg-header">
-    <div class="pg-header-l"><h1><i class="fas fa-bullhorn"></i>公告管理</h1><p>管理前台頂部公告橫幅（本機儲存）</p></div>
-    <button class="btn btn-gold btn-sm" onclick="addAnnounce()"><i class="fas fa-plus"></i> 新增公告</button>
-  </div>
-  <div class="pg-content">
-    <div class="info-box" style="margin-bottom:1.25rem;"><i class="fas fa-circle-info"></i> 公告儲存於瀏覽器本機，每次只顯示一則（最新啟用的）。</div>
-    <div class="tc"><div class="tw"><table>
-      <thead><tr><th>公告內容</th><th>建立日期</th><th>狀態</th><th>操作</th></tr></thead>
-      <tbody>${announces.map(a=>`<tr>
-        <td style="max-width:320px;">${esc(a.text)}</td>
-        <td>${a.created}</td>
-        <td>${a.active?'<span class="bdg bdg-green">啟用中</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
-        <td><div class="ac">
-          <button class="ib ib-edit" onclick="toggleAnn(${a.id})" title="${a.active?'停用':'啟用'}"><i class="fas fa-${a.active?'pause':'play'}"></i></button>
-          <button class="ib ib-del" onclick="delAnn(${a.id})" title="刪除"><i class="fas fa-trash"></i></button>
-        </div></td>
-      </tr>`).join('')||'<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--muted);">暫無公告</td></tr>'}</tbody>
-    </table></div></div>
-  </div>`;
+  try{
+    const { data,error } = await sb.from('agents').select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    const agents=data||[];
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-user-tie"></i>代理管理</h1><p>共 ${agents.length} 位代理 · Supabase agents 表</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddAgent()"><i class="fas fa-plus"></i> 新增代理</button>
+    </div>
+    <div class="pg-content">
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>姓名</th><th>電話</th><th>Email</th><th>區域</th><th>狀態</th><th>操作</th></tr></thead>
+        <tbody>${agents.map(a=>`<tr>
+          <td><strong>${esc(a.name||'—')}</strong></td>
+          <td>${esc(a.phone||'—')}</td>
+          <td>${esc(a.email||'—')}</td>
+          <td>${esc(a.region||'—')}</td>
+          <td>${a.active?'<span class="bdg bdg-green">啟用</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
+          <td><div class="ac">
+            <button class="ib ib-edit" onclick="editAgent('${a.id}')" title="編輯"><i class="fas fa-edit"></i></button>
+            <button class="ib ib-del" onclick="delAgent('${a.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+          </div></td>
+        </tr>`).join('')||'<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted);">暫無代理資料</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
 }
 
-function addAnnounce(){
-  openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增公告',`
-    <div class="fmg"><label class="fml">公告內容 *</label><textarea class="fmc fmc-ta" id="an_text" placeholder="可使用 emoji 增加吸引力"></textarea></div>
-    <div class="fmg"><label class="fml">狀態</label><select class="fmc fmc-sel" id="an_active"><option value="1">立即啟用</option><option value="0">暫時停用</option></select></div>`,
-    ()=>{
-      const text=gv('an_text');
-      if(!text){toast('請輸入公告內容','error');return;}
-      if(gv('an_active')==='1') announces.forEach(a=>a.active=false);
-      const newId=announces.length?Math.max(...announces.map(a=>a.id))+1:1;
-      announces.push({id:newId,text,active:gv('an_active')==='1',created:today()});
-      lsave('announces',announces); closeFm(); pgAnnounce(); renderFrontAnnounce(); toast('公告已新增');
+function showAddAgent(agent=null){
+  const isEdit=!!agent;
+  openFm(`<i class="fas fa-${isEdit?'edit':'plus'}" style="color:var(--gold);"></i> ${isEdit?'編輯':'新增'}代理`,`
+    <div class="fmr">
+      <div class="fmg"><label class="fml">姓名 *</label><input class="fmc" id="ag_name" value="${esc(agent?.name||'')}"></div>
+      <div class="fmg"><label class="fml">電話</label><input class="fmc" id="ag_phone" value="${esc(agent?.phone||'')}"></div>
+    </div>
+    <div class="fmr">
+      <div class="fmg"><label class="fml">Email</label><input class="fmc" id="ag_email" type="email" value="${esc(agent?.email||'')}"></div>
+      <div class="fmg"><label class="fml">區域</label><input class="fmc" id="ag_region" value="${esc(agent?.region||'')}"></div>
+    </div>
+    <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="ag_notes" rows="3">${esc(agent?.notes||'')}</textarea></div>`,
+    async()=>{
+      const name=gv('ag_name');
+      if(!name){toast('請填寫姓名','error');return;}
+      const agentData={name,phone:gv('ag_phone'),email:gv('ag_email'),region:gv('ag_region'),notes:gv('ag_notes'),active:true};
+      if(isEdit){
+        const { error } = await sb.from('agents').update(agentData).eq('id',agent.id);
+        if(error){toast('更新失敗：'+error.message,'error');return;}
+        closeFm(); pgAgents(); toast('代理已更新');
+      } else {
+        agentData.created_at=new Date().toISOString();
+        const { error } = await sb.from('agents').insert(agentData);
+        if(error){toast('新增失敗：'+error.message,'error');return;}
+        closeFm(); pgAgents(); toast('代理已新增');
+      }
     });
 }
 
-function toggleAnn(id){
-  const a=announces.find(x=>x.id===id);if(!a)return;
-  if(!a.active) announces.forEach(x=>x.active=false);
-  a.active=!a.active; lsave('announces',announces); pgAnnounce(); renderFrontAnnounce();
-  toast(a.active?'公告已啟用':'公告已停用');
+async function editAgent(id){
+  const { data:agent,error } = await sb.from('agents').select('*').eq('id',id).single();
+  if(error||!agent){toast('找不到代理資料','error');return;}
+  showAddAgent(agent);
 }
-function delAnn(id){
+
+async function delAgent(id){
+  if(!confirm('確定要刪除此代理？')) return;
+  const { error } = await sb.from('agents').delete().eq('id',id);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgAgents(); toast('代理已刪除');
+}
+
+/* ============================================================
+   PAGE: MAKERS (Supabase)
+============================================================ */
+async function pgMakers(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('makers').select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    const makers=data||[];
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-industry"></i>廠商管理</h1><p>共 ${makers.length} 家廠商 · Supabase makers 表</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddMaker()"><i class="fas fa-plus"></i> 新增廠商</button>
+    </div>
+    <div class="pg-content">
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>廠商名稱</th><th>聯絡人</th><th>電話</th><th>Email</th><th>狀態</th><th>操作</th></tr></thead>
+        <tbody>${makers.map(mk=>`<tr>
+          <td><strong>${esc(mk.name||'—')}</strong></td>
+          <td>${esc(mk.contact_person||'—')}</td>
+          <td>${esc(mk.phone||'—')}</td>
+          <td>${esc(mk.email||'—')}</td>
+          <td>${mk.active?'<span class="bdg bdg-green">啟用</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
+          <td><div class="ac">
+            <button class="ib ib-edit" onclick="editMaker('${mk.id}')" title="編輯"><i class="fas fa-edit"></i></button>
+            <button class="ib ib-del" onclick="delMaker('${mk.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+          </div></td>
+        </tr>`).join('')||'<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted);">暫無廠商資料</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+function showAddMaker(maker=null){
+  const isEdit=!!maker;
+  openFm(`<i class="fas fa-${isEdit?'edit':'plus'}" style="color:var(--gold);"></i> ${isEdit?'編輯':'新增'}廠商`,`
+    <div class="fmr">
+      <div class="fmg"><label class="fml">廠商名稱 *</label><input class="fmc" id="mk_name" value="${esc(maker?.name||'')}"></div>
+      <div class="fmg"><label class="fml">聯絡人</label><input class="fmc" id="mk_contact" value="${esc(maker?.contact_person||'')}"></div>
+    </div>
+    <div class="fmr">
+      <div class="fmg"><label class="fml">電話</label><input class="fmc" id="mk_phone" value="${esc(maker?.phone||'')}"></div>
+      <div class="fmg"><label class="fml">Email</label><input class="fmc" id="mk_email" type="email" value="${esc(maker?.email||'')}"></div>
+    </div>
+    <div class="fmg"><label class="fml">地址</label><input class="fmc" id="mk_address" value="${esc(maker?.address||'')}"></div>
+    <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="mk_notes" rows="3">${esc(maker?.notes||'')}</textarea></div>`,
+    async()=>{
+      const name=gv('mk_name');
+      if(!name){toast('請填寫廠商名稱','error');return;}
+      const makerData={name,contact_person:gv('mk_contact'),phone:gv('mk_phone'),email:gv('mk_email'),address:gv('mk_address'),notes:gv('mk_notes'),active:true};
+      if(isEdit){
+        const { error } = await sb.from('makers').update(makerData).eq('id',maker.id);
+        if(error){toast('更新失敗：'+error.message,'error');return;}
+        closeFm(); pgMakers(); toast('廠商已更新');
+      } else {
+        makerData.created_at=new Date().toISOString();
+        const { error } = await sb.from('makers').insert(makerData);
+        if(error){toast('新增失敗：'+error.message,'error');return;}
+        closeFm(); pgMakers(); toast('廠商已新增');
+      }
+    });
+}
+
+async function editMaker(id){
+  const { data:maker,error } = await sb.from('makers').select('*').eq('id',id).single();
+  if(error||!maker){toast('找不到廠商資料','error');return;}
+  showAddMaker(maker);
+}
+
+async function delMaker(id){
+  if(!confirm('確定要刪除此廠商？')) return;
+  const { error } = await sb.from('makers').delete().eq('id',id);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgMakers(); toast('廠商已刪除');
+}
+
+/* ============================================================
+   PAGE: MONKS (Supabase)
+============================================================ */
+async function pgMonks(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('monks').select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    const monks=data||[];
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-pray"></i>僧人管理</h1><p>共 ${monks.length} 位僧人 · Supabase monks 表</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddMonk()"><i class="fas fa-plus"></i> 新增僧人</button>
+    </div>
+    <div class="pg-content">
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>法名</th><th>地區</th><th>電話</th><th>聯絡方式</th><th>認識來源</th><th>服務地區</th><th>操作</th></tr></thead>
+        <tbody>${monks.map(mk=>`<tr>
+          <td><strong>${esc(mk.name||'—')}</strong></td>
+          <td>${esc(mk.region||'—')}</td>
+          <td>${esc(mk.phone||'—')}</td>
+          <td>${esc(mk.contact||'—')}</td>
+          <td>${esc(mk.channel||'—')}</td>
+          <td>${esc(mk.serviceregion||'—')}</td>
+          <td><div class="ac">
+            <button class="ib ib-edit" onclick="editMonk('${mk.id}')" title="編輯"><i class="fas fa-edit"></i></button>
+            <button class="ib ib-del" onclick="delMonk('${mk.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+          </div></td>
+        </tr>`).join('')||'<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted);">暫無僧人資料</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+function showAddMonk(monk=null){
+  const isEdit=!!monk;
+  
+  // 地區選項
+  const regionOptions=['請選擇','西藏','尼泊爾','不丹','拉達克','蒙古','內地','其他'];
+  // 認識來源選項
+  const channelOptions=['請選擇','展會認識','網路搜尋','朋友介紹','主動開發','社群媒體','廠商自薦','其他'];
+  
+  openFm(`<i class="fas fa-${isEdit?'edit':'plus'}" style="color:var(--gold);"></i> ${isEdit?'編輯':'新增'}僧人`,`
+    <div class="fmr">
+      <div class="fmg"><label class="fml">法名 *</label><input class="fmc" id="mn_name" value="${esc(monk?.name||'')}"></div>
+      <div class="fmg"><label class="fml">地區 *</label>
+        <select class="fmc fmc-sel" id="mn_region">
+          ${regionOptions.map(r=>`<option value="${r==='請選擇'?'':r}" ${monk?.region===r?'selected':''}>${r}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="fmr">
+      <div class="fmg"><label class="fml">電話</label><input class="fmc" id="mn_phone" value="${esc(monk?.phone||'')}"></div>
+      <div class="fmg"><label class="fml">聯絡方式</label><input class="fmc" id="mn_contact" value="${esc(monk?.contact||'')}"></div>
+    </div>
+    <div class="fmr">
+      <div class="fmg"><label class="fml">認識來源</label>
+        <select class="fmc fmc-sel" id="mn_channel">
+          ${channelOptions.map(c=>`<option value="${c==='請選擇'?'':c}" ${monk?.channel===c?'selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fmg"><label class="fml">服務地區</label><input class="fmc" id="mn_serviceregion" value="${esc(monk?.serviceregion||'')}" placeholder="例：全台可約"></div>
+    </div>
+    <div class="fmr">
+      <div class="fmg"><label class="fml">微信帳號</label><input class="fmc" id="mn_wechat" value="${esc(monk?.wechat||'')}"></div>
+      <div class="fmg"><label class="fml">加持費用</label><input class="fmc" id="mn_blessingfee" type="number" step="0.01" value="${monk?.blessingfee||''}" placeholder="0"></div>
+    </div>`,
+    async()=>{
+      const name=gv('mn_name');
+      if(!name){toast('請填寫法名','error');return;}
+      const monkData={
+        name,
+        region:gv('mn_region'),
+        phone:gv('mn_phone'),
+        contact:gv('mn_contact'),
+        channel:gv('mn_channel'),
+        serviceregion:gv('mn_serviceregion'),
+        wechat:gv('mn_wechat'),
+        blessingfee:gv('mn_blessingfee')?parseFloat(gv('mn_blessingfee')):null
+      };
+      if(isEdit){
+        const { error } = await sb.from('monks').update(monkData).eq('id',monk.id);
+        if(error){toast('更新失敗：'+error.message,'error');return;}
+        closeFm(); pgMonks(); toast('僧人已更新');
+      } else {
+        // 生成 UUID 作為 ID
+        monkData.id=crypto.randomUUID();
+        monkData.created_at=new Date().toISOString();
+        const { error } = await sb.from('monks').insert(monkData);
+        if(error){toast('新增失敗：'+error.message,'error');return;}
+        closeFm(); pgMonks(); toast('僧人已新增');
+      }
+    });
+}
+
+async function editMonk(id){
+  const { data:monk,error } = await sb.from('monks').select('*').eq('id',id).single();
+  if(error||!monk){toast('找不到僧人資料','error');return;}
+  showAddMonk(monk);
+}
+
+async function delMonk(id){
+  if(!confirm('確定要刪除此僧人？')) return;
+  const { error } = await sb.from('monks').delete().eq('id',id);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgMonks(); toast('僧人已刪除');
+}
+
+/* ============================================================
+   PAGE: WAREHOUSES (Supabase)
+============================================================ */
+async function pgWarehouses(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('warehouses').select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    const warehouses=data||[];
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-warehouse"></i>倉庫管理</h1><p>共 ${warehouses.length} 個倉庫 · Supabase warehouses 表</p></div>
+      <button class="btn btn-gold btn-sm" onclick="showAddWarehouse()"><i class="fas fa-plus"></i> 新增倉庫</button>
+    </div>
+    <div class="pg-content">
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>倉庫名稱</th><th>位置</th><th>容量</th><th>聯絡人</th><th>狀態</th><th>操作</th></tr></thead>
+        <tbody>${warehouses.map(w=>`<tr>
+          <td><strong>${esc(w.name||'—')}</strong></td>
+          <td>${esc(w.location||'—')}</td>
+          <td>${w.capacity||'—'}</td>
+          <td>${esc(w.contact_person||'—')}</td>
+          <td>${w.active?'<span class="bdg bdg-green">啟用</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
+          <td><div class="ac">
+            <button class="ib ib-edit" onclick="editWarehouse('${w.id}')" title="編輯"><i class="fas fa-edit"></i></button>
+            <button class="ib ib-del" onclick="delWarehouse('${w.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+          </div></td>
+        </tr>`).join('')||'<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted);">暫無倉庫資料</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+function showAddWarehouse(wh=null){
+  const isEdit=!!wh;
+  openFm(`<i class="fas fa-${isEdit?'edit':'plus'}" style="color:var(--gold);"></i> ${isEdit?'編輯':'新增'}倉庫`,`
+    <div class="fmr">
+      <div class="fmg"><label class="fml">倉庫名稱 *</label><input class="fmc" id="wh_name" value="${esc(wh?.name||'')}"></div>
+      <div class="fmg"><label class="fml">位置</label><input class="fmc" id="wh_location" value="${esc(wh?.location||'')}"></div>
+    </div>
+    <div class="fmr">
+      <div class="fmg"><label class="fml">容量</label><input class="fmc" id="wh_capacity" type="number" min="0" value="${wh?.capacity||''}"></div>
+      <div class="fmg"><label class="fml">聯絡人</label><input class="fmc" id="wh_contact" value="${esc(wh?.contact_person||'')}"></div>
+    </div>
+    <div class="fmg"><label class="fml">地址</label><input class="fmc" id="wh_address" value="${esc(wh?.address||'')}"></div>
+    <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="wh_notes" rows="3">${esc(wh?.notes||'')}</textarea></div>`,
+    async()=>{
+      const name=gv('wh_name');
+      if(!name){toast('請填寫倉庫名稱','error');return;}
+      const whData={name,location:gv('wh_location'),capacity:Number(gv('wh_capacity'))||null,contact_person:gv('wh_contact'),address:gv('wh_address'),notes:gv('wh_notes'),active:true};
+      if(isEdit){
+        const { error } = await sb.from('warehouses').update(whData).eq('id',wh.id);
+        if(error){toast('更新失敗：'+error.message,'error');return;}
+        closeFm(); pgWarehouses(); toast('倉庫已更新');
+      } else {
+        whData.created_at=new Date().toISOString();
+        const { error } = await sb.from('warehouses').insert(whData);
+        if(error){toast('新增失敗：'+error.message,'error');return;}
+        closeFm(); pgWarehouses(); toast('倉庫已新增');
+      }
+    });
+}
+
+async function editWarehouse(id){
+  const { data:wh,error } = await sb.from('warehouses').select('*').eq('id',id).single();
+  if(error||!wh){toast('找不到倉庫資料','error');return;}
+  showAddWarehouse(wh);
+}
+
+async function delWarehouse(id){
+  if(!confirm('確定要刪除此倉庫？')) return;
+  const { error } = await sb.from('warehouses').delete().eq('id',id);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgWarehouses(); toast('倉庫已刪除');
+}
+
+/* ============================================================
+   PAGE: ANNOUNCEMENTS (Supabase Database)
+============================================================ */
+async function pgAnnounce(){
+  const m=document.getElementById('bkMain');
+  try{
+    const { data,error } = await sb.from('announcements').select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    const announces=data||[];
+    
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-bullhorn"></i>公告管理</h1><p>管理前台頂部公告橫幅（雲端儲存，所有客戶即時同步）</p></div>
+      <button class="btn btn-gold btn-sm" onclick="addAnnounce()"><i class="fas fa-plus"></i> 新增公告</button>
+    </div>
+    <div class="pg-content">
+      <div class="info-box" style="margin-bottom:1.25rem;background:#dbeafe;color:#1e40af;border-color:#93c5fd;"><i class="fas fa-cloud"></i> 公告已儲存於 Supabase 雲端數據庫，所有客戶都能看到最新公告。</div>
+      <div class="tc"><div class="tw"><table>
+        <thead><tr><th>公告內容</th><th>建立日期</th><th>狀態</th><th>操作</th></tr></thead>
+        <tbody>${announces.map(a=>`<tr>
+          <td style="max-width:320px;">${esc(a.text)}</td>
+          <td>${new Date(a.created_at).toLocaleDateString('zh-TW')}</td>
+          <td>${a.active?'<span class="bdg bdg-green">啟用中</span>':'<span class="bdg bdg-gray">停用</span>'}</td>
+          <td><div class="ac">
+            <button class="ib ib-edit" onclick="toggleAnn('${a.id}')" title="${a.active?'停用':'啟用'}"><i class="fas fa-${a.active?'pause':'play'}"></i></button>
+            <button class="ib ib-del" onclick="delAnn('${a.id}')" title="刪除"><i class="fas fa-trash"></i></button>
+          </div></td>
+        </tr>`).join('')||'<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--muted);">暫無公告</td></tr>'}</tbody>
+      </table></div></div>
+    </div>`;
+  } catch(e){ m.innerHTML=errPage(e); }
+}
+
+async function addAnnounce(){
+  openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增公告',`
+    <div class="fmg"><label class="fml">公告內容 *</label><textarea class="fmc fmc-ta" id="an_text" placeholder="可使用 emoji 增加吸引力"></textarea></div>
+    <div class="fmg"><label class="fml">狀態</label><select class="fmc fmc-sel" id="an_active"><option value="1">立即啟用</option><option value="0">暫時停用</option></select></div>`,
+    async ()=>{
+      const text=gv('an_text');
+      if(!text){toast('請輸入公告內容','error');return;}
+      
+      // 如果選擇啟用，先停用其他所有公告
+      if(gv('an_active')==='1') {
+        await sb.from('announcements').update({active:false}).eq('active',true);
+      }
+      
+      const { error } = await sb.from('announcements').insert({
+        text,
+        active:gv('an_active')==='1'
+      });
+      
+      if(error){toast('新增失敗：'+error.message,'error');return;}
+      closeFm(); pgAnnounce(); renderFrontAnnounce(); toast('公告已新增');
+    });
+}
+
+async function toggleAnn(id){
+  const { data:ann } = await sb.from('announcements').select('*').eq('id',id).single();
+  if(!ann) return;
+  
+  // 如果啟用的話，先停用其他所有公告
+  if(!ann.active) {
+    await sb.from('announcements').update({active:false}).eq('active',true);
+  }
+  
+  const { error } = await sb.from('announcements').update({
+    active:!ann.active
+  }).eq('id',id);
+  
+  if(error){toast('更新失敗：'+error.message,'error');return;}
+  pgAnnounce(); renderFrontAnnounce();
+  toast(!ann.active?'公告已啟用':'公告已停用');
+}
+
+async function delAnn(id){
   if(!confirm('確定要刪除此公告？')) return;
-  announces=announces.filter(a=>a.id!==id); lsave('announces',announces); pgAnnounce(); renderFrontAnnounce(); toast('公告已刪除');
+  const { error } = await sb.from('announcements').delete().eq('id',id);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  pgAnnounce(); renderFrontAnnounce(); toast('公告已刪除');
 }
 
 /* ============================================================
@@ -1487,6 +3686,205 @@ function saveDesign(){
 }
 
 /* ============================================================
+   PAGE: PERMISSIONS (權限管理)
+============================================================ */
+async function pgPermissions(){
+  const m=document.getElementById('bkMain');
+  try{
+    // 獲取所有 profiles
+    const { data:profiles,error } = await sb.from('profiles').select('*');
+    if(error) throw error;
+    
+    const userList=profiles||[];
+    
+    m.innerHTML=`
+    <div class="pg-header">
+      <div class="pg-header-l"><h1><i class="fas fa-user-shield"></i>權限管理</h1><p>管理後台成員的存取權限（資料來自 Supabase profiles）</p></div>
+      <button class="btn btn-gold btn-sm" onclick="addPermission()"><i class="fas fa-plus"></i> 新增成員</button>
+    </div>
+    <div class="pg-content">
+      <div class="info-box" style="margin-bottom:1.25rem;background:#fef3c7;color:#92400e;border-color:#fcd34d;">
+        <i class="fas fa-info-circle"></i> 
+        <strong>提示：</strong>用戶 ID 對應 Supabase Authentication 中的用戶。如需查看電子郵件，請前往 Supabase Dashboard → Authentication → Users。
+      </div>
+      <div class="info-box" style="margin-bottom:1.25rem;background:#dbeafe;color:#1e40af;border-color:#93c5fd;">
+        <i class="fas fa-info-circle"></i> 
+        <strong>權限等級說明：</strong>
+        <ul style="margin:.5rem 0 0 1.5rem;font-size:.85rem;">
+          <li><strong>Admin（管理員）</strong>：完整權限，可管理所有功能及用戶權限</li>
+          <li><strong>Editor（一般成員）</strong>：可編輯商品、訂單等內容，但無法管理權限</li>
+          <li><strong>Viewer（查看者）</strong>：僅可查看數據，無法修改任何內容</li>
+        </ul>
+      </div>
+      <div class="tc">
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:35%;">用戶 ID</th>
+                <th style="width:15%;">顯示名稱</th>
+                <th style="width:15%;">權限等級</th>
+                <th style="width:35%;">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${userList.length===0?`<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--muted);">尚無用戶資料</td></tr>`:
+                userList.map(u=>`
+                  <tr>
+                    <td style="font-family:monospace;font-size:.75rem;color:var(--muted);">${u.id?u.id.substring(0,8)+'...':''}</td>
+                    <td>${esc(u.display_name||'-')}</td>
+                    <td>
+                      <span style="padding:.25rem .75rem;border-radius:2rem;font-size:.78rem;font-weight:600;display:inline-block;${
+                        u.role==='admin'?'background:#fef3c7;color:#92400e;border:1px solid #fcd34d;':
+                        u.role==='editor'?'background:#dbeafe;color:#1e40af;border:1px solid #93c5fd;':
+                        'background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;'
+                      }">
+                        ${u.role==='admin'?'👑 Admin':u.role==='editor'?'✏️ Editor':'👁️ Viewer'}
+                      </span>
+                    </td>
+                    <td>
+                      <button class="btn btn-ghost btn-sm" onclick="editPermission('${u.id}')" style="margin-right:.5rem;">
+                        <i class="fas fa-edit"></i> 編輯
+                      </button>
+                      ${u.role!=='admin'?`<button class="btn btn-danger btn-sm" onclick="deletePermission('${u.id}')">
+                        <i class="fas fa-trash"></i> 刪除
+                      </button>`:''}
+                    </td>
+                  </tr>
+                `).join('')
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>`;
+  } catch(e){
+    m.innerHTML=errPage(e);
+  }
+}
+
+// 新增成員權限
+async function addPermission(){
+  openFm('<i class="fas fa-plus" style="color:var(--gold);"></i> 新增成員',`
+    <div class="info-box" style="margin-bottom:1rem;background:#fef3c7;color:#92400e;border-color:#fcd34d;">
+      <i class="fas fa-info-circle"></i> 
+      <strong>步驟：</strong><br>
+      1. 前往 Supabase Dashboard → Authentication → Users<br>
+      2. 複製要新增的用戶 ID (UUID)<br>
+      3. 在此處貼上並設定權限
+    </div>
+    <div class="fmg">
+      <label class="fml">用戶 ID (UUID) *</label>
+      <input class="fmc" id="perm_user_id" placeholder="例如：550e8400-e29b-41d4-a716-446655440000" required>
+      <small style="color:var(--muted);font-size:.78rem;">必須是有效的 UUID 格式</small>
+    </div>
+    <div class="fmg">
+      <label class="fml">顯示名稱</label>
+      <input class="fmc" id="perm_display_name" placeholder="例如：王小明">
+    </div>
+    <div class="fmg">
+      <label class="fml">權限等級 *</label>
+      <select class="fmc" id="perm_role">
+        <option value="viewer">Viewer（查看者）</option>
+        <option value="editor">Editor（一般成員）</option>
+        <option value="admin">Admin（管理員）</option>
+      </select>
+    </div>
+  `,
+  async ()=>{
+    const userId=gv('perm_user_id');
+    const displayName=gv('perm_display_name');
+    const role=gv('perm_role');
+    
+    if(!userId||!userId.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i)){
+      toast('請輸入有效的 UUID','error');
+      return;
+    }
+    
+    // 檢查是否已存在 profiles
+    const { data:existing,error:checkError } = await sb.from('profiles').select('id').eq('id',userId).single();
+    
+    let result;
+    if(existing){
+      // 更新現有 profile
+      result=await sb.from('profiles').update({
+        display_name:displayName,
+        role
+      }).eq('id',userId);
+      
+      if(result.error){toast('更新失敗：'+result.error.message,'error');return;}
+      closeFm();
+      await pgPermissions();
+      toast('權限已更新');
+    } else {
+      // 創建新 profile
+      result=await sb.from('profiles').insert({
+        id:userId,
+        display_name:displayName,
+        role
+      });
+      
+      if(result.error){toast('新增失敗：'+result.error.message,'error');return;}
+      closeFm();
+      await pgPermissions();
+      toast('成員已新增');
+    }
+  });
+}
+
+// 編輯成員權限
+async function editPermission(userId){
+  const { data:profile,error } = await sb.from('profiles').select('*').eq('id',userId).single();
+  if(error||!profile){toast('找不到用戶資料','error');return;}
+  
+  openFm('<i class="fas fa-edit" style="color:var(--gold);"></i> 編輯權限',`
+    <div class="fmg">
+      <label class="fml">用戶 ID</label>
+      <input class="fmc" value="${esc(profile.id)}" disabled style="background:#f1f5f9;font-family:monospace;font-size:.85rem;">
+    </div>
+    <div class="info-box" style="margin-bottom:1rem;background:#fef3c7;color:#92400e;border-color:#fcd34d;font-size:.82rem;">
+      <i class="fas fa-info-circle"></i> 如需查看電子郵件，請前往 Supabase Dashboard → Authentication → Users
+    </div>
+    <div class="fmg">
+      <label class="fml">顯示名稱</label>
+      <input class="fmc" id="perm_display_name" value="${esc(profile.display_name||'')}">
+    </div>
+    <div class="fmg">
+      <label class="fml">權限等級 *</label>
+      <select class="fmc" id="perm_role">
+        <option value="viewer" ${profile.role==='viewer'?'selected':''}>Viewer（查看者）</option>
+        <option value="editor" ${profile.role==='editor'?'selected':''}>Editor（一般成員）</option>
+        <option value="admin" ${profile.role==='admin'?'selected':''}>Admin（管理員）</option>
+      </select>
+    </div>
+  `,
+  async ()=>{
+    const displayName=gv('perm_display_name');
+    const role=gv('perm_role');
+    
+    const { error } = await sb.from('profiles').update({
+      display_name:displayName,
+      role
+    }).eq('id',userId);
+    
+    if(error){toast('更新失敗：'+error.message,'error');return;}
+    closeFm();
+    await pgPermissions();
+    toast('權限已更新');
+  });
+}
+
+// 刪除成員權限
+async function deletePermission(userId){
+  if(!confirm(`確定要刪除此用戶的權限設定？\n\n用戶 ID: ${userId.substring(0,8)}...\n\n注意：這不會刪除 Supabase Auth 帳號，只會移除 profiles 記錄。`)) return;
+  
+  const { error } = await sb.from('profiles').delete().eq('id',userId);
+  if(error){toast('刪除失敗：'+error.message,'error');return;}
+  await pgPermissions();
+  toast('權限已刪除');
+}
+
+/* ============================================================
    PAGE: SETTINGS
 ============================================================ */
 function pgSettings(){
@@ -1524,6 +3922,130 @@ function saveSysConfig(){
   sysConfig.supportEmail=gv('sys_email');sysConfig.address=gv('sys_addr');sysConfig.copyright=gv('sys_copy');
   lsave('config',sysConfig);applySettings();toast('系統設定已儲存');
 }
+
+/* ============================================================
+   IMAGE ZOOM FUNCTIONALITY
+============================================================ */
+function openImageZoom(imageUrl){
+  if(!imageUrl || imageUrl.trim()==='') return;
+  
+  const modal=document.getElementById('imageZoomModal');
+  const img=document.getElementById('zoomImage');
+  
+  if(modal && img){
+    img.src=imageUrl;
+    modal.classList.add('show');
+    document.body.style.overflow='hidden'; // Prevent scrolling
+  }
+}
+
+function closeImageZoom(){
+  const modal=document.getElementById('imageZoomModal');
+  if(modal){
+    modal.classList.remove('show');
+    document.body.style.overflow=''; // Restore scrolling
+    setTimeout(()=>{
+      const img=document.getElementById('zoomImage');
+      if(img) img.src=''; // Clear image source
+    },300);
+  }
+}
+
+// Initialize zoom functionality on page load
+document.addEventListener('DOMContentLoaded',function(){
+  // Close on background click
+  const modal=document.getElementById('imageZoomModal');
+  if(modal){
+    modal.addEventListener('click',function(e){
+      if(e.target===modal) closeImageZoom();
+    });
+  }
+  
+  // Close on Escape key
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') closeImageZoom();
+  });
+  
+  // Mouse wheel zoom
+  const zoomImg=document.getElementById('zoomImage');
+  if(zoomImg){
+    let currentScale=1;
+    const minScale=0.5;
+    const maxScale=3;
+    
+    zoomImg.addEventListener('wheel',function(e){
+      e.preventDefault();
+      
+      if(e.deltaY<0){
+        // Zoom in
+        currentScale=Math.min(currentScale+0.2,maxScale);
+      } else {
+        // Zoom out
+        currentScale=Math.max(currentScale-0.2,minScale);
+      }
+      
+      this.style.transform=`scale(${currentScale})`;
+    });
+    
+    // Reset zoom when opening new image
+    const originalOpen=openImageZoom;
+    window.openImageZoom=function(imageUrl){
+      currentScale=1;
+      if(zoomImg) zoomImg.style.transform='scale(1)';
+      originalOpen(imageUrl);
+    };
+  }
+});
 </script>
+
+<!-- Image Zoom Modal -->
+<div id="imageZoomModal" class="image-zoom-modal">
+  <div class="image-zoom-container">
+    <button class="image-zoom-close" onclick="closeImageZoom()" title="關閉">
+      <i class="fas fa-times"></i>
+    </button>
+    <img id="zoomImage" src="" alt="放大查看">
+    <div class="image-zoom-hint">
+      <i class="fas fa-mouse-pointer"></i> 點擊背景或按 ESC 關閉 | 滾輪縮放
+    </div>
+  </div>
+</div>
+
+<!-- ===== LINE MODAL ===== -->
+<div id="lineModal" class="modal-overlay">
+  <div class="modal-box" style="max-width:450px;">
+    <div class="mhdr">
+      <h3><i class="fab fa-line" style="color:#06C755;"></i> 加入 LINE 官方帳號</h3>
+      <button class="mbtn-close" onclick="closeLineModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mbody" style="text-align:center;padding:2rem 1.5rem;">
+      <div style="margin-bottom:1.5rem;">
+        <i class="fas fa-comments" style="font-size:3rem;color:var(--gold);margin-bottom:1rem;display:block;"></i>
+        <h3 style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.5rem;">歡迎加入 LINE 官方帳號</h3>
+        <p style="font-size:.95rem;color:var(--muted);line-height:1.7;">
+          立即添加好友，獲取專屬服務：<br>
+          <span style="color:var(--gold);font-weight:600;">開光服務</span>・<span style="color:var(--gold);font-weight:600;">藝術諮詢</span>・<span style="color:var(--gold);font-weight:600;">定制服務</span>
+        </p>
+      </div>
+      <div style="background:#f0fdf4;border:2px solid #06C755;border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem;">
+        <p style="font-size:.85rem;color:#06C755;font-weight:700;margin-bottom:.75rem;">
+          <i class="fas fa-qrcode"></i> 掃描 QR Code 或直接點擊
+        </p>
+        <div style="margin-bottom:1rem;">
+          <i class="fab fa-line" style="font-size:4rem;color:#06C755;"></i>
+        </div>
+        <a href="https://lin.ee/Zp9jWfq" target="_blank" rel="noopener" class="btn" style="background:#06C755;color:white;padding:.85rem 2rem;font-size:1rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;">
+          <i class="fab fa-line"></i> 加入 LINE 好友
+        </a>
+      </div>
+      <div style="font-size:.85rem;color:var(--muted);line-height:1.6;">
+        <p><i class="fas fa-check-circle" style="color:#06C755;"></i> 專屬客服一對一服務</p>
+        <p><i class="fas fa-check-circle" style="color:#06C755;"></i> 新品上架第一時間通知</p>
+        <p><i class="fas fa-check-circle" style="color:#06C755;"></i> 限量唐卡優先預購資格</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
