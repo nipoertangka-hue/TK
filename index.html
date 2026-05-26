@@ -1347,7 +1347,8 @@ let pageContent = lload('content',{
   serviceItems:['100%手工繪製唐卡','天然礦物顏料','可選開光加持服務','國際運送與保險']
 });
 let pageDesign = lload('design',{primaryColor:'#c9933a',heroGradientFrom:'#c9933a',heroGradientTo:'#e8b865',sectionBackground:'#f7f6f2'});
-let sysConfig  = lload('config',{companyName:'唐卡藝術館',supportPhone:'+886 2 2345 6789',supportEmail:'info@thangka-art.com',address:'台北市信義區唐卡路一段1號',copyright:'© 2024 唐卡藝術館. 版權所有.'});
+// ✅ 初始化時不從 localStorage 載入，改為空物件，等待資料庫載入
+let sysConfig = {companyName:'唐卡藝術館',supportPhone:'+886 2 2345 6789',supportEmail:'info@thangka-art.com',address:'台北市信義區唐卡路一段1號',copyright:'© 2024 唐卡藝術館. 版權所有.'};
 // 公告已移至 Supabase 數據庫，不再使用 localStorage
 let cart       = lload('cart',[]);
 
@@ -2036,6 +2037,9 @@ async function loadSysConfigFromDB(){
       
       // 標記已從資料庫載入
       localStorage.setItem('sysConfig_loaded_from_db', 'true');
+      
+      // ✅ 清除 localStorage 舊緩存，確保下次從資料庫載入
+      localStorage.removeItem(LKEYS['config']);
       
       console.log('✅ 系統設定已從資料庫載入');
       return true; // 返回 true 表示成功載入
