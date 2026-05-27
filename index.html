@@ -140,7 +140,7 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
   text-align:center;
   color:var(--gold);
 }
-.lang-option i{font-size:.75rem;color:var(--muted);}
+.lang-option i{font-size:.75rem;color:var(--muted);}`n`n/* 手機版語言選項 */`n.mobile-lang-option{`n  padding:.6rem 1rem;`n  border-radius:.5rem;`n  cursor:pointer;`n  transition:all .2s ease;`n  color:var(--text);`n  font-weight:500;`n  font-size:.85rem;`n  display:flex;`n  align-items:center;`n  gap:.75rem;`n  touch-action:manipulation;`n  -webkit-tap-highlight-color:transparent;`n}`n.mobile-lang-option:active{`n  background:rgba(201,147,58,.08);`n  transform:scale(.98);`n}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
 .cart-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.1rem;border-radius:2rem;border:1.5px solid var(--border);background:#fff;color:var(--text);font-weight:600;font-size:.88rem;transition:var(--tr);}
 .cart-btn:hover{border-color:var(--gold);color:var(--gold);}
@@ -161,6 +161,227 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .btn-ghost:hover{background:rgba(201,147,58,.15);}
 .btn-line{background:linear-gradient(135deg,#06C755,#05a647);color:#fff;box-shadow:0 4px 18px rgba(6,199,85,.32);}
 .btn-line:hover{transform:translateY(-2px);box-shadow:0 7px 26px rgba(6,199,85,.42);}
+
+/* ===== LINE CONTACT FLOATING BUTTON ===== */
+.line-contact-btn{
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  width:56px;
+  height:56px;
+  background:linear-gradient(135deg,#06C755,#05a647);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(6,199,85,.4);
+  transition:all .3s ease;
+  z-index:999;
+  animation:pulse-line 2s infinite;
+}
+.line-contact-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 6px 28px rgba(6,199,85,.5);
+}
+.line-contact-btn i{
+  font-size:1.8rem;
+  color:#fff;
+}
+.line-tooltip{
+  position:absolute;
+  right:65px;
+  top:50%;
+  transform:translateY(-50%);
+  background:#333;
+  color:#fff;
+  padding:.4rem .8rem;
+  border-radius:.5rem;
+  font-size:.75rem;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+}
+.line-contact-btn:hover .line-tooltip{
+  opacity:1;
+}
+
+@keyframes pulse-line{
+  0%,100%{box-shadow:0 4px 20px rgba(6,199,85,.4);}
+  50%{box-shadow:0 4px 30px rgba(6,199,85,.6),0 0 0 10px rgba(6,199,85,.1);}
+}
+
+/* LINE Contact Modal */
+.line-contact-modal{
+  position:fixed;
+  bottom:160px;
+  right:20px;
+  width:320px;
+  max-width:calc(100vw - 40px);
+  background:#fff;
+  border-radius:1rem;
+  box-shadow:0 8px 32px rgba(0,0,0,.15);
+  z-index:1000;
+  overflow:hidden;
+  animation:slideUp .3s ease;
+}
+
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.line-modal-header{
+  background:linear-gradient(135deg,#06C755,#05a647);
+  color:#fff;
+  padding:1.2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.line-modal-header h3{
+  margin:0;
+  font-size:1.1rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+.line-modal-close{
+  background:rgba(255,255,255,.2);
+  border:none;
+  color:#fff;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .2s;
+}
+.line-modal-close:hover{
+  background:rgba(255,255,255,.3);
+}
+
+.line-modal-body{
+  padding:1.5rem;
+}
+.line-modal-desc{
+  color:var(--muted);
+  font-size:.85rem;
+  line-height:1.6;
+  margin-bottom:1.2rem;
+  text-align:center;
+}
+
+.line-qr-section{
+  text-align:center;
+  padding:1rem;
+  background:rgba(6,199,85,.05);
+  border-radius:.75rem;
+  margin-bottom:1rem;
+}
+.line-qr-code{
+  width:120px;
+  height:120px;
+  margin:0 auto .8rem;
+  background:#fff;
+  border-radius:.75rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+.line-id-label{
+  font-size:.75rem;
+  color:var(--muted);
+  margin-bottom:.3rem;
+}
+.line-id-value{
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:.8rem;
+  font-family:monospace;
+}
+.btn-line-copy{
+  background:#f5f5f5;
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:.5rem 1rem;
+  border-radius:.5rem;
+  cursor:pointer;
+  font-size:.8rem;
+  font-weight:600;
+  transition:all .2s;
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+}
+.btn-line-copy:hover{
+  background:#e5e5e5;
+  border-color:#ccc;
+}
+
+.btn-line-add{
+  display:block;
+  width:100%;
+  padding:.9rem;
+  background:linear-gradient(135deg,#06C755,#05a647);
+  color:#fff;
+  text-align:center;
+  text-decoration:none;
+  border-radius:.75rem;
+  font-weight:700;
+  font-size:.95rem;
+  margin-bottom:1rem;
+  transition:all .2s;
+  box-shadow:0 4px 12px rgba(6,199,85,.3);
+}
+.btn-line-add:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(6,199,85,.4);
+}
+
+.line-contact-info{
+  border-top:1px solid var(--border);
+  padding-top:1rem;
+}
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  padding:.5rem 0;
+  color:var(--muted);
+  font-size:.8rem;
+}
+.contact-item i{
+  color:#06C755;
+  width:16px;
+  text-align:center;
+}
+
+/* Mobile adjustments for LINE button */
+@media(max-width:768px){
+  .line-contact-btn{
+    bottom:80px;
+    right:15px;
+    width:50px;
+    height:50px;
+  }
+  .line-contact-btn i{
+    font-size:1.6rem;
+  }
+  .line-tooltip{
+    display:none;
+  }
+  .line-contact-modal{
+    bottom:140px;
+    right:15px;
+    width:calc(100vw - 30px);
+  }
+}
 .btn-danger{background:linear-gradient(135deg,#f87171,#ef4444);color:#fff;border:none;}
 .btn-sm{padding:.5rem 1rem;font-size:.82rem;border-radius:1.5rem;}
 /* Category Tabs */
@@ -339,7 +560,7 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .cart-item{display:flex;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--border);align-items:center;}
 .cart-item:last-child{border-bottom:none;}
 .cart-item-img{width:70px;height:70px;border-radius:.5rem;overflow:hidden;background:linear-gradient(155deg,#f9f3e8,#edddb8);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-.cart-item-img img{width:100%;height:100%;object-fit:cover;}
+.cart-item-img img{width:100%;height:100%;object-fit:cover;display:block;border:none;outline:none;}
 .cart-item-img i{font-size:1.5rem;color:rgba(201,147,58,.4);}
 .cart-item-info{flex:1;}
 .cart-item-name{font-weight:600;font-size:.92rem;margin-bottom:.25rem;}
@@ -394,43 +615,48 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
   bottom:0;
   left:0;
   right:0;
-  background:#fff;
+  background:linear-gradient(to top, #fff 0%, rgba(255,255,255,.98) 100%);
+  backdrop-filter:blur(10px);
   border-top:1px solid var(--border);
-  padding:env(safe-area-inset-bottom, 0);
+  padding:0;
   z-index:1000;
-  box-shadow:0 -2px 10px rgba(0,0,0,.05);
+  box-shadow:0 -1px 8px rgba(0,0,0,.06);
 }
 .app-nav-items{
   display:flex;
   justify-content:space-around;
-  padding:.5rem 0 .7rem;
+  align-items:center;
+  padding:.35rem .25rem;
+  height:56px;
 }
 .app-nav-item{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:.25rem;
-  padding:.5rem .75rem;
-  border-radius:.75rem;
+  justify-content:center;
+  gap:.15rem;
+  padding:.25rem .5rem;
+  border-radius:.5rem;
   cursor:pointer;
   transition:all .2s ease;
   color:var(--muted);
-  font-size:.65rem;
+  font-size:.6rem;
   font-weight:600;
-  min-width:60px;
+  min-width:50px;
+  height:48px;
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
 }
 .app-nav-item:active{
-  transform:scale(.92);
-  background:rgba(201,147,58,.08);
+  transform:scale(.95);
+  background:rgba(201,147,58,.06);
 }
 .app-nav-item.active{
   color:var(--gold);
-  background:rgba(201,147,58,.08);
+  background:rgba(201,147,58,.06);
 }
 .app-nav-item i{
-  font-size:1.15rem;
+  font-size:1.1rem;
   transition:all .2s ease;
 }
 .app-nav-item.active i{
@@ -491,7 +717,7 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .admin-role{font-size:.66rem;color:#475569;}
 .sb-logout{display:flex;align-items:center;gap:.6rem;padding:.62rem 1rem;border-radius:.7rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);color:#f87171;font-size:.8rem;font-weight:600;cursor:pointer;transition:var(--tr);width:100%;}
 .sb-logout:hover{background:rgba(239,68,68,.15);}
-.bk-main{flex:1;overflow:auto;background:#f1f0ec;min-width:0;}
+.bk-main{flex:1;overflow:auto;background:#f1f0ec;min-width:0;overflow-x:hidden;}
 .pg-header{background:#fff;border-bottom:1px solid var(--border);padding:1.35rem 1.75rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;position:sticky;top:0;z-index:100;}
 .pg-header-l{display:flex;align-items:center;gap:.75rem;flex:1;min-width:0;}
 .pg-header-l h1{font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.6rem;white-space:nowrap;}
@@ -560,8 +786,6 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
 .coupon-code-badge{font-family:monospace;font-size:.82rem;background:var(--border-light);padding:.18rem .55rem;border-radius:.45rem;color:var(--indigo);font-weight:700;}
 .stock-alert{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:.75rem;padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;font-size:.84rem;}
 .stock-alert i{color:var(--red);flex-shrink:0;}
-.sync-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:2rem;font-size:.68rem;font-weight:600;background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.2);}
-
 /* 響應式設計 */
 /* ===== MOBILE RESPONSIVE ===== */
 @media(max-width:1024px){
@@ -572,6 +796,9 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
 
 /* ===== TABLET (768px) ===== */
 @media(max-width:768px){
+  /* APP風格佈局 */
+  .app-wrap{flex-direction:column !important;}
+  
   /* 顯示漢堡選單按鈕 */
   .mobile-menu-toggle{display:flex !important;}
   .frontend-menu-toggle{display:block !important;}
@@ -584,7 +811,8 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
     display:block !important;
   }
   .bk-main{
-    padding-bottom:70px !important;
+    padding-bottom:64px !important;
+    overflow-x:hidden;
   }
   
   /* 導航欄手機版 */
@@ -625,9 +853,11 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   }
   .sb.show{transform:translateX(0);}
   
-  .pg-content{padding:1rem;}
-  .pg-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem;}
-  .pg-header-l h1{font-size:1.1rem;}
+  .pg-content{padding:1rem;overflow-x:hidden;}
+  .pg-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem;flex-wrap:nowrap;}
+  .pg-header-l{min-width:0;flex:1;}
+  .pg-header-l h1{font-size:1.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pg-header-r{flex-shrink:0;display:flex;gap:.5rem;flex-wrap:nowrap;}
   
   /* 手機漢堡選單 */
   .mobile-menu-toggle{
@@ -728,11 +958,18 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   .toast{bottom:1rem;right:1rem;left:1rem;max-width:none;}
   
   /* 後台表格 */
-  .tc{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-  .data-tbl{min-width:600px;}
+  .tc{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
+  .data-tbl{min-width:600px;width:100%;}
   
   /* 表單 */
-  .fmr{grid-template-columns:1fr !important;}
+  .fmr{grid-template-columns:1fr !important;gap:.75rem;}
+  
+  /* 統計卡片 */
+  .stats-grid{grid-template-columns:1fr 1fr;gap:.6rem;}
+  
+  /* 按鈕組防止堆疊 */
+  .pg-header-r{display:flex;gap:.5rem;flex-wrap:nowrap;}
+  .pg-header-r .btn{white-space:nowrap;font-size:.75rem;padding:.5rem .75rem;}
 }
 
 /* ===== MOBILE (480px) ===== */
@@ -772,7 +1009,9 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   
   /* 表格容器 */
   .tc-hdr{padding:.8rem 1rem;flex-direction:column;align-items:flex-start;gap:.5rem;}
-  .tc-title{font-size:.85rem;}
+  .tc-title{font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;}
+  .tc-actions{display:flex;gap:.5rem;flex-wrap:nowrap;width:100%;overflow-x:auto;padding-bottom:.25rem;}
+  .tc-actions .btn{white-space:nowrap;flex-shrink:0;}
   
   /* 表單 */
   .fmg{margin-bottom:.75rem;}
@@ -803,10 +1042,11 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   
   /* APP底部安全區域 */
   .app-bottom-nav{
-    padding-bottom:env(safe-area-inset-bottom, 0);
+    padding:0 0 env(safe-area-inset-bottom, 0) 0;
   }
   .app-nav-items{
-    padding:.4rem 0 calc(.7rem + env(safe-area-inset-bottom, 0));
+    padding:.35rem .25rem;
+    height:56px;
   }
   
   /* 優化觸控 */
@@ -927,10 +1167,57 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
       <span>聯繫我們</span>
     </div>
     <hr style="border:none;border-top:1px solid var(--border);margin:.5rem 0;">
-    <div class="mobile-nav-item" onclick="toggleLangDropdown();closeFrontendMenu();">
+    <!-- 語言切換選項（可展開） -->
+    <div class="mobile-nav-item" onclick="toggleMobileLangSelector()" style="position:relative;">
       <i class="fas fa-globe"></i>
       <span id="mobileLangLabel">語言：繁體中文</span>
+      <i class="fas fa-chevron-down" style="margin-left:auto;font-size:.7rem;transition:transform .3s;"></i>
     </div>
+    
+    <!-- 語言選擇列表（隱藏） -->
+    <div id="mobileLangSelector" style="display:none;padding:0 1rem .5rem;background:rgba(201,147,58,.03);">
+      <div class="mobile-lang-option" onclick="switchLanguage('zh-TW');closeMobileLangSelector();" data-lang="zh-TW">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);"></i>
+        <span>繁體中文</span>
+      </div>
+      <div class="mobile-lang-option" onclick="switchLanguage('zh-CN');closeMobileLangSelector();" data-lang="zh-CN">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
+        <span>简体中文</span>
+      </div>
+      <div class="mobile-lang-option" onclick="switchLanguage('en');closeMobileLangSelector();" data-lang="en">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
+        <span>English</span>
+      </div>
+      <div class="mobile-lang-option" onclick="switchLanguage('ja');closeMobileLangSelector();" data-lang="ja">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
+        <span>日本語</span>
+      </div>
+      <div class="mobile-lang-option" onclick="switchLanguage('ko');closeMobileLangSelector();" data-lang="ko">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
+        <span>한국어</span>
+      </div>
+      <div class="mobile-lang-option" onclick="switchLanguage('fr');closeMobileLangSelector();" data-lang="fr">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
+        <span>Français</span>
+      </div>
+      <div class="mobile-lang-option" onclick="switchLanguage('de');closeMobileLangSelector();" data-lang="de">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
+        <span>Deutsch</span>
+      </div>
+      <div class="mobile-lang-option" onclick="switchLanguage('es');closeMobileLangSelector();" data-lang="es">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
+        <span>Español</span>
+      </div>
+      <div class="mobile-lang-option" onclick="switchLanguage('th');closeMobileLangSelector();" data-lang="th">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
+        <span>ไทย</span>
+      </div>
+      <div class="mobile-lang-option" onclick="switchLanguage('vi');closeMobileLangSelector();" data-lang="vi">
+        <i class="fas fa-check" style="width:20px;text-align:center;color:var(--gold);visibility:hidden;"></i>
+        <span>Tiếng Việt</span>
+      </div>
+    </div>
+    
     <div class="mobile-nav-item" onclick="showCartModal();closeFrontendMenu();">
       <i class="fas fa-shopping-bag"></i>
       <span>我的結緣 (<span id="mobileCartCount">0</span>)</span>
@@ -938,6 +1225,64 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   </div>
   
   <div class="announce-bar hidden" id="frontAnnounceBar"></div>
+  
+  <!-- ===== LINE CONTACT FLOATING BUTTON ===== -->
+  <div id="lineContactBtn" class="line-contact-btn" onclick="openLineModal()">
+    <i class="fab fa-line"></i>
+    <span class="line-tooltip">加入 LINE</span>
+  </div>
+  
+  <!-- LINE Contact Modal (原始設計) -->
+  <div id="lineModal" class="modal-overlay line-modal">
+    <div class="modal-box" style="max-width:420px;border-radius:1rem;">
+      <div class="mhdr" style="border-bottom:none;padding-bottom:0;">
+        <h3 style="flex:1;text-align:center;font-size:1.15rem;"><i class="fab fa-line" style="color:#06C755;margin-right:.5rem;"></i>加入 LINE 官方帳號</h3>
+        <button class="mbtn-close" onclick="closeLineModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="mbody" style="text-align:center;padding-top:.5rem;">
+        <!-- 標題區 -->
+        <div style="margin-bottom:1.5rem;">
+          <i class="fas fa-comments" style="font-size:3rem;color:var(--gold);opacity:.6;margin-bottom:.75rem;display:block;"></i>
+          <h2 style="font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.5rem;">歡迎加入 LINE 官方帳號</h2>
+          <p style="color:var(--muted);font-size:.88rem;line-height:1.6;">立即添加好友，獲取專屬服務：</p>
+          <p style="color:var(--gold);font-weight:600;font-size:.85rem;margin-top:.35rem;">開光服務 · 藝術諮詢 · 定制服務</p>
+        </div>
+        
+        <!-- 主要操作區 -->
+        <div style="background:rgba(6,199,85,.06);border-radius:1rem;padding:1.5rem;border:2px solid rgba(6,199,85,.15);margin-bottom:1.5rem;">
+          <p style="color:#06C755;font-weight:700;font-size:.85rem;margin-bottom:1rem;">
+            <i class="fas fa-qrcode" style="margin-right:.4rem;"></i>掃描 QR Code 或直接點擊
+          </p>
+          
+          <!-- LINE 圖標 -->
+          <div style="width:80px;height:80px;background:#06C755;border-radius:1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;box-shadow:0 4px 12px rgba(6,199,85,.3);">
+            <i class="fab fa-line" style="font-size:2.5rem;color:#fff;"></i>
+          </div>
+          
+          <!-- 加入好友按鈕 -->
+          <a href="https://line.me/ti/p/@thangka_store" target="_blank" class="btn-line-add" style="display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:linear-gradient(135deg,#06C755,#05a647);color:#fff;text-decoration:none;border-radius:2rem;font-weight:700;font-size:.95rem;box-shadow:0 4px 12px rgba(6,199,85,.3);transition:all .2s;" onclick="closeLineModal();">
+            <i class="fab fa-line"></i> 加入 LINE 好友
+          </a>
+        </div>
+        
+        <!-- 好處清單 -->
+        <div style="text-align:left;max-width:280px;margin:0 auto;">
+          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem 0;color:var(--text);font-size:.85rem;">
+            <i class="fas fa-check-circle" style="color:#06C755;font-size:1rem;"></i>
+            <span>專屬客服一對一服務</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem 0;color:var(--text);font-size:.85rem;">
+            <i class="fas fa-check-circle" style="color:#06C755;font-size:1rem;"></i>
+            <span>新品上架第一時間通知</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.6rem;padding:.5rem 0;color:var(--text);font-size:.85rem;">
+            <i class="fas fa-check-circle" style="color:#06C755;font-size:1rem;"></i>
+            <span>限量唐卡優先預購資格</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <!-- ===== CONNECTION STATUS INDICATOR ===== -->
   <div id="connectionStatus" style="position:fixed;top:10px;right:10px;z-index:9999;padding:6px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;display:none;">
@@ -966,12 +1311,8 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
       </div>
     </div>
     
-    <!-- Category Tabs -->
-    <div id="categoryTabs" style="display:flex;justify-content:center;gap:.75rem;margin-bottom:2.5rem;flex-wrap:wrap;">
-      <button class="cat-tab active" data-category="all" onclick="switchCategory('all')">
-        <i class="fas fa-th-large"></i> 全部藏品
-      </button>
-    </div>
+    <!-- Category Tabs (動態生成) -->
+    <div id="categoryTabs" style="display:none;justify-content:center;gap:.75rem;margin-bottom:2.5rem;flex-wrap:wrap;"></div>
       
     <div id="frontProductsContainer">
       <div class="products-loading"><div class="spinner"></div><p>正在載入藏品...</p></div>
@@ -1198,11 +1539,7 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
    
    IMPORTANT: Database Setup Requirements
    =======================================
-   1. Supabase Project Configuration:
-      - Project URL: https://mnqewmhcrzofdbjoitxt.supabase.co
-      - API Key: sb_publishable__JKjXoD74jxDBBDiUN_TJw_MJjNENJJ
-   
-   2. Required Database Tables:
+   1. Required Database Tables:
       a) items table:
          - id (uuid, primary key)
          - code (text, product SKU/category code)
@@ -1688,6 +2025,11 @@ function closeFrontendMenu(){
   const toggle = document.getElementById('frontendMenuToggle');
   if(dropdown) dropdown.classList.remove('show');
   if(toggle) toggle.classList.remove('active');
+  
+  // 同時關閉語言選擇器
+  if(typeof closeMobileLangSelector === 'function'){
+    closeMobileLangSelector();
+  }
 }
 
 // 滾動到指定區域
@@ -2161,7 +2503,7 @@ async function loadFrontProducts(){
   try{
     const { data, error } = await sb
       .from('items')
-      .select('id,code,name,image,region,painter,maker,price,notes,status')
+      .select('id,code,productname,image,region,painter,maker,price,notes,status')
       .eq('status','in-stock')
       .order('createdat',{ascending:false});
 
@@ -2177,7 +2519,7 @@ async function loadFrontProducts(){
     if(sixItems.length > 0) {
       console.log('=== SIX 開頭商品詳細信息 ===');
       sixItems.forEach((item, index) => {
-        console.log(`[${index+1}] 商品: ${item.name}`);
+        console.log(`[${index+1}] 商品: ${item.productname}`);
         console.log(`    編號: ${item.code}`);
         console.log(`    圖片: ${item.image || '(空)'}`);
         console.log(`    狀態: ${item.status}`);
@@ -2342,7 +2684,7 @@ function renderFrontProductsByCategory(items){
 }
 
 function renderProductCard(p){
-  const name=p.name||'唐卡藏品';
+  const name=p.productname||'唐卡藏品';
   const description=p.productdescription||'';  // 修正：使用 productdescription 而非 notes
   
   // 更強大的圖片處理邏輯
@@ -2394,10 +2736,22 @@ async function viewFrontProduct(id){
     // Normalize image URL
     const normalizedImage = normalizeImageUrl(p.image);
     
-    const name=p.name||'唐卡藏品';
+    const name=p.productname||'唐卡藏品';
     const rawDescription=p.productdescription||'';  // 原始描述文字
     const price=Number(p.price||0);
     const sizeDimensions = p.size_dimensions || '';  // 新增：尺寸資訊
+    
+    // Parse additional fields
+    const painter = p.painter || '';
+    const maker = p.maker || '';
+    const cost = Number(p.cost||0);
+    const extracost = Number(p.extracost||0);
+    const taxincluded = p.taxincluded === true;
+    const framed = p.framed === true;
+    const quantity = Number(p.quantity||0);
+    const purchasedate = p.purchasedate || '';
+    const shipmentdate = p.shipmentdate || '';
+    const shipnotes = p.shipnotes || '';
     
     // 解析並格式化商品描述
     const formattedDescription = formatProductDescription(rawDescription);
@@ -2437,6 +2791,49 @@ async function viewFrontProduct(id){
           ${formattedDescription}
         </div>
       </div>
+      
+      ${painter || maker ? `
+      <!-- 商品來源資訊 -->
+      <div style="margin-bottom:1.25rem;padding:1rem;background:#f8f7f4;border-radius:.75rem;">
+        <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
+          <i class="fas fa-users" style="color:var(--gold);"></i> 商品來源
+        </div>
+        ${painter ? `<div style="margin-bottom:.5rem;"><span style="color:var(--muted);font-size:.85rem;">畫師：</span><span style="font-weight:600;color:var(--text);">${esc(painter)}</span></div>` : ''}
+        ${maker ? `<div><span style="color:var(--muted);font-size:.85rem;">廠家/來源：</span><span style="font-weight:600;color:var(--text);">${esc(maker)}</span></div>` : ''}
+      </div>
+      ` : ''}
+      
+      ${cost > 0 || extracost > 0 || taxincluded || framed ? `
+      <!-- 成本與售價資訊 -->
+      <div style="margin-bottom:1.25rem;padding:1rem;background:#f8f7f4;border-radius:.75rem;">
+        <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
+          <i class="fas fa-coins" style="color:var(--gold);"></i> 價格詳情
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          ${cost > 0 ? `<div><span style="color:var(--muted);font-size:.85rem;">成本：</span><span style="font-weight:600;color:var(--text);">NT$ ${cost.toLocaleString()}</span></div>` : ''}
+          ${extracost > 0 ? `<div><span style="color:var(--muted);font-size:.85rem;">額外成本：</span><span style="font-weight:600;color:var(--text);">NT$ ${extracost.toLocaleString()}</span></div>` : ''}
+        </div>
+        <div style="margin-top:.75rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div><span style="color:var(--muted);font-size:.85rem;">是否含稅：</span><span style="font-weight:600;color:${taxincluded?'#059669':'var(--muted)'};">${taxincluded?'是':'否'}</span></div>
+          <div><span style="color:var(--muted);font-size:.85rem;">是否含框：</span><span style="font-weight:600;color:${framed?'#059669':'var(--muted)'};">${framed?'是':'否'}</span></div>
+        </div>
+      </div>
+      ` : ''}
+      
+      ${quantity > 0 || purchasedate || shipmentdate || shipnotes ? `
+      <!-- 庫存與物流資訊 -->
+      <div style="margin-bottom:1.25rem;padding:1rem;background:#f8f7f4;border-radius:.75rem;">
+        <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
+          <i class="fas fa-truck" style="color:var(--gold);"></i> 庫存與物流
+        </div>
+        ${quantity > 0 ? `<div style="margin-bottom:.5rem;"><span style="color:var(--muted);font-size:.85rem;">數量：</span><span style="font-weight:600;color:var(--text);">${quantity}</span></div>` : ''}
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          ${purchasedate ? `<div><span style="color:var(--muted);font-size:.85rem;">進貨日期：</span><span style="font-weight:600;color:var(--text);">${esc(purchasedate)}</span></div>` : ''}
+          ${shipmentdate ? `<div><span style="color:var(--muted);font-size:.85rem;">出貨日期：</span><span style="font-weight:600;color:var(--text);">${esc(shipmentdate)}</span></div>` : ''}
+        </div>
+        ${shipnotes ? `<div style="margin-top:.75rem;"><span style="color:var(--muted);font-size:.85rem;">出貨備註：</span><div style="font-weight:600;color:var(--text);margin-top:.25rem;">${esc(shipnotes)}</div></div>` : ''}
+      </div>
+      ` : ''}
       
       <!-- 分隔線 -->
       <div style="height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:1.5rem 0;"></div>
@@ -2581,31 +2978,29 @@ function renderCart(){
   let total=0;
   c.innerHTML=cart.map(it=>{const sub=it.price*it.quantity;total+=sub;
     
-    // 圖片處理邏輯 - 簡化並移除所有調試代碼
+    // 圖片處理邏輯
     let imgHtml;
     if(it.image && it.image.trim() !== '' && it.image !== 'this.style' && it.image !== 'undefined' && it.image !== 'null') {
-      // 有有效圖片 URL，顯示圖片
-      imgHtml = `<img src="${it.image}" alt="${esc(it.name)}" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-dharmachakra\"></i>';">`;
+      imgHtml = '<img src="' + it.image + '" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display=\'none\';">';
     } else {
-      // 沒有圖片或圖片 URL 無效，顯示預設圖標
-      imgHtml = `<i class="fas fa-dharmachakra"></i>`;
+      imgHtml = '';
     }
     
-    return `
-    <div class="cart-item">
-      <div class="cart-item-img">
-        ${imgHtml}
-      </div>
-      <div class="cart-item-info">
-        <div class="cart-item-name">${esc(it.name)}</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:.15rem;">
-          <i class="fas fa-layer-group" style="font-size:.7rem;"></i> 數量：${it.quantity}
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;">
-        <button class="ib ib-del" onclick="removeCart('${it.id}')" title="移除"><i class="fas fa-trash"></i></button>
-      </div>
-    </div>`;}).join('');
+    // 添加圖標作為背景或替補
+    const iconHtml = '<i class="fas fa-dharmachakra" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.5rem;color:rgba(201,147,58,.4);"></i>';
+    
+    return '<div class="cart-item">' +
+      '<div class="cart-item-img" style="position:relative;">' + iconHtml + imgHtml + '</div>' +
+      '<div class="cart-item-info">' +
+        '<div class="cart-item-name">' + esc(it.name) + '</div>' +
+        '<div style="font-size:.78rem;color:var(--muted);margin-top:.15rem;">' +
+          '<i class="fas fa-layer-group" style="font-size:.7rem;"></i> 數量：' + it.quantity +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;">' +
+        '<button class="ib ib-del" onclick="removeCart(\'' + it.id + '\')" title="移除"><i class="fas fa-trash"></i></button>' +
+      '</div>' +
+    '</div>';}).join('');
   ti.innerHTML='';
 }
 function removeCart(id){ cart=cart.filter(i=>i.id!==id);lsave('cart',cart);updateBadge();renderCart(); }
@@ -2728,7 +3123,7 @@ async function submitOrder(){
   try{
     const orderData={
       order_no:genOrderNo(),
-      customer_name:name,
+      customer_productname:name,
       customer_phone:phone,
       customer_email:gv('co_email')||'',
       customer_address:gv('co_address')||'',
@@ -2890,7 +3285,7 @@ async function pgDashboard(){
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-chart-line"></i>數據儀表板</h1><p>歡迎回來，資料已從 Supabase 同步 <span class="sync-badge"><i class="fas fa-circle-check"></i>已同步</span></p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-chart-line"></i>數據儀表板</h1><p>歡迎回來</p></div>
       <div style="font-size:.8rem;color:var(--muted);">${new Date().toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})}</div>
     </div>
     <div class="pg-content">
@@ -2932,7 +3327,7 @@ async function pgDashboard(){
           <div class="tw"><table>
             <thead><tr><th>商品</th><th>狀態</th></tr></thead>
             <tbody>${items.slice(0,6).map(p=>`<tr>
-              <td><code style="font-size:.75rem;">${esc(p.id.slice(0,8))}...</code></td>
+              <td><div style="font-weight:600;font-size:.85rem;">${esc(p.name||'未命名商品')}</div></td>
               <td>${p.status==='in-stock'?'<span class="bdg bdg-green">上架中</span>':'<span class="bdg bdg-gray">下架</span>'}</td>
             </tr>`).join('')||'<tr><td colspan="2" style="text-align:center;color:var(--muted);">—</td></tr>'}</tbody>
           </table></div>
@@ -2970,8 +3365,11 @@ async function pgProducts(){
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-palette"></i>商品管理</h1><p>管理前台顯示的藏品（共 ${items.length} 件）· 資料來源：Supabase items 表</p></div>
-      <button class="btn btn-gold btn-sm" onclick="showAddProduct()"><i class="fas fa-plus"></i> 新增商品</button>
+      <div class="pg-header-l"><h1><i class="fas fa-palette"></i>商品管理</h1><p>管理前台顯示的藏品（共 ${items.length} 件）</p></div>
+      <div style="display:flex;gap:.5rem;">
+        <button class="btn btn-gold btn-sm" onclick="showDataMigrationTool()"><i class="fas fa-exchange-alt"></i> 資料轉移工具</button>
+        <button class="btn btn-gold btn-sm" onclick="showAddProduct()"><i class="fas fa-plus"></i> 新增商品</button>
+      </div>
     </div>
     <div class="pg-content">
       <div class="info-box" style="margin-bottom:1.25rem;">
@@ -2990,7 +3388,7 @@ async function pgProducts(){
       <div class="tc"><div class="tw"><table id="adminProductsTable">
         <thead><tr><th>圖片</th><th>SKU</th><th>分類</th><th>商品名稱</th><th>售價</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${items.map(p=>{
-          const name=p.name||'未命名商品';
+          const name=p.productname||'未命名商品';
           const cat=getCategoryInfo(p.code);
           return`<tr data-category="${cat.key}">
             <td><div style="width:3rem;height:4rem;background:#f0e6cc;border-radius:.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center;">
@@ -3057,8 +3455,19 @@ async function editProductFull(id){
       </div>
       ${p.code?`<div style="margin-left:auto;"><div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;">SKU</div><code style="font-size:.82rem;">${esc(p.code)}</code></div>`:''}
     </div>
-    <div class="fmg"><label class="fml">商品名稱 *</label><input class="fmc" id="ep_name" value="${esc(p.name||'')}"></div>
+    <div class="fmg"><label class="fml">商品名稱 *</label><input class="fmc" id="ep_name" value="${esc(p.productname||'')}"></div>
     <div class="fmg"><label class="fml">商品描述</label><textarea class="fmc fmc-ta" id="ep_description" placeholder="商品詳細描述">${esc(p.productdescription||'')}</textarea></div>
+    
+    <!-- 商品來源資訊 -->
+    <div style="background:#f8f7f4;border-radius:.75rem;padding:1rem;margin:1rem 0;">
+      <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
+        <i class="fas fa-users" style="color:var(--gold);"></i> 商品來源
+      </div>
+      <div class="fmg"><label class="fml">畫師名稱</label><input class="fmc" id="ep_painter" value="${esc(p.painter||'')}" placeholder="畫師/創作者名稱"></div>
+      <div class="fmg"><label class="fml">廠家/來源</label><input class="fmc" id="ep_maker" value="${esc(p.maker||'')}" placeholder="廠家或來源單位"></div>
+    </div>
+    
+    <!-- 尺寸資訊（長 x 寬 x 高） -->
     <div class="fmg"><label class="fml">尺寸（長 × 寬 × 高，單位：cm）</label>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
         <input class="fmc" id="ep_size_length" type="number" min="0" step="0.1" placeholder="長" value="${sizeLength}">
@@ -3067,7 +3476,47 @@ async function editProductFull(id){
       </div>
       <div style="font-size:.72rem;color:var(--muted);margin-top:.35rem;"><i class="fas fa-info-circle"></i> 例：20 × 26 × 3（cm）</div>
     </div>
-    <div class="fmg"><label class="fml">備註</label><textarea class="fmc fmc-ta" id="ep_notes" placeholder="內部備註">${esc(p.notes||'')}</textarea></div>
+    
+    <!-- 成本與售價 -->
+    <div style="background:#f8f7f4;border-radius:.75rem;padding:1rem;margin:1rem 0;">
+      <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
+        <i class="fas fa-coins" style="color:var(--gold);"></i> 成本與售價
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div class="fmg"><label class="fml">成本 (NT$)</label><input class="fmc" id="ep_cost" type="number" min="0" value="${p.cost||0}"></div>
+        <div class="fmg"><label class="fml">額外成本 (NT$)</label><input class="fmc" id="ep_extracost" type="number" min="0" value="${p.extracost||0}"></div>
+      </div>
+      <div class="fmg"><label class="fml">售價 (NT$) *</label><input class="fmc" id="ep_price" type="number" min="0" value="${p.price||0}"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div class="fmg"><label class="fml">是否含稅</label>
+          <select class="fmc fmc-sel" id="ep_taxincluded">
+            <option value="false" ${!p.taxincluded||p.taxincluded===false?'selected':''}>否</option>
+            <option value="true" ${p.taxincluded===true?'selected':''}>是</option>
+          </select>
+        </div>
+        <div class="fmg"><label class="fml">是否含框</label>
+          <select class="fmc fmc-sel" id="ep_framed">
+            <option value="false" ${!p.framed||p.framed===false?'selected':''}>否</option>
+            <option value="true" ${p.framed===true?'selected':''}>是</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 庫存與物流 -->
+    <div style="background:#f8f7f4;border-radius:.75rem;padding:1rem;margin:1rem 0;">
+      <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
+        <i class="fas fa-truck" style="color:var(--gold);"></i> 庫存與物流
+      </div>
+      <div class="fmg"><label class="fml">數量</label><input class="fmc" id="ep_quantity" type="number" min="0" value="${p.quantity||0}"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div class="fmg"><label class="fml">進貨日期</label><input class="fmc" id="ep_purchasedate" type="date" value="${p.purchasedate||''}"></div>
+        <div class="fmg"><label class="fml">出貨日期</label><input class="fmc" id="ep_shipmentdate" type="date" value="${p.shipmentdate||''}"></div>
+      </div>
+      <div class="fmg"><label class="fml">出貨備註</label><textarea class="fmc fmc-ta" id="ep_shipnotes" placeholder="物流或出貨相關備註" rows="2">${esc(p.shipnotes||'')}</textarea></div>
+    </div>
+    
+    <div class="fmg"><label class="fml">內部備註</label><textarea class="fmc fmc-ta" id="ep_notes" placeholder="內部備註">${esc(p.notes||'')}</textarea></div>
     <div class="fmg"><label class="fml">售價 (NT$)</label><input class="fmc" id="ep_price" type="number" min="0" value="${p.price||0}"></div>
     <div class="fmg"><label class="fml">圖片網址</label><input class="fmc" id="ep_image" value="${esc(p.image||'')}" placeholder="https://... 或 Supabase Storage 路徑" oninput="previewEditImage(this.value)"></div>
     <div id="ep_image_preview" style="margin-top:.5rem;display:${normalizedImage?'block':'none'};">
@@ -3093,11 +3542,21 @@ async function editProductFull(id){
         }
         
         const updateData={
-          name:gv('ep_name'),
-          productdescription:gv('ep_description'),  // 修正：商品描述對應 productdescription
-          size_dimensions: sizeDimensions,  // 新增：尺寸欄位
-          notes:gv('ep_notes'),                      // 備註對應 notes
+          productname:gv('ep_name'),
+          productdescription:gv('ep_description'),
+          painter:gv('ep_painter')||null,
+          maker:gv('ep_maker')||null,
+          size_dimensions: sizeDimensions,
+          cost:Number(gv('ep_cost'))||0,
+          extracost:Number(gv('ep_extracost'))||0,
           price:Number(gv('ep_price'))||0,
+          taxincluded:gv('ep_taxincluded')==='true',
+          framed:gv('ep_framed')==='true',
+          quantity:Number(gv('ep_quantity'))||0,
+          purchasedate:gv('ep_purchasedate')||null,
+          shipmentdate:gv('ep_shipmentdate')||null,
+          shipnotes:gv('ep_shipnotes')||null,
+          notes:gv('ep_notes'),
           status:gv('ep_status')
         };
         if(gv('ep_image')) updateData.image=gv('ep_image');
@@ -3183,15 +3642,25 @@ function showAddProduct(){
         sizeDimensions = `${sizeLength} × ${sizeWidth} × ${sizeHeight} cm`;
       }
       
-      const { error } = await sb.from('items').insert({
-        name:name,
-        productdescription:gv('ap_description'),  // 修正：商品描述對應 productdescription
-        size_dimensions: sizeDimensions,  // 新增：尺寸欄位
-        notes:gv('ap_notes'),                      // 備註對應 notes
+            const { error } = await sb.from('items').insert({
+        productname:name,
+        productdescription:gv('ap_description'),
+        painter:gv('ap_painter')||null,
+        maker:gv('ap_maker')||null,
+        size_dimensions: sizeDimensions,
+        cost:Number(gv('ap_cost'))||0,
+        extracost:Number(gv('ap_extracost'))||0,
         price:Number(gv('ap_price'))||0,
+        taxincluded:gv('ap_taxincluded')==='true',
+        framed:gv('ap_framed')==='true',
+        quantity:Number(gv('ap_quantity'))||0,
+        purchasedate:gv('ap_purchasedate')||null,
+        shipmentdate:gv('ap_shipmentdate')||null,
+        shipnotes:gv('ap_shipnotes')||null,
+        notes:gv('ap_notes'),
         image:gv('ap_image')||'',
         status:gv('ap_status'),
-        created_at:new Date().toISOString()  // 修正：使用 created_at 而非 createdat
+        created_at:new Date().toISOString()
       });
       if(error){toast('新增失敗：'+error.message,'error');return;}
       closeFm(); pgProducts(); toast('商品已新增');
@@ -3210,6 +3679,144 @@ async function delProduct(id){
   const { error } = await sb.from('items').delete().eq('id',id);
   if(error){toast('刪除失敗：'+error.message,'error');return;}
   pgProducts(); toast('商品已刪除');
+}
+
+/* ============================================================
+   DATA MIGRATION TOOL - Transfer data from wrong columns to correct ones
+============================================================ */
+function showDataMigrationTool(){
+  openFm('<i class="fas fa-exchange-alt" style="color:var(--gold);"></i> 資料庫欄位轉移工具',`
+    <div style="background:#fef3c7;border-left:4px solid #f59e0b;padding:1rem;border-radius:.5rem;margin-bottom:1.5rem;">
+      <div style="font-weight:700;color:#92400e;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;">
+        <i class="fas fa-exclamation-triangle"></i> 重要提示
+      </div>
+      <p style="color:#92400e;font-size:.9rem;line-height:1.6;">
+        此工具用於將錯誤欄位的資料複製到正確的欄位。執行前請確認：<br>
+        1. 您的資料庫中是否有舊的錯誤欄位（如 <code>name</code>）<br>
+        2. 正確的欄位名稱應為 <code>productname</code>（全小寫）<br>
+        3. 轉移後建議手動驗證資料正確性
+      </p>
+    </div>
+    
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:.75rem;">轉移規則：</div>
+      <div style="background:#f8f7f4;padding:1rem;border-radius:.5rem;font-size:.85rem;line-height:1.8;">
+        <div><strong>name</strong> → <strong>productname</strong>（商品名稱）</div>
+        <div><strong>description</strong> → <strong>productdescription</strong>（商品描述）</div>
+        <div style="margin-top:.5rem;color:var(--muted);font-size:.8rem;">
+          <i class="fas fa-info-circle"></i> 只會轉移目標欄位為空的記錄，不會覆蓋已有資料
+        </div>
+      </div>
+    </div>
+    
+    <div id="migrationResult" style="display:none;margin-bottom:1.5rem;"></div>
+    
+    <div style="display:flex;gap:.75rem;">
+      <button class="btn btn-outline" onclick="closeFm()" style="flex:1;">取消</button>
+      <button class="btn btn-gold" onclick="executeMigration()" style="flex:1;justify-content:center;">
+        <i class="fas fa-play"></i> 開始轉移
+      </button>
+    </div>
+  `,null,false);
+}
+
+async function executeMigration(){
+  const resultDiv = document.getElementById('migrationResult');
+  resultDiv.style.display = 'block';
+  resultDiv.innerHTML = '<div style="padding:1rem;background:#dbeafe;border-radius:.5rem;text-align:center;"><i class="fas fa-spinner fa-spin"></i> 正在檢查並轉移資料...</div>';
+  
+  try {
+    // Step 1: Get all products
+    const { data: products, error: fetchError } = await sb.from('items').select('*');
+    if (fetchError) throw new Error('讀取資料失敗：' + fetchError.message);
+    
+    if (!products || products.length === 0) {
+      resultDiv.innerHTML = '<div style="padding:1rem;background:#fef3c7;border-radius:.5rem;"><i class="fas fa-info-circle"></i> 沒有找到任何產品資料</div>';
+      return;
+    }
+    
+    let migratedCount = 0;
+    let skippedCount = 0;
+    let errorCount = 0;
+    const errors = [];
+    
+    // Step 2: Check each product and migrate if needed
+    for (const product of products) {
+      const updates = {};
+      
+      // Check if name exists but productname is empty
+      if (product.name && !product.productname) {
+        updates.productname = product.name;
+      }
+      
+      // Check if description exists but productdescription is empty
+      if (product.description && !product.productdescription) {
+        updates.productdescription = product.description;
+      }
+      
+      // Only update if there are changes
+      if (Object.keys(updates).length > 0) {
+        const { error: updateError } = await sb
+          .from('items')
+          .update(updates)
+          .eq('id', product.id);
+        
+        if (updateError) {
+          errorCount++;
+          errors.push(`ID ${product.id}: ${updateError.message}`);
+        } else {
+          migratedCount++;
+        }
+      } else {
+        skippedCount++;
+      }
+    }
+    
+    // Step 3: Show results
+    let resultHtml = `
+      <div style="padding:1rem;background:#d1fae5;border-radius:.5rem;margin-bottom:1rem;">
+        <div style="font-weight:700;color:#065f46;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;">
+          <i class="fas fa-check-circle"></i> 轉移完成
+        </div>
+        <div style="color:#065f46;font-size:.9rem;line-height:1.8;">
+          <div>✓ 成功轉移：<strong>${migratedCount}</strong> 筆記錄</div>
+          <div>○ 跳過（已有資料）：<strong>${skippedCount}</strong> 筆記錄</div>
+          ${errorCount > 0 ? `<div style="color:#dc2626;">✗ 失敗：<strong>${errorCount}</strong> 筆記錄</div>` : ''}
+        </div>
+      </div>
+    `;
+    
+    if (errors.length > 0) {
+      resultHtml += `
+        <div style="padding:1rem;background:#fee2e2;border-radius:.5rem;">
+          <div style="font-weight:700;color:#991b1b;margin-bottom:.5rem;">錯誤詳情：</div>
+          <div style="font-size:.8rem;color:#991b1b;max-height:200px;overflow-y:auto;">
+            ${errors.map(e => `<div style="margin-bottom:.25rem;">• ${e}</div>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+    
+    resultDiv.innerHTML = resultHtml;
+    
+    // Refresh product list if any migrations succeeded
+    if (migratedCount > 0) {
+      setTimeout(() => {
+        pgProducts();
+        toast(`已成功轉移 ${migratedCount} 筆資料`);
+      }, 1500);
+    }
+    
+  } catch (e) {
+    resultDiv.innerHTML = `
+      <div style="padding:1rem;background:#fee2e2;border-radius:.5rem;">
+        <div style="font-weight:700;color:#991b1b;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;">
+          <i class="fas fa-times-circle"></i> 轉移失敗
+        </div>
+        <div style="color:#991b1b;font-size:.9rem;">${esc(e.message)}</div>
+      </div>
+    `;
+  }
 }
 
 /* ============================================================
@@ -3236,7 +3843,7 @@ async function pgOrders(){
     m.innerHTML=`
     <div class="pg-header">
       <button class="admin-mobile-toggle" onclick="toggleAdminSidebar()"><i class="fas fa-bars"></i></button>
-      <div class="pg-header-l"><h1><i class="fas fa-receipt"></i>訂單管理</h1><p>共 ${orders.length} 筆 · 資料來源：Supabase orders 表</p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-receipt"></i>訂單管理</h1><p>共 ${orders.length} 筆</p></div>
       <div style="display:flex;gap:.5rem;">
         <button class="btn btn-gold btn-sm" onclick="showBatchStatusUpdate()"><i class="fas fa-layer-group"></i> 批次更新狀態</button>
         <button class="btn btn-ghost btn-sm" onclick="exportOrderNotes()"><i class="fas fa-file-export"></i> 匯出備註</button>
@@ -3612,7 +4219,7 @@ async function pgCustomers(){
       <button class="btn btn-gold btn-sm" onclick="showAddCustomer()"><i class="fas fa-plus"></i> 新增客戶</button>
     </div>
     <div class="pg-content">
-      <div class="info-box" style="margin-bottom:1.25rem;"><i class="fas fa-circle-info"></i> 此資料表與 APP 庫存系統共用。在此新增的客戶也會出現在 APP 中。</div>
+      
       <div class="tc"><div class="tw"><table>
         <thead><tr><th>姓名</th><th>電話</th><th>地址</th><th>備註</th><th>加入日期</th><th>操作</th></tr></thead>
         <tbody>${custs.map(c=>`<tr>
@@ -4018,11 +4625,10 @@ async function pgAnnounce(){
     
     m.innerHTML=`
     <div class="pg-header">
-      <div class="pg-header-l"><h1><i class="fas fa-bullhorn"></i>公告管理</h1><p>管理前台頂部公告橫幅（雲端儲存，所有客戶即時同步）</p></div>
+      <div class="pg-header-l"><h1><i class="fas fa-bullhorn"></i>公告管理</h1><p>管理前台頂部公告橫幅</p></div>
       <button class="btn btn-gold btn-sm" onclick="addAnnounce()"><i class="fas fa-plus"></i> 新增公告</button>
     </div>
     <div class="pg-content">
-      <div class="info-box" style="margin-bottom:1.25rem;background:#dbeafe;color:#1e40af;border-color:#93c5fd;"><i class="fas fa-cloud"></i> 公告已儲存於 Supabase 雲端數據庫，所有客戶都能看到最新公告。</div>
       <div class="tc"><div class="tw"><table>
         <thead><tr><th>公告內容</th><th>建立日期</th><th>狀態</th><th>操作</th></tr></thead>
         <tbody>${announces.map(a=>`<tr>
@@ -4504,10 +5110,7 @@ async function pgSettings(){
   </div>
   <div class="pg-content">
     <div class="sc">
-      <div class="sc-title"><i class="fas fa-building"></i> 公司基本資訊（資料庫同步）</div>
-      <div class="info-box" style="margin-bottom:1rem;background:#f0fdf4;border-color:#86efac;">
-        <i class="fas fa-circle-check"></i> 此設定已連接到 Supabase 資料庫，所有裝置即時同步
-      </div>
+      <div class="sc-title"><i class="fas fa-building"></i> 公司基本資訊</div>
       <div class="fmr">
         <div class="fmg"><label class="fml">公司名稱</label><input class="fmc" id="sys_name" value="${esc(sysConfig.companyName)}"></div>
         <div class="fmg"><label class="fml">聯絡電話</label><input class="fmc" id="sys_phone" value="${esc(sysConfig.supportPhone)}"></div>
@@ -4515,18 +5118,6 @@ async function pgSettings(){
       <div class="fmg"><label class="fml">聯絡信箱</label><input class="fmc" id="sys_email" type="email" value="${esc(sysConfig.supportEmail)}"></div>
       <div class="fmg"><label class="fml">地址</label><input class="fmc" id="sys_addr" value="${esc(sysConfig.address)}"></div>
       <div class="fmg"><label class="fml">頁尾版權文字</label><input class="fmc" id="sys_copy" value="${esc(sysConfig.copyright)}"></div>
-    </div>
-    <div class="sc">
-      <div class="sc-title"><i class="fas fa-plug"></i> Supabase 連線資訊</div>
-      <div class="info-box">
-        <div style="margin-bottom:.4rem;"><strong>Project URL：</strong><code>${SB_URL}</code></div>
-        <div><strong>Anon Key：</strong><code>${SB_KEY.slice(0,20)}...</code></div>
-        <div style="margin-top:.65rem;font-size:.78rem;color:#64748b;">如需更換 Supabase 專案，請直接修改 HTML 原始碼中的 <code>SB_URL</code> 與 <code>SB_KEY</code> 變數。</div>
-      </div>
-    </div>
-    <div class="sc sc-warn">
-      <div class="sc-title"><i class="fas fa-shield-halved"></i> 帳號安全</div>
-      <p style="font-size:.84rem;color:var(--muted);margin-bottom:.75rem;">此網站使用 Supabase Auth 登入。請至 Supabase Dashboard → Authentication → Users 管理帳號。</p>
     </div>
     <div style="display:flex;justify-content:space-between;gap:1rem;">
           <button class="btn btn-outline" onclick="testFrontendSettings()"><i class="fas fa-eye"></i> 預覽前台設定</button>
@@ -4594,11 +5185,17 @@ async function saveSysConfig(){
 
 // 測試前台設定顯示
 function testFrontendSettings(){
-  console.log(' 測試前台設定顯示...');
+  console.log('測試前台設定顯示...');
   console.log('目前 sysConfig:', sysConfig);
   
-  // 切換到前台查看
-  showFrontend();
+  // 先應用設定到前台
+  applySettings();
+  
+  // 切換到前台視圖（修改 URL hash）
+  window.location.hash = '';
+  
+  // 顯示提示
+  toast('✅ 已切換到前台，請查看頁腳資訊', 'success');
   
   // 等待一秒後檢查頁腳元素
   setTimeout(()=>{
@@ -4744,5 +5341,55 @@ document.addEventListener('DOMContentLoaded',function(){
   </div>
 </div>
 
+<script>
+// ===== LINE CONTACT FUNCTIONS =====
+function toggleLineContact(){
+  const modal = document.getElementById('lineContactModal');
+  if(modal){
+    modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
+function closeLineContact(){
+  const modal = document.getElementById('lineContactModal');
+  if(modal) modal.style.display = 'none';
+}
+
+function copyLineId(){
+  const lineId = document.getElementById('lineIdDisplay');
+  if(lineId){
+    navigator.clipboard.writeText(lineId.textContent).then(() => {
+      showNotification('LINE ID 已複製！', 'success');
+    }).catch(() => {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = lineId.textContent;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      showNotification('LINE ID 已複製！', 'success');
+    });
+  }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(e){
+  const modal = document.getElementById('lineContactModal');
+  const btn = document.getElementById('lineContactBtn');
+  if(modal && modal.style.display === 'block'){
+    if(!modal.contains(e.target) && !btn.contains(e.target)){
+      closeLineContact();
+    }
+  }
+});
+</script>
+<script src="mobile_lang_selector.js"></script>
 </body>
 </html>
+
+
+
+
+
+
