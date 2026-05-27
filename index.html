@@ -2713,7 +2713,7 @@ function renderProductCard(p){
       <div class="product-price-row"><span class="product-price">NT$ ${Number(p.price||0).toLocaleString()}</span></div>
       <div class="product-actions">
         <button class="btn btn-outline" onclick="viewFrontProduct('${p.id}')"><i class="fas fa-eye"></i> 詳情</button>
-        <button class="btn btn-gold" onclick="addToCart('${p.id}','${esc(name)}',${p.price||0},'${p.image||''}')"><i class="fas fa-om"></i> 結緣</button>
+        <button class="btn btn-gold" onclick="addToCart('${p.id}','${esc(name)}',${p.price||0},'${p.image||''}','${esc(description)}','${esc(p.size_dimensions||'')}')"><i class="fas fa-om"></i> 結緣</button>
       </div>
     </div>
   </div>`;
@@ -2794,8 +2794,8 @@ async function viewFrontProduct(id){
       </div>
       
       ${painter || maker ? `
-      <!-- 商品來源資訊 -->
-      <div style="margin-bottom:1.25rem;padding:1rem;background:#f8f7f4;border-radius:.75rem;">
+      <!-- 商品來源資訊 (已隱藏) -->
+      <div style="display:none;margin-bottom:1.25rem;padding:1rem;background:#f8f7f4;border-radius:.75rem;">
         <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
           <i class="fas fa-users" style="color:var(--gold);"></i> 商品來源
         </div>
@@ -2804,44 +2804,16 @@ async function viewFrontProduct(id){
       </div>
       ` : ''}
       
-      ${cost > 0 || extracost > 0 || taxincluded || framed ? `
-      <!-- 成本與售價資訊 -->
-      <div style="margin-bottom:1.25rem;padding:1rem;background:#f8f7f4;border-radius:.75rem;">
-        <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
-          <i class="fas fa-coins" style="color:var(--gold);"></i> 價格詳情
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-          ${cost > 0 ? `<div><span style="color:var(--muted);font-size:.85rem;">成本：</span><span style="font-weight:600;color:var(--text);">NT$ ${cost.toLocaleString()}</span></div>` : ''}
-          ${extracost > 0 ? `<div><span style="color:var(--muted);font-size:.85rem;">額外成本：</span><span style="font-weight:600;color:var(--text);">NT$ ${extracost.toLocaleString()}</span></div>` : ''}
-        </div>
-        <div style="margin-top:.75rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-          <div><span style="color:var(--muted);font-size:.85rem;">是否含稅：</span><span style="font-weight:600;color:${taxincluded?'#059669':'var(--muted)'};">${taxincluded?'是':'否'}</span></div>
-          <div><span style="color:var(--muted);font-size:.85rem;">是否含框：</span><span style="font-weight:600;color:${framed?'#059669':'var(--muted)'};">${framed?'是':'否'}</span></div>
-        </div>
-      </div>
-      ` : ''}
       
-      ${quantity > 0 || purchasedate || shipmentdate || shipnotes ? `
-      <!-- 庫存與物流資訊 -->
-      <div style="margin-bottom:1.25rem;padding:1rem;background:#f8f7f4;border-radius:.75rem;">
-        <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;">
-          <i class="fas fa-truck" style="color:var(--gold);"></i> 庫存與物流
-        </div>
-        ${quantity > 0 ? `<div style="margin-bottom:.5rem;"><span style="color:var(--muted);font-size:.85rem;">數量：</span><span style="font-weight:600;color:var(--text);">${quantity}</span></div>` : ''}
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-          ${purchasedate ? `<div><span style="color:var(--muted);font-size:.85rem;">進貨日期：</span><span style="font-weight:600;color:var(--text);">${esc(purchasedate)}</span></div>` : ''}
-          ${shipmentdate ? `<div><span style="color:var(--muted);font-size:.85rem;">出貨日期：</span><span style="font-weight:600;color:var(--text);">${esc(shipmentdate)}</span></div>` : ''}
-        </div>
-        ${shipnotes ? `<div style="margin-top:.75rem;"><span style="color:var(--muted);font-size:.85rem;">出貨備註：</span><div style="font-weight:600;color:var(--text);margin-top:.25rem;">${esc(shipnotes)}</div></div>` : ''}
-      </div>
-      ` : ''}
+      
+      
       
       <!-- 分隔線 -->
       <div style="height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:1.5rem 0;"></div>
       
       <!-- 操作按鈕 -->
       <div style="display:flex;gap:.75rem;">
-        <button class="btn btn-outline" onclick="addToCart('${p.id}','${esc(name)}',${price},'${p.image||''}');closeFm();" style="flex:1;justify-content:center;padding:.85rem;font-size:.95rem;">
+        <button class="btn btn-outline" onclick="addToCart('${p.id}','${esc(name)}',${price},'${p.image||''}','${esc(rawDescription)}','${esc(sizeDimensions)}');closeFm();" style="flex:1;justify-content:center;padding:.85rem;font-size:.95rem;">
           <i class="fas fa-om"></i> 加入結緣清單
         </button>
       </div>
@@ -2936,7 +2908,7 @@ function formatProductDescription(rawText){
 /* ============================================================
    CART
 ============================================================ */
-function addToCart(id,name,price,imageUrl){
+function addToCart(id,name,price,imageUrl,description,sizeDimensions){
   // 清理圖片 URL，移除可能的錯誤值
   let cleanImageUrl = imageUrl || '';
   if(cleanImageUrl === 'this.style' || cleanImageUrl === 'undefined' || cleanImageUrl === 'null') {
@@ -2951,7 +2923,9 @@ function addToCart(id,name,price,imageUrl){
       id, 
       name, 
       price:Number(price), 
-      image:cleanImageUrl, 
+      image:cleanImageUrl,
+      description: description || '',
+      sizeDimensions: sizeDimensions || '',
       quantity:1
     });
   }
@@ -2994,9 +2968,8 @@ function renderCart(){
       '<div class="cart-item-img" style="position:relative;">' + iconHtml + imgHtml + '</div>' +
       '<div class="cart-item-info">' +
         '<div class="cart-item-name">' + esc(it.name) + '</div>' +
-        '<div style="font-size:.78rem;color:var(--muted);margin-top:.15rem;">' +
-          '<i class="fas fa-layer-group" style="font-size:.7rem;"></i> 數量：' + it.quantity +
-        '</div>' +
+        (it.description && it.description.trim() !== '' ? '<div style="font-size:.78rem;color:var(--text);margin-top:.35rem;line-height:1.5;">' + esc(it.description) + '</div>' : '') +
+        (it.sizeDimensions && it.sizeDimensions.trim() !== '' ? '<div style="font-size:.75rem;color:#0891b2;margin-top:.25rem;font-weight:600;display:flex;align-items:center;gap:.35rem;"><i class="fas fa-ruler-combined" style="font-size:.7rem;"></i>' + esc(it.sizeDimensions) + '</div>' : '') +
       '</div>' +
       '<div style="display:flex;align-items:center;">' +
         '<button class="ib ib-del" onclick="removeCart(\'' + it.id + '\')" title="移除"><i class="fas fa-trash"></i></button>' +
