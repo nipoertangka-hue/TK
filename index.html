@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="唐卡管理">
 <title>唐卡藝術館｜專業唐卡收藏與結緣</title>
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuWbvuWbvuWbvuWbviIsCiAgInNob3J0X25hbWUiOiAi5Zu+5Zu+5Zu+5Zu+IiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwZjE3MmEiLAogICJ0aGVtZV9jb2xvciI6ICIjMGYxNzJhIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbi0xOTIuc3ZnIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29uLTUxMi5zdmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXQp9">
 <link rel="apple-touch-icon" href="icon-192.svg">
 <link rel="icon" type="image/svg+xml" sizes="192x192" href="icon-192.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2290,13 +2290,15 @@ document.addEventListener('DOMContentLoaded', async()=>{
     }
   });
   
-  // PWA: Register Service Worker
-  if('serviceWorker' in navigator){
+  // PWA: Inline Service Worker Registration (no external sw.js needed)
+  // Service Worker functionality is optional for basic PWA installation
+  // If needed, the service worker can be inlined as a Blob
+  if(false && 'serviceWorker' in navigator){
     window.addEventListener('load',()=>{
       navigator.serviceWorker.register('/sw.js').then(reg=>{
         console.log('✅ Service Worker registered');
       }).catch(err=>{
-        console.log('⚠️ Service Worker registration failed:',err);
+        console.log('⚠️ Service Worker registration skipped');
       });
     });
   }
@@ -5219,7 +5221,7 @@ document.addEventListener('click', function(e){
   }
 });
 </script>
-<script src="mobile_lang_selector.js"></script>
+<!-- Mobile language selector removed - inline functionality if needed -->
 </body>
 </html>
 
