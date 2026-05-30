@@ -866,46 +866,53 @@ code{background:var(--border-light);padding:.1rem .35rem;border-radius:.35rem;fo
   
   /* 手機版分類選單 */
   .mobile-category-bar{
-    display:block;
-    position:sticky;
-    top:0;
-    background:rgba(247,246,242,.98);
-    backdrop-filter:blur(10px);
-    z-index:100;
-    padding:.75rem 1rem;
-    border-bottom:1px solid var(--border);
-    margin-bottom:1rem;
+    display:none; /* 桌面版隱藏 */
   }
-  .mobile-category-scroll{
-    display:flex;
-    gap:.4rem;
-    overflow-x:auto;
-    padding-bottom:.4rem;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-  }
-  .mobile-category-scroll::-webkit-scrollbar{display:none;}
-  .mobile-cat-btn{
-    flex-shrink:0;
-    padding:.5rem .9rem;
-    border:1.5px solid var(--border);
-    border-radius:1.5rem;
-    background:#fff;
-    color:var(--text);
-    font-size:.75rem;
-    font-weight:600;
-    cursor:pointer;
-    transition:var(--tr);
-    display:flex;
-    align-items:center;
-    gap:.3rem;
-    white-space:nowrap;
-  }
-  .mobile-cat-btn:active{transform:scale(.96);}
-  .mobile-cat-btn.active{
-    background:var(--gold);
-    color:#fff;
-    border-color:var(--gold);
+  
+  /* 手機版分類選單 - 手機版樣式 */
+  @media(max-width:768px){
+    .mobile-category-bar{
+      display:block !important; /* 手機版顯示，使用 !important 覆蓋 inline style */
+      position:sticky;
+      top:0;
+      background:rgba(247,246,242,.98);
+      backdrop-filter:blur(10px);
+      z-index:100;
+      padding:.75rem 1rem;
+      border-bottom:1px solid var(--border);
+      margin-bottom:1rem;
+    }
+    .mobile-category-scroll{
+      display:flex;
+      gap:.4rem;
+      overflow-x:auto;
+      padding-bottom:.4rem;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .mobile-category-scroll::-webkit-scrollbar{display:none;}
+    .mobile-cat-btn{
+      flex-shrink:0;
+      padding:.5rem .9rem;
+      border:1.5px solid var(--border);
+      border-radius:1.5rem;
+      background:#fff;
+      color:var(--text);
+      font-size:.75rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:var(--tr);
+      display:flex;
+      align-items:center;
+      gap:.3rem;
+      white-space:nowrap;
+    }
+    .mobile-cat-btn:active{transform:scale(.96);}
+    .mobile-cat-btn.active{
+      background:var(--gold);
+      color:#fff;
+      border-color:var(--gold);
+    }
   }
   
   /* 產品網格 */
@@ -2627,7 +2634,8 @@ function renderFrontProductsByCategory(items){
   if(!items.length){
     c.innerHTML='<div class="products-loading"><i class="fas fa-dharmachakra" style="font-size:2.5rem;opacity:.25;display:block;margin-bottom:.75rem;"></i><p>目前暫無展示藏品</p></div>';
     tabsContainer.style.display='none';
-    if(mobileTabsContainer) mobileTabsContainer.parentElement.style.display='none';
+    // 不要直接設定 display，讓 CSS 控制
+    // if(mobileTabsContainer) mobileTabsContainer.parentElement.style.display='none';
     return;
   }
   
@@ -2675,10 +2683,11 @@ function renderFrontProductsByCategory(items){
   tabsContainer.innerHTML=tabsHTML;
   tabsContainer.style.display='flex';
   
-  // 插入手機版分類標籤
+  // 插入手機版分類標籤（僅在手機版顯示）
   if(mobileTabsContainer){
     mobileTabsContainer.innerHTML=mobileTabsHTML;
-    mobileTabsContainer.parentElement.style.display='block';
+    // 不要直接設定 display='block'，讓 CSS media query 控制顯示
+    // mobileTabsContainer.parentElement.style.display='block'; // 移除這行
   }
   
   // Render initial view (all products)
@@ -3412,13 +3421,43 @@ async function editProductFull(id){
   
   // Parse existing size dimensions if available
   let sizeLength = '', sizeWidth = '', sizeHeight = '';
-  if(p.size_dimensions && p.size_dimensions.includes('×')) {
-    const parts = p.size_dimensions.split('×').map(s => s.replace('cm', '').replace(' ', '').trim());
-    if(parts.length >= 3) {
-      sizeLength = parts[0];
-      sizeWidth = parts[1];
-      sizeHeight = parts[2];
+  if(p.size_dimensions && p.size_dimensions.trim() !== '') {
+    // Try multiple parsing strategies
+    const sizeStr = p.size_dimensions.trim();
+    console.log('📏 解析尺寸數據:', sizeStr);
+    
+    // Strategy 1: Try "长 × 宽 × 高 cm/厘米" format
+    if(sizeStr.includes('×')) {
+      const parts = sizeStr.split('×').map(s => s.replace(/cm|厘米|公分/gi, '').replace(/[,，]/g, '').trim());
+      console.log('Strategy 1 - 使用 × 分隔:', parts);
+      if(parts.length >= 3) {
+        sizeLength = parts[0];
+        sizeWidth = parts[1];
+        sizeHeight = parts[2];
+      }
     }
+    // Strategy 2: Try "长x宽x高" format (lowercase x)
+    else if(sizeStr.toLowerCase().includes('x')) {
+      const parts = sizeStr.split(/[xX×]/).map(s => s.replace(/cm|厘米|公分/gi, '').replace(/[,，]/g, '').trim());
+      console.log('Strategy 2 - 使用 x 分隔:', parts);
+      if(parts.length >= 3) {
+        sizeLength = parts[0];
+        sizeWidth = parts[1];
+        sizeHeight = parts[2];
+      }
+    }
+    // Strategy 3: Try comma or space separated numbers
+    else {
+      const numbers = sizeStr.match(/[\d.]+/g);
+      console.log('Strategy 3 - 提取數字:', numbers);
+      if(numbers && numbers.length >= 3) {
+        sizeLength = numbers[0];
+        sizeWidth = numbers[1];
+        sizeHeight = numbers[2];
+      }
+    }
+    
+    console.log('✅ 解析結果:', { sizeLength, sizeWidth, sizeHeight });
   }
   
   openFm(`<i class="fas fa-pen" style="color:var(--gold);"></i> 編輯商品`,`
@@ -3508,13 +3547,16 @@ async function editProductFull(id){
     async()=>{
       try{
         // Build size string from length × width × height
-        const sizeLength = gv('ep_size_length');
-        const sizeWidth = gv('ep_size_width');
-        const sizeHeight = gv('ep_size_height');
+        const sizeLength = gv('ep_size_length').trim();
+        const sizeWidth = gv('ep_size_width').trim();
+        const sizeHeight = gv('ep_size_height').trim();
         let sizeDimensions = '';
         if(sizeLength && sizeWidth && sizeHeight) {
-          sizeDimensions = `${sizeLength} × ${sizeWidth} × ${sizeHeight} cm`;
+          // Save in consistent format: "长 × 宽 × 高 厘米" （與資料庫格式一致）
+          sizeDimensions = `${sizeLength} × ${sizeWidth} × ${sizeHeight} 厘米`;
         }
+        
+        console.log('💾 儲存尺寸數據:', { sizeLength, sizeWidth, sizeHeight, sizeDimensions });
         
         const updateData={
           productname:gv('ep_name'),
@@ -3609,13 +3651,16 @@ function showAddProduct(){
       if(!name){toast('請輸入商品名稱','error');return;}
       
       // Build size string from length × width × height
-      const sizeLength = gv('ap_size_length');
-      const sizeWidth = gv('ap_size_width');
-      const sizeHeight = gv('ap_size_height');
+      const sizeLength = gv('ap_size_length').trim();
+      const sizeWidth = gv('ap_size_width').trim();
+      const sizeHeight = gv('ap_size_height').trim();
       let sizeDimensions = '';
       if(sizeLength && sizeWidth && sizeHeight) {
-        sizeDimensions = `${sizeLength} × ${sizeWidth} × ${sizeHeight} cm`;
+        // Save in consistent format: "长 × 宽 × 高 厘米" （與資料庫格式一致）
+        sizeDimensions = `${sizeLength} × ${sizeWidth} × ${sizeHeight} 厘米`;
       }
+      
+      console.log('➕ 新增產品尺寸數據:', { sizeLength, sizeWidth, sizeHeight, sizeDimensions });
       
             const { error } = await sb.from('items').insert({
         productname:name,
