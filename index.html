@@ -3431,9 +3431,10 @@ async function editProductFull(id){
       const parts = sizeStr.split('×').map(s => s.replace(/cm|厘米|公分/gi, '').replace(/[,，]/g, '').trim());
       console.log('Strategy 1 - 使用 × 分隔:', parts);
       if(parts.length >= 3) {
-        sizeLength = parts[0];
-        sizeWidth = parts[1];
-        sizeHeight = parts[2];
+        // 過濾掉「-」佔位符，只保留實際數值
+        sizeLength = parts[0] !== '-' ? parts[0] : '';
+        sizeWidth = parts[1] !== '-' ? parts[1] : '';
+        sizeHeight = parts[2] !== '-' ? parts[2] : '';
       }
     }
     // Strategy 2: Try "长x宽x高" format (lowercase x)
@@ -3441,9 +3442,10 @@ async function editProductFull(id){
       const parts = sizeStr.split(/[xX×]/).map(s => s.replace(/cm|厘米|公分/gi, '').replace(/[,，]/g, '').trim());
       console.log('Strategy 2 - 使用 x 分隔:', parts);
       if(parts.length >= 3) {
-        sizeLength = parts[0];
-        sizeWidth = parts[1];
-        sizeHeight = parts[2];
+        // 過濾掉「-」佔位符，只保留實際數值
+        sizeLength = parts[0] !== '-' ? parts[0] : '';
+        sizeWidth = parts[1] !== '-' ? parts[1] : '';
+        sizeHeight = parts[2] !== '-' ? parts[2] : '';
       }
     }
     // Strategy 3: Try comma or space separated numbers
@@ -3551,9 +3553,14 @@ async function editProductFull(id){
         const sizeWidth = gv('ep_size_width').trim();
         const sizeHeight = gv('ep_size_height').trim();
         let sizeDimensions = '';
-        if(sizeLength && sizeWidth && sizeHeight) {
-          // Save in consistent format: "长 × 宽 × 高 厘米" （與資料庫格式一致）
-          sizeDimensions = `${sizeLength} × ${sizeWidth} × ${sizeHeight} 厘米`;
+        
+        // 修改：只要有填寫任何尺寸就會儲存（不再要求三個都要填）
+        if(sizeLength || sizeWidth || sizeHeight) {
+          // 組裝尺寸字串，空的欄位用「-」表示
+          const l = sizeLength || '-';
+          const w = sizeWidth || '-';
+          const h = sizeHeight || '-';
+          sizeDimensions = `${l} × ${w} × ${h} 厘米`;
         }
         
         console.log('💾 儲存尺寸數據:', { sizeLength, sizeWidth, sizeHeight, sizeDimensions });
@@ -3655,9 +3662,14 @@ function showAddProduct(){
       const sizeWidth = gv('ap_size_width').trim();
       const sizeHeight = gv('ap_size_height').trim();
       let sizeDimensions = '';
-      if(sizeLength && sizeWidth && sizeHeight) {
-        // Save in consistent format: "长 × 宽 × 高 厘米" （與資料庫格式一致）
-        sizeDimensions = `${sizeLength} × ${sizeWidth} × ${sizeHeight} 厘米`;
+      
+      // 修改：只要有填寫任何尺寸就會儲存（不再要求三個都要填）
+      if(sizeLength || sizeWidth || sizeHeight) {
+        // 組裝尺寸字串，空的欄位用「-」表示
+        const l = sizeLength || '-';
+        const w = sizeWidth || '-';
+        const h = sizeHeight || '-';
+        sizeDimensions = `${l} × ${w} × ${h} 厘米`;
       }
       
       console.log('➕ 新增產品尺寸數據:', { sizeLength, sizeWidth, sizeHeight, sizeDimensions });
