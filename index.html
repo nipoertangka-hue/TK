@@ -47,7 +47,7 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
 .lang-switcher{position:relative;display:inline-block;}
 .lang-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .85rem;border-radius:2rem;border:1.5px solid var(--border);background:#fff;color:var(--text);font-weight:600;font-size:.82rem;cursor:pointer;transition:var(--tr);}
 .lang-btn:hover{border-color:var(--gold);color:var(--gold);}
-.lang-dropdown{position:absolute;top:calc(100% + .5rem);right:0;background:#fff;border:1px solid var(--border);border-radius:.75rem;box-shadow:var(--shadow-md);min-width:140px;z-index:1000;display:none;overflow:hidden;}
+.lang-dropdown{position:absolute;top:calc(100% + .5rem);left:0;background:#fff;border:1px solid var(--border);border-radius:.75rem;box-shadow:var(--shadow-md);min-width:140px;z-index:1000;display:none;overflow:hidden;}
 .lang-dropdown.show{display:block;animation:fadeIn .2s ease;}
 .lang-option{padding:.65rem 1rem;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--text);}
 .lang-option:hover{background:rgba(201,147,58,.08);color:var(--gold);}
@@ -140,7 +140,27 @@ a{text-decoration:none;}button{font-family:inherit;cursor:pointer;}input,select,
   text-align:center;
   color:var(--gold);
 }
-.lang-option i{font-size:.75rem;color:var(--muted);}`n`n/* 手機版語言選項 */`n.mobile-lang-option{`n  padding:.6rem 1rem;`n  border-radius:.5rem;`n  cursor:pointer;`n  transition:all .2s ease;`n  color:var(--text);`n  font-weight:500;`n  font-size:.85rem;`n  display:flex;`n  align-items:center;`n  gap:.75rem;`n  touch-action:manipulation;`n  -webkit-tap-highlight-color:transparent;`n}`n.mobile-lang-option:active{`n  background:rgba(201,147,58,.08);`n  transform:scale(.98);`n}
+.lang-option i{font-size:.75rem;color:var(--muted);}
+
+/* 手機版語言選項 */
+.mobile-lang-option{
+  padding:.6rem 1rem;
+  border-radius:.5rem;
+  cursor:pointer;
+  transition:all .2s ease;
+  color:var(--text);
+  font-weight:500;
+  font-size:.85rem;
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.mobile-lang-option:active{
+  background:rgba(201,147,58,.08);
+  transform:scale(.98);
+}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
 .cart-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.1rem;border-radius:2rem;border:1.5px solid var(--border);background:#fff;color:var(--text);font-weight:600;font-size:.88rem;transition:var(--tr);}
 .cart-btn:hover{border-color:var(--gold);color:var(--gold);}
@@ -2097,9 +2117,19 @@ function switchLanguage(lang){
     if(check) check.style.visibility = isActive ? 'visible' : 'hidden';
   });
   
+  // Update mobile language selector active state
+  document.querySelectorAll('.mobile-lang-option').forEach(opt => {
+    const isActive = opt.dataset.lang === lang;
+    const check = opt.querySelector('i');
+    if(check) check.style.visibility = isActive ? 'visible' : 'hidden';
+  });
+  
   // Close dropdown
   const dropdown = document.getElementById('langDropdown');
   if(dropdown) dropdown.classList.remove('show');
+  
+  // Close mobile language selector
+  closeMobileLangSelector();
   
   // Apply translations safely
   try {
@@ -2110,6 +2140,35 @@ function switchLanguage(lang){
     }
   } catch(e) {
     console.error('Translation error:', e);
+  }
+}
+
+// Toggle mobile language selector
+function toggleMobileLangSelector(){
+  const selector = document.getElementById('mobileLangSelector');
+  if(!selector) return;
+  
+  const isHidden = selector.style.display === 'none' || selector.style.display === '';
+  selector.style.display = isHidden ? 'block' : 'none';
+  
+  // Rotate chevron icon
+  const chevron = document.querySelector('.mobile-nav-item[onclick="toggleMobileLangSelector()"] .fa-chevron-down');
+  if(chevron) {
+    chevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+}
+
+// Close mobile language selector
+function closeMobileLangSelector(){
+  const selector = document.getElementById('mobileLangSelector');
+  if(!selector) return;
+  
+  selector.style.display = 'none';
+  
+  // Reset chevron icon
+  const chevron = document.querySelector('.mobile-nav-item[onclick="toggleMobileLangSelector()"] .fa-chevron-down');
+  if(chevron) {
+    chevron.style.transform = 'rotate(0deg)';
   }
 }
 
@@ -2745,13 +2804,26 @@ async function viewFrontProduct(id){
     const { data:p } = await sb.from('items').select('*').eq('id',id).single();
     if(!p) return;
     
+    console.log('🔍 前端載入產品詳情:', p.id, p.productname);
+    console.log('  資料庫尺寸數據:', { length: p.length, width: p.width, height: p.height });
+    
     // Normalize image URL
     const normalizedImage = normalizeImageUrl(p.image);
     
     const name=p.productname||'唐卡藏品';
     const rawDescription=p.productdescription||'';  // 原始描述文字
     const price=Number(p.price||0);
-    const sizeDimensions = p.size_dimensions || '';  // 新增：尺寸資訊
+    
+    // ✅ 正確對應：從獨立的 length, width, height 欄位組裝顯示
+    let sizeDimensions = '';
+    if(p.length || p.width || p.height) {
+      const l = p.length || '-';
+      const w = p.width || '-';
+      const h = p.height || '-';
+      sizeDimensions = `${l} × ${w} × ${h} 厘米`;
+    }
+    
+    console.log('  組裝後的尺寸顯示:', sizeDimensions);
     
     // Parse additional fields
     const painter = p.painter || '';
@@ -2792,7 +2864,7 @@ async function viewFrontProduct(id){
           ${esc(sizeDimensions)}
         </div>
       </div>
-      ` : ''}
+      ` : '<!-- ⚠️ 尺寸數據為空，不顯示尺寸區塊 -->'}
       
       <!-- 商品描述（分段格式化） -->
       <div style="margin-bottom:1.5rem;">
@@ -2836,8 +2908,23 @@ async function viewFrontProduct(id){
 function formatProductDescription(rawText){
   if(!rawText || rawText.trim()==='') return '<p style="color:var(--muted);font-style:italic;">暫無商品描述</p>';
   
+  // ✅ 增強：如果文字中有標題標記但沒有換行，先按標題分割
+  let processedText = rawText;
+  
+  // 檢查是否包含標題標記（emoji + 文字 + | 或 ：）
+  const hasTitleMarkers = /[＀-￯]\s*[^\n|：:]+[\uff5c|：:]/.test(rawText);
+  
+  if(hasTitleMarkers && !rawText.includes('\n')) {
+    // 沒有換行符但有標題標記，自動插入換行
+    console.log(' 檢測到標題標記但無換行符，自動分段處理');
+    
+    // 在每個標題標記前插入換行（除了第一個）
+    processedText = rawText.replace(/([＀-￯]\s*[^\uff00-￯|：:]+[\uff5c|：:])/g, '\n\n$1');
+    processedText = processedText.trim();
+  }
+  
   // 將文字按換行符分割成段落
-  const paragraphs = rawText.split('\n').filter(p => p.trim() !== '');
+  const paragraphs = processedText.split('\n').filter(p => p.trim() !== '');
   
   let html = '';
   let currentSection = null;
@@ -3419,48 +3506,12 @@ async function editProductFull(id){
   const cat=getCategoryInfo(p.code||'');
   const normalizedImage = normalizeImageUrl(p.image);
   
-  // Parse existing size dimensions if available
-  let sizeLength = '', sizeWidth = '', sizeHeight = '';
-  if(p.size_dimensions && p.size_dimensions.trim() !== '') {
-    // Try multiple parsing strategies
-    const sizeStr = p.size_dimensions.trim();
-    console.log('📏 解析尺寸數據:', sizeStr);
-    
-    // Strategy 1: Try "长 × 宽 × 高 cm/厘米" format
-    if(sizeStr.includes('×')) {
-      const parts = sizeStr.split('×').map(s => s.replace(/cm|厘米|公分/gi, '').replace(/[,，]/g, '').trim());
-      console.log('Strategy 1 - 使用 × 分隔:', parts);
-      if(parts.length >= 3) {
-        // 過濾掉「-」佔位符，只保留實際數值
-        sizeLength = parts[0] !== '-' ? parts[0] : '';
-        sizeWidth = parts[1] !== '-' ? parts[1] : '';
-        sizeHeight = parts[2] !== '-' ? parts[2] : '';
-      }
-    }
-    // Strategy 2: Try "长x宽x高" format (lowercase x)
-    else if(sizeStr.toLowerCase().includes('x')) {
-      const parts = sizeStr.split(/[xX×]/).map(s => s.replace(/cm|厘米|公分/gi, '').replace(/[,，]/g, '').trim());
-      console.log('Strategy 2 - 使用 x 分隔:', parts);
-      if(parts.length >= 3) {
-        // 過濾掉「-」佔位符，只保留實際數值
-        sizeLength = parts[0] !== '-' ? parts[0] : '';
-        sizeWidth = parts[1] !== '-' ? parts[1] : '';
-        sizeHeight = parts[2] !== '-' ? parts[2] : '';
-      }
-    }
-    // Strategy 3: Try comma or space separated numbers
-    else {
-      const numbers = sizeStr.match(/[\d.]+/g);
-      console.log('Strategy 3 - 提取數字:', numbers);
-      if(numbers && numbers.length >= 3) {
-        sizeLength = numbers[0];
-        sizeWidth = numbers[1];
-        sizeHeight = numbers[2];
-      }
-    }
-    
-    console.log('✅ 解析結果:', { sizeLength, sizeWidth, sizeHeight });
-  }
+  // ✅ 正確對應：直接從獨立的 length, width, height 欄位讀取
+  const lengthVal = p.length || '';
+  const widthVal = p.width || '';
+  const heightVal = p.height || '';
+  
+  console.log('📏 載入尺寸數據:', { length: lengthVal, width: widthVal, height: heightVal });
   
   openFm(`<i class="fas fa-pen" style="color:var(--gold);"></i> 編輯商品`,`
     <div style="background:#f8f7f4;border-radius:.75rem;padding:.85rem;margin-bottom:1.1rem;display:flex;align-items:center;gap:.65rem;">
@@ -3486,9 +3537,9 @@ async function editProductFull(id){
     <!-- 尺寸資訊（長 x 寬 x 高） -->
     <div class="fmg"><label class="fml">尺寸（長 × 寬 × 高，單位：cm）</label>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
-        <input class="fmc" id="ep_size_length" type="number" min="0" step="0.1" placeholder="長" value="${sizeLength}">
-        <input class="fmc" id="ep_size_width" type="number" min="0" step="0.1" placeholder="寬" value="${sizeWidth}">
-        <input class="fmc" id="ep_size_height" type="number" min="0" step="0.1" placeholder="高" value="${sizeHeight}">
+        <input class="fmc" id="ep_size_length" type="number" min="0" step="0.1" placeholder="長" value="${lengthVal}">
+        <input class="fmc" id="ep_size_width" type="number" min="0" step="0.1" placeholder="寬" value="${widthVal}">
+        <input class="fmc" id="ep_size_height" type="number" min="0" step="0.1" placeholder="高" value="${heightVal}">
       </div>
       <div style="font-size:.72rem;color:var(--muted);margin-top:.35rem;"><i class="fas fa-info-circle"></i> 例：20 × 26 × 3（cm）</div>
     </div>
@@ -3548,29 +3599,36 @@ async function editProductFull(id){
       </select></div>`,
     async()=>{
       try{
-        // Build size string from length × width × height
-        const sizeLength = gv('ep_size_length').trim();
-        const sizeWidth = gv('ep_size_width').trim();
-        const sizeHeight = gv('ep_size_height').trim();
-        let sizeDimensions = '';
+        console.log('=== 開始儲存商品 ===');
+        console.log('產品 ID:', id);
         
-        // 修改：只要有填寫任何尺寸就會儲存（不再要求三個都要填）
-        if(sizeLength || sizeWidth || sizeHeight) {
-          // 組裝尺寸字串，空的欄位用「-」表示
-          const l = sizeLength || '-';
-          const w = sizeWidth || '-';
-          const h = sizeHeight || '-';
-          sizeDimensions = `${l} × ${w} × ${h} 厘米`;
-        }
+        // 讀取長寬高輸入值（對應資料庫的 length, width, height 欄位）
+        const lengthEl = document.getElementById('ep_size_length');
+        const widthEl = document.getElementById('ep_size_width');
+        const heightEl = document.getElementById('ep_size_height');
         
-        console.log('💾 儲存尺寸數據:', { sizeLength, sizeWidth, sizeHeight, sizeDimensions });
+        console.log('尺寸輸入元素:', {
+          length: lengthEl ? lengthEl.value : 'NOT FOUND',
+          width: widthEl ? widthEl.value : 'NOT FOUND',
+          height: heightEl ? heightEl.value : 'NOT FOUND'
+        });
         
+        const lengthVal = gv('ep_size_length').trim();
+        const widthVal = gv('ep_size_width').trim();
+        const heightVal = gv('ep_size_height').trim();
+        
+        console.log('解析後的尺寸值:', { lengthVal, widthVal, heightVal });
+        
+        // 構建更新數據 - 使用獨立的 length, width, height 欄位
         const updateData={
           productname:gv('ep_name'),
           productdescription:gv('ep_description'),
           painter:gv('ep_painter')||null,
           maker:gv('ep_maker')||null,
-          size_dimensions: sizeDimensions,
+          // ✅ 正確對應：使用獨立的數值欄位
+          length: lengthVal ? parseFloat(lengthVal) : null,
+          width: widthVal ? parseFloat(widthVal) : null,
+          height: heightVal ? parseFloat(heightVal) : null,
           cost:Number(gv('ep_cost'))||0,
           extracost:Number(gv('ep_extracost'))||0,
           price:Number(gv('ep_price'))||0,
@@ -3584,8 +3642,20 @@ async function editProductFull(id){
           status:gv('ep_status')
         };
         if(gv('ep_image')) updateData.image=gv('ep_image');
-        const { error } = await sb.from('items').update(updateData).eq('id',id);
-        if(error) throw error;
+        
+        console.log('💾 完整更新數據:', updateData);
+        console.log('準備執行 Supabase 更新...');
+        
+        const { data, error } = await sb.from('items').update(updateData).eq('id',id);
+        
+        console.log('Supabase 更新結果:', { data, error });
+        
+        if(error) {
+          console.error('❌ Supabase 更新錯誤:', error);
+          throw error;
+        }
+        
+        console.log('✅ 更新成功！');
         closeFm(); pgProducts(); toast('商品已更新');
       } catch(e){ toast('更新失敗：'+e.message,'error'); }
     });
@@ -3657,29 +3727,22 @@ function showAddProduct(){
       const name=gv('ap_name');
       if(!name){toast('請輸入商品名稱','error');return;}
       
-      // Build size string from length × width × height
-      const sizeLength = gv('ap_size_length').trim();
-      const sizeWidth = gv('ap_size_width').trim();
-      const sizeHeight = gv('ap_size_height').trim();
-      let sizeDimensions = '';
+      // ✅ 正確對應：使用獨立的 length, width, height 欄位
+      const lengthVal = gv('ap_size_length').trim();
+      const widthVal = gv('ap_size_width').trim();
+      const heightVal = gv('ap_size_height').trim();
       
-      // 修改：只要有填寫任何尺寸就會儲存（不再要求三個都要填）
-      if(sizeLength || sizeWidth || sizeHeight) {
-        // 組裝尺寸字串，空的欄位用「-」表示
-        const l = sizeLength || '-';
-        const w = sizeWidth || '-';
-        const h = sizeHeight || '-';
-        sizeDimensions = `${l} × ${w} × ${h} 厘米`;
-      }
-      
-      console.log('➕ 新增產品尺寸數據:', { sizeLength, sizeWidth, sizeHeight, sizeDimensions });
+      console.log('➕ 新增產品尺寸數據:', { length: lengthVal, width: widthVal, height: heightVal });
       
             const { error } = await sb.from('items').insert({
         productname:name,
         productdescription:gv('ap_description'),
         painter:gv('ap_painter')||null,
         maker:gv('ap_maker')||null,
-        size_dimensions: sizeDimensions,
+        // ✅ 正確對應：使用獨立的 length, width, height 欄位
+        length: lengthVal ? parseFloat(lengthVal) : null,
+        width: widthVal ? parseFloat(widthVal) : null,
+        height: heightVal ? parseFloat(heightVal) : null,
         cost:Number(gv('ap_cost'))||0,
         extracost:Number(gv('ap_extracost'))||0,
         price:Number(gv('ap_price'))||0,
